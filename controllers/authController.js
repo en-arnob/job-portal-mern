@@ -1,3 +1,4 @@
-exports.loginController = (req, res) => {
+exports.loginGetController = (req, res) => {
     res.json({msg: 'Login'})
 }
+
