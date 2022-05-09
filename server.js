@@ -1,5 +1,8 @@
 const express = require('express')
 const app = express()
+const routes = require('./routes/router')
+
+app.use(routes)
 
 app.get('/', (req, res)=>{
     res.send('Hello Symstar!')
