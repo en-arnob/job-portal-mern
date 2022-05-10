@@ -1,12 +1,21 @@
 const {Schema, model} = require('mongoose')
 
 const ClientSchema = new Schema({
+    usertype : {
+        type: String,
+        required: true,
+    },
     username: {
         type: String,
         trim: true,
         required: true,
         unique: true,
         maxlength: 20,
+    },
+    fullname: {
+        type: String,
+        required: true,
+        maxlength: 100,
     },
     email: {
         type: String,
@@ -42,7 +51,6 @@ const ClientSchema = new Schema({
       confirmPass: {
           type: String,
           trim: true,
-          required: true,
       },
       phone: {
           type: String,
@@ -52,11 +60,9 @@ const ClientSchema = new Schema({
       },
       birthday: {
           type: Date,
-          required: true,
       },
       profileImage: {
           type: String,
-          rrquired: true,
       },
       gender: {
           type: String,
@@ -66,4 +72,4 @@ const ClientSchema = new Schema({
 })
 
 const UserClients = model('UserClient', ClientSchema)
-module.exports = UserClient
+module.exports = UserClients

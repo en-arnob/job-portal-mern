@@ -1,12 +1,21 @@
 const {Schema, model} = require('mongoose')
 
 const CandidateSchema = new Schema({
+    usertype : {
+        type: String,
+        required: true,
+    },
     username: {
         type: String,
         trim: true,
         required: true,
         unique: true,
         maxlength: 20,
+    },
+    fullname: {
+        type: String,
+        required: true,
+        maxlength: 100,
     },
     email: {
         type: String,
