@@ -1,5 +1,8 @@
 const { body, validationResult } = require('express-validator');
 const UserClient = require('../models/UserClient')
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken');
+require('dotenv').config()
 
 
 exports.clRegValidation = [
@@ -14,12 +17,11 @@ exports.clRegValidation = [
 ]
 
 
-
 exports.loginGetController = (req, res) => {
     res.json({msg: 'Login'})
 }
 
-exports.clientRegPostController = (req, res) => {
+exports.clientRegPostController = async (req, res) => {
     const {
         usertype,
         username,
@@ -28,7 +30,6 @@ exports.clientRegPostController = (req, res) => {
         organization,
         nid,
         password,
-        confirmPass,
         phone, 
         gender } = req.body
     
@@ -36,6 +37,41 @@ exports.clientRegPostController = (req, res) => {
     if (!vErrors.isEmpty()){
         return res.status(400).json({errors:vErrors.array()})
     } 
+    try{
+
+        const checkUser = await UserClient.findOne({email})
+        if(checkUser){
+            return res.status(400).json({errors: {msg: 'Email is already registered'}})
+        }
+        //hashPasswd
+        const salt = await bcrypt.genSalt(10)
+        const hashed = await bcrypt.hash(password, salt)
+        try{
+            const user = await UserClient.create({
+                usertype,
+                username,
+                fullname,
+                email,
+                organization,
+                nid,
+                password: hashed,
+                phone, 
+                gender
+            })
+            const jwtToken = jwt.sign({user: user}, process.env.SECRET_KEY, {expiresIn: '7d'} )
+            return res.status(200).json({msg: "Account Created Successfully", jwtToken})
+
+        } catch(error) {
+            return res.status(500).json({errors: error})
+        }
+
+
+    } catch(e){
+
+        return res.status(500).json({errors: e})
+    }
+
+
     res.json({usertype, username, fullname, email, organization, nid, password, confirmPass, phone,  gender})
     
 

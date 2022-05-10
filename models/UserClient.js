@@ -51,7 +51,6 @@ const ClientSchema = new Schema({
       confirmPass: {
           type: String,
           trim: true,
-          required: true,
       },
       phone: {
           type: String,
@@ -73,4 +72,4 @@ const ClientSchema = new Schema({
 })
 
 const UserClients = model('UserClient', ClientSchema)
-module.exports = UserClient
+module.exports = UserClients
