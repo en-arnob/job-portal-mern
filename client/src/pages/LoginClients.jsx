@@ -14,8 +14,8 @@ const LoginClients = () => {
           <Col lg={6} md={6} sm={12}>
             <div className="mt-5">
               <Card.Body className="text-center">
-                <p className="font-mono text-4xl font-extrabold text-blue-700">
-                  Sign In as Client
+                <p className="font-mono text-3xl font-extrabold text-blue-700">
+                  Sign In as Recruiter
                 </p>
                 <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                   <div class="mb-4">
