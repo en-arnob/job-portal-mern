@@ -62,11 +62,6 @@ const CandidateSchema = new Schema({
           trim: true,
           required: true,
       },
-      confirmPass: {
-          type: String,
-          trim: true,
-          required: true,
-      },
       phone: {
           type: String,
           trim: true,
@@ -75,11 +70,10 @@ const CandidateSchema = new Schema({
       },
       birthday: {
           type: Date,
-          required: true,
       },
       profileImage: {
           type: String,
-          rrquired: true,
+          
       },
       gender: {
           type: String,

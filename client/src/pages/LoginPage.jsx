@@ -3,7 +3,7 @@ import LoginCandidates from "./LoginCandidates";
 import LoginClients from "./LoginClients";
 
 const LoginPage = () => {
-  const [loginC, setLoginC] = useState(0);
+  const [loginC, setLoginC] = useState(1);
 
   return (
     <div>

@@ -48,10 +48,6 @@ const ClientSchema = new Schema({
           trim: true,
           required: true,
       },
-      confirmPass: {
-          type: String,
-          trim: true,
-      },
       phone: {
           type: String,
           trim: true,
