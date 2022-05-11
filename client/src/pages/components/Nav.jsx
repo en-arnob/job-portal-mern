@@ -10,10 +10,13 @@ const Nav = () => {
         <div className='container px-4 mx-auto flex flex-wrap items-center justify-between'>
           <div className='w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start'>
             <Link
-              className='px-3 text-2xl py-2 flex items-center text-sm uppercase font-bold leading-snug text-white hover:opacity-75 no-underline'
+              className='px-3 text-2xl py-2 flex items-center   font-bold leading-snug text-white hover:opacity-75 no-underline'
               to='/'
             >
-              Job Portal
+              ICT.jobs{" "}
+              <span className='ml-4 text-xs text-green-500 md:text-lg md:text-white '>
+                #1 Job portal for ICT Sector in Bangladesh
+              </span>
             </Link>
 
             <button
@@ -43,7 +46,7 @@ const Nav = () => {
               <li className='nav-item'>
                 <Link
                   className='px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-white hover:opacity-75 no-underline'
-                  to='/'
+                  to='/reg'
                 >
                   Register
                 </Link>
