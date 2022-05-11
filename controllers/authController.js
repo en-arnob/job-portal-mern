@@ -73,7 +73,7 @@ exports.clientRegPostController = async (req, res) => {
     if (checkUser) {
       return res
         .status(400)
-        .json({ errors: { msg: "Email is already registered" } });
+        .json({ errors: [{ msg: "Email is already registered" }] });
     }
     //hashPasswd
     const salt = await bcrypt.genSalt(10);
