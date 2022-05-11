@@ -17,7 +17,7 @@ const RegistrationClients = () => {
     phone: "",
     gender: "",
   });
-  const [error, setError] = useState("");
+  const [error, setError] = useState(" ");
   const navigate = useNavigate();
 
   const handleChange = ({ currentTarget: input }) => {
@@ -36,9 +36,8 @@ const RegistrationClients = () => {
         error.response.status >= 400 &&
         error.response.status <= 500
       ) {
-        setError(error);
+        setError(error.response.data.errors[0]);
       }
-      console.log(error);
     }
   };
   return (
@@ -275,7 +274,7 @@ const RegistrationClients = () => {
                       name="confirmPassword"
                     />
                     {error && (
-                      <p class="text-red-500 text-xs italic">{error}</p>
+                      <p class="text-red-500 text-xs italic">{error.msg}</p>
                     )}
                   </div>
                   <div class="content-center">
