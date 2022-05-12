@@ -1,0 +1,20 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.userImagePrev {
+  background-color: #67e8e8;
+  min-height: 100vh;
+}
+.selcetBtn {
+  border: 1px solid white;
+  border-radius: 5%;
+}
+.sectionInfo {
+  margin-left: 60px !important;
+}
+@media screen and (max-width: 770px) {
+  .userImagePrev {
+    min-height: 80vh;
+  }
+}
