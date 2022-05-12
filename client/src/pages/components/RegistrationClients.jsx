@@ -195,9 +195,8 @@ const RegistrationClients = () => {
                             type="radio"
                             name="gender"
                             id="flexRadioDefault1"
-                            onSelect={handleChange}
-                            value={data.gender}
-                            checked={data.male}
+                            onChange={handleChange}
+                            value="male"
                           />
                           <label
                             class="form-check-label inline-block text-gray-800"
@@ -212,9 +211,8 @@ const RegistrationClients = () => {
                             type="radio"
                             name="gender"
                             id="flexRadioDefault2"
-                            onClick={handleChange}
-                            value={data.gender}
-                            checked={data.male}
+                            onChange={handleChange}
+                            value="female"
                           />
                           <label
                             class="form-check-label inline-block text-gray-800"
@@ -231,7 +229,7 @@ const RegistrationClients = () => {
                             name="gender"
                             id="flexRadioDefault3"
                             onChange={handleChange}
-                            value={data.gender}
+                            value="other"
                           />
                           <label
                             class="form-check-label inline-block text-gray-800"

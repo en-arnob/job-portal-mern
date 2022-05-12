@@ -62,7 +62,7 @@ const ClientSchema = new Schema({
   },
   gender: {
     type: String,
-    //   required: true,
+    required: true,
   },
 });
 
