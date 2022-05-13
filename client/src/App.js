@@ -7,14 +7,13 @@ import Nav from "./pages/components/Nav";
 import LoginPage from "./pages/LoginPage";
 import RegistrationPage from "./pages/RegistrationPage";
 import ProfilePage from "./pages/ProfilePage";
-import { UserContext } from "./hooks/UserContext";
+import { UserProvider } from "./hooks/UserContext";
 
 function App() {
-  const [value, setValue] = useState('hellow from context')
 
   return (
     <Router>
-      <UserContext.Provider value={{value, setValue}}>
+      <UserProvider>
         <Nav />
         <Routes>
           <Route path="/" exact element={<Home />} />
@@ -22,7 +21,7 @@ function App() {
           <Route path="/reg" exact element={<RegistrationPage />} />
           <Route path="/profile" exact element={<ProfilePage />} />
        </Routes>
-      </UserContext.Provider>
+      </UserProvider>
     </Router>
   );
 }
