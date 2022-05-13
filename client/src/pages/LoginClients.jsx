@@ -6,12 +6,13 @@ import loginImg from "../assets/images/loginClients.svg";
 import jwt_decode from "jwt-decode";
 
 const LoginClients = () => {
+  const navigate = useNavigate();
   const [data, setData] = useState({
     email: "",
     password: "",
   });
   const [error, setError] = useState(" ");
-  const navigate = useNavigate();
+
   const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.name]: input.value });
   };
