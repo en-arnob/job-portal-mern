@@ -15,12 +15,13 @@ const CandidatesProfileDetails = () => {
             <h5 className="userName text-center text-uppercase">
               Nahim Bin Reza Udoy
             </h5>
+            <p className="userName text-center mt-3">nahim_udoy</p>
           </Col>
           <Col lg={9} md={8} sm={12} className="userDetails mt-3">
             <UserDetails />
             <div className="text-center my-5">
               <button type="submit" className="btn btn-info btn-lg">
-                Download CV
+                Download Resume
               </button>
             </div>
           </Col>

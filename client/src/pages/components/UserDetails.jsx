@@ -7,6 +7,7 @@ import {
   FaHistory,
   FaStickyNote,
   FaCertificate,
+  FaLink,
 } from "react-icons/fa";
 import { Col, Row } from "react-bootstrap";
 const UserDetails = () => {
@@ -105,9 +106,13 @@ const UserDetails = () => {
                 ipsum dolor sit amet, consectetur adipisicing elit.
               </p>
               <p>
-                <span className="fw-bolder fst-italic">Technology: </span> Lorem
+                <span className="fw-bolder fst-italic">Expertise: </span> Lorem
                 ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos
                 in magnam repellat.{" "}
+              </p>
+              <p>
+                <span className="fw-bolder fst-italic">Skill: </span> Lorem
+                ipsum dolor sit amet. Dignissimos in magnam repellat.{" "}
               </p>
             </Col>
           </Row>
@@ -171,6 +176,29 @@ const UserDetails = () => {
               <p>
                 <span className="fw-bolder fst-italic">Programming Hero</span>,
                 from Lorem ipsum dolor sit amet
+              </p>
+            </Col>
+          </Row>
+        </div>
+      </div>
+
+      <div className="sections">
+        <div className="sectionTitle">
+          <h4>
+            <FaLink className="d-inline-block" /> &nbsp; &nbsp;{" "}
+            <span className="text-black-50">Links</span>{" "}
+          </h4>
+        </div>
+        <div className="sectionInfo mt-3">
+          <Row>
+            <Col>
+              <p>
+                <span className="fw-bolder fst-italic">Portfolio link:</span>{" "}
+                https://github.com/
+              </p>
+              <p>
+                <span className="fw-bolder fst-italic">Email:</span>{" "}
+                amaremail@gmai.com
               </p>
             </Col>
           </Row>
