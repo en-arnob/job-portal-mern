@@ -46,6 +46,21 @@ exports.cdRegValidation = [
       "Password is required and needed to be minimum 6 characters long"
     ),
 ];
+exports.LogValidation = [
+  body("email")
+  .not()
+  .isEmpty()
+  .isEmail()
+  .withMessage("Valid email is required"),
+  body("password")
+    .not()
+    .isEmpty()
+    .isLength({ min: 6 })
+    .withMessage(
+      "Password is required and needed to be minimum 6 characters long"
+    ),
+
+]
 
 exports.loginGetController = (req, res) => {
   res.json({ msg: "Login" });
@@ -145,3 +160,70 @@ exports.candidateRegPostController = async (req, res) => {
     return res.status(500).json({ errors: e });
   }
 };
+ 
+exports.clientLoginPostController = async (req, res) => {
+  const {email, password} = req.body
+
+  const clLogVErr = validationResult(req)
+  if (!clLogVErr.isEmpty()) {
+    return res.status(400).json({ errors: clLogVErr.array() });
+  }
+  try {
+    let user = await UserClient.findOne({email})
+    if (!user) {
+      return res
+        .status(400)
+        .json({ errors: [{ msg: "Invalid Credentials" }] });
+    }
+    let match = await bcrypt.compare(password, user.password)
+    if (!match) {
+      return res
+        .status(400)
+        .json({ errors: [{ msg: "Invalid Credentials" }] });
+    }
+    const jwtToken = jwt.sign({ user: user }, process.env.SECRET_KEY, {
+      expiresIn: "7d",
+    });
+    return res
+      .status(200)
+      .json({ msg: "Account Logged in", jwtToken });
+
+
+  } catch (error) {
+    return res.status(500).json({ errors: error });
+  }
+
+}
+exports.candidateLoginPostController = async (req, res) => {
+  const {email, password} = req.body
+
+  const LogVErr = validationResult(req)
+  if (!LogVErr.isEmpty()) {
+    return res.status(400).json({ errors: LogVErr.array() });
+  }
+  try {
+    let user = await UserCandidate.findOne({email})
+    if (!user) {
+      return res
+        .status(400)
+        .json({ errors: [{ msg: "Invalid Credentials" }] });
+    }
+    let match = await bcrypt.compare(password, user.password)
+    if (!match) {
+      return res
+        .status(400)
+        .json({ errors: [{ msg: "Invalid Credentials" }] });
+    }
+    const jwtToken = jwt.sign({ user: user }, process.env.SECRET_KEY, {
+      expiresIn: "7d",
+    });
+    return res
+      .status(200)
+      .json({ msg: "Account Logged in", jwtToken });
+
+
+  } catch (error) {
+    return res.status(500).json({ errors: error });
+  }
+
+}
