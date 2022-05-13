@@ -1,8 +1,8 @@
 import React from "react";
 import { Col, Container, Row, Card } from "react-bootstrap";
-import EditImg from "../../assets/images/EditCandidates.svg";
+import EditImg from "../../assets/images/EditClients.svg";
 
-const EditCandidatesProfile = () => {
+const EditClientProfile = () => {
   return (
     <div>
       <Container>
@@ -109,20 +109,6 @@ const EditCandidatesProfile = () => {
                         // value={data.fullname}
                         // name="birthday"
                       />
-                      <label
-                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        for="grid-image"
-                      >
-                        Upload Image
-                      </label>
-                      <input
-                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                        id="grid-image"
-                        type="file"
-                        //   onChange={handleChange}
-                        //   value={data.phone}
-                        name="image"
-                      />
 
                       <label
                         class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -217,8 +203,8 @@ const EditCandidatesProfile = () => {
                         // name="confirmPassword"
                       />
                       {/* {error && (
-                      <p class="text-red-500 text-xs italic">{error.msg}</p>
-                    )} */}
+                    <p class="text-red-500 text-xs italic">{error.msg}</p>
+                  )} */}
                     </div>
                   </div>
                 </Card.Body>
@@ -233,13 +219,13 @@ const EditCandidatesProfile = () => {
                         class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                         for="grid-insOrg"
                       >
-                        Institute/Organization
+                        Organization
                       </label>
                       <input
                         class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                         id="grid-insOrg"
                         type="text"
-                        placeholder="Enter Institute/Organization"
+                        placeholder="Enter Organization"
                         //   onChange={handleChange}
                         //   value={data.fullname}
                         name="insOrg"
@@ -263,133 +249,120 @@ const EditCandidatesProfile = () => {
 
                       <label
                         class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        for="grid-skill"
+                        for="grid-nid"
                       >
-                        Skills
+                        Nid
                       </label>
                       <input
                         class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                        id="grid-skill"
+                        id="grid-nid"
                         type="text"
-                        placeholder="Skill1,Skill2...."
+                        placeholder="nid number of account holder"
                         //   onChange={handleChange}
                         //   value={data.email}
-                        name="skill"
+                        name="nid"
                       />
 
                       <label
                         class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        for="grid-Expertisee"
+                        for="grid-address"
                       >
-                        Expertise
+                        Office Address
                       </label>
                       <input
                         class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                        id="grid-Expertise"
+                        id="grid-address"
                         type="text"
-                        placeholder="Expertise1,Expertise2..."
+                        placeholder="Proper address of office"
                         //   onChange={handleChange}
                         //   value={data.phone}
-                        name="expertise"
+                        name="address"
                       />
+
+                      <div class="flex flex-wrap -mx-3 mb-2">
+                        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                          <label
+                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                            for="grid-city"
+                          >
+                            City
+                          </label>
+                          <input
+                            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                            id="grid-city"
+                            type="text"
+                            placeholder="Dhaka"
+                          />
+                        </div>
+                        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                          <label
+                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                            for="grid-state"
+                          >
+                            State
+                          </label>
+                          <div class="relative">
+                            <select
+                              class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                              id="grid-state"
+                            >
+                              <option>Dhanmondi</option>
+                              <option>Mohammadpur</option>
+                              <option>Basundhora</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                          <label
+                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                            for="grid-zip"
+                          >
+                            Zip
+                          </label>
+                          <input
+                            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                            id="grid-zip"
+                            type="text"
+                            placeholder="1215"
+                          />
+                        </div>
+                      </div>
 
                       <label
                         class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        for="grid-experience"
+                        for="grid-website"
                       >
-                        Experience
-                      </label>
-                      <textarea
-                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                        id="grid-experience"
-                        type="text"
-                        // onChange={handleChange}
-                        // value={data.fullname}
-                        name="experience"
-                        placeholder="Enter experinces"
-                      />
-                      <label
-                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        for="grid-cover"
-                      >
-                        Cover letter
-                      </label>
-                      <textarea
-                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                        id="grid-cover"
-                        type="text"
-                        // onChange={handleChange}
-                        // value={data.fullname}
-                        name="cover"
-                        placeholder="Write a cover letter"
-                      />
-                      <label
-                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        for="grid-bio"
-                      >
-                        Bio
-                      </label>
-                      <textarea
-                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                        id="grid-experience"
-                        type="text"
-                        // onChange={handleChange}
-                        // value={data.fullname}
-                        name="bio"
-                        placeholder="Write your bio"
-                      />
-
-                      <label
-                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        for="grid-portfolio"
-                      >
-                        Portfolio Link
+                        Website Link
                       </label>
                       <input
                         class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                        id="grid-portfolio"
+                        id="grid-website"
                         type="text"
-                        placeholder="Enter portfolio url"
+                        placeholder="Enter website url"
                         //   onChange={handleChange}
                         //   value={data.phone}
-                        name="portfolio"
+                        name="website"
                       />
                       <label
                         class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        for="grid-certificate"
+                        for="grid-image"
                       >
-                        Certificate
+                        Upload Company logo or image
                       </label>
                       <input
                         class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                        id="grid-certificate"
-                        type="text"
-                        placeholder="Online certificate only"
-                        //   onChange={handleChange}
-                        //   value={data.phone}
-                        name="certificate"
-                      />
-
-                      <label
-                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        for="grid-resume"
-                      >
-                        Upload Resume
-                      </label>
-                      <input
-                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                        id="grid-resume"
+                        id="grid-image"
                         type="file"
                         //   onChange={handleChange}
                         //   value={data.phone}
-                        name="resume"
+                        name="image"
                       />
                     </div>
 
                     <div class="mb-6">
                       {/* {error && (
-                      <p class="text-red-500 text-xs italic">{error.msg}</p>
-                    )} */}
+                    <p class="text-red-500 text-xs italic">{error.msg}</p>
+                  )} */}
                     </div>
                     <div class="content-center">
                       <button
@@ -410,4 +383,4 @@ const EditCandidatesProfile = () => {
   );
 };
 
-export default EditCandidatesProfile;
+export default EditClientProfile;
