@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./assets/css/style.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -6,8 +6,10 @@ import Home from "./pages/Home";
 import Nav from "./pages/components/Nav";
 import LoginPage from "./pages/LoginPage";
 import RegistrationPage from "./pages/RegistrationPage";
-import ProfilePage from "./pages/ProfilePage";
 import { UserProvider } from "./hooks/UserContext";
+import Profile from "./pages/protected/Profile";
+
+// import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
 
@@ -16,10 +18,11 @@ function App() {
       <UserProvider>
         <Nav />
         <Routes>
+        {/* <ProtectedRoute exact path='/profile' component={Profile} /> */}
           <Route path="/" exact element={<Home />} />
           <Route path="/login" exact element={<LoginPage />} />
           <Route path="/reg" exact element={<RegistrationPage />} />
-          <Route path="/profile" exact element={<ProfilePage />} />
+          <Route path='/profile' exact element={<Profile/>} />
        </Routes>
       </UserProvider>
     </Router>
