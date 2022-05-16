@@ -19,7 +19,7 @@ function App() {
       <UserProvider>
         <Nav />
         <Routes>
-        {/* <ProtectedRoute exact path='/profile' component={Profile} /> */}
+          {/* <ProtectedRoute exact path='/profile' component={Profile} /> */}
           <Route path="/" exact element={<Home />} />
           <Route path="/login" exact element={<LoginPage />} />
           <Route path="/reg" exact element={<RegistrationPage />} />
