@@ -17,9 +17,13 @@ const CandidatesProfileDetails = () => {
     <div>
       <Container>
         <Row>
-          <Col lg={3} md={4} sm={12} className="userImagePrev">
+          <Col lg={3} md={4} sm={12} className="bg-cyan-300 userImagePrev">
             <div className="text-center my-3">
-              <img src={UserImage} className="img-fluid rounded-circle" />
+              <img
+                src={UserImage}
+                className="img-fluid rounded-circle"
+                alt="CandidatesIamge"
+              />
             </div>
             <h5 className="userName text-center text-uppercase">
               Nahim Bin Reza Udoy
