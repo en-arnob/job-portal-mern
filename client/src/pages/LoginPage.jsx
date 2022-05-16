@@ -1,24 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import LoginCandidates from "./LoginCandidates";
 import LoginClients from "./LoginClients";
 import { useNavigate } from "react-router-dom";
-import jwt_decode from "jwt-decode";
 
-const LoginPage = () => {
+const LoginPage = ({ history }) => {
   const [loginC, setLoginC] = useState(1);
   const navigate = useNavigate();
-  const token = localStorage.getItem("myToken");
-  if (token) {
-    const decodedToken = jwt_decode(token);
-    const expiresIn = new Date(decodedToken.exp * 1000);
-    if (new Date() > expiresIn) {
-      localStorage.removeItem("myToken");
-      navigate("/login");
-    } else {
-      const { user } = decodedToken;
-      navigate("/");
+
+  useEffect(() => {
+    if (localStorage.getItem("myToken")) {
+      //   const decodedToken = jwt_decode(localStorage.getItem("myToken"));
+      //   const expiresIn = new Date(decodedToken.exp * 1000);
+      //   if (!new Date() > expiresIn) {
+      //     history.push("/profile");
+      //   } else {
+      //     localStorage.getItem("myToken");
+      //   }
+      // }
+      navigate("/profile");
     }
-  }
+  });
 
   return (
     <div>

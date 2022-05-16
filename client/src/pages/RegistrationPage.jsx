@@ -1,9 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import RegistrationClients from "./components/RegistrationClients";
 import RegistrationCandidates from "./components/RegistrationCandidates";
+import { useNavigate } from "react-router-dom";
 
 const RegistrationPage = () => {
   const [RegistrationC, setRegistrationC] = useState(1);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (localStorage.getItem("myToken")) {
+      //   const decodedToken = jwt_decode(localStorage.getItem("myToken"));
+      //   const expiresIn = new Date(decodedToken.exp * 1000);
+      //   if (!new Date() > expiresIn) {
+      //     history.push("/profile");
+      //   } else {
+      //     localStorage.getItem("myToken");
+      //   }
+      // }
+      navigate("/profile");
+    }
+  });
 
   return (
     <div>
