@@ -6,20 +6,27 @@ import Home from "./pages/Home";
 import Nav from "./pages/components/Nav";
 import LoginPage from "./pages/LoginPage";
 import RegistrationPage from "./pages/RegistrationPage";
-import ProfilePage from "./pages/ProfilePage";
+import { UserProvider } from "./hooks/UserContext";
+import Profile from "./pages/protected/Profile";
 import EditProfilePage from "./pages/EditProfilePage";
 
+// import ProtectedRoute from "./ProtectedRoute";
+
 function App() {
+
   return (
     <Router>
-      <Nav />
-      <Routes>
-        <Route path="/" exact element={<Home />} />
-        <Route path="/login" exact element={<LoginPage />} />
-        <Route path="/reg" exact element={<RegistrationPage />} />
-        <Route path="/profile" exact element={<ProfilePage />} />
-        <Route path="/editProfile" exact element={<EditProfilePage />} />
-      </Routes>
+      <UserProvider>
+        <Nav />
+        <Routes>
+        {/* <ProtectedRoute exact path='/profile' component={Profile} /> */}
+          <Route path="/" exact element={<Home />} />
+          <Route path="/login" exact element={<LoginPage />} />
+          <Route path="/reg" exact element={<RegistrationPage />} />
+          <Route path='/profile' exact element={<Profile/>} />
+          <Route path="/editProfile" exact element={<EditProfilePage />} />
+       </Routes>
+      </UserProvider>
     </Router>
   );
 }
