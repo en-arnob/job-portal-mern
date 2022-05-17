@@ -1,22 +1,96 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { CgMenu } from "react-icons/cg";
+import { UserContext } from "../../App";
 
 const Nav = () => {
   const [navbarOpen, setNavbarOpen] = useState(false);
-  const beforeLoginNavItem = ["Login", "Register", "Help"];
-  const beforeLoginNavLinkPath = ["/login", "/reg", "#"];
-  const afterLoginNavItem = ["Profile", "Dashboard", "Logout"];
-  const afterLoginNavLinkPath = ["/profile", "/editProfile", "#"];
-  let navItem;
-  let linkPath;
-  if (localStorage.getItem("myToken")) {
-    navItem = afterLoginNavItem;
-    linkPath = afterLoginNavLinkPath;
-  } else {
-    navItem = beforeLoginNavItem;
-    linkPath = beforeLoginNavLinkPath;
-  }
+  const { state, dispatch } = useContext(UserContext);
+  // const [navItem, setNavItem] = useState(" ");
+  // const [navLinkPath, setNavLinkPath] = useState(" ");
+  // const beforeLoginNavItem = ["Login", "Register", "Help"];
+  // const beforeLoginNavLinkPath = ["/login", "/reg", "#"];
+  // const afterLoginNavItem = ["Profile", "Dashboard", "Logout"];
+  // const afterLoginNavLinkPath = ["/profile", "/editProfile", "#"];
+  // // let navItem;
+  // // let linkPath;
+  // if (localStorage.getItem("myToken")) {
+  //   // navItem = afterLoginNavItem;
+  //   // linkPath = afterLoginNavLinkPath;
+  //   setNavItem(afterLoginNavItem);
+  //   setNavLinkPath(afterLoginNavLinkPath);
+  // } else {
+  //   setNavItem(beforeLoginNavItem);
+  //   setNavLinkPath(beforeLoginNavLinkPath);
+  // }
+
+  const RenderNav = () => {
+    if (!state) {
+      return (
+        <>
+          <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
+            <li className="nav-item">
+              <Link
+                className="px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-white hover:opacity-75 no-underline"
+                to="/"
+              >
+                Home
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link
+                className="px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-white hover:opacity-75 no-underline"
+                to="/login"
+              >
+                Login
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link
+                className="px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-white hover:opacity-75 no-underline"
+                to="/reg"
+              >
+                Register
+              </Link>
+            </li>
+          </ul>
+          ;
+        </>
+      );
+    } else {
+      return (
+        <>
+          <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
+            <li className="nav-item">
+              <Link
+                className="px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-white hover:opacity-75 no-underline"
+                to="/profile"
+              >
+                Profile
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link
+                className="px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-white hover:opacity-75 no-underline"
+                to="/editProfile"
+              >
+                Dashboard
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link
+                className="px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-white hover:opacity-75 no-underline"
+                to="/logout"
+              >
+                Logout
+              </Link>
+            </li>
+          </ul>
+          ;
+        </>
+      );
+    }
+  };
   return (
     <>
       <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-green-500 mb-3">
@@ -47,32 +121,8 @@ const Nav = () => {
             }
             id="example-navbar-danger"
           >
-            <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
-              <li className="nav-item">
-                <Link
-                  className="px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-white hover:opacity-75 no-underline"
-                  to={linkPath[0]}
-                >
-                  {navItem[0]}
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  className="px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-white hover:opacity-75 no-underline"
-                  to={linkPath[1]}
-                >
-                  {navItem[1]}
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  className="px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-white hover:opacity-75 no-underline"
-                  to={linkPath[2]}
-                >
-                  {navItem[2]}
-                </Link>
-              </li>
-            </ul>
+            {/* dynamic nav */}
+            <RenderNav />
           </div>
         </div>
       </nav>
