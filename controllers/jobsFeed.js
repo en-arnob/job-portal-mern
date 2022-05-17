@@ -23,7 +23,7 @@ exports.postJobsController = async (req, res) => {
     try {
         const job = await JobPost.create({
             title: data.title,
-            authorId: user.user._id,
+            authorId: user._id,
             body: data.body,
             tags: data.tags,
             vaccancy: data.vaccancy,

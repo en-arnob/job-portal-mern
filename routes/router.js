@@ -16,6 +16,6 @@ router.post('/candidate-register', cdRegValidation, candidateRegPostController )
 
 // home
 router.get('/api/jobs', getJobsController)
-route.post('/api/job-post', postJobsController )
+router.post('/api/job-post', postJobsController )
 
 module.exports = router

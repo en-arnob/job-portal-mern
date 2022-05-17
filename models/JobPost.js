@@ -1,4 +1,6 @@
 const {Schema, model} = require('mongoose')
+const UserClient = require('./UserClient')
+
 
 const jobPostSchema = new Schema(
     {
@@ -18,14 +20,14 @@ const jobPostSchema = new Schema(
             required: true,
         },
         tags: {
-            type: [String],
+            type: String,
         },
         vaccancy: Number,
         dateOfPosting: {
             type: Date,
             default: Date.now,
         },
-        deadline: Date,
+        deadline: String,
         jobType: {
             type: String,
             required: true,
