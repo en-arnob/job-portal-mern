@@ -7,7 +7,7 @@ import Home from "./pages/Home";
 import Nav from "./pages/components/Nav";
 import LoginPage from "./pages/LoginPage";
 import RegistrationPage from "./pages/RegistrationPage";
-import { UserProvider } from "./hooks/UserContext";
+import { UserProvider } from "./hooks/UsersContext";
 import Profile from "./pages/protected/Profile";
 import EditProfilePage from "./pages/EditProfilePage";
 import LogoutPage from "./pages/LogoutPage";

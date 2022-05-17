@@ -1,12 +1,14 @@
-import React, { useContext } from "react";
-import { UserContext } from "../hooks/UserContext";
+import React, { useContext, useEffect } from "react";
+import { UsersContext } from "../hooks/UsersContext";
+import jwt_decode from "jwt-decode";
 
 const Home = () => {
-  const { value } = useContext(UserContext);
+  const [user, setUser] = useContext(UsersContext);
+
   return (
-    <div className="text-xl">
+    <div className='text-xl'>
       <h1>Hello</h1>
-      <h1>{value}</h1>
+      <h1>{user.username}</h1>
     </div>
   );
 };
