@@ -9,7 +9,16 @@ exports.getJobsController = (req, res) => {
 exports.postJobsController = async (req, res) => {
 
     const {token} = req.body
-    const decoded = jwt_decode(token);
+    try {
+        const decoded = await jwt_decode(token);
+    const user = decoded.user
+    } catch (error) {
+
+        return res
+        .status(400)
+        .json({ errors: [{ msg: "Invalid Token" }] });
+    }
+    const decoded = await jwt_decode(token);
     const user = decoded.user
 
     if (user.usertype != 'recruiter') {
