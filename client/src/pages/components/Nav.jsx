@@ -6,6 +6,7 @@ import { UserContext } from "../../App";
 const Nav = () => {
   const [navbarOpen, setNavbarOpen] = useState(false);
   const { state, dispatch } = useContext(UserContext);
+  const token = localStorage.getItem("myToken");
   // const [navItem, setNavItem] = useState(" ");
   // const [navLinkPath, setNavLinkPath] = useState(" ");
   // const beforeLoginNavItem = ["Login", "Register", "Help"];
@@ -25,7 +26,7 @@ const Nav = () => {
   // }
 
   const RenderNav = () => {
-    if (!state) {
+    if (!state && !token) {
       return (
         <>
           <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
