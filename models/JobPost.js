@@ -8,7 +8,7 @@ const jobPostSchema = new Schema(
             maxlength: 100,
             required: true,
         },
-        author: {
+        authorId: {
             type: Schema.Types.ObjectId,
             ref: UserClient,
             required: true,
@@ -20,5 +20,19 @@ const jobPostSchema = new Schema(
         tags: {
             type: [String],
         },
+        vaccancy: Number,
+        dateOfPosting: {
+            type: Date,
+            default: Date.now,
+        },
+        deadline: Date,
+        jobType: {
+            type: String,
+            required: true,
+        },
+
     }
 )
+
+const JobPost = model("JobPost", jobPostSchema)
+module.exports = JobPost
