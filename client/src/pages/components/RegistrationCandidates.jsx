@@ -6,7 +6,7 @@ import RegImg from "../../assets/images/RegCandidates.svg";
 
 const RegistrationCandidates = () => {
   const [data, setData] = useState({
-    usertype: " ",
+    usertype: "candidate",
     username: "",
     fullname: "",
     email: "",
