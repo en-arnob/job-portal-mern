@@ -1,9 +1,10 @@
+require("dotenv").config();
 const { body, validationResult } = require("express-validator");
 const UserClient = require("../models/UserClient");
 const UserCandidate = require("../models/UserCandidate");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-require("dotenv").config();
+
 
 exports.clRegValidation = [
   body("username").not().isEmpty().withMessage("Username is required"),
@@ -105,7 +106,13 @@ exports.clientRegPostController = async (req, res) => {
         phone,
         gender,
       });
-      const jwtToken = jwt.sign({ user: user }, process.env.SECRET_KEY, {
+      const jwtToken = jwt.sign({ user: {
+        id: user._id,
+        usertype: user.usertype,
+        fullname: user.fullname,
+        organization: user.organization,
+  
+      }}, process.env.SECRET_KEY, {
         expiresIn: "7d",
       });
       return res
@@ -147,7 +154,13 @@ exports.candidateRegPostController = async (req, res) => {
         phone,
         gender,
       });
-      const jwtToken = jwt.sign({ user: user }, process.env.SECRET_KEY, {
+      const jwtToken = jwt.sign({ user: {
+        id: user._id,
+        usertype: user.usertype,
+        fullname: user.fullname,
+        organization: user.organization,
+  
+      }}, process.env.SECRET_KEY, {
         expiresIn: "7d",
       });
       return res
@@ -169,7 +182,7 @@ exports.clientLoginPostController = async (req, res) => {
     return res.status(400).json({ errors: clLogVErr.array() });
   }
   try {
-    let user = await UserClient.findOne({email})
+    let user = await UserClient.findOne({email}).select('+password')
     if (!user) {
       return res
         .status(400)
@@ -181,7 +194,13 @@ exports.clientLoginPostController = async (req, res) => {
         .status(400)
         .json({ errors: [{ msg: "Invalid Credentials" }] });
     }
-    const jwtToken = jwt.sign({ user: user }, process.env.SECRET_KEY, {
+    const jwtToken = jwt.sign({ user: {
+      id: user._id,
+      usertype: user.usertype,
+      fullname: user.fullname,
+      organization: user.organization,
+
+    }}, process.env.SECRET_KEY, {
       expiresIn: "7d",
     });
     return res
@@ -202,7 +221,7 @@ exports.candidateLoginPostController = async (req, res) => {
     return res.status(400).json({ errors: LogVErr.array() });
   }
   try {
-    let user = await UserCandidate.findOne({email})
+    let user = await UserCandidate.findOne({email}).select('+password')
     if (!user) {
       return res
         .status(400)
@@ -214,7 +233,13 @@ exports.candidateLoginPostController = async (req, res) => {
         .status(400)
         .json({ errors: [{ msg: "Invalid Credentials" }] });
     }
-    const jwtToken = jwt.sign({ user: user }, process.env.SECRET_KEY, {
+    const jwtToken = jwt.sign({ user: {
+      id: user._id,
+      usertype: user.usertype,
+      fullname: user.fullname,
+      organization: user.organization,
+
+    }}, process.env.SECRET_KEY, {
       expiresIn: "7d",
     });
     return res
