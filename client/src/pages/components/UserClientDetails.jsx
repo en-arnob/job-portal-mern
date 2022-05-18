@@ -1,10 +1,27 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
+import axios from "axios";
 import { UsersContext } from "../../hooks/UsersContext";
 import { FaUserAlt, FaHome, FaBriefcase, FaLink } from "react-icons/fa";
 import { Card, Col, Row } from "react-bootstrap";
 const UserClientDetails = () => {
   const [user, setUser] = useContext(UsersContext);
-  const token = localStorage.getItem("myToken");
+  const [userData, setUserData] = useState("");
+  useEffect(() => {
+    getJob();
+  }, []);
+
+  const getJob = () => {
+    axios
+      .get(`http://127.0.0.1:8000/userDetails/${user.id}/${user.usertype}`)
+      .then((response) => {
+        const catchData = response.data.data.user;
+        setUserData(catchData);
+        console.log(response.data.data.user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <div>
       {user && (
@@ -22,25 +39,25 @@ const UserClientDetails = () => {
                   <Col lg={4} md={12} sm={12}>
                     <p>
                       <span className="fw-bolder fst-italic">Name: </span>{" "}
-                      {user.fullname}
+                      {userData.fullname}
                     </p>
                     <p>
                       <span className="fw-bolder fst-italic">Birthday: </span>{" "}
-                      {user.birthday}
+                      {userData.birthday}
                     </p>
                     <p>
                       <span className="fw-bolder fst-italic">NID: </span>{" "}
-                      {user.nid}
+                      {userData.nid}
                     </p>
                   </Col>
                   <Col lg={4} md={12} sm={12}>
                     <p>
                       <span className="fw-bold fst-italic">Gender: </span>{" "}
-                      {user.gender}
+                      {userData.gender}
                     </p>
                     <p>
                       <span className="fw-bold fst-italic">Phone: </span>{" "}
-                      {user.phone}
+                      {userData.phone}
                     </p>
                   </Col>
                 </Row>
@@ -61,7 +78,7 @@ const UserClientDetails = () => {
                       <span className="fw-bolder fst-italic">
                         Organization:{" "}
                       </span>{" "}
-                      {user.organization}
+                      {userData.organization}
                     </p>
                     <p>
                       <span className="fw-bolder fst-italic">
@@ -121,7 +138,7 @@ const UserClientDetails = () => {
                     </p>
                     <p>
                       <span className="fw-bolder fst-italic">Email:</span>{" "}
-                      {user.email}
+                      {userData.email}
                     </p>
                   </Col>
                 </Row>
