@@ -2,8 +2,16 @@ const jwt_decode = require('jwt-decode');
 const JobPost = require('../models/JobPost')
 
 
-exports.getJobsController = (req, res) => {
-    res.send('Jobs here')
+exports.getJobsController = async (req, res) => {
+
+    try {
+        let jobs = await JobPost.find()
+        res.json(jobs)
+    } catch (error) {
+        res.json(error)
+    }
+    
+    
 }
 
 exports.postJobsController = async (req, res) => {
@@ -11,7 +19,7 @@ exports.postJobsController = async (req, res) => {
     const {token} = req.body
     try {
         const decoded = await jwt_decode(token);
-    const user = decoded.user
+        const user = decoded.user
     } catch (error) {
 
         return res
