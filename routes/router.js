@@ -13,9 +13,9 @@ const {
 
 //api
 const {
-  getJobsController,
+  getAllJobsController,
   postJobsController,
-} = require("../controllers/jobsFeed");
+} = require("../controllers/jobsController");
 
 //auth routes
 router.get("/login", loginGetController);
@@ -28,7 +28,7 @@ router.post("/candidate-register", cdRegValidation, candidateRegPostController);
 router.get("/userDetails/:id/:usertype", getUserDetails);
 
 // home
-router.get("/api/jobs", getJobsController);
+router.get("/api/jobs/all", getAllJobsController);
 router.post("/api/job-post", postJobsController);
 
 module.exports = router;

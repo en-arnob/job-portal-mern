@@ -1,6 +1,7 @@
 import React from "react";
+import TextTruncate from "react-text-truncate";
 
-const JobCard = () => {
+const JobCard = ({ job }) => {
   return (
     <div className='col-span-2 mx-2'>
       <h1
@@ -11,11 +12,12 @@ const JobCard = () => {
 
         <div className='justify-between sm:flex'>
           <div>
-            <h5 className='text-xl font-bold text-indigo-900'>
-              Frontend Engineer
-            </h5>
-            <p className='mt-1 text-sm font-medium text-indigo-800'>
-              Microsoft
+            <h5 className='text-xl font-bold text-indigo-900'>{job.title}</h5>
+            <p className='mt-1 text-lg  text-blue-700'>
+              {job.authorId.organization}
+            </p>
+            <p className='mt-1 text-sm font-medium text-blue-800'>
+              Posted by: {job.authorId.fullname}
             </p>
           </div>
 
@@ -28,22 +30,29 @@ const JobCard = () => {
           </div>
         </div>
 
-        <div className='mt-4 sm:pr-8'>
-          <p class='text-sm text-gray-500'>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. At velit
-            illum provident a, ipsa maiores deleniti consectetur nobis et eaque.
-          </p>
+        <div className='mt-2 text-gray-600 sm:pr-8 text-sm'>
+          <TextTruncate
+            line={2}
+            element='span'
+            truncateText='…'
+            text={job.body}
+            textTruncateChild={
+              <span className='text-blue-400 mx-2' href='#'>
+                Read more on full post
+              </span>
+            }
+          />
         </div>
 
         <dl class='flex mt-6'>
           <div class='flex flex-col-reverse'>
             <dt class='text-sm font-medium text-gray-600'>#React #Next.js</dt>
-            <dd class='text-xs  text-stone-800'>Deadline: 31st June, 2022</dd>
+            <dd class='text-sm  text-red-800'>Deadline: 31st June, 2022</dd>
           </div>
 
           <div class='flex flex-col-reverse ml-3 sm:ml-6'>
             <dt class='text-sm font-medium text-indigo-600'>Onsite</dt>
-            <dd class='text-xs  text-gray-800'>Vaccancy: 3</dd>
+            <dd class='text-sm  text-gray-800'>Vaccancy: 3</dd>
           </div>
         </dl>
       </h1>
