@@ -1,30 +1,34 @@
-const router = require('express').Router()
-
-//auth
-const { 
-    loginGetController, 
-    clientRegPostController, 
-    candidateRegPostController, 
-    clRegValidation, cdRegValidation, 
-    LogValidation, 
-    clientLoginPostController, 
-    candidateLoginPostController} = require('../controllers/authController')
+const router = require("express").Router();
+const {
+  loginGetController,
+  clientRegPostController,
+  candidateRegPostController,
+  clRegValidation,
+  cdRegValidation,
+  LogValidation,
+  clientLoginPostController,
+  candidateLoginPostController,
+  getUserDetails,
+} = require("../controllers/authController");
 
 //api
 const {
-    getAllJobsController, 
-    postJobsController} = require('../controllers/jobsController')
+  getJobsController,
+  postJobsController,
+} = require("../controllers/jobsFeed");
 
 //auth routes
-router.get('/login', loginGetController )
-router.post('/client-login', LogValidation, clientLoginPostController )
-router.post('/candidate-login', LogValidation, candidateLoginPostController )
-router.post('/client-register', clRegValidation, clientRegPostController )
-router.post('/candidate-register', cdRegValidation, candidateRegPostController )
+router.get("/login", loginGetController);
+router.post("/client-login", LogValidation, clientLoginPostController);
+router.post("/candidate-login", LogValidation, candidateLoginPostController);
+router.post("/client-register", clRegValidation, clientRegPostController);
+router.post("/candidate-register", cdRegValidation, candidateRegPostController);
 
+// get Profile details
+router.get("/userDetails/:id/:usertype", getUserDetails);
 
-// jobs
-router.get('/api/jobs/all', getAllJobsController)
-router.post('/api/job-post', postJobsController )
+// home
+router.get("/api/jobs", getJobsController);
+router.post("/api/job-post", postJobsController);
 
-module.exports = router
+module.exports = router;

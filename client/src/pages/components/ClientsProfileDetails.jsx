@@ -1,4 +1,5 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
+import axios from "axios";
 import { UsersContext } from "../../hooks/UsersContext";
 import { Col, Container, Row } from "react-bootstrap";
 import UserClientDetails from "./UserClientDetails";
@@ -6,7 +7,23 @@ import UserImage from "../../assets/images/dummy-member.jpg";
 
 const ClientsProfileDetails = () => {
   const [user, setUser] = useContext(UsersContext);
-  const token = localStorage.getItem("myToken");
+  const [userData, setUserData] = useState("");
+  useEffect(() => {
+    getJob();
+  }, []);
+
+  const getJob = () => {
+    axios
+      .get(`http://127.0.0.1:8000/userDetails/${user.id}/${user.usertype}`)
+      .then((response) => {
+        const catchData = response.data.data.user;
+        setUserData(catchData);
+        console.log(response.data.data.user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <div>
       {user && (
@@ -21,9 +38,9 @@ const ClientsProfileDetails = () => {
                 />
               </div>
               <h5 className="userName text-center text-uppercase">
-                {user.fullname}
+                {userData.fullname}
               </h5>
-              <p className="userName text-center mt-3">{user.username}</p>
+              <p className="userName text-center mt-3">{userData.username}</p>
             </Col>
             <Col lg={9} md={8} sm={12} className="userDetails md:mt-3">
               <UserClientDetails />
