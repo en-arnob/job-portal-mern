@@ -1,9 +1,19 @@
 const router = require('express').Router()
-const { loginGetController, clientRegPostController, candidateRegPostController, clRegValidation, cdRegValidation, LogValidation, clientLoginPostController, candidateLoginPostController} = require('../controllers/authController')
 
+//auth
+const { 
+    loginGetController, 
+    clientRegPostController, 
+    candidateRegPostController, 
+    clRegValidation, cdRegValidation, 
+    LogValidation, 
+    clientLoginPostController, 
+    candidateLoginPostController} = require('../controllers/authController')
 
 //api
-const {getJobsController, postJobsController} = require('../controllers/jobsFeed')
+const {
+    getAllJobsController, 
+    postJobsController} = require('../controllers/jobsController')
 
 //auth routes
 router.get('/login', loginGetController )
@@ -13,9 +23,8 @@ router.post('/client-register', clRegValidation, clientRegPostController )
 router.post('/candidate-register', cdRegValidation, candidateRegPostController )
 
 
-
-// home
-router.get('/api/jobs', getJobsController)
+// jobs
+router.get('/api/jobs/all', getAllJobsController)
 router.post('/api/job-post', postJobsController )
 
 module.exports = router

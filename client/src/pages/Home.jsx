@@ -1,13 +1,11 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { UsersContext } from "../hooks/UsersContext";
-import jwt_decode from "jwt-decode";
 import JobCard from "./components/JobCard";
-import { FaMapMarkerAlt, FaUserCircle } from "react-icons/fa";
+import { FaMapMarkerAlt } from "react-icons/fa";
 import JobCardSponsored from "./components/JobCardSponsored";
 
 const Home = () => {
   const [user, setUser] = useContext(UsersContext);
-  const token = localStorage.getItem("myToken");
 
   return (
     <div className='text-xl'>
