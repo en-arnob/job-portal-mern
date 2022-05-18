@@ -3,9 +3,27 @@ import { UsersContext } from "../hooks/UsersContext";
 import JobCard from "./components/JobCard";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import JobCardSponsored from "./components/JobCardSponsored";
+import axios from "axios";
 
 const Home = () => {
   const [user, setUser] = useContext(UsersContext);
+  const [jobs, setJobs] = useState("");
+  const [errors, setErrors] = useState([]);
+
+  useEffect(() => {
+    getAllJobs();
+  }, []);
+
+  const getAllJobs = () => {
+    axios
+      .get("http://127.0.0.1:8000/api/jobs/all")
+      .then((response) => {
+        const allJobs = response.data.jobs;
+        console.log(allJobs);
+        setJobs(allJobs);
+      })
+      .catch((error) => console.log(`Error: ${error}`));
+  };
 
   return (
     <div className='text-xl'>
@@ -82,13 +100,13 @@ const Home = () => {
       <h1 className='flex items-center justify-center gap-2 text-center font-normal text-2xl p-4'>
         Latest job offerings nearby <FaMapMarkerAlt className='text-red-500' />
       </h1>
+
       <div className='my-4 md:mx-6 grid md:grid-cols-4 gap-4'>
         <JobCardSponsored />
-        <JobCard />
-        <JobCard />
-        <JobCard />
-        <JobCard />
-        <JobCard />
+
+        {jobs.map((job) => (
+          <JobCard />
+        ))}
       </div>
     </div>
   );
