@@ -252,3 +252,26 @@ exports.candidateLoginPostController = async (req, res) => {
     return res.status(500).json({ errors: error });
   }
 };
+
+exports.getUserDetails = async (req, res) => {
+  try {
+    let user;
+    if (req.params.usertype == "recruiter") {
+      user = await UserClient.findById(req.params.id);
+    } else if (req.params.usertype == "candidate") {
+      user = await UserCandidate.findById(req.params.id);
+    }
+    res.status(200).json({
+      status: "success",
+      data: {
+        user,
+      },
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: "fail",
+      message: "failed to find the user",
+      error: err,
+    });
+  }
+};
