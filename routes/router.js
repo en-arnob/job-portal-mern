@@ -9,6 +9,7 @@ const {
   clientLoginPostController,
   candidateLoginPostController,
   getUserDetails,
+  updateUser,
 } = require("../controllers/authController");
 
 //api
@@ -25,7 +26,14 @@ router.post("/client-register", clRegValidation, clientRegPostController);
 router.post("/candidate-register", cdRegValidation, candidateRegPostController);
 
 // get Profile details
-router.get("/userDetails/:id/:usertype", getUserDetails);
+// router.get("/userDetails/:id/:usertype", getUserDetails).patch();
+// update Profile
+// router.patch("/userUpdate/:id/:usertype", updateUser);
+
+router
+  .route("/userDetails/:id/:usertype")
+  .get(getUserDetails)
+  .patch(updateUser);
 
 // home
 router.get("/api/jobs/all", getAllJobsController);

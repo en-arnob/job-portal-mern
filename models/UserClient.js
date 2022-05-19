@@ -41,7 +41,7 @@ const ClientSchema = new Schema({
     required: true,
     trim: true,
   },
-  officeAdress: Object,
+  officeAdress: String,
 
   password: {
     type: String,

@@ -275,3 +275,33 @@ exports.getUserDetails = async (req, res) => {
     });
   }
 };
+
+exports.updateUser = async (req, res) => {
+  try {
+    let user;
+    if (req.params.usertype == "recruiter") {
+      user = await UserClient.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+        runValidators: true,
+      });
+    } else if (req.params.usertype == "candidate") {
+      user = await UserCandidate.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+        runValidators: true,
+      });
+    }
+
+    res.status(201).json({
+      status: "success",
+      data: {
+        user,
+      },
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: "fail",
+      message: "failed to find or update the user data",
+      error: err,
+    });
+  }
+};

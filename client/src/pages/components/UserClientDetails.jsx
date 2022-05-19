@@ -43,7 +43,7 @@ const UserClientDetails = () => {
                     </p>
                     <p>
                       <span className="fw-bolder fst-italic">Birthday: </span>{" "}
-                      {userData.birthday}
+                      {new Date(userData.birthday).toDateString()}
                     </p>
                     <p>
                       <span className="fw-bolder fst-italic">NID: </span>{" "}
@@ -84,8 +84,7 @@ const UserClientDetails = () => {
                       <span className="fw-bolder fst-italic">
                         Office Address:{" "}
                       </span>{" "}
-                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                      Voluptatum, voluptate!
+                      {userData.officeAdress}
                     </p>
                   </Col>
                 </Row>
@@ -106,7 +105,7 @@ const UserClientDetails = () => {
                       <span className="fw-bolder fst-italic">
                         Designation:{" "}
                       </span>{" "}
-                      Regional Manager
+                      {userData.designation}
                     </p>
                     <p>
                       <span className="fw-bolder fst-italic">
@@ -134,7 +133,7 @@ const UserClientDetails = () => {
                       <span className="fw-bolder fst-italic">
                         Company Webiste:
                       </span>{" "}
-                      https://github.com/
+                      {userData.website}
                     </p>
                     <p>
                       <span className="fw-bolder fst-italic">Email:</span>{" "}
