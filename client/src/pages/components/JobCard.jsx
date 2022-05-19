@@ -44,7 +44,7 @@ const JobCard = ({ job }) => {
             truncateText='…'
             text={job.body}
             textTruncateChild={
-              <span className='text-blue-400 mx-2' href='#'>
+              <span className='text-indigo-900 mx-2' href='#'>
                 Read more on full post
               </span>
             }

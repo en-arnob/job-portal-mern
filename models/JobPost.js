@@ -19,15 +19,25 @@ const jobPostSchema = new Schema(
             type: String,
             required: true,
         },
-        tags: {
+        companyLogo: {
             type: String,
         },
-        vaccancy: Number,
+        tags: {
+            type: String,
+            required: true,
+        },
+        vaccancy: {
+            type: String,
+            required: true,
+        },
         dateOfPosting: {
             type: Date,
             default: Date.now,
         },
-        deadline: String,
+        deadline: {
+            type: String,
+            required: true,
+        },
         jobType: {
             type: String,
             required: true,

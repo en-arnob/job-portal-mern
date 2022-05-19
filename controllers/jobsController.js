@@ -32,6 +32,7 @@ exports.postJobsController = async (req, res) => {
                 authorId: user.id,
                 body: data.body,
                 tags: data.tags,
+                companyLogo: data.logoUrl,
                 vaccancy: data.vaccancy,
                 deadline: data.deadline,
                 jobType: data.jobType,

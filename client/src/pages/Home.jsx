@@ -2,13 +2,16 @@ import React, { useContext, useEffect, useState } from "react";
 import { UsersContext } from "../hooks/UsersContext";
 import JobCard from "./components/JobCard";
 import { FaMapMarkerAlt } from "react-icons/fa";
+import { AiOutlineArrowDown } from "react-icons/ai";
 import JobCardSponsored from "./components/JobCardSponsored";
 import axios from "axios";
+import CreateJobSection from "./components/CreateJobSection";
 
 const Home = () => {
   const [user, setUser] = useContext(UsersContext);
   const [jobs, setJobs] = useState([]);
   const [errors, setErrors] = useState([]);
+  const [postSection, setPostSection] = useState(false);
 
   useEffect(() => {
     getAllJobs();
@@ -34,8 +37,11 @@ const Home = () => {
           <div className='max-w-screen-xl px-4 py-8 mx-auto sm:py-12 sm:px-6 lg:px-8'>
             <div className='sm:justify-between sm:items-center sm:flex'>
               <div className='text-center sm:text-left'>
-                <h1 className=' text-2xl  text-stone-800 sm:text-3xl'>
-                  Welcome Back, {user.fullname}{" "}
+                <h1 className=' text-2xl  text-rose-700 sm:text-3xl'>
+                  Welcome Back,{" "}
+                  <span className='font-normal text-gray-800'>
+                    {user.fullname}
+                  </span>
                 </h1>
                 {user.usertype === "recruiter" ? (
                   <p className='mt-1.5 text-lg text-gray-500'>
@@ -88,17 +94,21 @@ const Home = () => {
                 </div>
                 {user.usertype === "recruiter" && (
                   <button
-                    className='block px-5 py-3 text-sm font-medium text-white transition bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring'
+                    onClick={() => setPostSection(!postSection)}
+                    className='flex gap-2 items-center justify-center px-5 py-3 text-sm font-medium text-white transition bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring'
                     type='button'
                   >
-                    Post Job
+                    Create Job <AiOutlineArrowDown className='text-lg' />
                   </button>
                 )}
               </div>
             </div>
+            <div className='mt-4'></div>
           </div>
+          {/* <CreateJobSection /> */}
         </header>
       )}
+      {postSection ? <CreateJobSection /> : null}
       <h1 className='flex items-center justify-center gap-2 text-center font-normal text-2xl p-4'>
         Latest job offerings nearby <FaMapMarkerAlt className='text-red-500' />
       </h1>
