@@ -1,4 +1,7 @@
 import React from "react";
+import TextTruncate from "react-text-truncate";
+import { HiOutlineOfficeBuilding, HiOutlineClock } from "react-icons/hi";
+import { GoVerified } from "react-icons/go";
 
 const JobCardSponsored = () => {
   return (
@@ -11,10 +14,16 @@ const JobCardSponsored = () => {
 
         <div className='justify-between sm:flex'>
           <div>
-            <h5 className='text-xl font-bold text-green-900'>
+            <h5 className='text-2xl font-medium text-green-900'>
               Software Engineer
             </h5>
-            <p className='mt-1 text-sm  text-green-800'>Google</p>
+            <p className='flex gap-3 font-normal text-lg  text-indigo-800'>
+              <HiOutlineOfficeBuilding className='text-lg mt-1' />
+              Google
+            </p>
+            <p className='flex gap-3 text-sm font-medium text-blue-800'>
+              <GoVerified className='text-lg' /> Sponsored Job
+            </p>
           </div>
 
           <div className='flex-shrink-0 hidden ml-3 sm:block'>
@@ -26,11 +35,19 @@ const JobCardSponsored = () => {
           </div>
         </div>
 
-        <div className='mt-4 sm:pr-8'>
-          <p class='text-sm text-gray-500'>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. At velit
-            illum provident a, ipsa maiores deleniti consectetur nobis et eaque.
-          </p>
+        <div className='mt-2 text-gray-600 sm:pr-8 text-sm'>
+          <TextTruncate
+            line={2}
+            element='span'
+            truncateText='…'
+            text='Lorem ipsum dolor sit, amet consectetur adipisicing elit. At velit
+            illum provident a, ipsa maiores deleniti consectetur nobis et eaque.'
+            textTruncateChild={
+              <span className='text-blue-400 mx-2' href='#'>
+                Read more on full post
+              </span>
+            }
+          />
         </div>
 
         <dl class='flex mt-6'>
@@ -38,14 +55,18 @@ const JobCardSponsored = () => {
             <dt class='text-sm font-medium text-gray-600'>
               #JavaScript #Angular
             </dt>
-            <dd class='text-xs  text-stone-800'>Deadline: 31st June, 2022</dd>
+            <dd class='text-sm  text-stone-800'>Deadline: 31st June, 2022</dd>
           </div>
 
           <div class='flex flex-col-reverse ml-3 sm:ml-6'>
             <dt class='text-sm font-medium text-green-600'>Remote</dt>
-            <dd class='text-xs  text-gray-800'>Vaccancy: 3</dd>
+            <dd class='text-sm  text-gray-800'>Vaccancy: 3</dd>
           </div>
         </dl>
+        <p class='text-xs flex gap-2  text-gray-800'>
+          <HiOutlineClock className='text-sm' /> Thu May 19 2022 03:22:35
+          GMT+0600 (Bangladesh Standard Time)
+        </p>
       </h1>
     </div>
   );

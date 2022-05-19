@@ -22,7 +22,9 @@ const Home = () => {
         console.log(allJobs);
         setJobs(allJobs);
       })
-      .catch((error) => console.log(`Error: ${error}`));
+      .catch((error) => {
+        setErrors(error);
+      });
   };
 
   return (
@@ -102,6 +104,13 @@ const Home = () => {
       </h1>
 
       <div className='my-4 md:mx-6 grid md:grid-cols-4 gap-4'>
+        {errors.length > 0 && (
+          <div className='p-4 mx-4 text-red-700 border-l-4 border-red-700 bg-red-50'>
+            <h3 class='text-sm font-medium'>
+              Error fetching data! Try a stable internet connection
+            </h3>
+          </div>
+        )}
         <JobCardSponsored />
         {jobs.map((job) => (
           <JobCard key={job._id} job={job} />

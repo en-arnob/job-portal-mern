@@ -1,7 +1,11 @@
 import React from "react";
 import TextTruncate from "react-text-truncate";
+import { RiUserVoiceLine } from "react-icons/ri";
+import { HiOutlineOfficeBuilding, HiOutlineClock } from "react-icons/hi";
 
 const JobCard = ({ job }) => {
+  const postDate = job.dateOfPosting;
+  const cdate = new Date(postDate).toString();
   return (
     <div className='col-span-2 mx-2'>
       <h1
@@ -12,12 +16,15 @@ const JobCard = ({ job }) => {
 
         <div className='justify-between sm:flex'>
           <div>
-            <h5 className='text-xl font-bold text-indigo-900'>{job.title}</h5>
-            <p className='mt-1 text-lg  text-blue-700'>
+            <h5 className='text-2xl font-medium text-indigo-900'>
+              {job.title}
+            </h5>
+            <p className='flex gap-3 font-normal text-lg  text-blue-700'>
+              <HiOutlineOfficeBuilding className='text-lg mt-1' />{" "}
               {job.authorId.organization}
             </p>
-            <p className='mt-1 text-sm font-medium text-blue-800'>
-              Posted by: {job.authorId.fullname}
+            <p className='flex gap-3 text-sm font-normal text-blue-800'>
+              <RiUserVoiceLine className='text-lg' /> {job.authorId.fullname}
             </p>
           </div>
 
@@ -46,15 +53,18 @@ const JobCard = ({ job }) => {
 
         <dl class='flex mt-6'>
           <div class='flex flex-col-reverse'>
-            <dt class='text-sm font-medium text-gray-600'>#React #Next.js</dt>
-            <dd class='text-sm  text-red-800'>Deadline: 31st June, 2022</dd>
+            <dt class='text-sm font-medium text-gray-600'>{job.tags}</dt>
+            <dd class='text-sm  text-red-800'>Deadline: {job.deadline}</dd>
           </div>
 
           <div class='flex flex-col-reverse ml-3 sm:ml-6'>
-            <dt class='text-sm font-medium text-indigo-600'>Onsite</dt>
-            <dd class='text-sm  text-gray-800'>Vaccancy: 3</dd>
+            <dt class='text-sm font-medium text-indigo-600'>{job.jobType}</dt>
+            <dd class='text-sm  text-gray-800'>Vaccancy: {job.vaccancy}</dd>
           </div>
         </dl>
+        <p class='text-xs flex gap-2  text-gray-800'>
+          <HiOutlineClock className='text-sm' /> {cdate}
+        </p>
       </h1>
     </div>
   );
