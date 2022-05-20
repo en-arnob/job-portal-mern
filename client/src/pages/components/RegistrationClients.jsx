@@ -174,8 +174,8 @@ const RegistrationClients = () => {
                       id="grid-full-name"
                       type="date"
                       onChange={handleChange}
+                      value={data.birthday}
                       name="birthday"
-                      // value={data.birthday}
                     />
 
                     <label
