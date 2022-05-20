@@ -11,7 +11,6 @@ const {
   getUserDetails,
 } = require("../controllers/authController");
 
-//api
 const {
   getAllJobsController,
   postJobsController,
