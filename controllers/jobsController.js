@@ -54,10 +54,17 @@ exports.postJobsController = async (req, res) => {
     }
     
 
-    
+}
 
+exports.getSingleJobController = async (req, res) => {
+    let postId = req.params.id
     
-
+    try {
+        const job = await JobPost.findOne({_id: postId}).populate("authorId")
+        return res.status(200).json({msg: "Success", job})
+    } catch (error) {
+        res.json(error)
+    }
     
-
+    
 }
