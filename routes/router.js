@@ -12,7 +12,6 @@ const {
   updateUser,
 } = require("../controllers/authController");
 
-//api
 const {
   getAllJobsController,
   postJobsController,
