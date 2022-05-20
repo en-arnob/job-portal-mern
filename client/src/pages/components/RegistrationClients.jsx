@@ -302,7 +302,7 @@ const RegistrationClients = () => {
 
           <Col lg={6} md={6} sm={12}>
             <div className="text-center mt-44">
-              <img src={RegImg} className="img-fluid" />
+              <img src={RegImg} className="img-fluid" alt="clientImage" />
             </div>
           </Col>
         </Row>

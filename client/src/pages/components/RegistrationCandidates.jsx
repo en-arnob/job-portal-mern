@@ -242,7 +242,7 @@ const RegistrationCandidates = () => {
 
           <Col lg={6} md={6} sm={12}>
             <div className="text-center mt-12">
-              <img src={RegImg} className="img-fluid" />
+              <img src={RegImg} className="img-fluid" alt="candidateImage" />
             </div>
           </Col>
         </Row>
