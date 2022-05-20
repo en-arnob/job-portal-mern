@@ -1,8 +1,35 @@
-import React from "react";
+import React, { useState, useContext } from "react";
+import axios from "axios";
+import { UsersContext } from "../../hooks/UsersContext";
+import { useNavigate } from "react-router-dom";
 import { Col, Container, Row, Card } from "react-bootstrap";
 import EditImg from "../../assets/images/EditClients.svg";
 
 const EditClientProfile = () => {
+  const [data, setData] = useState({});
+  const [user, setUser] = useContext(UsersContext);
+  const [error, setError] = useState(" ");
+  const navigate = useNavigate();
+
+  const handleChange = ({ currentTarget: input }) => {
+    setData({ ...data, [input.name]: input.value });
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const url = `http://127.0.0.1:8000/userDetails/${user.id}/${user.usertype}`;
+      const { data: res } = await axios.patch(url, data);
+      navigate("/");
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status <= 500
+      ) {
+        setError(error.response.data.errors[0]);
+      }
+    }
+  };
   return (
     <div>
       <Container>
@@ -10,12 +37,12 @@ const EditClientProfile = () => {
           <Col lg={3} md={12} sm={12}></Col>
           <Col lg={6} md={12} sm={12}>
             <div className="text-center">
-              <img src={EditImg} className="img-fluid" />
+              <img src={EditImg} className="img-fluid" alt="userImage" />
             </div>
           </Col>
           <Col lg={3} md={12} sm={12}></Col>
         </Row>
-        <form>
+        <form onSubmit={handleSubmit}>
           <Row>
             <div className="text-center">
               <p className="font-mono text-3xl font-extrabold text-blue-700">
@@ -26,10 +53,7 @@ const EditClientProfile = () => {
             <Col lg={6} md={6} sm={12}>
               <div className="mt-5">
                 <Card.Body className="text-center">
-                  <div
-                    class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-                    //   onSubmit={handleSubmit}
-                  >
+                  <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                     <div class="mb-4">
                       <label
                         class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -42,8 +66,8 @@ const EditClientProfile = () => {
                         id="grid-full-name"
                         type="text"
                         placeholder="Enter Name"
-                        //   onChange={handleChange}
-                        //   value={data.fullname}
+                        onChange={handleChange}
+                        value={data.fullname}
                         name="fullname"
                       />
 
@@ -58,8 +82,8 @@ const EditClientProfile = () => {
                         id="grid-full-name"
                         type="text"
                         placeholder="Enter username"
-                        //   onChange={handleChange}
-                        //   value={data.username}
+                        onChange={handleChange}
+                        value={data.username}
                         name="username"
                       />
 
@@ -74,8 +98,8 @@ const EditClientProfile = () => {
                         id="grid-full-name"
                         type="email"
                         placeholder="Enter email address"
-                        //   onChange={handleChange}
-                        //   value={data.email}
+                        onChange={handleChange}
+                        value={data.email}
                         name="email"
                       />
 
@@ -90,8 +114,8 @@ const EditClientProfile = () => {
                         id="grid-full-name"
                         type="text"
                         placeholder="Enter phone number"
-                        //   onChange={handleChange}
-                        //   value={data.phone}
+                        onChange={handleChange}
+                        value={data.phone}
                         name="phone"
                       />
 
@@ -105,9 +129,9 @@ const EditClientProfile = () => {
                         class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                         id="grid-full-name"
                         type="date"
-                        // onChange={handleChange}
-                        // value={data.fullname}
-                        // name="birthday"
+                        onChange={handleChange}
+                        value={data.birthday}
+                        name="birthday"
                       />
 
                       <label
@@ -124,7 +148,7 @@ const EditClientProfile = () => {
                               type="radio"
                               name="gender"
                               id="flexRadioDefault1"
-                              // onChange={handleChange}
+                              onChange={handleChange}
                               value="male"
                             />
                             <label
@@ -140,7 +164,7 @@ const EditClientProfile = () => {
                               type="radio"
                               name="gender"
                               id="flexRadioDefault2"
-                              // onChange={handleChange}
+                              onChange={handleChange}
                               value="female"
                             />
                             <label
@@ -157,7 +181,7 @@ const EditClientProfile = () => {
                               type="radio"
                               name="gender"
                               id="flexRadioDefault3"
-                              // onChange={handleChange}
+                              onChange={handleChange}
                               value="other"
                             />
                             <label
@@ -169,42 +193,6 @@ const EditClientProfile = () => {
                           </div>
                         </div>
                       </div>
-                    </div>
-
-                    <div class="mb-6">
-                      <label
-                        class="block text-gray-700 text-sm font-bold mb-2"
-                        for="password"
-                      >
-                        Password
-                      </label>
-                      <input
-                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                        id="grid-password"
-                        type="password"
-                        placeholder="******************"
-                        //   onChange={handleChange}
-                        //   value={data.password}
-                        name="password"
-                      />
-                      <label
-                        class="block text-gray-700 text-sm font-bold mb-2"
-                        for="password"
-                      >
-                        Confirm Password
-                      </label>
-                      <input
-                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                        id="grid-password"
-                        type="password"
-                        placeholder="******************"
-                        // onChange={handleChange}
-                        // value={data.confirmPassword}
-                        // name="confirmPassword"
-                      />
-                      {/* {error && (
-                    <p class="text-red-500 text-xs italic">{error.msg}</p>
-                  )} */}
                     </div>
                   </div>
                 </Card.Body>
@@ -226,9 +214,9 @@ const EditClientProfile = () => {
                         id="grid-insOrg"
                         type="text"
                         placeholder="Enter Organization"
-                        //   onChange={handleChange}
-                        //   value={data.fullname}
-                        name="insOrg"
+                        onChange={handleChange}
+                        value={data.organization}
+                        name="organization"
                       />
 
                       <label
@@ -242,8 +230,8 @@ const EditClientProfile = () => {
                         id="grid-designation"
                         type="text"
                         placeholder="Enter designation"
-                        //   onChange={handleChange}
-                        //   value={data.username}
+                        onChange={handleChange}
+                        value={data.designation}
                         name="designation"
                       />
 
@@ -258,8 +246,8 @@ const EditClientProfile = () => {
                         id="grid-nid"
                         type="text"
                         placeholder="nid number of account holder"
-                        //   onChange={handleChange}
-                        //   value={data.email}
+                        onChange={handleChange}
+                        value={data.nid}
                         name="nid"
                       />
 
@@ -274,9 +262,9 @@ const EditClientProfile = () => {
                         id="grid-address"
                         type="text"
                         placeholder="Proper address of office"
-                        //   onChange={handleChange}
-                        //   value={data.phone}
-                        name="address"
+                        onChange={handleChange}
+                        value={data.officeAdress}
+                        name="officeAdress"
                       />
 
                       <div class="flex flex-wrap -mx-3 mb-2">
@@ -339,8 +327,8 @@ const EditClientProfile = () => {
                         id="grid-website"
                         type="text"
                         placeholder="Enter website url"
-                        //   onChange={handleChange}
-                        //   value={data.phone}
+                        onChange={handleChange}
+                        value={data.website}
                         name="website"
                       />
                       <label
@@ -360,9 +348,9 @@ const EditClientProfile = () => {
                     </div>
 
                     <div class="mb-6">
-                      {/* {error && (
-                    <p class="text-red-500 text-xs italic">{error.msg}</p>
-                  )} */}
+                      {error && (
+                        <p class="text-red-500 text-xs italic">{error.msg}</p>
+                      )}
                     </div>
                     <div class="content-center">
                       <button
