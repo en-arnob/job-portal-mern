@@ -1,17 +1,26 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UsersContext } from "../hooks/UsersContext";
-import JobCard from "./components/JobCard";
+
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { AiOutlineArrowDown } from "react-icons/ai";
-import JobCardSponsored from "./components/JobCardSponsored";
+
 import axios from "axios";
 import CreateJobSection from "./components/CreateJobSection";
+import JobsSection from "./components/JobsSection";
 
 const Home = () => {
   const [user, setUser] = useContext(UsersContext);
   const [jobs, setJobs] = useState([]);
   const [errors, setErrors] = useState([]);
   const [postSection, setPostSection] = useState(false);
+
+  //pagination things
+
+  // const [currentPage, setCurrentPage] = useState(1);
+  // const [postsPerPage, setPostPerPage] = useState(5);
+  // const indexofLastPost = currentPage * postsPerPage;
+  // const indexofFirstPost = indexofLastPost - postsPerPage;
+  // const currentPosts = jobs.slice(indexofFirstPost, indexofLastPost);
 
   useEffect(() => {
     getAllJobs();
@@ -22,7 +31,6 @@ const Home = () => {
       .get("http://127.0.0.1:8000/api/jobs/all")
       .then((response) => {
         const allJobs = response.data.jobs;
-        console.log(allJobs);
         setJobs(allJobs);
       })
       .catch((error) => {
@@ -112,20 +120,8 @@ const Home = () => {
       <h1 className='flex items-center justify-center gap-2 text-center font-normal text-2xl p-4'>
         Latest job offerings nearby <FaMapMarkerAlt className='text-red-500' />
       </h1>
-
-      <div className='my-4 md:mx-6 grid md:grid-cols-4 gap-4'>
-        {errors.length > 0 && (
-          <div className='p-4 mx-4 text-red-700 border-l-4 border-red-700 bg-red-50'>
-            <h3 class='text-sm font-medium'>
-              Error fetching data! Try a stable internet connection
-            </h3>
-          </div>
-        )}
-        <JobCardSponsored />
-        {jobs.map((job) => (
-          <JobCard key={job._id} job={job} />
-        ))}
-      </div>
+      <JobsSection jobs={jobs} errors={errors} />
+      {jobs.length}
     </div>
   );
 };
