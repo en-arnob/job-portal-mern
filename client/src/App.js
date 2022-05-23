@@ -11,6 +11,7 @@ import { UserProvider } from "./hooks/UsersContext";
 import Profile from "./pages/protected/Profile";
 import EditProfilePage from "./pages/EditProfilePage";
 import LogoutPage from "./pages/LogoutPage";
+import JobView from "./pages/components/JobView";
 
 // import ProtectedRoute from "./ProtectedRoute";
 
@@ -31,6 +32,7 @@ function App() {
             <Route path="/profile" exact element={<Profile />} />
             <Route path="/editProfile" exact element={<EditProfilePage />} />
             <Route path="/logout" exact element={<LogoutPage />} />
+            <Route path="/jobView" exact element={<JobView/>} />
           </Routes>
         </UserProvider>
       </Router>

@@ -2,10 +2,15 @@ import React from "react";
 import TextTruncate from "react-text-truncate";
 import { RiUserVoiceLine } from "react-icons/ri";
 import { HiOutlineOfficeBuilding, HiOutlineClock } from "react-icons/hi";
-
+import { useNavigate } from "react-router-dom";
 const JobCard = ({ job }) => {
+  const navigate = useNavigate();
   const postDate = job.dateOfPosting;
   const cdate = new Date(postDate).toString();
+
+  const toJobViewComponent = () => {
+    navigate("/jobView", { state: { job } });
+  };
   return (
     <div className='col-span-2 mx-2'>
       <h1
@@ -44,7 +49,13 @@ const JobCard = ({ job }) => {
             truncateText='…'
             text={job.body}
             textTruncateChild={
-              <span className='text-indigo-900 mx-2' href='#'>
+              <span
+                onClick={() => {
+                  toJobViewComponent();
+                }}
+                className='text-indigo-900 mx-2'
+                href='#'
+              >
                 Read more on full post
               </span>
             }
