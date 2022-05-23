@@ -17,6 +17,7 @@ const RegistrationClients = () => {
     confirmPass: "",
     phone: "",
     gender: "",
+    birthday: "",
   });
   const [error, setError] = useState(" ");
   const navigate = useNavigate();
