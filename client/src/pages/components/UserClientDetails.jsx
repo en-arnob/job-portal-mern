@@ -7,10 +7,10 @@ const UserClientDetails = () => {
   const [user, setUser] = useContext(UsersContext);
   const [userData, setUserData] = useState("");
   useEffect(() => {
-    getJob();
+    getUserDetails();
   }, []);
 
-  const getJob = () => {
+  const getUserDetails = () => {
     axios
       .get(`http://127.0.0.1:8000/userDetails/${user.id}/${user.usertype}`)
       .then((response) => {

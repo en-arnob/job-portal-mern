@@ -66,8 +66,8 @@ const EditCandidatesProfile = () => {
                         id="grid-full-name"
                         type="text"
                         placeholder="Enter Name"
-                        //   onChange={handleChange}
-                        //   value={data.fullname}
+                        onChange={handleChange}
+                        value={data.fullname}
                         name="fullname"
                       />
 
@@ -82,8 +82,8 @@ const EditCandidatesProfile = () => {
                         id="grid-full-name"
                         type="text"
                         placeholder="Enter username"
-                        //   onChange={handleChange}
-                        //   value={data.username}
+                        onChange={handleChange}
+                        value={data.username}
                         name="username"
                       />
 
@@ -98,8 +98,8 @@ const EditCandidatesProfile = () => {
                         id="grid-full-name"
                         type="email"
                         placeholder="Enter email address"
-                        //   onChange={handleChange}
-                        //   value={data.email}
+                        onChange={handleChange}
+                        value={data.email}
                         name="email"
                       />
 
@@ -114,8 +114,8 @@ const EditCandidatesProfile = () => {
                         id="grid-full-name"
                         type="text"
                         placeholder="Enter phone number"
-                        //   onChange={handleChange}
-                        //   value={data.phone}
+                        onChange={handleChange}
+                        value={data.phone}
                         name="phone"
                       />
 
@@ -129,9 +129,9 @@ const EditCandidatesProfile = () => {
                         class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                         id="grid-full-name"
                         type="date"
-                        // onChange={handleChange}
-                        // value={data.fullname}
-                        // name="birthday"
+                        onChange={handleChange}
+                        value={data.birthday}
+                        name="birthday"
                       />
                       <label
                         class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -162,7 +162,7 @@ const EditCandidatesProfile = () => {
                               type="radio"
                               name="gender"
                               id="flexRadioDefault1"
-                              // onChange={handleChange}
+                              onChange={handleChange}
                               value="male"
                             />
                             <label
@@ -178,7 +178,7 @@ const EditCandidatesProfile = () => {
                               type="radio"
                               name="gender"
                               id="flexRadioDefault2"
-                              // onChange={handleChange}
+                              onChange={handleChange}
                               value="female"
                             />
                             <label
@@ -195,7 +195,7 @@ const EditCandidatesProfile = () => {
                               type="radio"
                               name="gender"
                               id="flexRadioDefault3"
-                              // onChange={handleChange}
+                              onChange={handleChange}
                               value="other"
                             />
                             <label
@@ -218,9 +218,9 @@ const EditCandidatesProfile = () => {
                         class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                         id="grid-cover"
                         type="text"
-                        // onChange={handleChange}
-                        // value={data.fullname}
-                        name="cover"
+                        onChange={handleChange}
+                        value={data.coverLetter}
+                        name="coverLetter"
                         placeholder="Write a cover letter"
                       />
                       <label
@@ -233,8 +233,8 @@ const EditCandidatesProfile = () => {
                         class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                         id="grid-experience"
                         type="text"
-                        // onChange={handleChange}
-                        // value={data.fullname}
+                        onChange={handleChange}
+                        value={data.bio}
                         name="bio"
                         placeholder="Write your bio"
                       />
@@ -259,9 +259,9 @@ const EditCandidatesProfile = () => {
                         id="grid-insOrg"
                         type="text"
                         placeholder="Enter Institute/Organization"
-                        //   onChange={handleChange}
-                        //   value={data.fullname}
-                        name="insOrg"
+                        onChange={handleChange}
+                        value={data.institute}
+                        name="institute"
                       />
 
                       <label
@@ -275,8 +275,8 @@ const EditCandidatesProfile = () => {
                         id="grid-designation"
                         type="text"
                         placeholder="Enter designation"
-                        //   onChange={handleChange}
-                        //   value={data.username}
+                        onChange={handleChange}
+                        value={data.designation}
                         name="designation"
                       />
 
@@ -291,9 +291,9 @@ const EditCandidatesProfile = () => {
                         id="grid-skill"
                         type="text"
                         placeholder="Skill1,Skill2...."
-                        //   onChange={handleChange}
-                        //   value={data.email}
-                        name="skill"
+                        onChange={handleChange}
+                        value={data.skills}
+                        name="skills"
                       />
 
                       <label
@@ -307,9 +307,25 @@ const EditCandidatesProfile = () => {
                         id="grid-Expertise"
                         type="text"
                         placeholder="Expertise1,Expertise2..."
-                        //   onChange={handleChange}
-                        //   value={data.phone}
+                        onChange={handleChange}
+                        value={data.expertise}
                         name="expertise"
+                      />
+
+                      <label
+                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                        for="grid-language"
+                      >
+                        Language
+                      </label>
+                      <input
+                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                        id="grid-language"
+                        type="text"
+                        placeholder="language1,language2..."
+                        onChange={handleChange}
+                        value={data.language}
+                        name="language"
                       />
 
                       <label
@@ -322,8 +338,8 @@ const EditCandidatesProfile = () => {
                         class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                         id="grid-experience"
                         type="text"
-                        // onChange={handleChange}
-                        // value={data.fullname}
+                        onChange={handleChange}
+                        value={data.experience}
                         name="experience"
                         placeholder="Enter experinces"
                       />
@@ -339,9 +355,9 @@ const EditCandidatesProfile = () => {
                         id="grid-portfolio"
                         type="text"
                         placeholder="Enter portfolio url"
-                        //   onChange={handleChange}
-                        //   value={data.phone}
-                        name="portfolio"
+                        onChange={handleChange}
+                        value={data.portfolioLink}
+                        name="portfolioLink"
                       />
                       <label
                         class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -354,9 +370,9 @@ const EditCandidatesProfile = () => {
                         id="grid-certificate"
                         type="text"
                         placeholder="Online certificate only"
-                        //   onChange={handleChange}
-                        //   value={data.phone}
-                        name="certificate"
+                        onChange={handleChange}
+                        value={data.certification}
+                        name="certification"
                       />
 
                       <label
@@ -370,15 +386,15 @@ const EditCandidatesProfile = () => {
                         id="grid-resume"
                         type="file"
                         //   onChange={handleChange}
-                        //   value={data.phone}
+                        //   value={data.resume}
                         name="resume"
                       />
                     </div>
 
                     <div class="mb-6">
-                      {/* {error && (
-                      <p class="text-red-500 text-xs italic">{error.msg}</p>
-                    )} */}
+                      {error && (
+                        <p class="text-red-500 text-xs italic">{error.msg}</p>
+                      )}
                     </div>
                     <div class="content-center">
                       <button

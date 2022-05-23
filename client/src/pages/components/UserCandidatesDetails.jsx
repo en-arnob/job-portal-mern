@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
+import axios from "axios";
+import { UsersContext } from "../../hooks/UsersContext";
 import {
   FaUserAlt,
   FaGraduationCap,
@@ -10,7 +12,25 @@ import {
   FaLink,
 } from "react-icons/fa";
 import { Col, Row } from "react-bootstrap";
-const UserDetails = () => {
+const UserCandidatesDetails = () => {
+  const [user, setUser] = useContext(UsersContext);
+  const [userData, setUserData] = useState("");
+  useEffect(() => {
+    getUserDetails();
+  }, []);
+
+  const getUserDetails = () => {
+    axios
+      .get(`http://127.0.0.1:8000/userDetails/${user.id}/${user.usertype}`)
+      .then((response) => {
+        const catchData = response.data.data.user;
+        setUserData(catchData);
+        console.log(response.data.data.user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <div>
       <div className="sections">
@@ -24,17 +44,22 @@ const UserDetails = () => {
           <Row>
             <Col lg={4} md={12} sm={12}>
               <p>
-                <span className="fw-bolder fst-italic">Name: </span> Nahim Bin
-                Reza Udoy
+                <span className="fw-bolder fst-italic">Name: </span>{" "}
+                {userData.fullname}
               </p>
               <p>
-                <span className="fw-bolder fst-italic">Birthday: </span> 24
-                May,1996
+                <span className="fw-bolder fst-italic">Birthday: </span>{" "}
+                {new Date(userData.birthday).toDateString()}
               </p>
             </Col>
             <Col lg={4} md={12} sm={12}>
               <p>
-                <span className="fw-bold fst-italic">Gender: </span> Male
+                <span className="fw-bold fst-italic">Gender: </span>{" "}
+                {userData.gender}
+              </p>
+              <p>
+                <span className="fw-bold fst-italic">Phone: </span>{" "}
+                {userData.phone}
               </p>
             </Col>
           </Row>
@@ -53,7 +78,7 @@ const UserDetails = () => {
             <Col>
               <p>
                 <span className="fw-bolder fst-italic">Institute: </span>{" "}
-                Daffodil International University
+                {userData.institute}
               </p>
               <p>
                 <span className="fw-bolder fst-italic">Department: </span>{" "}
@@ -79,12 +104,11 @@ const UserDetails = () => {
             <Col>
               <p>
                 <span className="fw-bolder fst-italic">Designation: </span>{" "}
-                Lorem ipsum dolor sit amet
+                {userData.designation}
               </p>
               <p>
-                <span className="fw-bolder fst-italic">Experiences: </span>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Dignissimos in magnam repellat.{" "}
+                <span className="fw-bolder fst-italic">Experiences: </span>{" "}
+                {userData.experience}
               </p>
             </Col>
           </Row>
@@ -102,17 +126,16 @@ const UserDetails = () => {
           <Row>
             <Col>
               <p>
-                <span className="fw-bolder fst-italic">Language: </span> Lorem
-                ipsum dolor sit amet, consectetur adipisicing elit.
+                <span className="fw-bolder fst-italic">Language: </span>{" "}
+                {userData.language}
               </p>
               <p>
-                <span className="fw-bolder fst-italic">Expertise: </span> Lorem
-                ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos
-                in magnam repellat.{" "}
+                <span className="fw-bolder fst-italic">Expertise: </span>{" "}
+                {userData.expertise}{" "}
               </p>
               <p>
-                <span className="fw-bolder fst-italic">Skill: </span> Lorem
-                ipsum dolor sit amet. Dignissimos in magnam repellat.{" "}
+                <span className="fw-bolder fst-italic">Skill: </span>{" "}
+                {userData.skills}{" "}
               </p>
             </Col>
           </Row>
@@ -129,11 +152,7 @@ const UserDetails = () => {
         <div className="sectionInfo mt-3">
           <Row>
             <Col>
-              <p className="fst-italic">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut
-                dolorem laboriosam molestias pariatur quae. Corporis dolores
-                magnam officiis possimus tempore.
-              </p>
+              <p className="fst-italic">{userData.bio}</p>
             </Col>
           </Row>
         </div>
@@ -149,11 +168,7 @@ const UserDetails = () => {
         <div className="sectionInfo mt-3">
           <Row>
             <Col>
-              <p className="fst-italic">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut
-                dolorem laboriosam molestias pariatur quae. Corporis dolores
-                magnam officiis possimus tempore.
-              </p>
+              <p className="fst-italic">{userData.coverLetter}</p>
             </Col>
           </Row>
         </div>
@@ -170,12 +185,9 @@ const UserDetails = () => {
           <Row>
             <Col>
               <p>
-                <span className="fw-bolder fst-italic">B.Sc</span>, from Lorem
-                ipsum dolor sit amet
-              </p>
-              <p>
-                <span className="fw-bolder fst-italic">Programming Hero</span>,
-                from Lorem ipsum dolor sit amet
+                <span className="fw-bolder fst-italic">
+                  {userData.certification}
+                </span>
               </p>
             </Col>
           </Row>
@@ -194,11 +206,11 @@ const UserDetails = () => {
             <Col>
               <p>
                 <span className="fw-bolder fst-italic">Portfolio link:</span>{" "}
-                https://github.com/
+                {userData.portfolioLink}
               </p>
               <p>
                 <span className="fw-bolder fst-italic">Email:</span>{" "}
-                amaremail@gmai.com
+                {userData.email}
               </p>
             </Col>
           </Row>
@@ -208,4 +220,4 @@ const UserDetails = () => {
   );
 };
 
-export default UserDetails;
+export default UserCandidatesDetails;
