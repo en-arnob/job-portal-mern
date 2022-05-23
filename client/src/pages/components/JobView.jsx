@@ -11,7 +11,7 @@ const JobView = () => {
 
   return (
     <div className='m-4 grid grid-cols-1 md:grid-cols-3 md:divide-x divide-green-500  gap-2'>
-      <div className=' w-full h-screen col-span-2'>
+      <div className=' w-full h-auto col-span-2'>
         <div className='p-4'>
           <div className='flex gap-4 bg-green-100 p-4 rounded-lg text-3xl font-normal text-stone-800'>
             {" "}
@@ -45,9 +45,12 @@ const JobView = () => {
               Deadline: {job.dateOfPosting}
             </p>
           </div>
+          <div className='bg-yellow-50 p-6 rounded-lg'>
+            <p className='text-lg'>{job.body}</p>
+          </div>
         </div>
       </div>
-      <div className=' w-full h-screen'>
+      <div className=' w-full h-auto'>
         <div className='p-4'>
           <div className='flex gap-4 bg-green-50 p-4 rounded-lg text-3xl font-normal text-stone-800'>
             {" "}

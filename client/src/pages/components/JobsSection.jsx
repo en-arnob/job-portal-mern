@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import JobCardSponsored from "./JobCardSponsored";
 import JobCard from "./JobCard";
 import ReactPaginate from "react-paginate";
@@ -36,7 +36,7 @@ const JobsSection = (props) => {
         <JobCardSponsored />
         {displayPosts}
       </div>
-      <div className=''>
+      <div className='text-center items-center justify-center'>
         <ReactPaginate
           breakLabel=''
           previousLabel={"Prev"}
