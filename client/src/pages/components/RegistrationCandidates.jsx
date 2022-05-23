@@ -13,6 +13,7 @@ const RegistrationCandidates = () => {
     phone: "",
     password: "",
     gender: "",
+    birthday: "",
   });
   const [error, setError] = useState(" ");
   const navigate = useNavigate();
@@ -126,9 +127,9 @@ const RegistrationCandidates = () => {
                       class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                       id="grid-full-name"
                       type="date"
-                      // onChange={handleChange}
-                      // value={data.fullname}
-                      // name="birthday"
+                      onChange={handleChange}
+                      value={data.birthday}
+                      name="birthday"
                     />
 
                     <label
@@ -242,7 +243,7 @@ const RegistrationCandidates = () => {
 
           <Col lg={6} md={6} sm={12}>
             <div className="text-center mt-12">
-              <img src={RegImg} className="img-fluid" />
+              <img src={RegImg} className="img-fluid" alt="candidateImage" />
             </div>
           </Col>
         </Row>

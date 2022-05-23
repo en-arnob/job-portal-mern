@@ -35,13 +35,13 @@ const CandidateSchema = new Schema({
     type: String,
     trim: true,
   },
-  skills: Object,
-  expertise: Object,
+  skills: String,
+  expertise: String,
   experience: {
     type: String,
     maxlength: 20,
   },
-  language: Object,
+  language: String,
   coverLetter: {
     type: String,
     maxlength: 250,
