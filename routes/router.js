@@ -10,6 +10,8 @@ const {
   candidateLoginPostController,
   getUserDetails,
   updateUser,
+  generatePdf,
+  fetchPdf,
 } = require("../controllers/authController");
 
 const {
@@ -17,8 +19,6 @@ const {
   postJobsController,
   getSingleJobController,
 } = require("../controllers/jobsController");
-
-
 
 //auth routes
 router.get("/login", loginGetController);
@@ -38,11 +38,13 @@ router
   .get(getUserDetails)
   .patch(updateUser);
 
+//generate resume
+router.route("/generate-resume").get(fetchPdf).post(generatePdf);
 // home
 router.get("/api/jobs/all", getAllJobsController);
 router.post("/api/job-post", postJobsController);
 
 //single post api
-router.get("/api/get/singlePost/:id", getSingleJobController)
+router.get("/api/get/singlePost/:id", getSingleJobController);
 
 module.exports = router;
