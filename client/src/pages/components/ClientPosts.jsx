@@ -1,13 +1,6 @@
 import React from "react";
-import {
-  Col,
-  Container,
-  Row,
-  Card,
-  ListGroup,
-  ListGroupItem,
-} from "react-bootstrap";
-import { HiOutlineOfficeBuilding, HiOutlineClock } from "react-icons/hi";
+import { Col, Container, Row, Card } from "react-bootstrap";
+import { HiOutlineOfficeBuilding } from "react-icons/hi";
 
 const ClientPosts = () => {
   return (
