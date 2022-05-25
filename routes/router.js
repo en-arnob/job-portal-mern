@@ -18,6 +18,7 @@ const {
   getAllJobsController,
   postJobsController,
   getSingleJobController,
+  applyController,
 } = require("../controllers/jobsController");
 
 //auth routes
@@ -40,11 +41,13 @@ router
 
 //generate resume
 router.route("/generate-resume").get(fetchPdf).post(generatePdf);
+
 // home
 router.get("/api/jobs/all", getAllJobsController);
 router.post("/api/job-post", postJobsController);
 
 //single post api
 router.get("/api/get/singlePost/:id", getSingleJobController);
+router.get("/apply/:postId/:userId", applyController)
 
 module.exports = router;

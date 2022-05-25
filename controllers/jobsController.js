@@ -1,5 +1,6 @@
 const jwt_decode = require('jwt-decode');
 const JobPost = require('../models/JobPost')
+const UserCandidate = require("../models/UserCandidate");
 
 
 exports.getAllJobsController = async (req, res) => {
@@ -67,4 +68,46 @@ exports.getSingleJobController = async (req, res) => {
     }
     
     
+}
+
+exports.applyController = async (req, res) => {
+    let {postId, userId} = req.params  
+
+    try {
+        const user = await UserCandidate.findById(userId)
+        if(user){
+            try {
+                const post = await JobPost.findById(postId)
+                if(post.applicants.includes(userId)){
+                    return res.json({
+                        msg: "You already have applied to this job"
+                    })
+                }
+                await JobPost.findOneAndUpdate({_id: postId}, {$push: {'applicants': user._id}})
+                    res.json({
+                        msg: "Congratulations! 🎉🎉 You have successfully applied to this job. Wait for response, the recruiter will get to you shortly."
+                    })    
+            } catch (error) {
+                res.json({
+                    error: error.message
+                })
+            }
+        } else{
+            res.json({
+                msg: "invalid user"
+            })
+        }
+            
+        
+    } catch (error) {
+        res.json({
+            error: error.message
+        })
+    }
+
+    // res.json({
+    //     p: postId,
+    //     u: userId
+    // })
+
 }
