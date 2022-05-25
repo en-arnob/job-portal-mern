@@ -4,6 +4,8 @@ const UserClient = require("../models/UserClient");
 const UserCandidate = require("../models/UserCandidate");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const pdf = require("html-pdf");
+const path = require("path");
 
 exports.clRegValidation = [
   body("username").not().isEmpty().withMessage("Username is required"),
@@ -304,4 +306,29 @@ exports.updateUser = async (req, res) => {
       error: err,
     });
   }
+};
+
+exports.generatePdf = (req, res) => {
+  console.log(req.body);
+  const pdfTemplate = require("../documents/index");
+  const options = {
+    height: "42cm",
+    width: "29.7cm",
+    timeout: "6000",
+  };
+  console.log("Let's generate");
+  pdf.create(pdfTemplate(req.body), options).toFile("Resume.pdf", (err) => {
+    if (err) {
+      console.log(err);
+      res.send(Promise.reject());
+    } else res.send(Promise.resolve());
+  });
+};
+
+exports.fetchPdf = (req, res) => {
+  console.log(path);
+  const file = path.join("Resume.pdf");
+  console.log(file);
+  console.log("show");
+  res.download("Resume.pdf");
 };

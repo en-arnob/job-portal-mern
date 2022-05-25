@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { UsersContext } from "../hooks/UsersContext";
 import { Col, Container, Row } from "react-bootstrap";
-import jsPDF from "jspdf";
+import { saveAs } from "file-saver";
 import UserImage from "../assets/images/dummy-member.jpg";
 import UserCandidatesDetails from "./components/UserCandidatesDetails";
 
@@ -25,13 +25,28 @@ const CandidatesProfileDetails = () => {
         console.log(error);
       });
   };
-  const generatePdf = () => {
-    const doc = new jsPDF("p", "pt", "a4");
-    doc.html(document.querySelector("#content"), {
-      callback: function (pdf) {
-        pdf.save("resume.pdf");
-      },
-    });
+
+  const createAndDownloadPDF = () => {
+    axios
+      .post("http://127.0.0.1:8000/generate-resume", userData)
+      .then(() => {
+        axios
+          .get("http://127.0.0.1:8000/generate-resume", {
+            responseType: "arraybuffer",
+          })
+          .then((res) => {
+            const pdfBlob = new Blob([res.data], {
+              type: "application/pdf",
+            });
+            saveAs(pdfBlob, `${userData.fullname}'s Resume.pdf`);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <div>
@@ -52,15 +67,14 @@ const CandidatesProfileDetails = () => {
               <p className="userName text-center mt-3">{userData.username}</p>
             </Col>
             <Col lg={9} md={8} sm={12} className="userDetails mt-3">
-              {/* <UserDetails id="content" /> */}
-              <div id="content">
+              <div>
                 <UserCandidatesDetails />
               </div>
               <div className="text-center my-5">
                 <button
                   type="submit"
                   className="btn btn-info btn-lg"
-                  onClick={generatePdf}
+                  onClick={createAndDownloadPDF}
                 >
                   Download Resume
                 </button>
