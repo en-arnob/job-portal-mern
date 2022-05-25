@@ -46,7 +46,7 @@ const JobView = () => {
             </p>
           </div>
           <div className='bg-yellow-50 p-6 rounded-lg'>
-            <p className='text-lg'>{job.body}</p>
+            <p className='text-lg font-normal'>{job.body}</p>
           </div>
         </div>
       </div>
