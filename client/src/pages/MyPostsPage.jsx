@@ -22,7 +22,7 @@ const MyPostsPage = () => {
               <h5 className="userName text-center text-uppercase">
                 {user.fullname}
               </h5>
-              <p className="userName text-center mt-3">Total Post: </p>
+              <p className="userName text-center mt-3">Total Post:</p>
             </Col>
             <Col lg={9} md={8} sm={12} className="userDetails md:mt-3">
               <ClientPosts />
