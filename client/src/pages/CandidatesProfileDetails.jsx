@@ -5,6 +5,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import { saveAs } from "file-saver";
 import UserImage from "../assets/images/dummy-member.jpg";
 import UserCandidatesDetails from "./components/UserCandidatesDetails";
+import { Link } from "react-router-dom";
 
 const CandidatesProfileDetails = () => {
   const [user, setUser] = useContext(UsersContext);
@@ -65,6 +66,16 @@ const CandidatesProfileDetails = () => {
                 {userData.fullname}
               </h5>
               <p className="userName text-center mt-3">{userData.username}</p>
+              <div className="text-center">
+                <button
+                  class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
+                  to="/mypost"
+                >
+                  <Link className="text-white no-underline" to="/mypost">
+                    Visit Posts
+                  </Link>
+                </button>
+              </div>
             </Col>
             <Col lg={9} md={8} sm={12} className="userDetails mt-3">
               <div>
