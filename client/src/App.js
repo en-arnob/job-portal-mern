@@ -13,6 +13,7 @@ import EditProfilePage from "./pages/EditProfilePage";
 import LogoutPage from "./pages/LogoutPage";
 import JobView from "./pages/components/JobView";
 import MyPostsPage from "./pages/MyPostsPage";
+import AppliedJobs from "./pages/AppliedJobs";
 
 // import ProtectedRoute from "./ProtectedRoute";
 
@@ -35,6 +36,7 @@ function App() {
             <Route path="/logout" exact element={<LogoutPage />} />
             <Route path="/jobView" exact element={<JobView />} />
             <Route path="/mypost" exact element={<MyPostsPage />} />
+            <Route path="/appliedJobs" exact element={<AppliedJobs />} />
           </Routes>
         </UserProvider>
       </Router>

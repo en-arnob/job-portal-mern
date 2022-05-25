@@ -3,12 +3,15 @@ import { UsersContext } from "../hooks/UsersContext";
 
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { AiOutlineArrowDown } from "react-icons/ai";
+import { GoTasklist } from "react-icons/go";
+import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
 import CreateJobSection from "./components/CreateJobSection";
 import JobsSection from "./components/JobsSection";
 
 const Home = () => {
+  const navigate = useNavigate();
   const [user, setUser] = useContext(UsersContext);
   const [jobs, setJobs] = useState([]);
   const [errors, setErrors] = useState([]);
@@ -107,6 +110,15 @@ const Home = () => {
                     type='button'
                   >
                     Create Job <AiOutlineArrowDown className='text-lg' />
+                  </button>
+                )}
+                {user.usertype === "candidate" && (
+                  <button
+                    onClick={() => navigate("/appliedJobs")}
+                    className='flex gap-2 items-center justify-center px-5 py-3 text-sm font-medium text-white transition bg-green-600 rounded-lg hover:bg-green-800 focus:outline-none focus:ring'
+                    type='button'
+                  >
+                    Applied Jobs <GoTasklist className='text-lg' />
                   </button>
                 )}
               </div>
