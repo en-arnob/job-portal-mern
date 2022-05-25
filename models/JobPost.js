@@ -42,7 +42,12 @@ const jobPostSchema = new Schema(
             type: String,
             required: true,
         },
-
+        applicants: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: "User",
+            },
+        ],
     }
 )
 
