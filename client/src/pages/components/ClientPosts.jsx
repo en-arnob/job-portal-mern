@@ -1,131 +1,79 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
+import axios from "axios";
+import { UsersContext } from "../../hooks/UsersContext";
 import { Col, Container, Row, Card } from "react-bootstrap";
 import { HiOutlineOfficeBuilding } from "react-icons/hi";
 
 const ClientPosts = () => {
+  const [user, setUser] = useContext(UsersContext);
+  const [userData, setUserData] = useState([]);
+  useEffect(() => {
+    getJobDtails();
+  }, []);
+
+  const getJobDtails = () => {
+    axios
+      .get(`http://127.0.0.1:8000/api/jobs/client-job/${user.id}`)
+      .then((response) => {
+        const catchData = response.data.job;
+        setUserData(catchData);
+        console.log(catchData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  console.log(userData);
   return (
     <div>
       <Container>
         <Row>
-          <Col lg={12} md={6} sm={12}>
-            <div className=" bg-gray-100 shadow-xl  hover:shadow-2xl">
-              <Card.Body>
-                <Card.Title>Cyber Security Specialist</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">
-                  <p className="flex gap-3 font-normal text-sm  text-blue-700">
-                    <HiOutlineOfficeBuilding className="text-sm mt-1" /> Google
-                  </p>
-                </Card.Subtitle>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
+          {userData.map((arrEl) => {
+            return (
+              <>
+                <Col lg={12} md={6} sm={12}>
+                  <div className=" bg-gray-100 shadow-xl  hover:shadow-2xl">
+                    <Card.Body>
+                      <Card.Title>{arrEl.title}</Card.Title>
+                      <Card.Subtitle className="mb-2 text-muted">
+                        <p className="flex gap-3 font-normal text-sm  text-blue-700">
+                          <HiOutlineOfficeBuilding className="text-sm mt-1" />{" "}
+                          {arrEl.jobType}
+                        </p>
+                      </Card.Subtitle>
+                      <Card.Text className="text-justify">
+                        {arrEl.body}
+                      </Card.Text>
 
-                <dl class="flex mt-6">
-                  <div class="flex flex-col-reverse">
-                    <dd class="text-sm  text-red-800">Deadline: 20-11-2022</dd>
-                  </div>
+                      <dl class="flex mt-6">
+                        <div class="flex flex-col-reverse">
+                          <dd class="text-sm  text-red-800">
+                            {arrEl.deadline}
+                          </dd>
+                        </div>
 
-                  <div class="flex flex-col-reverse ml-3 sm:ml-6">
-                    <dd class="text-sm  text-gray-800">
-                      Total Applicants: 100
-                    </dd>
+                        <div class="flex flex-col-reverse ml-3 sm:ml-6">
+                          <dd class="text-sm  text-gray-800">
+                            Total Applicants: {arrEl.applicants}
+                          </dd>
+                        </div>
+                      </dl>
+                      <div className="card-footer">
+                        <div className="text-center">
+                          <button class="bg-green-600 hover:bg-green-700 text-white font-bold mx-1 py-2 px-3 rounded-full">
+                            Extend Deadline
+                          </button>
+                          <button class="bg-red-600 hover:bg-red-700 text-white font-bold mx-1 py-2 px-4 rounded-full">
+                            Delete Post
+                          </button>
+                        </div>
+                      </div>
+                    </Card.Body>
                   </div>
-                </dl>
-                <div className="card-footer">
-                  <div className="text-center">
-                    <button class="bg-green-600 hover:bg-green-700 text-white font-bold mx-1 py-2 px-3 rounded-full">
-                      Extend Deadline
-                    </button>
-                    <button class="bg-red-600 hover:bg-red-700 text-white font-bold mx-1 py-2 px-4 rounded-full">
-                      Delete Post
-                    </button>
-                  </div>
-                </div>
-              </Card.Body>
-            </div>
-          </Col>
-          <Col lg={12} md={6} sm={12} className="gy-5">
-            <div className=" bg-gray-100 shadow-xl  hover:shadow-2xl">
-              <Card.Body>
-                <Card.Title>Cyber Security Specialist</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">
-                  <p className="flex gap-3 font-normal text-sm  text-blue-700">
-                    <HiOutlineOfficeBuilding className="text-sm mt-1" /> Google
-                  </p>
-                </Card.Subtitle>
-                <Card.Text>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Officia sed minima architecto? Quia dolore non quae ab
-                  reiciendis mollitia pariatur a aut voluptatibus debitis amet
-                  nihil officiis qui enim officia, tempora incidunt veritatis
-                  ipsa iure ratione sint. Porro, temporibus et?
-                </Card.Text>
-
-                <dl class="flex mt-6">
-                  <div class="flex flex-col-reverse">
-                    <dd class="text-sm  text-red-800">Deadline: 20-11-2022</dd>
-                  </div>
-
-                  <div class="flex flex-col-reverse ml-3 sm:ml-6">
-                    <dd class="text-sm  text-gray-800">
-                      Total Applicants: 100
-                    </dd>
-                  </div>
-                </dl>
-                <div className="card-footer">
-                  <div className="text-center">
-                    <button class="bg-green-600 hover:bg-green-700 text-white font-bold mx-1 py-2 px-3 rounded-full">
-                      Extend Deadline
-                    </button>
-                    <button class="bg-red-600 hover:bg-red-700 text-white font-bold mx-1 py-2 px-4 rounded-full">
-                      Delete Post
-                    </button>
-                  </div>
-                </div>
-              </Card.Body>
-            </div>
-          </Col>
-
-          <Col lg={12} md={6} sm={12} className="gy-5">
-            <div className=" bg-gray-100 shadow-xl  hover:shadow-2xl">
-              <Card.Body>
-                <Card.Title>Cyber Security Specialist</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">
-                  <p className="flex gap-3 font-normal text-sm  text-blue-700">
-                    <HiOutlineOfficeBuilding className="text-sm mt-1" /> Google
-                  </p>
-                </Card.Subtitle>
-                <Card.Text>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Aliquid deserunt at nisi, reiciendis laudantium minima impedit
-                  animi eos veritatis! Perferendis.
-                </Card.Text>
-
-                <dl class="flex mt-6">
-                  <div class="flex flex-col-reverse">
-                    <dd class="text-sm  text-red-800">Deadline: 20-11-2022</dd>
-                  </div>
-
-                  <div class="flex flex-col-reverse ml-3 sm:ml-6">
-                    <dd class="text-sm  text-gray-800">
-                      Total Applicants: 100
-                    </dd>
-                  </div>
-                </dl>
-                <div className="card-footer">
-                  <div className="text-center">
-                    <button class="bg-green-600 hover:bg-green-700 text-white font-bold mx-1 py-2 px-3 rounded-full">
-                      Extend Deadline
-                    </button>
-                    <button class="bg-red-600 hover:bg-red-700 text-white font-bold mx-1 py-2 px-4 rounded-full">
-                      Delete Post
-                    </button>
-                  </div>
-                </div>
-              </Card.Body>
-            </div>
-          </Col>
+                </Col>
+              </>
+            );
+          })}
         </Row>
       </Container>
     </div>
