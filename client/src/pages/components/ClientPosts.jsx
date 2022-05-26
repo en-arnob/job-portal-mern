@@ -1,34 +1,14 @@
-import React, { useContext, useState, useEffect } from "react";
-import axios from "axios";
-import { UsersContext } from "../../hooks/UsersContext";
+import React from "react";
 import { Col, Container, Row, Card } from "react-bootstrap";
 import { HiOutlineOfficeBuilding } from "react-icons/hi";
 
-const ClientPosts = () => {
-  const [user, setUser] = useContext(UsersContext);
-  const [userData, setUserData] = useState([]);
-  useEffect(() => {
-    getJobDtails();
-  }, []);
-
-  const getJobDtails = () => {
-    axios
-      .get(`http://127.0.0.1:8000/api/jobs/client-job/${user.id}`)
-      .then((response) => {
-        const catchData = response.data.job;
-        setUserData(catchData);
-        console.log(catchData);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-  console.log(userData);
+const ClientPosts = (props) => {
+  const arrEl = props.totalPost;
   return (
     <div>
       <Container>
         <Row>
-          {userData.map((arrEl) => {
+          {arrEl.map((arrEl) => {
             return (
               <>
                 <Col lg={12} md={6} sm={12}>
@@ -60,6 +40,9 @@ const ClientPosts = () => {
                       </dl>
                       <div className="card-footer">
                         <div className="text-center">
+                          <button class="bg-sky-300 hover:bg-sky-400 text-white font-bold mx-1 py-2 px-3 rounded-full">
+                            Applicants
+                          </button>
                           <button class="bg-green-600 hover:bg-green-700 text-white font-bold mx-1 py-2 px-3 rounded-full">
                             Extend Deadline
                           </button>
