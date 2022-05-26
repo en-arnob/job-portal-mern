@@ -1,9 +1,21 @@
 import React from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { Col, Container, Row, Card } from "react-bootstrap";
 import { HiOutlineOfficeBuilding } from "react-icons/hi";
 
 const ClientPosts = (props) => {
   const arrEl = props.totalPost;
+  const navigate = useNavigate();
+  const deleteJob = async (postId, e) => {
+    e.preventDefault();
+    try {
+      await axios.delete(`http://127.0.0.1:8000/api/jobs/client-job/${postId}`);
+      navigate("/profile");
+    } catch (error) {
+      // console.log(error);
+    }
+  };
   return (
     <div>
       <Container>
@@ -46,7 +58,10 @@ const ClientPosts = (props) => {
                           <button class="bg-green-600 hover:bg-green-700 text-white font-bold mx-1 py-2 px-3 rounded-full">
                             Extend Deadline
                           </button>
-                          <button class="bg-red-600 hover:bg-red-700 text-white font-bold mx-1 py-2 px-4 rounded-full">
+                          <button
+                            class="bg-red-600 hover:bg-red-700 text-white font-bold mx-1 py-2 px-4 rounded-full"
+                            onClick={(e) => deleteJob(arrEl._id, e)}
+                          >
                             Delete Post
                           </button>
                         </div>

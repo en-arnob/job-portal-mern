@@ -57,7 +57,7 @@ exports.getSingleJobController = async (req, res) => {
 
 exports.getAlljobByID = async (req, res) => {
   try {
-    const job = await JobPost.find({ authorId: req.params.authorId });
+    const job = await JobPost.find({ authorId: req.params.id });
     res.status(200).json({
       status: "success",
       job,
@@ -112,19 +112,33 @@ exports.applyController = async (req, res) => {
 };
 
 exports.appliedJobs = async (req, res) => {
-  let {applicantId} = req.params;
+  let { applicantId } = req.params;
   try {
     const jobs = await JobPost.find({
-      applicants: { $in: [applicantId]}
-    })
-  
+      applicants: { $in: [applicantId] },
+    });
+
     res.json({
-      jobs
-    })
+      jobs,
+    });
   } catch (error) {
     res.json({
-      errors: error
-    })
+      errors: error,
+    });
   }
-}
-  
+};
+
+exports.deleteJob = async (req, res) => {
+  try {
+    const job = await JobPost.findByIdAndDelete(req.params.id);
+    res.status(204).json({
+      status: "success",
+      data: null,
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: "fail",
+      message: "failed to find or delete the job",
+    });
+  }
+};
