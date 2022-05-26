@@ -26,7 +26,6 @@ const ClientSchema = new Schema({
   organization: {
     type: String,
     maxlength: 200,
-    required: true,
   },
   designation: {
     type: String,

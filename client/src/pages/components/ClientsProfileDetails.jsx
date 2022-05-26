@@ -3,7 +3,7 @@ import axios from "axios";
 import { UsersContext } from "../../hooks/UsersContext";
 import { Col, Container, Row } from "react-bootstrap";
 import UserClientDetails from "./UserClientDetails";
-import UserImage from "../../assets/images/dummy-member.jpg";
+import UserImage from "../../assets/images/blank-profile-picture.webp";
 import { Link } from "react-router-dom";
 
 const ClientsProfileDetails = () => {
@@ -30,7 +30,12 @@ const ClientsProfileDetails = () => {
       {user && (
         <Container>
           <Row>
-            <Col lg={3} md={4} sm={12} className="bg-blue-300 userImagePrev">
+            <Col
+              lg={3}
+              md={4}
+              sm={12}
+              className="bg-slate-500 p-6 userImagePrev"
+            >
               <div className="text-center my-3">
                 <img
                   src={UserImage}
@@ -38,10 +43,12 @@ const ClientsProfileDetails = () => {
                   alt="CandidatesIamge"
                 />
               </div>
-              <h5 className="userName text-center text-uppercase">
+              <h5 className="userName text-center text-gray-200 text-uppercase">
                 {userData.fullname}
               </h5>
-              <p className="userName text-center mt-3">{userData.username}</p>
+              <p className="userName text-center mt-3 text-gray-300">
+                {userData.username}
+              </p>
               <div className="text-center">
                 <button
                   class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"

@@ -3,7 +3,7 @@ import axios from "axios";
 import { UsersContext } from "../hooks/UsersContext";
 import { Col, Container, Row } from "react-bootstrap";
 import { saveAs } from "file-saver";
-import UserImage from "../assets/images/dummy-member.jpg";
+import UserImage from "../assets/images/blank-profile-picture.webp";
 import UserCandidatesDetails from "./components/UserCandidatesDetails";
 
 const CandidatesProfileDetails = () => {
@@ -53,7 +53,12 @@ const CandidatesProfileDetails = () => {
       {user && (
         <Container>
           <Row>
-            <Col lg={3} md={4} sm={12} className="bg-cyan-300 userImagePrev">
+            <Col
+              lg={3}
+              md={4}
+              sm={12}
+              className="bg-slate-700 p-6 userImagePrev"
+            >
               <div className="text-center my-3">
                 <img
                   src={UserImage}
@@ -61,10 +66,12 @@ const CandidatesProfileDetails = () => {
                   alt="CandidatesIamge"
                 />
               </div>
-              <h5 className="userName text-center text-uppercase">
+              <h5 className="userName text-center text-gray-200 text-uppercase">
                 {userData.fullname}
               </h5>
-              <p className="userName text-center mt-3">{userData.username}</p>
+              <p className="userName text-center text-gray-200 mt-3">
+                {userData.username}
+              </p>
             </Col>
             <Col lg={9} md={8} sm={12} className="userDetails mt-3">
               <div>
