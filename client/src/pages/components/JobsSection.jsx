@@ -9,7 +9,7 @@ const JobsSection = (props) => {
 
   //pagination stuffs
   const [pageNumber, setPageNumber] = useState(0);
-  const postsPerPage = 5;
+  const postsPerPage = 9;
   const pagesVisited = pageNumber * postsPerPage;
 
   const displayPosts = jobs
@@ -19,8 +19,13 @@ const JobsSection = (props) => {
     });
 
   const pageCount = Math.ceil(jobs.length / postsPerPage);
+
   const changePage = ({ selected }) => {
     setPageNumber(selected);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   return (
