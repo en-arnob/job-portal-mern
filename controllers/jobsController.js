@@ -116,7 +116,7 @@ exports.appliedJobs = async (req, res) => {
   try {
     const jobs = await JobPost.find({
       applicants: { $in: [applicantId]}
-    })
+    }).populate("authorId").sort([["dateOfPosting", -1]]);
   
     res.json({
       jobs
@@ -126,5 +126,31 @@ exports.appliedJobs = async (req, res) => {
       errors: error
     })
   }
+}
+
+exports.deleteApplicationController = async (req, res) => {
+  let {jobId, applicantId} = req.params
+  try {
+    let post = await JobPost.findById(jobId)
+    if(post.applicants.includes(applicantId)) {
+      await JobPost.findOneAndUpdate(
+        {_id: jobId},
+        {$pull: {'applicants': applicantId}}
+      )
+      return res.json({
+        msg: "Application Successfully Deleted!"
+      })
+    }
+    res.json({
+      msg: "Error Occured!"
+    })
+    
+
+  } catch (error) {
+    res.json({
+      errors: error
+    })
+  }
+
 }
   

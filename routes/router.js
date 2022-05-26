@@ -21,6 +21,7 @@ const {
   applyController,
   getAlljobByID,
   appliedJobs,
+  deleteApplicationController
 } = require("../controllers/jobsController");
 
 //auth routes
@@ -54,5 +55,7 @@ router.get("/apply/:postId/:userId", applyController);
 router.get("/api/jobs/client-job/:authorId", getAlljobByID);
 // get applied jobs
 router.get('/api/jobs/applied-jobs/:applicantId', appliedJobs)
+//delete applied job
+router.patch('/api/job/deleteApplication/:jobId/:applicantId', deleteApplicationController)
 
 module.exports = router;

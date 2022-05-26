@@ -8,6 +8,7 @@ import { MdOutlineLockClock } from "react-icons/md";
 import { GiSkills } from "react-icons/gi";
 import Modal from "react-modal";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const customStyles = {
   content: {
@@ -23,6 +24,7 @@ const customStyles = {
 Modal.setAppElement("*");
 
 const JobView = () => {
+  const navigate = useNavigate();
   const token = localStorage.getItem("myToken");
   let usr = "";
   if (token) {
@@ -46,6 +48,9 @@ const JobView = () => {
 
   function closeModal() {
     setIsOpen(false);
+  }
+  function navig() {
+    navigate("/appliedJobs");
   }
 
   const [modalMsg, setModalMsg] = useState(" ");
@@ -167,7 +172,10 @@ const JobView = () => {
               close
             </button>
 
-            <button className='pl-4 text-center justify-center items-center'>
+            <button
+              onClick={navig}
+              className='pl-4 text-center justify-center items-center'
+            >
               View Apply List
             </button>
           </Modal>
