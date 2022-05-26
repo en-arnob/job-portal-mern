@@ -110,3 +110,21 @@ exports.applyController = async (req, res) => {
   //     u: userId
   // })
 };
+
+exports.appliedJobs = async (req, res) => {
+  let {applicantId} = req.params;
+  try {
+    const jobs = await JobPost.find({
+      applicants: { $in: [applicantId]}
+    })
+  
+    res.json({
+      jobs
+    })
+  } catch (error) {
+    res.json({
+      errors: error
+    })
+  }
+}
+  

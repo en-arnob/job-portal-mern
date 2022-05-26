@@ -20,6 +20,7 @@ const {
   getSingleJobController,
   applyController,
   getAlljobByID,
+  appliedJobs,
 } = require("../controllers/jobsController");
 
 //auth routes
@@ -51,5 +52,7 @@ router.get("/api/get/singlePost/:id", getSingleJobController);
 router.get("/apply/:postId/:userId", applyController);
 // get Job by userID
 router.get("/api/jobs/client-job/:authorId", getAlljobByID);
+// get applied jobs
+router.get('/api/jobs/applied-jobs/:applicantId', appliedJobs)
 
 module.exports = router;
