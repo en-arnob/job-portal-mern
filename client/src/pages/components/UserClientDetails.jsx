@@ -16,10 +16,9 @@ const UserClientDetails = () => {
       .then((response) => {
         const catchData = response.data.data.user;
         setUserData(catchData);
-        console.log(response.data.data.user);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   };
   return (
