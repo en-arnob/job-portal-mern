@@ -51,7 +51,7 @@ router.post("/api/job-post", postJobsController);
 //single post api
 router.get("/api/get/singlePost/:id", getSingleJobController);
 router.get("/apply/:postId/:userId", applyController);
-// get Job by userID
+// get and delete Job by ID
 router.route("/api/jobs/client-job/:id").get(getAlljobByID).delete(deleteJob);
 // get applied jobs
 router.get("/api/jobs/applied-jobs/:applicantId", appliedJobs);
