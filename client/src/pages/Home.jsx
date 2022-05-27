@@ -16,6 +16,7 @@ const Home = () => {
   const [jobs, setJobs] = useState([]);
   const [errors, setErrors] = useState([]);
   const [postSection, setPostSection] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
   //pagination things
 
@@ -76,9 +77,12 @@ const Home = () => {
                   </label>
 
                   <input
+                    onChange={(event) => {
+                      setSearchTerm(event.target.value);
+                    }}
                     className='w-full h-10 pl-4 pr-10 text-sm bg-white border-none rounded-full shadow-sm sm:w-56'
                     id='search'
-                    type='search'
+                    type='text'
                     placeholder='Search for jobs...'
                   />
 
@@ -132,8 +136,7 @@ const Home = () => {
       <h1 className='flex items-center justify-center gap-2 text-center font-normal text-2xl p-4'>
         Latest job offerings nearby <FaMapMarkerAlt className='text-red-500' />
       </h1>
-      <JobsSection jobs={jobs} errors={errors} />
-      {jobs.length}
+      <JobsSection jobs={jobs} errors={errors} searchTerm={searchTerm} />
     </div>
   );
 };

@@ -6,14 +6,22 @@ import ReactPaginate from "react-paginate";
 const JobsSection = (props) => {
   const jobs = props.jobs;
   const errors = props.errors;
+  const searchTerm = props.searchTerm;
 
   //pagination stuffs
   const [pageNumber, setPageNumber] = useState(0);
-  const postsPerPage = 9;
+  const postsPerPage = 10;
   const pagesVisited = pageNumber * postsPerPage;
 
   const displayPosts = jobs
     .slice(pagesVisited, pagesVisited + postsPerPage)
+    .filter((post) => {
+      if (searchTerm === "") {
+        return post;
+      } else if (post.title.toLowerCase().includes(searchTerm.toLowerCase())) {
+        return post;
+      }
+    })
     .map((post) => {
       return <JobCard key={post._id} job={post} />;
     });
@@ -38,7 +46,7 @@ const JobsSection = (props) => {
             </h3>
           </div>
         )}
-        <JobCardSponsored />
+        {/* <JobCardSponsored /> */}
         {displayPosts}
       </div>
       <div className='text-center items-center justify-center'>
