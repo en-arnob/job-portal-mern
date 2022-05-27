@@ -1,3 +1,4 @@
+const req = require("express/lib/request");
 const jwt_decode = require("jwt-decode");
 const JobPost = require("../models/JobPost");
 const UserCandidate = require("../models/UserCandidate");
@@ -164,6 +165,28 @@ exports.deleteJob = async (req, res) => {
     res.status(400).json({
       status: "fail",
       message: "failed to find or delete the job",
+    });
+  }
+};
+
+exports.updateJob = async (req, res) => {
+  try {
+    const job = await JobPost.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
+    res.status(201).json({
+      status: "success",
+      data: {
+        job,
+      },
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: "fail",
+      message: "failed to find or update the job data",
+      error: err,
     });
   }
 };

@@ -33,7 +33,7 @@ const ClientsProfileDetails = () => {
               lg={3}
               md={4}
               sm={12}
-              className="bg-slate-500 p-6 userImagePrev"
+              className="bg-slate-500 p-6 userImagePrev rounded-lg"
             >
               <div className="text-center my-3">
                 <img

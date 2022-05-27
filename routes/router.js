@@ -23,6 +23,7 @@ const {
   appliedJobs,
   deleteApplicationController,
   deleteJob,
+  updateJob,
 } = require("../controllers/jobsController");
 
 //auth routes
@@ -52,8 +53,12 @@ router.post("/api/job-post", postJobsController);
 //single post api
 router.get("/api/get/singlePost/:id", getSingleJobController);
 router.get("/apply/:postId/:userId", applyController);
-// get and delete Job by ID
-router.route("/api/jobs/client-job/:id").get(getAlljobByID).delete(deleteJob);
+// get,delete and update Job by ID
+router
+  .route("/api/jobs/client-job/:id")
+  .get(getAlljobByID)
+  .delete(deleteJob)
+  .patch(updateJob);
 // get applied jobs
 router.get("/api/jobs/applied-jobs/:applicantId", appliedJobs);
 //delete applied job
