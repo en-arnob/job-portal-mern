@@ -14,7 +14,6 @@ const JobsSection = (props) => {
   const pagesVisited = pageNumber * postsPerPage;
 
   const displayPosts = jobs
-    .slice(pagesVisited, pagesVisited + postsPerPage)
     .filter((post) => {
       if (searchTerm === "") {
         return post;
@@ -22,6 +21,7 @@ const JobsSection = (props) => {
         return post;
       }
     })
+    .slice(pagesVisited, pagesVisited + postsPerPage)
     .map((post) => {
       return <JobCard key={post._id} job={post} />;
     });
