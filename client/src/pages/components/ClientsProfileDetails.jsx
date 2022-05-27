@@ -53,8 +53,8 @@ const ClientsProfileDetails = () => {
                   class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
                   to="/mypost"
                 >
-                  <Link className="text-white no-underline" to="/mypost">
-                    Visit Posts
+                  <Link className="text-white no-underline" to="/editProfile">
+                    Edit Profile
                   </Link>
                 </button>
               </div>
