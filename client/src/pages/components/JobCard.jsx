@@ -21,9 +21,7 @@ const JobCard = ({ job }) => {
 
         <div className='justify-between sm:flex'>
           <div>
-            <h5 className='text-2xl font-medium text-indigo-900'>
-              {job.title}
-            </h5>
+            <h5 className='text-xl font-medium text-indigo-900'>{job.title}</h5>
             <p className='flex gap-3 font-normal text-lg  text-blue-700'>
               <HiOutlineOfficeBuilding className='text-lg mt-1' />{" "}
               {job.authorId.organization}
@@ -33,13 +31,13 @@ const JobCard = ({ job }) => {
             </p>
           </div>
 
-          <div className='flex-shrink-0 hidden ml-3 sm:block'>
+          {/* <div className='flex-shrink-0 hidden ml-3 sm:block'>
             <img
               className='object-cover w-16 h-16 rounded-lg shadow-sm'
               src='https://www.designbust.com/download/1060/png/microsoft_logo_transparent512.png'
               alt=''
             />
-          </div>
+          </div> */}
         </div>
 
         <div
