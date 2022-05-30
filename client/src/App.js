@@ -14,6 +14,7 @@ import LogoutPage from "./pages/LogoutPage";
 import JobView from "./pages/components/JobView";
 import MyPostsPage from "./pages/MyPostsPage";
 import AppliedJobs from "./pages/AppliedJobs";
+import EmailVerify from "./pages/EmailVerify";
 
 // import ProtectedRoute from "./ProtectedRoute";
 
@@ -37,6 +38,7 @@ function App() {
             <Route path="/jobView" exact element={<JobView />} />
             <Route path="/mypost" exact element={<MyPostsPage />} />
             <Route path="/appliedJobs" exact element={<AppliedJobs />} />
+            <Route path="/users/:id/verify/:token" exact element={<EmailVerify/>}/>
           </Routes>
         </UserProvider>
       </Router>

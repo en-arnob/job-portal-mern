@@ -12,6 +12,7 @@ const {
   updateUser,
   generatePdf,
   fetchPdf,
+  
 } = require("../controllers/authController");
 
 const {
@@ -61,5 +62,7 @@ router.patch(
   "/api/job/deleteApplication/:jobId/:applicantId",
   deleteApplicationController
 );
+
+
 
 module.exports = router;

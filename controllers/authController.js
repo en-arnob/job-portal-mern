@@ -6,6 +6,9 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const pdf = require("html-pdf");
 const path = require("path");
+const nodemailer = require("nodemailer");
+const Token = require('../models/token')
+const crypto = require('crypto')
 
 exports.clRegValidation = [
   body("username").not().isEmpty().withMessage("Username is required"),
@@ -66,6 +69,9 @@ exports.LogValidation = [
 exports.loginGetController = (req, res) => {
   res.json({ msg: "Login" });
 };
+
+
+
 
 exports.clientRegPostController = async (req, res) => {
   const {
@@ -159,23 +165,37 @@ exports.candidateRegPostController = async (req, res) => {
         phone,
         gender,
       });
-      const jwtToken = jwt.sign(
-        {
-          user: {
-            id: user._id,
-            usertype: user.usertype,
-            fullname: user.fullname,
-            organization: user.organization,
-          },
-        },
-        process.env.SECRET_KEY,
-        {
-          expiresIn: "7d",
+      let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'testmail.arnob@gmail.com',
+          pass: 'w3bdev69'
         }
-      );
+      })
+      const token = await new Token({
+        userId: user._id,
+        token: crypto.randomBytes(32).toString('hex')
+      }).save()
+      const url = `http://localhost:3000/verify/${user._id}/${token.token}`
+
+      const mailOptions = {
+        from: `testmail.arnob@gmail.com`,
+        to: user.email,
+        subject: 'Test Mail',
+        html: `${url}`
+      }
+      transporter.sendMail(mailOptions, (err, info) => {
+        if(err) {
+          console.log(err)
+        } else{
+          console.log(info)
+        }
+      })
+
+
       return res
         .status(200)
-        .json({ msg: "Account Created Successfully", jwtToken });
+        .json({ msg: "An Email sent to your inbox, please verify to continue"});
     } catch (error) {
       return res.status(500).json({ errors: error });
     }

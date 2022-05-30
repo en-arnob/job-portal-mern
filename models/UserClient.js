@@ -64,6 +64,7 @@ const ClientSchema = new Schema({
     type: String,
     required: true,
   },
+  
 });
 
 const UserClients = model("UserClient", ClientSchema);
