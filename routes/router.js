@@ -12,6 +12,7 @@ const {
   updateUser,
   generatePdf,
   fetchPdf,
+  verifyEm
   
 } = require("../controllers/authController");
 
@@ -63,6 +64,8 @@ router.patch(
   deleteApplicationController
 );
 
+//verify
+router.get('/verify/:userType/:userId/:token', verifyEm)
 
 
 module.exports = router;

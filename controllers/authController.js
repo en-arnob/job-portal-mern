@@ -176,13 +176,15 @@ exports.candidateRegPostController = async (req, res) => {
         userId: user._id,
         token: crypto.randomBytes(32).toString('hex')
       }).save()
-      const url = `http://localhost:3000/verify/${user._id}/${token.token}`
+      const url = `http://localhost:3000/verify/${user.usertype}/${user._id}/${token.token}`
 
       const mailOptions = {
         from: `testmail.arnob@gmail.com`,
         to: user.email,
         subject: 'Test Mail',
-        html: `${url}`
+        html: `<h1>Verify Your Email</h1>
+                <p>The link bellow will redirect you to verfication page</p>
+                <a href=${url}>${url}</a> `
       }
       transporter.sendMail(mailOptions, (err, info) => {
         if(err) {
@@ -352,3 +354,29 @@ exports.fetchPdf = (req, res) => {
   console.log("show");
   res.download("Resume.pdf");
 };
+
+exports.verifyEm = async (req, res) => {
+  const {userType, userId, token } = req.params
+  if(userType === 'candidate') {
+    try {
+      // console.log(`hh: ${req.params.token}`)
+      const user = await UserCandidate.findOne({_id: userId})
+      if(!user) {
+        return res.status(400).send({msg: "Invalid Link"})
+      }
+      const token = await Token.findOne({userId: user._id, token: req.params.token})
+      if(!token) {
+        return res.status(400).send({msg: "Invalid Link"})
+      }
+
+      await UserCandidate.updateOne({_id: user._id}, {verified: true})
+      await token.remove()
+
+      res.status(200).send({msg: "Email Verified Successfully"})
+    } catch (error) {
+      res.status(500).send({msg: 'Internal Server Error'})
+    }
+  } else if(userType === 'recruiter') {
+    res.send('r')
+  }
+}
