@@ -109,10 +109,10 @@ const JobView = () => {
             </p>
           </div>
 
-          <div className='bg-yellow-50 p-6 rounded-lg'>
+          <div className=' p-6 rounded-lg'>
             <p className='text-lg font-normal'>{job.body}</p>
           </div>
-          {usr && usr.usertype == "candidate" ? (
+          {usr && usr.usertype === "candidate" ? (
             <div className='block'>
               <button
                 onClick={applyJob}

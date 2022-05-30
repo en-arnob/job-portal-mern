@@ -6,6 +6,9 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const pdf = require("html-pdf");
 const path = require("path");
+const nodemailer = require("nodemailer");
+const Token = require('../models/token')
+const crypto = require('crypto')
 
 exports.clRegValidation = [
   body("username").not().isEmpty().withMessage("Username is required"),
@@ -67,6 +70,9 @@ exports.loginGetController = (req, res) => {
   res.json({ msg: "Login" });
 };
 
+
+
+
 exports.clientRegPostController = async (req, res) => {
   const {
     usertype,
@@ -106,23 +112,37 @@ exports.clientRegPostController = async (req, res) => {
         phone,
         gender,
       });
-      const jwtToken = jwt.sign(
-        {
-          user: {
-            id: user._id,
-            usertype: user.usertype,
-            fullname: user.fullname,
-            organization: user.organization,
-          },
-        },
-        process.env.SECRET_KEY,
-        {
-          expiresIn: "7d",
+      let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'testmail.arnob@gmail.com',
+          pass: 'w3bdev69'
         }
-      );
+      })
+      const token = await new Token({
+        userId: user._id,
+        token: crypto.randomBytes(32).toString('hex')
+      }).save()
+      const url = `http://localhost:3000/verify/${user.usertype}/${user._id}/${token.token}`
+      const mailOptions = {
+        from: `testmail.arnob@gmail.com`,
+        to: user.email,
+        subject: 'Email Verification',
+        html: `<h1>Verify Your Email</h1>
+                <p>The link bellow will redirect you to verfication page</p>
+                <a href=${url}>${url}</a> `
+      }
+      transporter.sendMail(mailOptions, (err, info) => {
+        if(err) {
+          console.log(err)
+        } else{
+          console.log(info)
+        }
+      })
+
       return res
         .status(200)
-        .json({ msg: "Account Created Successfully", jwtToken });
+        .json({ msg: "An Email sent to your inbox, please verify to continue"});
     } catch (error) {
       return res.status(500).json({ errors: error });
     }
@@ -159,23 +179,39 @@ exports.candidateRegPostController = async (req, res) => {
         phone,
         gender,
       });
-      const jwtToken = jwt.sign(
-        {
-          user: {
-            id: user._id,
-            usertype: user.usertype,
-            fullname: user.fullname,
-            organization: user.organization,
-          },
-        },
-        process.env.SECRET_KEY,
-        {
-          expiresIn: "7d",
+      let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'testmail.arnob@gmail.com',
+          pass: 'w3bdev69'
         }
-      );
+      })
+      const token = await new Token({
+        userId: user._id,
+        token: crypto.randomBytes(32).toString('hex')
+      }).save()
+      const url = `http://localhost:3000/verify/${user.usertype}/${user._id}/${token.token}`
+
+      const mailOptions = {
+        from: `testmail.arnob@gmail.com`,
+        to: user.email,
+        subject: 'Email Verification',
+        html: `<h1>Verify Your Email</h1>
+                <p>The link bellow will redirect you to verfication page</p>
+                <a href=${url}>${url}</a> `
+      }
+      transporter.sendMail(mailOptions, (err, info) => {
+        if(err) {
+          console.log(err)
+        } else{
+          console.log(info)
+        }
+      })
+
+
       return res
         .status(200)
-        .json({ msg: "Account Created Successfully", jwtToken });
+        .json({ msg: "An Email sent to your inbox, please verify to continue"});
     } catch (error) {
       return res.status(500).json({ errors: error });
     }
@@ -200,21 +236,57 @@ exports.clientLoginPostController = async (req, res) => {
     if (!match) {
       return res.status(400).json({ errors: [{ msg: "Invalid Credentials" }] });
     }
-    const jwtToken = jwt.sign(
-      {
-        user: {
-          id: user._id,
-          usertype: user.usertype,
-          fullname: user.fullname,
-          organization: user.organization,
-        },
-      },
-      process.env.SECRET_KEY,
-      {
-        expiresIn: "7d",
+    if(!user.verified){
+      let token = await Token.findOne({userId: user._id})
+      if (!token) {
+        const token = await new Token({
+          userId: user._id,
+          token: crypto.randomBytes(32).toString('hex')
+        }).save()
+        
       }
-    );
-    return res.status(200).json({ msg: "Account Logged in", jwtToken });
+      let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'testmail.arnob@gmail.com',
+          pass: 'w3bdev69'
+        }
+      })
+      const url = `http://localhost:3000/verify/${user.usertype}/${user._id}/${token.token}`
+      const mailOptions = {
+          from: `testmail.arnob@gmail.com`,
+          to: user.email,
+          subject: 'Email Verification',
+          html: `<h1>Verify Your Email</h1>
+                  <p>The link bellow will redirect you to verfication page</p>
+                  <a href=${url}>${url}</a> `
+      }
+      transporter.sendMail(mailOptions, (err, info) => {
+          if(err) {
+            console.log(err)
+          } else{
+            console.log(info)
+          }
+      })
+      return res.status(200).send({msg: "An Email sent to your inbox, please verify to continue"})
+    } else {
+      const jwtToken = jwt.sign(
+        {
+          user: {
+            id: user._id,
+            usertype: user.usertype,
+            fullname: user.fullname,
+            organization: user.organization,
+          },
+        },
+        process.env.SECRET_KEY,
+        {
+          expiresIn: "7d",
+        }
+      );
+      return res.status(200).json({ msg: "Account Logged in", jwtToken });
+
+    }
   } catch (error) {
     return res.status(500).json({ errors: error });
   }
@@ -235,21 +307,57 @@ exports.candidateLoginPostController = async (req, res) => {
     if (!match) {
       return res.status(400).json({ errors: [{ msg: "Invalid Credentials" }] });
     }
-    const jwtToken = jwt.sign(
-      {
-        user: {
-          id: user._id,
-          usertype: user.usertype,
-          fullname: user.fullname,
-          organization: user.organization,
-        },
-      },
-      process.env.SECRET_KEY,
-      {
-        expiresIn: "7d",
+    if(!user.verified){
+      let token = await Token.findOne({userId: user._id})
+      if (!token) {
+        const token = await new Token({
+          userId: user._id,
+          token: crypto.randomBytes(32).toString('hex')
+        }).save()
+        
       }
-    );
-    return res.status(200).json({ msg: "Account Logged in", jwtToken });
+      let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'testmail.arnob@gmail.com',
+          pass: 'w3bdev69'
+        }
+      })
+      const url = `http://localhost:3000/verify/${user.usertype}/${user._id}/${token.token}`
+      const mailOptions = {
+          from: `testmail.arnob@gmail.com`,
+          to: user.email,
+          subject: 'Email Verification',
+          html: `<h1>Verify Your Email</h1>
+                  <p>The link bellow will redirect you to verfication page</p>
+                  <a href=${url}>${url}</a> `
+      }
+      transporter.sendMail(mailOptions, (err, info) => {
+          if(err) {
+            console.log(err)
+          } else{
+            console.log(info)
+          }
+      })
+      return res.status(200).send({msg: "An Email sent to your inbox, please verify to continue"})
+    } else {
+      const jwtToken = jwt.sign(
+        {
+          user: {
+            id: user._id,
+            usertype: user.usertype,
+            fullname: user.fullname,
+            organization: user.organization,
+          },
+        },
+        process.env.SECRET_KEY,
+        {
+          expiresIn: "7d",
+        }
+      );
+      return res.status(200).json({ msg: "Account Logged in", jwtToken });
+
+    } 
   } catch (error) {
     return res.status(500).json({ errors: error });
   }
@@ -332,3 +440,46 @@ exports.fetchPdf = (req, res) => {
   console.log("show");
   res.download("Resume.pdf");
 };
+
+exports.verifyEm = async (req, res) => {
+  const {userType, userId, token } = req.params
+  if(userType === 'candidate') {
+    try {
+      // console.log(`hh: ${req.params.token}`)
+      const user = await UserCandidate.findOne({_id: userId})
+      if(!user) {
+        return res.status(400).send({msg: "Invalid Link"})
+      }
+      const token = await Token.findOne({userId: user._id, token: req.params.token})
+      if(!token) {
+        return res.status(400).send({msg: "Invalid Link"})
+      }
+
+      await UserCandidate.updateOne({_id: user._id}, {verified: true})
+      await token.remove()
+
+      res.status(200).send({msg: "Email Verified Successfully"})
+    } catch (error) {
+      res.status(500).send({msg: 'Internal Server Error'})
+    }
+  } else if(userType === 'recruiter') {
+    try {
+      // console.log(`hh: ${req.params.token}`)
+      const user = await UserClient.findOne({_id: userId})
+      if(!user) {
+        return res.status(400).send({msg: "Invalid Link"})
+      }
+      const token = await Token.findOne({userId: user._id, token: req.params.token})
+      if(!token) {
+        return res.status(400).send({msg: "Invalid Link"})
+      }
+
+      await UserClient.updateOne({_id: user._id}, {verified: true})
+      await token.remove()
+
+      res.status(200).send({msg: "Email Verified Successfully"})
+    } catch (error) {
+      res.status(500).send({msg: 'Internal Server Error'})
+    }
+  }
+}

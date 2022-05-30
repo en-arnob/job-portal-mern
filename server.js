@@ -1,12 +1,13 @@
+
 const express = require("express");
 var cors = require("cors");
+require("dotenv").config();
 const morgan = require("morgan");
 const rateLimit = require("express-rate-limit");
 const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
 const app = express();
 const bodyParser = require("body-parser");
-require("dotenv").config();
 const connect = require("./config/db");
 const routes = require("./routes/router");
 
