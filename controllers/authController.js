@@ -3,9 +3,12 @@ const { body, validationResult } = require("express-validator");
 const UserClient = require("../models/UserClient");
 const UserCandidate = require("../models/UserCandidate");
 const bcrypt = require("bcrypt");
+const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
 const pdf = require("html-pdf");
 const path = require("path");
+const AppError = require("../utils/AppError");
+const sendEmail = require("../utils/forgotPasswordEmail");
 
 exports.clRegValidation = [
   body("username").not().isEmpty().withMessage("Username is required"),
@@ -331,4 +334,91 @@ exports.fetchPdf = (req, res) => {
   console.log(file);
   console.log("show");
   res.download("Resume.pdf");
+};
+
+exports.forgotPassword = async (req, res, next) => {
+  let user;
+  if (req.params.usertype == "recruiter") {
+    user = await UserClient.findOne({ email: req.body.email });
+  } else if (req.params.usertype == "candidate") {
+    user = await UserCandidate.findOne({ email: req.body.email });
+  }
+
+  if (!user) {
+    return next(new AppError("There is no user with this email address", 404));
+  }
+  const resetToken = user.createPasswordResetToken();
+  await user.save({ validateBeforeSave: false });
+
+  const resetURL = `${req.protocol}://${req.get(
+    "host"
+  )}/user/resetPassword/${resetToken}`;
+
+  const message = `Forgot your password? Submit a patch request with your new password and cormfirmPassword to: ${resetURL}.\n Please ignore if you can remember your old password `;
+
+  try {
+    await sendEmail({
+      email: user.email,
+      subject: "Your password reset token(valid for 10 min)",
+      message,
+    });
+
+    res.status(200).json({
+      status: "success",
+      message: "Token Send to email",
+    });
+  } catch (error) {
+    user.passwordResetToken = undefined;
+    user.passwordTokenExpires = undefined;
+    await user.save({ validateBeforeSave: false });
+
+    return next(
+      new AppError("Failed to send the email. Try again later.", 500)
+    );
+  }
+};
+
+exports.resetPassword = async (req, res, next) => {
+  console.log(req.params, req.body);
+  const hashToken = crypto
+    .createHash("sha256")
+    .update(req.params.token)
+    .digest("hex");
+
+  try {
+    let user;
+    if (req.params.usertype == "recruiter") {
+      user = user = await UserClient.findOne({
+        passwordResetToken: hashToken,
+        passwordTokenExpires: { $gt: Date.now() },
+      });
+    } else if (req.params.usertype == "candidate") {
+      user = await UserCandidate.findOne({
+        passwordResetToken: hashToken,
+        passwordTokenExpires: { $gt: Date.now() },
+      });
+    }
+    if (!user) {
+      return next(new AppError("Token is invalid or expaired!", 400));
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const hashed = await bcrypt.hash(req.body.password, salt);
+    user.password = hashed;
+    // user.confirmPassword = req.body.confirmPassword;
+    user.passwordResetToken = undefined;
+    user.passwordTokenExpires = undefined;
+
+    await user.save();
+
+    res.status(200).json({
+      status: "success",
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: "fail",
+      message: "Failed to reset password!!",
+      err,
+    });
+  }
 };

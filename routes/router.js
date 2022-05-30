@@ -12,6 +12,8 @@ const {
   updateUser,
   generatePdf,
   fetchPdf,
+  forgotPassword,
+  resetPassword,
 } = require("../controllers/authController");
 
 const {
@@ -35,6 +37,11 @@ router.post("/candidate-register", cdRegValidation, candidateRegPostController);
 
 // get Profile details
 router.get("/userDetails/:id/:usertype", getUserDetails);
+
+// forgotPasswor
+router.post("/user/forgotPassword/:usertype", forgotPassword);
+// reset password
+router.patch("/user/resetPassword/:token/:usertype", resetPassword);
 // update Profile
 // router.patch("/userUpdate/:id/:usertype", updateUser);
 
