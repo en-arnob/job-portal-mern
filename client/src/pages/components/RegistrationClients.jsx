@@ -4,6 +4,20 @@ import { useNavigate } from "react-router-dom";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import RegImg from "../../assets/images/RegClient.svg";
 import jwt_decode from "jwt-decode";
+import Modal from "react-modal";
+
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+  },
+};
+// Modal.setAppElement("app");
+Modal.setAppElement("*");
 
 const RegistrationClients = () => {
   const [data, setData] = useState({
@@ -21,6 +35,22 @@ const RegistrationClients = () => {
   });
   const [error, setError] = useState(" ");
   const navigate = useNavigate();
+  let subtitle;
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    subtitle.style.color = "#16003B";
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+  const [modalMsg, setModalMsg] = useState(" ");
 
   const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.name]: input.value });
@@ -30,19 +60,9 @@ const RegistrationClients = () => {
     try {
       const url = "http://127.0.0.1:8000/client-register";
       const { data: res } = await axios.post(url, data);
-      navigate("/");
-      localStorage.setItem("myToken", res.jwtToken);
-      const token = localStorage.getItem("myToken");
-      if (token) {
-        const decodedToken = jwt_decode(token);
-        const expiresIn = new Date(decodedToken.exp * 1000);
-        if (new Date() > expiresIn) {
-          localStorage.removeItem("myToken");
-        } else {
-          const { user } = decodedToken;
-          console.log(user);
-        }
-      }
+
+      setModalMsg(res.msg);
+      openModal();
     } catch (error) {
       if (
         error.response &&
@@ -295,6 +315,29 @@ const RegistrationClients = () => {
                     >
                       Sign Up
                     </button>
+                    <Modal
+                      appElement={document.getElementById("app")}
+                      isOpen={modalIsOpen}
+                      onAfterOpen={afterOpenModal}
+                      onRequestClose={closeModal}
+                      style={customStyles}
+                      contentLabel='Apply Status Modal'
+                    >
+                      <h2
+                        className='text-2xl'
+                        ref={(_subtitle) => (subtitle = _subtitle)}
+                      >
+                        Verify your Email
+                      </h2>
+
+                      <div className='text-xl py-4'>{modalMsg}</div>
+                      <button
+                        onClick={closeModal}
+                        className='bg-red-600 px-4 py-2 mt-2 text-white rounded-lg'
+                      >
+                        close
+                      </button>
+                    </Modal>
                   </div>
                 </form>
               </Card.Body>

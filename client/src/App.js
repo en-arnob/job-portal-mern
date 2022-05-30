@@ -38,7 +38,7 @@ function App() {
             <Route path="/jobView" exact element={<JobView />} />
             <Route path="/mypost" exact element={<MyPostsPage />} />
             <Route path="/appliedJobs" exact element={<AppliedJobs />} />
-            <Route path="/users/:id/verify/:token" exact element={<EmailVerify/>}/>
+            <Route path="/verify/:userType/:userId/:token" exact element={<EmailVerify/>}/>
           </Routes>
         </UserProvider>
       </Router>
