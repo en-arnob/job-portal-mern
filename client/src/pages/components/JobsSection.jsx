@@ -7,6 +7,7 @@ const JobsSection = (props) => {
   const jobs = props.jobs;
   const errors = props.errors;
   const searchTerm = props.searchTerm;
+  console.log(jobs);
 
   //pagination stuffs
   const [pageNumber, setPageNumber] = useState(0);

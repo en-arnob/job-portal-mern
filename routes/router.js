@@ -28,6 +28,9 @@ const {
   updateJob,
 } = require("../controllers/jobsController");
 
+
+const {fetchCandidates} = require('../controllers/userController')
+
 //auth routes
 router.get("/login", loginGetController);
 router.post("/client-login", LogValidation, clientLoginPostController);
@@ -71,6 +74,10 @@ router.patch(
 
 //verify
 router.get('/verify/:userType/:userId/:token', verifyEm)
+
+
+//fetch JobSeekers 
+router.get('/api/:userId/fetchCandidates', fetchCandidates)
 
 
 module.exports = router;
