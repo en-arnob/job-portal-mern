@@ -109,13 +109,22 @@ const Home = () => {
                   </button>
                 </div>
                 {user.usertype === "recruiter" && (
-                  <button
-                    onClick={() => setPostSection(!postSection)}
-                    className='flex gap-2 items-center justify-center px-5 py-3 text-sm font-medium text-white transition bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring'
-                    type='button'
-                  >
-                    Create Job <AiOutlineArrowDown className='text-lg' />
-                  </button>
+                  <div className='flex gap-2 justify-between'>
+                    <button
+                      onClick={() => setPostSection(!postSection)}
+                      className='flex gap-2 items-center justify-center px-5 py-3 text-sm font-medium text-white transition bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring'
+                      type='button'
+                    >
+                      Create Job <AiOutlineArrowDown className='text-lg' />
+                    </button>
+                    <button
+                      onClick={() => navigate("/show-UserCandidates")}
+                      className='flex gap-2 items-center justify-center px-5 py-3 text-sm font-medium text-white transition bg-blue-600 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring'
+                      type='button'
+                    >
+                      Available Job Seekers
+                    </button>
+                  </div>
                 )}
                 {user.usertype === "candidate" && (
                   <button

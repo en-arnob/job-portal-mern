@@ -34,9 +34,15 @@ const ShowUserCandidates = () => {
     <Fragment>
       {token && usr.user.usertype === "recruiter" ? (
         <div className='p-2 mx-4'>
-          <h2 className='bg-yellow-200 px-4 py-2 inline rounded-lg font-normal text-xl text-gray-800'>
-            Listing Job Seekers on this site
-          </h2>
+          <div className='flex-col gap-2 mb-4'>
+            <h2 className='bg-yellow-200 px-2 py-2 inline rounded-lg font-normal text-lg md:text-xl text-gray-800'>
+              Available Job Seekers
+            </h2>
+            <h2 className=' px-4 py-2 inline rounded-lg font-normal text-sm text-gray-800'>
+              Back to Home
+            </h2>
+          </div>
+
           {candidates.map((candidate) => {
             return <h1>{candidate.fullname}</h1>;
           })}
