@@ -15,6 +15,7 @@ import JobView from "./pages/components/JobView";
 import MyPostsPage from "./pages/MyPostsPage";
 import AppliedJobs from "./pages/AppliedJobs";
 import EmailVerify from "./pages/EmailVerify";
+import ShowUserCandidates from "./pages/ShowUserCandidates";
 
 // import ProtectedRoute from "./ProtectedRoute";
 
@@ -39,6 +40,7 @@ function App() {
             <Route path="/mypost" exact element={<MyPostsPage />} />
             <Route path="/appliedJobs" exact element={<AppliedJobs />} />
             <Route path="/verify/:userType/:userId/:token" exact element={<EmailVerify/>}/>
+            <Route path="/show-UserCandidates" exact element={<ShowUserCandidates/>}/>
           </Routes>
         </UserProvider>
       </Router>

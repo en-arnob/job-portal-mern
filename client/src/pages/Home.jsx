@@ -36,6 +36,7 @@ const Home = () => {
       .then((response) => {
         const allJobs = response.data.jobs;
         setJobs(allJobs);
+        // console.log(allJobs);
       })
       .catch((error) => {
         setErrors(error);
