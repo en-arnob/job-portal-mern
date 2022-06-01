@@ -1,56 +1,30 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import loginImg from "../assets/images/loginClients.svg";
-import jwt_decode from "jwt-decode";
-import { UserContext } from "../App";
-import { UsersContext } from "../hooks/UsersContext"; // ::arnob::
-
-const LoginClients = () => {
-  const { state, dispatch } = useContext(UserContext);
-  const [user, setUser] = useContext(UsersContext); // ::arnob::
+import { useNavigate, useLocation } from "react-router-dom";
+import authImage from "../assets/images/authentication_re.svg";
+const ResetPasswordPage = () => {
+  const [error, setError] = useState(" ");
   const navigate = useNavigate();
+  const location = useLocation();
+  const usertype = location.state.usertype;
+  console.log(usertype);
+
   const [data, setData] = useState({
-    email: "",
     password: "",
   });
-  const [error, setError] = useState(" ");
-  const [msg, setMsg] = useState("");
-
-  const forgotButton = () => {
-    navigate("/forgotPassword", { state: { usertype: "recruiter" } });
-  };
-
   const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.name]: input.value });
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const resetToken = document.getElementById("passwordResetToken").value;
     try {
-      const url = "http://127.0.0.1:8000/client-login";
-      const { data: res } = await axios.post(url, data);
-      setMsg(res.msg);
-      if (res.jwtToken) {
-        localStorage.setItem("myToken", res.jwtToken);
-
-        const token = localStorage.getItem("myToken");
-        const decoded = jwt_decode(token);
-        const usr = decoded.user;
-        setUser(usr);
-        if (token) {
-          dispatch({ type: "USER", payload: true });
-          const decodedToken = jwt_decode(token);
-          const expiresIn = new Date(decodedToken.exp * 1000);
-          if (new Date() > expiresIn) {
-            localStorage.removeItem("myToken");
-          } else {
-            const { user } = decodedToken;
-          }
-        }
-      }
+      const url = `http://127.0.0.1:8000/user/resetPassword/${resetToken}/${usertype}`;
+      const { data: res } = await axios.patch(url, data);
+      navigate("/login");
     } catch (error) {
+      console.log(error.response);
       if (
         error.response &&
         error.response.status >= 400 &&
@@ -60,21 +34,15 @@ const LoginClients = () => {
       }
     }
   };
-
   return (
     <div className="h-auto mb-7">
       <Container>
         <Row>
           <Col lg={6} md={6} sm={12}>
-            <div className="text-center mt-5">
-              <img src={loginImg} alt="pic" className="img-fluid" />
-            </div>
-          </Col>
-          <Col lg={6} md={6} sm={12}>
             <div className="mt-5">
               <Card.Body className="text-center">
                 <p className="font-mono text-3xl font-extrabold text-blue-700">
-                  Sign In as Recruiter
+                  Reset Password
                 </p>
                 <form
                   class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
@@ -89,15 +57,13 @@ const LoginClients = () => {
                     </label>
                     <input
                       class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      id="email"
-                      type="email"
+                      id="passwordResetToken"
+                      type="text"
                       onChange={handleChange}
-                      value={data.email}
-                      placeholder="Email"
-                      name="email"
+                      value={data.passwordResetToken}
+                      placeholder="Code"
+                      name="passwordResetToken"
                     />
-                  </div>
-                  <div class="mb-6">
                     <label
                       class="block text-gray-700 text-sm font-bold mb-2"
                       for="password"
@@ -113,29 +79,28 @@ const LoginClients = () => {
                       value={data.password}
                       name="password"
                     />
-                    {error && (
-                      <p class="text-red-500 text-xs italic">{error.msg}</p>
-                    )}
-                    {msg && <p class="text-blue-500 text-xs italic">{msg}</p>}
                   </div>
-                  <div class="flex items-center justify-between">
+                  <div class="mb-6">
+                    {error && (
+                      <p class="text-red-500 text-xs italic">{error}</p>
+                    )}
+                  </div>
+                  <div class="text-center">
                     <button
                       class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                       type="submit"
                     >
-                      Sign In
+                      Update Password
                     </button>
-                    <p
-                      class="inline-block cursor-pointer  align-baseline font-bold text-sm text-blue-700 hover:text-blue-800"
-                      onClick={() => {
-                        forgotButton();
-                      }}
-                    >
-                      Forgot Password?
-                    </p>
                   </div>
                 </form>
               </Card.Body>
+            </div>
+          </Col>
+
+          <Col lg={6} md={6} sm={12}>
+            <div className="text-center mt-5">
+              <img src={authImage} alt="pic" className="img-fluid" />
             </div>
           </Col>
         </Row>
@@ -144,4 +109,4 @@ const LoginClients = () => {
   );
 };
 
-export default LoginClients;
+export default ResetPasswordPage;

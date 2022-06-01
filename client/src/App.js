@@ -16,6 +16,8 @@ import MyPostsPage from "./pages/MyPostsPage";
 import AppliedJobs from "./pages/AppliedJobs";
 import EmailVerify from "./pages/EmailVerify";
 import ShowUserCandidates from "./pages/ShowUserCandidates";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
 
 // import ProtectedRoute from "./ProtectedRoute";
 
@@ -39,8 +41,26 @@ function App() {
             <Route path="/jobView" exact element={<JobView />} />
             <Route path="/mypost" exact element={<MyPostsPage />} />
             <Route path="/appliedJobs" exact element={<AppliedJobs />} />
-            <Route path="/verify/:userType/:userId/:token" exact element={<EmailVerify/>}/>
-            <Route path="/show-UserCandidates" exact element={<ShowUserCandidates/>}/>
+            <Route
+              path="/verify/:userType/:userId/:token"
+              exact
+              element={<EmailVerify />}
+            />
+            <Route
+              path="/show-UserCandidates"
+              exact
+              element={<ShowUserCandidates />}
+            />
+            <Route
+              path="/forgotPassword"
+              exact
+              element={<ForgotPasswordPage />}
+            />
+            <Route
+              path="/resetPassword"
+              exact
+              element={<ResetPasswordPage />}
+            />
           </Routes>
         </UserProvider>
       </Router>

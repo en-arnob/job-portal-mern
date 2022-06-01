@@ -12,8 +12,10 @@ const {
   updateUser,
   generatePdf,
   fetchPdf,
-  verifyEm
-  
+  verifyEm,
+
+  forgotPassword,
+  resetPassword,
 } = require("../controllers/authController");
 
 const {
@@ -28,8 +30,7 @@ const {
   updateJob,
 } = require("../controllers/jobsController");
 
-
-const {fetchCandidates} = require('../controllers/userController')
+const { fetchCandidates } = require("../controllers/userController");
 
 //auth routes
 router.get("/login", loginGetController);
@@ -40,6 +41,11 @@ router.post("/candidate-register", cdRegValidation, candidateRegPostController);
 
 // get Profile details
 router.get("/userDetails/:id/:usertype", getUserDetails);
+
+// forgotPasswor
+router.post("/user/forgotPassword/:usertype", forgotPassword);
+// reset password
+router.patch("/user/resetPassword/:token/:usertype", resetPassword);
 // update Profile
 // router.patch("/userUpdate/:id/:usertype", updateUser);
 
@@ -73,11 +79,9 @@ router.patch(
 );
 
 //verify
-router.get('/verify/:userType/:userId/:token', verifyEm)
+router.get("/verify/:userType/:userId/:token", verifyEm);
 
-
-//fetch JobSeekers 
-router.get('/api/:userId/fetchCandidates', fetchCandidates)
-
+//fetch JobSeekers
+router.get("/api/:userId/fetchCandidates", fetchCandidates);
 
 module.exports = router;

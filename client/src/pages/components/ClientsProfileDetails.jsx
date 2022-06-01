@@ -49,10 +49,7 @@ const ClientsProfileDetails = () => {
                 {userData.username}
               </p>
               <div className="text-center">
-                <button
-                  class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
-                  to="/mypost"
-                >
+                <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">
                   <Link className="text-white no-underline" to="/editProfile">
                     Edit Profile
                   </Link>

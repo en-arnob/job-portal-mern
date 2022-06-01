@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const crypto = require("crypto");
 
 const CandidateSchema = new Schema({
   usertype: {
@@ -83,7 +84,21 @@ const CandidateSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  passwordTokenExpires: Date,
+  passwordResetToken: String,
 });
+
+CandidateSchema.methods.createPasswordResetToken = function () {
+  const resetToken = crypto.randomBytes(32).toString("hex");
+  this.passwordResetToken = crypto
+    .createHash("sha256")
+    .update(resetToken)
+    .digest("hex");
+
+  this.passwordTokenExpires = Date.now() + 5 * 60 * 1000;
+  console.log(resetToken, this.passwordResetToken, this.passwordTokenExpires);
+  return resetToken;
+};
 
 const UserCandidate = model("UserCandidate", CandidateSchema);
 module.exports = UserCandidate;

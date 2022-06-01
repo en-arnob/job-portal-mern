@@ -3,12 +3,15 @@ const { body, validationResult } = require("express-validator");
 const UserClient = require("../models/UserClient");
 const UserCandidate = require("../models/UserCandidate");
 const bcrypt = require("bcrypt");
+const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
 const pdf = require("html-pdf");
 const path = require("path");
 const nodemailer = require("nodemailer");
-const Token = require('../models/token')
-const crypto = require('crypto')
+const Token = require("../models/token");
+const crypto = require("crypto");
+const AppError = require("../utils/AppError");
+const sendEmail = require("../utils/forgotPasswordEmail");
 
 exports.clRegValidation = [
   body("username").not().isEmpty().withMessage("Username is required"),
@@ -70,9 +73,6 @@ exports.loginGetController = (req, res) => {
   res.json({ msg: "Login" });
 };
 
-
-
-
 exports.clientRegPostController = async (req, res) => {
   const {
     usertype,
@@ -113,36 +113,38 @@ exports.clientRegPostController = async (req, res) => {
         gender,
       });
       let transporter = nodemailer.createTransport({
-        service: 'gmail',
+        service: "gmail",
         auth: {
-          user: 'testmail.arnob@gmail.com',
-          pass: 'w3bdev69'
-        }
-      })
+          user: "testmail.arnob@gmail.com",
+          pass: "w3bdev69",
+        },
+      });
       const token = await new Token({
         userId: user._id,
-        token: crypto.randomBytes(32).toString('hex')
-      }).save()
-      const url = `http://localhost:3000/verify/${user.usertype}/${user._id}/${token.token}`
+        token: crypto.randomBytes(32).toString("hex"),
+      }).save();
+      const url = `http://localhost:3000/verify/${user.usertype}/${user._id}/${token.token}`;
       const mailOptions = {
         from: `testmail.arnob@gmail.com`,
         to: user.email,
-        subject: 'Email Verification',
+        subject: "Email Verification",
         html: `<h1>Verify Your Email</h1>
                 <p>The link bellow will redirect you to verfication page</p>
-                <a href=${url}>${url}</a> `
-      }
+                <a href=${url}>${url}</a> `,
+      };
       transporter.sendMail(mailOptions, (err, info) => {
-        if(err) {
-          console.log(err)
-        } else{
-          console.log(info)
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(info);
         }
-      })
+      });
 
       return res
         .status(200)
-        .json({ msg: "An Email sent to your inbox, please verify to continue"});
+        .json({
+          msg: "An Email sent to your inbox, please verify to continue",
+        });
     } catch (error) {
       return res.status(500).json({ errors: error });
     }
@@ -180,38 +182,39 @@ exports.candidateRegPostController = async (req, res) => {
         gender,
       });
       let transporter = nodemailer.createTransport({
-        service: 'gmail',
+        service: "gmail",
         auth: {
-          user: 'testmail.arnob@gmail.com',
-          pass: 'w3bdev69'
-        }
-      })
+          user: "testmail.arnob@gmail.com",
+          pass: "w3bdev69",
+        },
+      });
       const token = await new Token({
         userId: user._id,
-        token: crypto.randomBytes(32).toString('hex')
-      }).save()
-      const url = `http://localhost:3000/verify/${user.usertype}/${user._id}/${token.token}`
+        token: crypto.randomBytes(32).toString("hex"),
+      }).save();
+      const url = `http://localhost:3000/verify/${user.usertype}/${user._id}/${token.token}`;
 
       const mailOptions = {
         from: `testmail.arnob@gmail.com`,
         to: user.email,
-        subject: 'Email Verification',
+        subject: "Email Verification",
         html: `<h1>Verify Your Email</h1>
                 <p>The link bellow will redirect you to verfication page</p>
-                <a href=${url}>${url}</a> `
-      }
+                <a href=${url}>${url}</a> `,
+      };
       transporter.sendMail(mailOptions, (err, info) => {
-        if(err) {
-          console.log(err)
-        } else{
-          console.log(info)
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(info);
         }
-      })
-
+      });
 
       return res
         .status(200)
-        .json({ msg: "An Email sent to your inbox, please verify to continue"});
+        .json({
+          msg: "An Email sent to your inbox, please verify to continue",
+        });
     } catch (error) {
       return res.status(500).json({ errors: error });
     }
@@ -236,39 +239,42 @@ exports.clientLoginPostController = async (req, res) => {
     if (!match) {
       return res.status(400).json({ errors: [{ msg: "Invalid Credentials" }] });
     }
-    if(!user.verified){
-      let token = await Token.findOne({userId: user._id})
+    if (!user.verified) {
+      let token = await Token.findOne({ userId: user._id });
       if (!token) {
         const token = await new Token({
           userId: user._id,
-          token: crypto.randomBytes(32).toString('hex')
-        }).save()
-        
+          token: crypto.randomBytes(32).toString("hex"),
+        }).save();
       }
       let transporter = nodemailer.createTransport({
-        service: 'gmail',
+        service: "gmail",
         auth: {
-          user: 'testmail.arnob@gmail.com',
-          pass: 'w3bdev69'
-        }
-      })
-      const url = `http://localhost:3000/verify/${user.usertype}/${user._id}/${token.token}`
+          user: "testmail.arnob@gmail.com",
+          pass: "w3bdev69",
+        },
+      });
+      const url = `http://localhost:3000/verify/${user.usertype}/${user._id}/${token.token}`;
       const mailOptions = {
-          from: `testmail.arnob@gmail.com`,
-          to: user.email,
-          subject: 'Email Verification',
-          html: `<h1>Verify Your Email</h1>
+        from: `testmail.arnob@gmail.com`,
+        to: user.email,
+        subject: "Email Verification",
+        html: `<h1>Verify Your Email</h1>
                   <p>The link bellow will redirect you to verfication page</p>
-                  <a href=${url}>${url}</a> `
-      }
+                  <a href=${url}>${url}</a> `,
+      };
       transporter.sendMail(mailOptions, (err, info) => {
-          if(err) {
-            console.log(err)
-          } else{
-            console.log(info)
-          }
-      })
-      return res.status(200).send({msg: "An Email sent to your inbox, please verify to continue"})
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(info);
+        }
+      });
+      return res
+        .status(200)
+        .send({
+          msg: "An Email sent to your inbox, please verify to continue",
+        });
     } else {
       const jwtToken = jwt.sign(
         {
@@ -285,7 +291,6 @@ exports.clientLoginPostController = async (req, res) => {
         }
       );
       return res.status(200).json({ msg: "Account Logged in", jwtToken });
-
     }
   } catch (error) {
     return res.status(500).json({ errors: error });
@@ -307,39 +312,42 @@ exports.candidateLoginPostController = async (req, res) => {
     if (!match) {
       return res.status(400).json({ errors: [{ msg: "Invalid Credentials" }] });
     }
-    if(!user.verified){
-      let token = await Token.findOne({userId: user._id})
+    if (!user.verified) {
+      let token = await Token.findOne({ userId: user._id });
       if (!token) {
         const token = await new Token({
           userId: user._id,
-          token: crypto.randomBytes(32).toString('hex')
-        }).save()
-        
+          token: crypto.randomBytes(32).toString("hex"),
+        }).save();
       }
       let transporter = nodemailer.createTransport({
-        service: 'gmail',
+        service: "gmail",
         auth: {
-          user: 'testmail.arnob@gmail.com',
-          pass: 'w3bdev69'
-        }
-      })
-      const url = `http://localhost:3000/verify/${user.usertype}/${user._id}/${token.token}`
+          user: "testmail.arnob@gmail.com",
+          pass: "w3bdev69",
+        },
+      });
+      const url = `http://localhost:3000/verify/${user.usertype}/${user._id}/${token.token}`;
       const mailOptions = {
-          from: `testmail.arnob@gmail.com`,
-          to: user.email,
-          subject: 'Email Verification',
-          html: `<h1>Verify Your Email</h1>
+        from: `testmail.arnob@gmail.com`,
+        to: user.email,
+        subject: "Email Verification",
+        html: `<h1>Verify Your Email</h1>
                   <p>The link bellow will redirect you to verfication page</p>
-                  <a href=${url}>${url}</a> `
-      }
+                  <a href=${url}>${url}</a> `,
+      };
       transporter.sendMail(mailOptions, (err, info) => {
-          if(err) {
-            console.log(err)
-          } else{
-            console.log(info)
-          }
-      })
-      return res.status(200).send({msg: "An Email sent to your inbox, please verify to continue"})
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(info);
+        }
+      });
+      return res
+        .status(200)
+        .send({
+          msg: "An Email sent to your inbox, please verify to continue",
+        });
     } else {
       const jwtToken = jwt.sign(
         {
@@ -356,8 +364,7 @@ exports.candidateLoginPostController = async (req, res) => {
         }
       );
       return res.status(200).json({ msg: "Account Logged in", jwtToken });
-
-    } 
+    }
   } catch (error) {
     return res.status(500).json({ errors: error });
   }
@@ -442,44 +449,132 @@ exports.fetchPdf = (req, res) => {
 };
 
 exports.verifyEm = async (req, res) => {
-  const {userType, userId, token } = req.params
-  if(userType === 'candidate') {
+  const { userType, userId, token } = req.params;
+  if (userType === "candidate") {
     try {
       // console.log(`hh: ${req.params.token}`)
-      const user = await UserCandidate.findOne({_id: userId})
-      if(!user) {
-        return res.status(400).send({msg: "Invalid Link"})
+      const user = await UserCandidate.findOne({ _id: userId });
+      if (!user) {
+        return res.status(400).send({ msg: "Invalid Link" });
       }
-      const token = await Token.findOne({userId: user._id, token: req.params.token})
-      if(!token) {
-        return res.status(400).send({msg: "Invalid Link"})
+      const token = await Token.findOne({
+        userId: user._id,
+        token: req.params.token,
+      });
+      if (!token) {
+        return res.status(400).send({ msg: "Invalid Link" });
       }
 
-      await UserCandidate.updateOne({_id: user._id}, {verified: true})
-      await token.remove()
+      await UserCandidate.updateOne({ _id: user._id }, { verified: true });
+      await token.remove();
 
-      res.status(200).send({msg: "Email Verified Successfully"})
+      res.status(200).send({ msg: "Email Verified Successfully" });
     } catch (error) {
-      res.status(500).send({msg: 'Internal Server Error'})
+      res.status(500).send({ msg: "Internal Server Error" });
     }
-  } else if(userType === 'recruiter') {
+  } else if (userType === "recruiter") {
     try {
       // console.log(`hh: ${req.params.token}`)
-      const user = await UserClient.findOne({_id: userId})
-      if(!user) {
-        return res.status(400).send({msg: "Invalid Link"})
+      const user = await UserClient.findOne({ _id: userId });
+      if (!user) {
+        return res.status(400).send({ msg: "Invalid Link" });
       }
-      const token = await Token.findOne({userId: user._id, token: req.params.token})
-      if(!token) {
-        return res.status(400).send({msg: "Invalid Link"})
+      const token = await Token.findOne({
+        userId: user._id,
+        token: req.params.token,
+      });
+      if (!token) {
+        return res.status(400).send({ msg: "Invalid Link" });
       }
 
-      await UserClient.updateOne({_id: user._id}, {verified: true})
-      await token.remove()
+      await UserClient.updateOne({ _id: user._id }, { verified: true });
+      await token.remove();
 
-      res.status(200).send({msg: "Email Verified Successfully"})
+      res.status(200).send({ msg: "Email Verified Successfully" });
     } catch (error) {
-      res.status(500).send({msg: 'Internal Server Error'})
+      res.status(500).send({ msg: "Internal Server Error" });
     }
   }
-}
+};
+exports.forgotPassword = async (req, res, next) => {
+  let user;
+  if (req.params.usertype == "recruiter") {
+    user = await UserClient.findOne({ email: req.body.email });
+  } else if (req.params.usertype == "candidate") {
+    user = await UserCandidate.findOne({ email: req.body.email });
+  }
+
+  if (!user) {
+    return next(new AppError("There is no user with this email address", 404));
+  }
+  const resetToken = user.createPasswordResetToken();
+  await user.save({ validateBeforeSave: false });
+
+  const message = `Forgot your password? Use the following token to reset password.\nToken: ${resetToken}.\n Please ignore if you can remember your old password `;
+
+  try {
+    await sendEmail({
+      email: user.email,
+      subject: "Your password reset token(valid for 10 min)",
+      message,
+    });
+
+    res.status(200).json({
+      status: "success",
+      message: "Token Send to email",
+    });
+  } catch (error) {
+    user.passwordResetToken = undefined;
+    user.passwordTokenExpires = undefined;
+    await user.save({ validateBeforeSave: false });
+
+    return next(
+      new AppError("Failed to send the email. Try again later.", 500)
+    );
+  }
+};
+
+exports.resetPassword = async (req, res, next) => {
+  console.log(req.params, req.body);
+  const hashToken = crypto
+    .createHash("sha256")
+    .update(req.params.token)
+    .digest("hex");
+
+  try {
+    let user;
+    if (req.params.usertype == "recruiter") {
+      user = user = await UserClient.findOne({
+        passwordResetToken: hashToken,
+        passwordTokenExpires: { $gt: Date.now() },
+      });
+    } else if (req.params.usertype == "candidate") {
+      user = await UserCandidate.findOne({
+        passwordResetToken: hashToken,
+        passwordTokenExpires: { $gt: Date.now() },
+      });
+    }
+    if (!user) {
+      return next(new AppError("Token is invalid or expaired!", 400));
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const hashed = await bcrypt.hash(req.body.password, salt);
+    user.password = hashed;
+    // user.confirmPassword = req.body.confirmPassword;
+    user.passwordResetToken = undefined;
+    user.passwordTokenExpires = undefined;
+
+    await user.save();
+
+    res.status(200).json({
+      status: "success",
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: "fail",
+      message: "Failed to reset password!!",
+      err,
+    });
+  }
+};
