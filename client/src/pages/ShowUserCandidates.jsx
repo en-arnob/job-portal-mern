@@ -9,13 +9,14 @@ const ShowUserCandidates = () => {
   const token = localStorage.getItem("myToken");
   const usr = jwt_decode(token);
   const user = usr.user;
-  console.log(user.id);
+
   const [candidates, setCandidates] = useState([]);
   //pagination stuffs
   const [pageNumber, setPageNumber] = useState(0);
   const postsPerPage = 12;
   const pagesVisited = pageNumber * postsPerPage;
   const [errors, setErrors] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const fetchCandidates = () => {
     axios
       .get(`http://localhost:8000/api/${user.id}/fetchCandidates`)
@@ -36,7 +37,15 @@ const ShowUserCandidates = () => {
     }
   }, []);
   const displayCandidates = candidates
-
+    .filter((candidate) => {
+      if (searchTerm === "") {
+        return candidate;
+      } else if (
+        candidate.fullname.toLowerCase().includes(searchTerm.toLowerCase())
+      ) {
+        return candidate;
+      }
+    })
     .slice(pagesVisited, pagesVisited + postsPerPage)
     .map((candidate) => {
       return <CandidatesCard key={candidate._id} candidate={candidate} />;
@@ -82,6 +91,9 @@ const ShowUserCandidates = () => {
             </span>
 
             <input
+              onChange={(event) => {
+                setSearchTerm(event.target.value);
+              }}
               type='text'
               class='w-full py-3 pl-10 pr-4 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring'
               placeholder='Search by Expertise'
