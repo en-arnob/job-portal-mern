@@ -18,6 +18,7 @@ import EmailVerify from "./pages/EmailVerify";
 import ShowUserCandidates from "./pages/ShowUserCandidates";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
+import TotalApplicantsPage from "./pages/TotalApplicantsPage";
 
 // import ProtectedRoute from "./ProtectedRoute";
 
@@ -61,6 +62,7 @@ function App() {
               exact
               element={<ResetPasswordPage />}
             />
+            <Route path="/applicants" exact element={<TotalApplicantsPage />} />
           </Routes>
         </UserProvider>
       </Router>
