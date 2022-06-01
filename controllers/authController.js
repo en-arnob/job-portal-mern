@@ -9,7 +9,6 @@ const pdf = require("html-pdf");
 const path = require("path");
 const nodemailer = require("nodemailer");
 const Token = require("../models/token");
-const crypto = require("crypto");
 const AppError = require("../utils/AppError");
 const sendEmail = require("../utils/forgotPasswordEmail");
 
@@ -140,11 +139,9 @@ exports.clientRegPostController = async (req, res) => {
         }
       });
 
-      return res
-        .status(200)
-        .json({
-          msg: "An Email sent to your inbox, please verify to continue",
-        });
+      return res.status(200).json({
+        msg: "An Email sent to your inbox, please verify to continue",
+      });
     } catch (error) {
       return res.status(500).json({ errors: error });
     }
@@ -210,11 +207,9 @@ exports.candidateRegPostController = async (req, res) => {
         }
       });
 
-      return res
-        .status(200)
-        .json({
-          msg: "An Email sent to your inbox, please verify to continue",
-        });
+      return res.status(200).json({
+        msg: "An Email sent to your inbox, please verify to continue",
+      });
     } catch (error) {
       return res.status(500).json({ errors: error });
     }
@@ -270,11 +265,9 @@ exports.clientLoginPostController = async (req, res) => {
           console.log(info);
         }
       });
-      return res
-        .status(200)
-        .send({
-          msg: "An Email sent to your inbox, please verify to continue",
-        });
+      return res.status(200).send({
+        msg: "An Email sent to your inbox, please verify to continue",
+      });
     } else {
       const jwtToken = jwt.sign(
         {
@@ -343,11 +336,9 @@ exports.candidateLoginPostController = async (req, res) => {
           console.log(info);
         }
       });
-      return res
-        .status(200)
-        .send({
-          msg: "An Email sent to your inbox, please verify to continue",
-        });
+      return res.status(200).send({
+        msg: "An Email sent to your inbox, please verify to continue",
+      });
     } else {
       const jwtToken = jwt.sign(
         {
