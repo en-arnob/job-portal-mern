@@ -119,7 +119,7 @@ const Home = () => {
                     </button>
                     <button
                       onClick={() => navigate("/show-UserCandidates")}
-                      className='flex gap-2 items-center justify-center px-5 py-3 text-sm font-medium text-white transition bg-blue-600 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring'
+                      className='flex gap-2 items-center justify-center px-5 py-3 text-sm font-medium text-white transition bg-blue-600 rounded-lg hover:bg-blue-900 focus:outline-none focus:ring'
                       type='button'
                     >
                       Available Job Seekers
