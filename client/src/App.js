@@ -18,6 +18,7 @@ import EmailVerify from "./pages/EmailVerify";
 import ShowUserCandidates from "./pages/ShowUserCandidates";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
+import ProfileView from "./pages/ProfileView";
 
 // import ProtectedRoute from "./ProtectedRoute";
 
@@ -61,6 +62,7 @@ function App() {
               exact
               element={<ResetPasswordPage />}
             />
+            <Route path="/profileView" exact element={<ProfileView/>} />
           </Routes>
         </UserProvider>
       </Router>
