@@ -17,6 +17,10 @@ const LoginClients = () => {
   });
   const [error, setError] = useState(" ");
 
+  const forgotButton = () => {
+    navigate("/forgotPassword", { state: { usertype: "recruiter" } });
+  };
+
   const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.name]: input.value });
   };
@@ -117,12 +121,14 @@ const LoginClients = () => {
                     >
                       Sign In
                     </button>
-                    <a
-                      class="inline-block align-baseline font-bold text-sm text-blue-700 hover:text-blue-800"
-                      href="/"
+                    <p
+                      class="inline-block cursor-pointer  align-baseline font-bold text-sm text-blue-700 hover:text-blue-800"
+                      onClick={() => {
+                        forgotButton();
+                      }}
                     >
                       Forgot Password?
-                    </a>
+                    </p>
                   </div>
                 </form>
               </Card.Body>

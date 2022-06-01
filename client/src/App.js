@@ -14,6 +14,8 @@ import LogoutPage from "./pages/LogoutPage";
 import JobView from "./pages/components/JobView";
 import MyPostsPage from "./pages/MyPostsPage";
 import AppliedJobs from "./pages/AppliedJobs";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
 
 // import ProtectedRoute from "./ProtectedRoute";
 
@@ -37,6 +39,16 @@ function App() {
             <Route path="/jobView" exact element={<JobView />} />
             <Route path="/mypost" exact element={<MyPostsPage />} />
             <Route path="/appliedJobs" exact element={<AppliedJobs />} />
+            <Route
+              path="/forgotPassword"
+              exact
+              element={<ForgotPasswordPage />}
+            />
+            <Route
+              path="/resetPassword"
+              exact
+              element={<ResetPasswordPage />}
+            />
           </Routes>
         </UserProvider>
       </Router>

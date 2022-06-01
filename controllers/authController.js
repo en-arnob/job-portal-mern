@@ -350,11 +350,7 @@ exports.forgotPassword = async (req, res, next) => {
   const resetToken = user.createPasswordResetToken();
   await user.save({ validateBeforeSave: false });
 
-  const resetURL = `${req.protocol}://${req.get(
-    "host"
-  )}/user/resetPassword/${resetToken}`;
-
-  const message = `Forgot your password? Submit a patch request with your new password and cormfirmPassword to: ${resetURL}.\n Please ignore if you can remember your old password `;
+  const message = `Forgot your password? Use the following token to reset password.\nToken: ${resetToken}.\n Please ignore if you can remember your old password `;
 
   try {
     await sendEmail({
