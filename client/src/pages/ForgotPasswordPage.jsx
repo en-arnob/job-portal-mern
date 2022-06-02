@@ -10,10 +10,6 @@ const ForgotPasswordPage = () => {
   const usertype = location.state.usertype;
   console.log(usertype);
 
-  //   const sendUserType = () => {
-  //     navigate("/resetPassword", { state: { usertype: usertype } });
-  //   };
-
   const [data, setData] = useState({
     email: "",
   });

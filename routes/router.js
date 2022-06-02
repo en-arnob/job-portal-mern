@@ -30,7 +30,10 @@ const {
   updateJob,
 } = require("../controllers/jobsController");
 
-const { fetchCandidates } = require("../controllers/userController");
+const {
+  fetchCandidates,
+  getCandidateDetails,
+} = require("../controllers/userController");
 
 //auth routes
 router.get("/login", loginGetController);
@@ -83,5 +86,7 @@ router.get("/verify/:userType/:userId/:token", verifyEm);
 
 //fetch JobSeekers
 router.get("/api/:userId/fetchCandidates", fetchCandidates);
+// get Applicant
+router.get("/api/job/:applicantID", getCandidateDetails);
 
 module.exports = router;

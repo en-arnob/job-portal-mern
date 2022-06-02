@@ -1,8 +1,89 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { Container, Row, Col } from "react-bootstrap";
+import { useNavigate, useLocation } from "react-router-dom";
+
 import userImage from "../assets/images/blank-profile-picture.webp";
 
 const TotalApplicantsPage = () => {
+  const location = useLocation();
+  const jobDetails = location.state.jobDetails;
+  console.log(jobDetails.applicants);
+  const [userData, setUserData] = useState([]);
+
+  useEffect(() => {
+    UserDetails();
+  }, []);
+
+  const UserDetails = () => {
+    jobDetails.applicants.map((arrEl) => {
+      console.log(arrEl);
+      if (arrEl) {
+        axios
+          .get(`http://127.0.0.1:8000/api/job/${arrEl}`)
+          .then((response) => {
+            const catchData = response.data.data.user;
+            setUserData(catchData);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+      // getUserDetails();
+
+      return (
+        <>
+          <Col lg={4} md={6} sm={12}>
+            <div class="max-w-sm bg-slate-300 rounded-lg border border-slate-300 shadow-md dark:bg-gray-800 dark:border-gray-700 mt-3">
+              <div class="flex flex-col items-center py-5">
+                <img
+                  class="mb-3 w-20 h-22 rounded-full shadow-lg"
+                  src={userImage}
+                  alt="Userimage"
+                />
+                <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">
+                  {userData.fullname}
+                </h5>
+                <span class="text-sm text-gray-500 dark:text-gray-400">
+                  {userData.designation}
+                </span>
+                <div class="flex mt-4 space-x-3 lg:mt-6">
+                  <a
+                    href="#"
+                    class="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 no-underline"
+                  >
+                    View Profile
+                  </a>
+                  <a
+                    href="#"
+                    class="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-gray-900 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700 no-underline"
+                  >
+                    Reject
+                  </a>
+                </div>
+              </div>
+            </div>
+          </Col>{" "}
+        </>
+      );
+    });
+  };
+
+  // useEffect(() => {
+  //   getUserDetails();
+  // }, []);
+
+  // const getUserDetails = () => {
+  //   axios
+  //     .get(`http://127.0.0.1:8000/api/job/${jobDetails.applicants}`)
+  //     .then((response) => {
+  //       const catchData = response.data.data.user;
+  //       setUserData(catchData);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
   return (
     <div>
       <Container>
@@ -11,21 +92,22 @@ const TotalApplicantsPage = () => {
             <span className=" text-2xl  text-slate-700 sm:text-3xl">
               Job Title:
             </span>{" "}
-            Lorem ipsum dolor sit amet.
+            {jobDetails.title}
           </p>
           <p className=" text-xs  text-rose-700 sm:text-sm  font-semibold">
             <span className=" text-sm  text-slate-700 sm:text-sm">
               Total Applicant:
             </span>{" "}
-            21 /{" "}
+            {jobDetails.applicants.length} /{" "}
             <span className=" text-sm  text-slate-700 sm:text-sm">
               Total Vacancy:
             </span>{" "}
-            5
+            {jobDetails.vaccancy}
           </p>
         </div>
         <Row>
-          <Col lg={4} md={6} sm={12}>
+          <UserDetails />
+          {/* <Col lg={4} md={6} sm={12}>
             <div class="max-w-sm bg-slate-300 rounded-lg border border-slate-300 shadow-md dark:bg-gray-800 dark:border-gray-700 mt-3">
               <div class="flex flex-col items-center py-5">
                 <img
@@ -34,10 +116,10 @@ const TotalApplicantsPage = () => {
                   alt="Userimage"
                 />
                 <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">
-                  Md. Jannat-Ul Naim
+                  {userData.fullname}
                 </h5>
                 <span class="text-sm text-gray-500 dark:text-gray-400">
-                  Laravel Developer
+                  {userData.designation}
                 </span>
                 <div class="flex mt-4 space-x-3 lg:mt-6">
                   <a
@@ -55,69 +137,7 @@ const TotalApplicantsPage = () => {
                 </div>
               </div>
             </div>
-          </Col>{" "}
-          <Col lg={4} md={6} sm={12}>
-            <div class="max-w-sm bg-slate-300 rounded-lg border border-slate-300 shadow-md dark:bg-gray-800 dark:border-gray-700 mt-3">
-              <div class="flex flex-col items-center py-5">
-                <img
-                  class="mb-3 w-20 h-22 rounded-full shadow-lg"
-                  src={userImage}
-                  alt="Userimage"
-                />
-                <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">
-                  Md. Jannat-Ul Naim
-                </h5>
-                <span class="text-sm text-gray-500 dark:text-gray-400">
-                  Laravel Developer
-                </span>
-                <div class="flex mt-4 space-x-3 lg:mt-6">
-                  <a
-                    href="#"
-                    class="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 no-underline"
-                  >
-                    View Profile
-                  </a>
-                  <a
-                    href="#"
-                    class="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-gray-900 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700 no-underline"
-                  >
-                    Reject
-                  </a>
-                </div>
-              </div>
-            </div>
-          </Col>{" "}
-          <Col lg={4} md={6} sm={12}>
-            <div class="max-w-sm bg-slate-300 rounded-lg border border-slate-300 shadow-md dark:bg-gray-800 dark:border-gray-700 mt-3">
-              <div class="flex flex-col items-center py-5">
-                <img
-                  class="mb-3 w-20 h-22 rounded-full shadow-lg"
-                  src={userImage}
-                  alt="Userimage"
-                />
-                <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">
-                  Md. Jannat-Ul Naim
-                </h5>
-                <span class="text-sm text-gray-500 dark:text-gray-400">
-                  Laravel Developer
-                </span>
-                <div class="flex mt-4 space-x-3 lg:mt-6">
-                  <a
-                    href="#"
-                    class="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 no-underline"
-                  >
-                    View Profile
-                  </a>
-                  <a
-                    href="#"
-                    class="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-gray-900 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700 no-underline"
-                  >
-                    Reject
-                  </a>
-                </div>
-              </div>
-            </div>
-          </Col>
+          </Col>{" "} */}
         </Row>
       </Container>
     </div>

@@ -38,6 +38,10 @@ const ClientPosts = (props) => {
     }
   };
 
+  const applicantsButton = (postDetails) => {
+    navigate("/applicants", { state: { jobDetails: postDetails } });
+  };
+
   const extendDeadline = async (postId, e) => {
     e.preventDefault();
     try {
@@ -119,7 +123,12 @@ const ClientPosts = (props) => {
                           >
                             Delete Post
                           </button>
-                          <button class="bg-sky-300 hover:bg-sky-400 text-white font-bold mx-1 py-2 px-3 rounded-full">
+                          <button
+                            class="bg-sky-300 hover:bg-sky-400 text-white font-bold mx-1 py-2 px-3 rounded-full"
+                            onClick={() => {
+                              applicantsButton(arrEl);
+                            }}
+                          >
                             Applicants
                           </button>
                         </div>
