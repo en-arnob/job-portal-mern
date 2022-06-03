@@ -190,3 +190,22 @@ exports.updateJob = async (req, res) => {
     });
   }
 };
+
+exports.ApplicantsDetails = async (req, res) => {
+  console.log(req.params);
+  try {
+    let job = await JobPost.findById(req.params.jobID).populate("applicants");
+    res.status(200).json({
+      status: "success",
+      data: {
+        job,
+      },
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: "fail",
+      message: "failed to find the user",
+      error: err,
+    });
+  }
+};

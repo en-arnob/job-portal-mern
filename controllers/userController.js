@@ -16,21 +16,3 @@ exports.fetchCandidates = async (req, res) => {
     res.json({ error: error });
   }
 };
-
-exports.getCandidateDetails = async (req, res) => {
-  try {
-    const user = await UserCandidate.findById(req.params.applicantID);
-    res.status(200).json({
-      status: "success",
-      data: {
-        user,
-      },
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: "fail",
-      message: "failed to find the user",
-      error: err,
-    });
-  }
-};
