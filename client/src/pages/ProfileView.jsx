@@ -46,7 +46,7 @@ const ProfileView = () => {
               <FaMapMarkerAlt className='text-red-500 mt-1' />
               Dhaka, Bangladesh
             </p>
-            <p className='flex gap-1  border-t-2 border-green-600'>
+            <p className='inline mt-1 border-b-2 text-center items-center justify-center border-green-400'>
               {userData.bio}
             </p>
           </div>

@@ -1,5 +1,6 @@
 const {Schema, model} = require('mongoose')
 const UserClient = require('./UserClient')
+const UserCandidate = require("./UserCandidate");
 
 
 const jobPostSchema = new Schema(
@@ -45,7 +46,7 @@ const jobPostSchema = new Schema(
         applicants: [
             {
                 type: Schema.Types.ObjectId,
-                ref: "User",
+                ref: UserCandidate,
             },
         ],
     }
