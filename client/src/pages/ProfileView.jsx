@@ -1,8 +1,29 @@
-import React from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { UsersContext } from "../hooks/UsersContext";
+import axios from "axios";
+import Moment from "moment";
 import arnobx from "../assets/images/arnobx.jpeg";
 import { FaMapMarkerAlt } from "react-icons/fa";
 
 const ProfileView = () => {
+  Moment.locale("en");
+  const [user, setUser] = useContext(UsersContext);
+  const [userData, setUserData] = useState("");
+  useEffect(() => {
+    getUserDetails();
+  }, []);
+  const getUserDetails = () => {
+    axios
+      .get(`http://127.0.0.1:8000/userDetails/${user.id}/${user.usertype}`)
+      .then((response) => {
+        const catchData = response.data.data.user;
+        setUserData(catchData);
+      })
+      .catch((error) => {
+        // console.log(error);
+      });
+  };
+
   return (
     <div className=''>
       <div className=' px-2 mx-4 rounded'>
@@ -16,14 +37,17 @@ const ProfileView = () => {
           </div>
 
           <h2 class='mt-2 text-2xl font-semibold text-gray-800 dark:text-white md:mt-0 md:text-3xl'>
-            Khalid Arnob
+            {userData.fullname}
           </h2>
 
           <div class='mt-2 text-gray-600 dark:text-gray-200'>
-            Full Stack Web Developer
+            {userData.designation || "No Data"}
             <p className='flex gap-1'>
               <FaMapMarkerAlt className='text-red-500 mt-1' />
               Dhaka, Bangladesh
+            </p>
+            <p className='flex gap-1  border-t-2 border-green-600'>
+              {userData.bio}
             </p>
           </div>
 
@@ -94,6 +118,108 @@ const ProfileView = () => {
             </svg>
 
             <span class='mx-1 text-sm sm:text-base'>Messages</span>
+          </button>
+        </div>
+      </div>
+      <div className='mx-6 mt-4 '>
+        <div class='bg-white  p-3 shadow-sm rounded-lg'>
+          <div class='flex items-center space-x-2 font-semibold text-gray-900 leading-8'>
+            <span clas='text-green-500'>
+              <svg
+                class='h-5'
+                xmlns='http://www.w3.org/2000/svg'
+                fill='none'
+                viewBox='0 0 24 24'
+                stroke='currentColor'
+              >
+                <path
+                  stroke-linecap='round'
+                  stroke-linejoin='round'
+                  stroke-width='2'
+                  d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'
+                />
+              </svg>
+            </span>
+            <span class='tracking-wide'>About</span>
+          </div>
+          <div class='text-gray-700'>
+            <div class='grid md:grid-cols-2 text-sm'>
+              <div class='grid grid-cols-2'>
+                <div class='px-4 py-2 font-semibold'>Full Name</div>
+                <div class='px-4 py-2'>{userData.fullname}</div>
+              </div>
+              <div class='grid grid-cols-2'>
+                <div class='px-4 py-2 font-semibold'>Address</div>
+                <div class='px-4 py-2'>West Razabazar, Dhaka</div>
+              </div>
+              <div class='grid grid-cols-2'>
+                <div class='px-4 py-2 font-semibold'>Gender</div>
+                <div class='px-4 py-2'>{userData.gender}</div>
+              </div>
+              <div class='grid grid-cols-2'>
+                <div class='px-4 py-2 font-semibold'>Contact No.</div>
+                <div class='px-4 py-2'>{userData.phone}</div>
+              </div>
+              <div class='grid grid-cols-2'>
+                <div class='px-4 py-2 font-semibold'>
+                  Last/Current Organization
+                </div>
+                <div class='px-4 py-2'>{userData.institute}</div>
+              </div>
+              <div class='grid grid-cols-2'>
+                <div class='px-4 py-2 font-semibold'>Designation</div>
+                <div class='px-4 py-2'> {userData.designation}</div>
+              </div>
+              <div class='grid grid-cols-2'>
+                <div class='px-4 py-2 font-semibold'>Email</div>
+                <div class='px-4 py-2'>
+                  <a class='text-blue-800' href='mailto:jane@example.com'>
+                    {userData.email}
+                  </a>
+                </div>
+              </div>
+              <div class='grid grid-cols-2'>
+                <div class='px-4 py-2 font-semibold'>Birthday</div>
+                <div class='px-4 py-2'>
+                  {Moment(userData.birthday).format("d MMM YYYY")}
+                </div>
+              </div>
+              <div class='grid grid-cols-2'>
+                <div class='px-4 py-2 font-semibold'>Education</div>
+                <div class='px-4 py-2'>{userData.edu || "No Data"}</div>
+              </div>
+              <div class='grid grid-cols-2'>
+                <div class='px-4 py-2 font-semibold'>Details</div>
+                <div class='px-4 py-2'>{userData.eduDetails || "No Data"}</div>
+              </div>
+              <div class='grid grid-cols-2'>
+                <div class='px-4 py-2 font-semibold'>Expertise</div>
+                <div class='px-4 py-2'>{userData.expertise || "No Data"}</div>
+              </div>
+              <div class='grid grid-cols-2'>
+                <div class='px-4 py-2 font-semibold'>Skills</div>
+                <div class='px-4 py-2'>{userData.skills || "No Data"}</div>
+              </div>
+              <div class='grid grid-cols-2'>
+                <div class='px-4 py-2 font-semibold'>Experience</div>
+                <div class='px-4 py-2'>{userData.experience || "No Data"}</div>
+              </div>
+              <div class='grid grid-cols-2'>
+                <div class='px-4 py-2 font-semibold'>Certification</div>
+                <div class='px-4 py-2'>
+                  {userData.certification || "No Data"}
+                </div>
+              </div>
+              <div class='grid grid-cols-2'>
+                <div class='px-4 py-2 font-semibold'>Portfolio</div>
+                <div class='px-4 py-2'>
+                  {userData.portfolioLink || "No Data"}
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class='block w-full text-blue-800 text-sm font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4'>
+            Update Profile
           </button>
         </div>
       </div>
