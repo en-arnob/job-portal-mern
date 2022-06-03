@@ -32,7 +32,7 @@ const CandidatesCard = ({ candidate }) => {
         </h1>
 
         <p class='py-2 text-gray-700 dark:text-gray-400'>
-          {candidate.designation || "No Current Position"}
+          {candidate.expertise || "No Expertise Tag"}
         </p>
 
         <div class='flex items-center mt-4 text-gray-700 dark:text-gray-200'>
@@ -51,7 +51,7 @@ const CandidatesCard = ({ candidate }) => {
           </svg>
 
           <h1 class='px-2 text-sm'>
-            {candidate.institute || "No Organization/Institute"}
+            {candidate.designation || "No Designation"}
           </h1>
         </div>
 

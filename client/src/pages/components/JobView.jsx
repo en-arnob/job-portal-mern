@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import jwt_decode from "jwt-decode";
 import { useLocation } from "react-router-dom";
 import { FiBriefcase } from "react-icons/fi";
@@ -24,6 +24,13 @@ const customStyles = {
 Modal.setAppElement("*");
 
 const JobView = () => {
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
+
   const navigate = useNavigate();
   const token = localStorage.getItem("myToken");
   let usr = "";
