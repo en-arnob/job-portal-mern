@@ -1,20 +1,24 @@
 import React, { useState, useContext, useEffect } from "react";
-import { UsersContext } from "../hooks/UsersContext";
+
 import axios from "axios";
 import Moment from "moment";
 import arnobx from "../assets/images/arnobx.jpeg";
 import { FaMapMarkerAlt } from "react-icons/fa";
+import { useLocation } from "react-router-dom";
 
 const ProfileView = () => {
+  const location = useLocation();
+  const userId = location.state.userId;
+  const userType = location.state.userType;
   Moment.locale("en");
-  const [user, setUser] = useContext(UsersContext);
+
   const [userData, setUserData] = useState("");
   useEffect(() => {
     getUserDetails();
   }, []);
   const getUserDetails = () => {
     axios
-      .get(`http://127.0.0.1:8000/userDetails/${user.id}/${user.usertype}`)
+      .get(`http://127.0.0.1:8000/userDetails/${userId}/${userType}`)
       .then((response) => {
         const catchData = response.data.data.user;
         setUserData(catchData);
@@ -45,18 +49,6 @@ const ProfileView = () => {
             <p className='flex gap-1'>
               <FaMapMarkerAlt className='text-red-500 mt-1' />
               Dhaka, Bangladesh
-            </p>
-            <p className='inline mt-1 border-b-2 text-center items-center justify-center border-green-400'>
-              {userData.bio}
-            </p>
-          </div>
-
-          <div class='flex justify-end mt-4'>
-            <p
-              href='/'
-              class='text-sm md:text-lg font-medium cursor-pointer text-blue-700 dark:text-blue-300'
-            >
-              Update Profile
             </p>
           </div>
         </div>
@@ -98,7 +90,7 @@ const ProfileView = () => {
               />
             </svg>
 
-            <span class='mx-1 text-sm sm:text-base'>Resume</span>
+            <span class='mx-1 text-sm sm:text-base'>Dowload Resume</span>
           </button>
 
           <button class='flex items-center h-12 px-2 py-2 text-center text-gray-700 bg-transparent border-b border-gray-300 sm:px-4 dark:border-gray-500 -px-1 dark:text-white whitespace-nowrap cursor-base focus:outline-none hover:border-gray-400 dark:hover:border-gray-300'>
@@ -117,11 +109,11 @@ const ProfileView = () => {
               />
             </svg>
 
-            <span class='mx-1 text-sm sm:text-base'>Messages</span>
+            <span class='mx-1 text-sm disabled sm:text-base'>Message</span>
           </button>
         </div>
       </div>
-      <div className='mx-6 mt-4 '>
+      <div className='mx-6 mt-4 mb-4 '>
         <div class='bg-white  p-3 shadow-sm rounded-lg'>
           <div class='flex items-center space-x-2 font-semibold text-gray-900 leading-8'>
             <span clas='text-green-500'>
@@ -218,9 +210,16 @@ const ProfileView = () => {
               </div>
             </div>
           </div>
-          <button class='block w-full text-blue-800 text-sm font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4'>
-            Update Profile
-          </button>
+        </div>
+        <div class='mt-10 py-10 border-t border-blueGray-200 text-center'>
+          <div class='flex flex-wrap justify-center'>
+            <div class='w-full lg:w-9/12 px-4'>
+              <p class='font-normal text-pink-500'>Bio</p>
+              <p class='mt-4 text-lg leading-relaxed text-blueGray-700'>
+                {userData.bio || "No Data"}
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

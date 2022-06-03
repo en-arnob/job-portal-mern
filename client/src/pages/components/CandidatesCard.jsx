@@ -1,7 +1,14 @@
 import React from "react";
 import arnob from "../../assets/images/arnob.jpeg";
+import { useNavigate } from "react-router-dom";
 
 const CandidatesCard = ({ candidate }) => {
+  const navigate = useNavigate();
+  const toCandidateProfile = (candidateId) => {
+    navigate("/profileView", {
+      state: { userId: candidateId, userType: "candidate" },
+    });
+  };
   return (
     <div class='max-w-sm w-96 mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800  mb-4'>
       <img
@@ -15,12 +22,17 @@ const CandidatesCard = ({ candidate }) => {
       </div>
 
       <div class='px-6 py-4'>
-        <h1 class='text-xl font-semibold text-gray-800 dark:text-white'>
+        <h1
+          onClick={() => {
+            toCandidateProfile(candidate._id);
+          }}
+          class='text-xl cursor-pointer font-semibold text-gray-800 dark:text-white'
+        >
           {candidate.fullname}
         </h1>
 
         <p class='py-2 text-gray-700 dark:text-gray-400'>
-          Bio/Another field from candidate
+          {candidate.designation || "No Current Position"}
         </p>
 
         <div class='flex items-center mt-4 text-gray-700 dark:text-gray-200'>
@@ -38,7 +50,9 @@ const CandidatesCard = ({ candidate }) => {
             />
           </svg>
 
-          <h1 class='px-2 text-sm'>Work Designation </h1>
+          <h1 class='px-2 text-sm'>
+            {candidate.institute || "No Organization/Institute"}
+          </h1>
         </div>
 
         <div class='flex items-center mt-4 text-gray-700 dark:text-gray-200'>
