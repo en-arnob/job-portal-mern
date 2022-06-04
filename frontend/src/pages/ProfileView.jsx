@@ -31,7 +31,7 @@ const ProfileView = () => {
   return (
     <div className=''>
       <div className=' px-2 mx-4 rounded'>
-        <div class='w-full px-8 py-4 mx-auto mt-16 bg-slate-200 rounded-lg shadow-md dark:bg-gray-800'>
+        <div class='w-full px-8 py-4 mx-auto mt-16 bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 rounded-lg shadow-md dark:bg-gray-800'>
           <div class='flex justify-center -mt-16 md:justify-end'>
             <img
               class='object-cover w-48 h-48 border-2 border-white rounded-full dark:border-blue-400'
