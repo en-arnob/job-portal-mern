@@ -7,7 +7,6 @@ import { GoTasklist } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
-import CreateJobSection from "./components/CreateJobSection";
 import JobsSection from "./components/JobsSection";
 
 const Home = () => {
@@ -15,7 +14,6 @@ const Home = () => {
   const [user, setUser] = useContext(UsersContext);
   const [jobs, setJobs] = useState([]);
   const [errors, setErrors] = useState([]);
-  const [postSection, setPostSection] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
 
   //pagination things
@@ -111,7 +109,7 @@ const Home = () => {
                 {user.usertype === "recruiter" && (
                   <div className='flex gap-2 justify-between'>
                     <button
-                      onClick={() => setPostSection(!postSection)}
+                      onClick={() => navigate("/createPost")}
                       className='flex gap-2 items-center justify-center px-5 py-3 text-sm font-medium text-white transition bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring'
                       type='button'
                     >
@@ -142,7 +140,7 @@ const Home = () => {
           {/* <CreateJobSection /> */}
         </header>
       )}
-      {postSection ? <CreateJobSection /> : null}
+
       <h1 className='flex items-center justify-center gap-2 text-center font-normal text-2xl p-4'>
         Latest job offerings nearby <FaMapMarkerAlt className='text-red-500' />
       </h1>

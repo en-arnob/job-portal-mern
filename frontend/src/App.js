@@ -20,6 +20,7 @@ import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import ProfileView from "./pages/ProfileView";
 import TotalApplicantsPage from "./pages/TotalApplicantsPage";
+import CreatePost from "./pages/CreatePost";
 
 // import ProtectedRoute from "./ProtectedRoute";
 
@@ -65,6 +66,7 @@ function App() {
             />
             <Route path="/profileView" exact element={<ProfileView />} />
             <Route path="/applicants" exact element={<TotalApplicantsPage />} />
+            <Route path="/createPost" exact element={<CreatePost/>} />
           </Routes>
         </UserProvider>
       </Router>
