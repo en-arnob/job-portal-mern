@@ -67,7 +67,7 @@ const Footer = () => {
                     class='text-white transition no-underline hover:text-white/75'
                     href='/'
                   >
-                    Projects
+                    Works
                   </a>
                 </li>
 
