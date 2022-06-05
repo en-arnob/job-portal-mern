@@ -194,6 +194,11 @@ const JobView = () => {
             {" "}
             <FiBriefcase className='text-green-500' /> Similar Jobs
           </div>
+          <p className='mt-4'>
+            {" "}
+            <span className='text-red-500'>*</span> Currently no data for this
+            section
+          </p>
         </div>
       </div>
     </div>

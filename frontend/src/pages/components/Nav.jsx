@@ -116,7 +116,7 @@ const Nav = () => {
         <div className='container px-4 mx-auto flex flex-wrap items-center justify-between'>
           <div className='w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start'>
             <Link
-              className='px-3 text-2xl py-2 flex items-center   font-bold leading-snug text-white hover:opacity-75 no-underline'
+              className='px-3 text-2xl py-2 flex items-center   font-bold leading-snug text-teal-300 hover:opacity-75 no-underline'
               to='/'
             >
               ICT.jobs
