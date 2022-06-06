@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import { UsersContext } from "../../hooks/UsersContext";
 import { useNavigate } from "react-router-dom";
-const EditClientProfile = () => {
+const EditCandidateProfile = () => {
   const [data, setData] = useState({});
   const [user, setUser] = useContext(UsersContext);
   const [error, setError] = useState(" ");
@@ -124,6 +124,19 @@ const EditClientProfile = () => {
                   </div>
                 </div>
                 <div class="grid grid-cols-2">
+                  <div class="px-4 py-2 font-semibold">Bio</div>
+                  <div class="px-4 py-2">
+                    <textarea
+                      className="appearance-none block w-full h-20 focus:bg-slate-200 focus:text-slate-700"
+                      type="text"
+                      onChange={handleChange}
+                      value={data.bio}
+                      name="bio"
+                      placeholder="Write your bio"
+                    />
+                  </div>
+                </div>
+                <div class="grid grid-cols-2">
                   <div class="px-4 py-2 font-semibold">Contact No.</div>
                   <div class="px-4 py-2">
                     <input
@@ -137,16 +150,15 @@ const EditClientProfile = () => {
                   </div>
                 </div>
                 <div class="grid grid-cols-2">
-                  <div class="px-4 py-2 font-semibold">NID</div>
+                  <div class="px-4 py-2 font-semibold">Cover Letter</div>
                   <div class="px-4 py-2">
-                    <input
-                      className="appearance-none block w-full h-5 focus:bg-slate-200 focus:text-slate-700"
-                      id="grid-nid"
+                    <textarea
+                      className="appearance-none block w-full h-20 focus:bg-slate-200 focus:text-slate-700"
                       type="text"
-                      placeholder="nid number of account holder"
                       onChange={handleChange}
-                      value={data.nid}
-                      name="nid"
+                      value={data.coverLetter}
+                      name="coverLetter"
+                      placeholder="Write a cover letter"
                     />
                   </div>
                 </div>
@@ -159,10 +171,10 @@ const EditClientProfile = () => {
                       className="appearance-none block w-full h-5 focus:bg-slate-200 focus:text-slate-700"
                       id="grid-insOrg"
                       type="text"
-                      placeholder="Enter Organization"
+                      placeholder="Enter Institute/Organization"
                       onChange={handleChange}
-                      value={data.organization}
-                      name="organization"
+                      value={data.institute}
+                      name="institute"
                     />
                   </div>
                 </div>
@@ -201,30 +213,86 @@ const EditClientProfile = () => {
                   </div>
                 </div>
                 <div class="grid grid-cols-2">
-                  <div class="px-4 py-2 font-semibold">Office Address</div>
+                  <div class="px-4 py-2 font-semibold">Language</div>
                   <div class="px-4 py-2">
                     <input
                       className="appearance-none block w-full h-5 focus:bg-slate-200 focus:text-slate-700"
-                      id="grid-address"
+                      id="grid-language"
                       type="text"
-                      placeholder="Proper address of office"
+                      placeholder="language1,language2..."
                       onChange={handleChange}
-                      value={data.officeAdress}
-                      name="officeAdress"
+                      value={data.language}
+                      name="language"
                     />
                   </div>
                 </div>
                 <div class="grid grid-cols-2">
-                  <div class="px-4 py-2 font-semibold">Website link</div>
+                  <div class="px-4 py-2 font-semibold">Expertise</div>
                   <div class="px-4 py-2">
                     <input
                       className="appearance-none block w-full h-5 focus:bg-slate-200 focus:text-slate-700"
-                      id="grid-website"
+                      id="grid-Expertise"
                       type="text"
-                      placeholder="Enter website url"
+                      placeholder="Expertise1,Expertise2..."
                       onChange={handleChange}
-                      value={data.website}
-                      name="website"
+                      value={data.expertise}
+                      name="expertise"
+                    />
+                  </div>
+                </div>
+                <div class="grid grid-cols-2">
+                  <div class="px-4 py-2 font-semibold">Skills</div>
+                  <div class="px-4 py-2">
+                    <input
+                      className="appearance-none block w-full h-5 focus:bg-slate-200 focus:text-slate-700"
+                      id="grid-skill"
+                      type="text"
+                      placeholder="Skill1,Skill2...."
+                      onChange={handleChange}
+                      value={data.skills}
+                      name="skills"
+                    />
+                  </div>
+                </div>
+                <div class="grid grid-cols-2">
+                  <div class="px-4 py-2 font-semibold">Experience</div>
+                  <div class="px-4 py-2">
+                    <input
+                      className="appearance-none block w-full h-5 focus:bg-slate-200 focus:text-slate-700"
+                      id="grid-experience"
+                      type="text"
+                      onChange={handleChange}
+                      value={data.experience}
+                      name="experience"
+                      placeholder="Enter experinces"
+                    />
+                  </div>
+                </div>
+                <div class="grid grid-cols-2">
+                  <div class="px-4 py-2 font-semibold">Certification</div>
+                  <div class="px-4 py-2">
+                    <input
+                      className="appearance-none block w-full h-5 focus:bg-slate-200 focus:text-slate-700"
+                      id="grid-certificate"
+                      type="text"
+                      placeholder="Online certificate only"
+                      onChange={handleChange}
+                      value={data.certification}
+                      name="certification"
+                    />
+                  </div>
+                </div>
+                <div class="grid grid-cols-2">
+                  <div class="px-4 py-2 font-semibold">Portfolio</div>
+                  <div class="px-4 py-2">
+                    <input
+                      className="appearance-none block w-full h-5 focus:bg-slate-200 focus:text-slate-700"
+                      id="grid-portfolio"
+                      type="text"
+                      placeholder="Enter portfolio url"
+                      onChange={handleChange}
+                      value={data.portfolioLink}
+                      name="portfolioLink"
                     />
                   </div>
                 </div>
@@ -246,4 +314,4 @@ const EditClientProfile = () => {
   );
 };
 
-export default EditClientProfile;
+export default EditCandidateProfile;
