@@ -1,5 +1,5 @@
 import React from "react";
-import arnob from "../../assets/images/arnob.jpeg";
+import arnob from "../../assets/images/blank-profile-picture.webp";
 import { useNavigate } from "react-router-dom";
 
 const CandidatesCard = ({ candidate }) => {

@@ -43,7 +43,7 @@ const ClientsProfileDetails = () => {
             {userData.designation || "No Data"}
             <p className='flex gap-1'>
               <FaMapMarkerAlt className='text-red-500 mt-1' />
-              {userData.officeAdress}
+              {userData.officeAdress || "Dhaka, Bangladesh"}
             </p>
             <p className='inline mt-1 border-b-2 text-center items-center justify-center border-green-400'>
               {userData.bio}
