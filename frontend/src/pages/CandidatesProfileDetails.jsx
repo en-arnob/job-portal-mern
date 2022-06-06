@@ -188,7 +188,7 @@ const CandidatesProfileDetails = () => {
               </div>
               <div class="grid grid-cols-2">
                 <div class="px-4 py-2 font-semibold">
-                  Last/Current Organization
+                  Institute/Organization
                 </div>
                 <div class="px-4 py-2">{userData.institute}</div>
               </div>
@@ -211,8 +211,8 @@ const CandidatesProfileDetails = () => {
                 </div>
               </div>
               <div class="grid grid-cols-2">
-                <div class="px-4 py-2 font-semibold">Education</div>
-                <div class="px-4 py-2">{userData.edu || "No Data"}</div>
+                <div class="px-4 py-2 font-semibold">Language</div>
+                <div class="px-4 py-2">{userData.language || "No Data"}</div>
               </div>
               <div class="grid grid-cols-2">
                 <div class="px-4 py-2 font-semibold">Details</div>

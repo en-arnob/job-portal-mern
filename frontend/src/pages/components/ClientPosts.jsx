@@ -64,11 +64,15 @@ const ClientPosts = (props) => {
     <div>
       <Container>
         <Row>
-          <div className="bg-zinc-400 p-6 rounded-lg text-center mb-3">
-            <h5 className="userName text-center text-gray-800">
-              Total Post: {jobData.length}
-            </h5>
-          </div>
+          <Col lg={12} md={12} sm={12}>
+            <div className="bg-zinc-400 p-4 w-full rounded-lg text-center my-3">
+              <h5 className="userName text-center text-gray-800">
+                Total Post: {jobData.length}
+              </h5>
+            </div>
+          </Col>
+        </Row>
+        <Row>
           {jobData.map((arrEl) => {
             return (
               <>

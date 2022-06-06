@@ -1,6 +1,8 @@
 import React, { useState, useContext } from "react";
 import { UsersContext } from "../hooks/UsersContext";
-import EditCandidatesProfile from "./components/EditCandidatesProfile";
+// import EditCandidatesProfile from "./components/EditCandidatesProfileO";
+// import EditClientProfile from "./components/EditClientProfileO";
+import EditCandidateProfile from "./components/EditCandidateProfile";
 import EditClientProfile from "./components/EditClientProfile";
 
 const EditProfilePage = () => {
@@ -8,7 +10,7 @@ const EditProfilePage = () => {
   if (user.usertype === "candidate") {
     return (
       <div>
-        <EditCandidatesProfile />
+        <EditCandidateProfile />;
       </div>
     );
   } else if (user.usertype === "recruiter") {
