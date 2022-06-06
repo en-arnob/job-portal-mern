@@ -3,6 +3,7 @@ import TextTruncate from "react-text-truncate";
 import { RiUserVoiceLine } from "react-icons/ri";
 import { HiOutlineOfficeBuilding, HiOutlineClock } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
+
 const JobCard = ({ job }) => {
   const navigate = useNavigate();
   const postDate = job.dateOfPosting;
@@ -44,14 +45,13 @@ const JobCard = ({ job }) => {
           onClick={() => {
             toJobViewComponent();
           }}
-          className='mt-2 cursor-pointer text-gray-600 sm:pr-8 text-lg font-normal hover:text-xl transition ease-in-out '
+          className='mt-2 cursor-pointer text-gray-600 sm:pr-8 text-sm font-normal  '
         >
-          View Post
-          {/* <TextTruncate
+          <TextTruncate
             line={2}
             element='span'
             truncateText='…'
-            text={job.body}
+            text={job.body.replace(/<[^>]+>/g, "")}
             textTruncateChild={
               <span
                 onClick={() => {
@@ -62,7 +62,7 @@ const JobCard = ({ job }) => {
                 Read more on full post
               </span>
             }
-          /> */}
+          />
         </div>
 
         <dl class='flex mt-6'>
