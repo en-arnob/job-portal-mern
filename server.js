@@ -28,7 +28,7 @@ app.use(bodyParser.json());
 // no sql query sanitization
 app.use(mongoSanitize());
 // xss sanitization
-app.use(xss());
+// app.use(xss());
 // parameter pollution prevention will be added in future
 //routes
 app.use(routes);

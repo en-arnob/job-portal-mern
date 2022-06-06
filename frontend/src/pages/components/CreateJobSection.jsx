@@ -1,7 +1,9 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { AiOutlineArrowRight } from "react-icons/ai";
+import parse from "html-react-parser";
 import { useNavigate } from "react-router-dom";
+import RichTextEditor from "./RichTextEditor";
+import { VscNote } from "react-icons/vsc";
 
 const CreateJobSection = () => {
   const [data, setData] = useState({
@@ -46,42 +48,14 @@ const CreateJobSection = () => {
   };
 
   return (
-    <section class='my-4 rounded-lg md:mx-6 bg-gray-100'>
-      <div class='max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8'>
+    <section class='my-4 rounded-lg md:mx-6 bg-white'>
+      <div class='max-w-screen-xl px-3 py-16 mx-auto sm:px-6 lg:px-8'>
+        <h1 className='flex gap-2 px-2 mb-5 text-4xl text-rose-600'>
+          <VscNote className='mt-1' />
+          Post a Job Circular
+        </h1>
         <div class='grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5'>
-          <div class='lg:py-12 lg:col-span-2'>
-            <h1 class='text-3xl font-extrabold sm:text-5xl'>
-              Let us boost your
-              <strong class='font-extrabold text-rose-700 sm:block'>
-                Job Post.
-              </strong>
-            </h1>
-            <p class='max-w-lg mt-4 sm:leading-relaxed sm:text-xl'>
-              You can post a sponsored job that appears as one of the very first
-              job cards in ICT.jobs
-            </p>
-            <div class='flex flex-wrap gap-4 mt-8 text-center'>
-              <a
-                class='block w-full no-underline px-12 py-3 text-sm font-medium text-white rounded shadow bg-rose-600 sm:w-auto active:bg-rose-500 hover:bg-rose-700 focus:outline-none focus:ring'
-                href='/get-started'
-              >
-                Get Started
-              </a>
-
-              <a
-                class='block no-underline w-full px-12 py-3 text-sm font-medium bg-white rounded shadow text-rose-600 sm:w-auto hover:text-rose-700 active:text-rose-500 focus:outline-none focus:ring'
-                href='/about'
-              >
-                Learn More
-              </a>
-            </div>
-            <p class='text-rose-700 flex gap-2 max-w-lg mt-4 text-lg'>
-              or post a regular one from here{" "}
-              <AiOutlineArrowRight className='mt-2' />
-            </p>
-          </div>
-
-          <div class='p-8 bg-white rounded-lg shadow-lg lg:p-12 lg:col-span-3'>
+          <div class='p-8 bg-white rounded-lg shadow-lg lg:p-12 lg:col-span-4'>
             <form class='space-y-4' onSubmit={handleSubmit}>
               <div>
                 <label class='sr-only' for='name'>
@@ -209,7 +183,7 @@ const CreateJobSection = () => {
                 </div>
               </div>
 
-              <div>
+              {/* <div>
                 <label class='sr-only' for='body'>
                   Post Body
                 </label>
@@ -222,6 +196,15 @@ const CreateJobSection = () => {
                   value={data.body}
                   name='body'
                 ></textarea>
+              </div> */}
+              <div>
+                <RichTextEditor data={data} setData={setData} />
+              </div>
+              <div>
+                <h1 className='text-lg  inline text-stone-600 p-2'>Preview</h1>
+                <p className='mt-4 py-4 px-2 rounded bg-stone-100'>
+                  {parse(data.body)}
+                </p>
               </div>
 
               <div class='mt-4'>
@@ -248,6 +231,36 @@ const CreateJobSection = () => {
                 </button>
               </div>
             </form>
+          </div>
+          <div class='lg:py-2 lg:col-span-6 my-10'>
+            <br />
+            <div className='text-center items-center justify-center'>
+              <h1 class='text-3xl font-extrabold sm:text-5xl'>
+                Let us boost your
+                <strong class='font-extrabold text-rose-700 sm:block'>
+                  Job Post.
+                </strong>
+              </h1>
+              <p class=' text-center items-center justify-centermax-w-lg mt-4 sm:leading-relaxed sm:text-xl'>
+                You can post a sponsored job that appears as one of the very
+                first job cards in ICT.jobs
+              </p>
+              <div class='flex flex-wrap gap-4 mt-8 text-center items-center justify-center'>
+                <a
+                  class='block w-full no-underline px-12 py-3 text-sm font-medium text-white rounded shadow bg-rose-600 sm:w-auto active:bg-rose-500 hover:bg-rose-700 focus:outline-none focus:ring'
+                  href='/get-started'
+                >
+                  Get Started
+                </a>
+
+                <a
+                  class='block no-underline w-full px-12 py-3 text-sm font-medium bg-white rounded shadow text-rose-600 sm:w-auto hover:text-rose-700 active:text-rose-500 focus:outline-none focus:ring'
+                  href='/about'
+                >
+                  Learn More
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>

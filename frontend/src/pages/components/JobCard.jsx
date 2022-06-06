@@ -44,9 +44,10 @@ const JobCard = ({ job }) => {
           onClick={() => {
             toJobViewComponent();
           }}
-          className='mt-2 cursor-pointer text-gray-600 sm:pr-8 text-sm'
+          className='mt-2 cursor-pointer text-gray-600 sm:pr-8 text-lg font-normal hover:text-xl transition ease-in-out '
         >
-          <TextTruncate
+          View Post
+          {/* <TextTruncate
             line={2}
             element='span'
             truncateText='…'
@@ -61,7 +62,7 @@ const JobCard = ({ job }) => {
                 Read more on full post
               </span>
             }
-          />
+          /> */}
         </div>
 
         <dl class='flex mt-6'>
