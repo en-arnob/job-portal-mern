@@ -74,7 +74,7 @@ const JobView = () => {
   };
 
   return (
-    <div className='grid grid-cols-1 md:grid-cols-3 md:divide-x divide-green-500  gap-2'>
+    <div className='grid grid-cols-1 md:grid-cols-3 md:divide-x divide-green-500  gap-2 min-h-screen'>
       <div className=' w-full h-auto col-span-2'>
         <div className='p-4'>
           <div className='flex gap-4 bg-green-100 p-4 rounded-lg text-3xl font-normal text-stone-800'>
