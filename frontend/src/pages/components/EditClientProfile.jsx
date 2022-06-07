@@ -1,12 +1,14 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import { UsersContext } from "../../hooks/UsersContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 const EditClientProfile = () => {
   const [data, setData] = useState({});
   const [user, setUser] = useContext(UsersContext);
   const [error, setError] = useState(" ");
   const navigate = useNavigate();
+  const location = useLocation();
+  const currentData = location.state.userData;
 
   const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.name]: input.value });
@@ -57,9 +59,9 @@ const EditClientProfile = () => {
                   <div class="px-4 py-2 font-semibold">Full Name</div>
                   <div class="px-4 py-2">
                     <input
-                      className="appearance-none block w-full h-5 focus:bg-slate-200 focus:text-slate-700"
+                      className="appearance-none block w-full h-5 rounded-md p-3 focus:bg-slate-200 focus:text-slate-700"
                       type="text"
-                      placeholder="Enter Name"
+                      placeholder={currentData.fullname}
                       onChange={handleChange}
                       value={data.fullname}
                       name="fullname"
@@ -68,7 +70,7 @@ const EditClientProfile = () => {
                 </div>
                 <div class="grid grid-cols-2">
                   <div class="px-4 py-2 font-semibold">Address</div>
-                  <div class="px-4 py-2">West Razabazar, Dhaka</div>
+                  <div class="px-4 py-2">{currentData.officeAdress}</div>
                 </div>
                 <div class="grid grid-cols-2">
                   <div class="px-4 py-2 font-semibold">Gender</div>
@@ -127,9 +129,9 @@ const EditClientProfile = () => {
                   <div class="px-4 py-2 font-semibold">Contact No.</div>
                   <div class="px-4 py-2">
                     <input
-                      className="appearance-none block w-full h-5 focus:bg-slate-200 focus:text-slate-700"
+                      className="appearance-none block w-full h-5 rounded-md p-3  focus:bg-slate-200 focus:text-slate-700"
                       type="text"
-                      placeholder="Enter phone number"
+                      placeholder={currentData.phone}
                       onChange={handleChange}
                       value={data.phone}
                       name="phone"
@@ -140,10 +142,10 @@ const EditClientProfile = () => {
                   <div class="px-4 py-2 font-semibold">NID</div>
                   <div class="px-4 py-2">
                     <input
-                      className="appearance-none block w-full h-5 focus:bg-slate-200 focus:text-slate-700"
+                      className="appearance-none block w-full h-5 rounded-md p-3  focus:bg-slate-200 focus:text-slate-700"
                       id="grid-nid"
                       type="text"
-                      placeholder="nid number of account holder"
+                      placeholder={currentData.nid}
                       onChange={handleChange}
                       value={data.nid}
                       name="nid"
@@ -156,10 +158,10 @@ const EditClientProfile = () => {
                   </div>
                   <div class="px-4 py-2">
                     <input
-                      className="appearance-none block w-full h-5 focus:bg-slate-200 focus:text-slate-700"
+                      className="appearance-none block w-full h-5 rounded-md p-3  focus:bg-slate-200 focus:text-slate-700"
                       id="grid-insOrg"
                       type="text"
-                      placeholder="Enter Organization"
+                      placeholder={currentData.organization}
                       onChange={handleChange}
                       value={data.organization}
                       name="organization"
@@ -170,10 +172,10 @@ const EditClientProfile = () => {
                   <div class="px-4 py-2 font-semibold">Designation</div>
                   <div class="px-4 py-2">
                     <input
-                      className="appearance-none block w-full h-5 focus:bg-slate-200 focus:text-slate-700"
+                      className="appearance-none block w-full h-5 rounded-md p-3  focus:bg-slate-200 focus:text-slate-700"
                       id="grid-designation"
                       type="text"
-                      placeholder="Enter designation"
+                      placeholder={currentData.designation}
                       onChange={handleChange}
                       value={data.designation}
                       name="designation"
@@ -184,7 +186,7 @@ const EditClientProfile = () => {
                   <div class="px-4 py-2 font-semibold">Email</div>
                   <div class="px-4 py-2">
                     <a class="text-blue-800" href="mailto:jane@example.com">
-                      hello
+                      {currentData.email}
                     </a>
                   </div>
                 </div>
@@ -192,7 +194,7 @@ const EditClientProfile = () => {
                   <div class="px-4 py-2 font-semibold">Birthday</div>
                   <div class="px-4 py-2">
                     <input
-                      className="appearance-none block w-full h-5 focus:bg-slate-200 focus:text-slate-700"
+                      className="appearance-none block w-full h-5 rounded-md p-3  focus:bg-slate-200 focus:text-slate-700"
                       type="date"
                       onChange={handleChange}
                       value={data.birthday}
@@ -204,10 +206,10 @@ const EditClientProfile = () => {
                   <div class="px-4 py-2 font-semibold">Office Address</div>
                   <div class="px-4 py-2">
                     <input
-                      className="appearance-none block w-full h-5 focus:bg-slate-200 focus:text-slate-700"
+                      className="appearance-none block w-full h-5 rounded-md p-3  focus:bg-slate-200 focus:text-slate-700"
                       id="grid-address"
                       type="text"
-                      placeholder="Proper address of office"
+                      placeholder={currentData.officeAdress}
                       onChange={handleChange}
                       value={data.officeAdress}
                       name="officeAdress"
@@ -218,10 +220,10 @@ const EditClientProfile = () => {
                   <div class="px-4 py-2 font-semibold">Website link</div>
                   <div class="px-4 py-2">
                     <input
-                      className="appearance-none block w-full h-5 focus:bg-slate-200 focus:text-slate-700"
+                      className="appearance-none block w-full h-5 rounded-md p-3  focus:bg-slate-200 focus:text-slate-700"
                       id="grid-website"
                       type="text"
-                      placeholder="Enter website url"
+                      placeholder={currentData.website}
                       onChange={handleChange}
                       value={data.website}
                       name="website"
