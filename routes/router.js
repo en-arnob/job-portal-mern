@@ -28,7 +28,7 @@ const {
   deleteApplicationController,
   deleteJob,
   updateJob,
-
+  rejectApplicant,
   ApplicantsDetails,
 } = require("../controllers/jobsController");
 
@@ -79,7 +79,8 @@ router.patch(
   "/api/job/deleteApplication/:jobId/:applicantId",
   deleteApplicationController
 );
-
+// reject Applicant
+router.patch("/api/job/rejectApplicant/:jobID/:applicantId", rejectApplicant);
 //verify
 router.get("/verify/:userType/:userId/:token", verifyEm);
 

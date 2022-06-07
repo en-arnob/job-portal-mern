@@ -209,3 +209,25 @@ exports.ApplicantsDetails = async (req, res) => {
     });
   }
 };
+
+exports.rejectApplicant = async (req, res) => {
+  try {
+    const post = await JobPost.findById(req.params.jobID);
+    if (post.applicants.includes(req.params.applicantId)) {
+      console.log("success");
+      await JobPost.findOneAndUpdate(
+        { _id: req.params.jobID },
+        { $pull: { applicants: req.params.applicantId } }
+      );
+      res.status(201).json({
+        status: "successfully rejected or removed",
+      });
+    }
+  } catch (err) {
+    res.status(404).json({
+      status: "fail",
+      message: "failed to delete the applicant",
+      error: err,
+    });
+  }
+};
