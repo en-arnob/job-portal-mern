@@ -92,7 +92,7 @@ const Nav = () => {
                   className='px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-white hover:opacity-75 no-underline'
                   to='/editProfile'
                 >
-                  Dashboard
+                  Edit Profile
                 </Link>
               </li>
               <li className='nav-item'>

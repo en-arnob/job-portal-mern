@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import Moment from "moment";
+import { Link } from "react-router-dom";
 import { UsersContext } from "../../hooks/UsersContext";
 import arnobx from "../../assets/images/arnobx.jpeg";
 import { FaMapMarkerAlt } from "react-icons/fa";
@@ -43,7 +44,7 @@ const ClientsProfileDetails = () => {
             {userData.designation || "No Data"}
             <p className='flex gap-1'>
               <FaMapMarkerAlt className='text-red-500 mt-1' />
-              {userData.officeAdress || "Dhaka, Bangladesh"}
+              {userData.officeAdress}
             </p>
             <p className='inline mt-1 border-b-2 text-center items-center justify-center border-green-400'>
               {userData.bio}
@@ -96,8 +97,9 @@ const ClientsProfileDetails = () => {
                 d='M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z'
               />
             </svg>
-
-            <span class='mx-1 text-sm sm:text-base'>My Post</span>
+            <Link className='no-underline text-gray-700' to='/mypost'>
+              <span class='mx-1 text-sm sm:text-base'>My Post</span>
+            </Link>
           </button>
 
           <button class='flex items-center h-12 px-2 py-2 text-center text-gray-700 bg-transparent border-b border-gray-300 sm:px-4 dark:border-gray-500 -px-1 dark:text-white whitespace-nowrap cursor-base focus:outline-none hover:border-gray-400 dark:hover:border-gray-300'>
@@ -216,7 +218,9 @@ const ClientsProfileDetails = () => {
             </div>
           </div>
           <button class='block w-full text-blue-800 text-sm font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4'>
-            Update Profile
+            <Link className='no-underline' to='/editProfile'>
+              Update Profile
+            </Link>
           </button>
         </div>
       </div>
