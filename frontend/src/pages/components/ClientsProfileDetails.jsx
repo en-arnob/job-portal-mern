@@ -4,7 +4,7 @@ import Moment from "moment";
 import { useNavigate, Link } from "react-router-dom";
 import { UsersContext } from "../../hooks/UsersContext";
 import { FaMapMarkerAlt } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+
 import dummy from "../../assets/images/blank-profile-picture.webp";
 
 const ClientsProfileDetails = () => {
@@ -25,6 +25,9 @@ const ClientsProfileDetails = () => {
       .catch((error) => {
         // console.log(error);
       });
+  };
+  const toEditProfile = () => {
+    navigate("/editProfile", { state: { userData } });
   };
   const toImageUpload = () => {
     navigate("/updateImage", { state: { userData } });
