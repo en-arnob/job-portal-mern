@@ -34,7 +34,9 @@ exports.updateImageController = async (req, res) => {
 
         
       } else{
-        res.status(200).json({ msg: "Success"});
+        
+        let updatedUser = await UserCandidate.findById(userId)
+        res.status(200).json({ msg: "Success", updatedUser});
         
       }
     } catch (error) {
@@ -51,7 +53,8 @@ exports.updateImageController = async (req, res) => {
         res.status(400).json({ errors: "No User"});
         
       } else{
-        res.status(200).json({ msg: "Success", user});
+        let updatedUser = await UserClient.findById(userId)
+        res.status(200).json({ msg: "Success", updatedUser});
         
       }
     } catch (error) {

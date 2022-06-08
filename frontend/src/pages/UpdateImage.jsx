@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import dummy from "../assets/images/blank-profile-picture.webp";
+
 function App() {
+  const location = useLocation();
   const navigate = useNavigate();
+  const userData = location.state.userData;
 
   /** start states */
   const [formData, setFormData] = useState("");
@@ -42,14 +45,14 @@ function App() {
     };
     axios
       .post(
-        "http://localhost:8000/recruiter/6295adfab5fcb8737187c780/image/upload",
+        `http://localhost:8000/${userData.usertype}/${userData._id}/image/upload`,
         formData,
         options
       )
       .then((res) => {
         console.log(res.data);
         setTimeout(() => {
-          setInfo(res.data.user);
+          setInfo(res.data.updatedUser);
           setProgressPercent(0);
         }, 1000);
       })
@@ -78,6 +81,7 @@ function App() {
       style={{ width: "100vw", height: "100vh" }}
       className='d-flex justify-content-center align-items-center flex-column'
     >
+      <h1 className='text-3xl mb-4'>Update Your Profile Picture</h1>
       {error.found && (
         <div
           className='alert alert-danger'
@@ -109,8 +113,8 @@ function App() {
             aria-describedby='inputGroupFileAddon04'
             onChange={upload}
           />
-          <label className='custom-file-label' htmlFor='inputGroupFile04'>
-            Choose file
+          <label className='mt-1 custom-file-label' htmlFor='inputGroupFile04'>
+            Select image file from your device (png/jpg) <p>Max size 1MB</p>
           </label>
         </div>
         <button type='submit' className='btn btn-primary w-100'>

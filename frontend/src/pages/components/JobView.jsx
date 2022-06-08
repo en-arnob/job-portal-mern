@@ -10,6 +10,7 @@ import Modal from "react-modal";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import parse from "html-react-parser";
+import Moment from "moment";
 
 const customStyles = {
   content: {
@@ -82,39 +83,39 @@ const JobView = () => {
             {" "}
             <FiBriefcase className='text-green-500 mt-1' /> {job.title}
           </div>
-          <div className='mt-4  mx-2 flex md:flex-row flex-col '>
-            <div className=' text-gray-800 flex gap-2 mr-4'>
-              <h1 className='text-lg flex gap-2 font-normal'>
+          <div className='mt-4 text-gray-700  mx-2 flex md:flex-row flex-col '>
+            <div className='  flex gap-2 mr-4'>
+              <h1 className='text-lg bg-sky-200 rounded px-2 flex gap-2 font-normal'>
                 <HiOutlineOfficeBuilding className=' mt-1' />
                 Company Name:
               </h1>
-              <h1 className='text-xl font-normal'>
+              <h1 className='text-lg font-normal'>
                 {job.authorId.organization}
               </h1>
             </div>
-            <div className='flex gap-2 text-gray-800'>
-              <h1 className='text-lg flex gap-2 font-normal'>
+            <div className='flex gap-2 '>
+              <h1 className='text-lg bg-blue-200 rounded px-2 flex gap-2 font-normal'>
                 <RiUserVoiceLine className=' mt-1' />
                 Posted By:
               </h1>
-              <h1 className='text-xl font-normal'>{job.authorId.fullname}</h1>
+              <h1 className='text-lg font-normal'>{job.authorId.fullname}</h1>
             </div>
           </div>
-          <div className='flex gap-2 px-2 rounded-lg'>
+          <div className='flex gap-2 text-gray-700 px-2 rounded-lg'>
             <h1 className='text-lg flex gap-2 font-normal'>
               <HiOutlineClock className='mt-1' />
-              {job.dateOfPosting}
+              {Moment(job.dateOfPosting).format("d MMM YYYY")}
             </h1>
-            <h1 className='text-lg flex gap-2 font-normal '>
-              <MdOutlineLockClock className='mt-1 text-red-600 ' />
-              <span className='text-red-600'>Deadline:</span>{" "}
-              {job.dateOfPosting}
+            <h1 className='text-lg text-gray-700 bg-red-200 rounded px-2 flex gap-2 font-normal '>
+              <MdOutlineLockClock className='mt-1  ' />
+              <span className=''>Deadline:</span> {job.deadline}
             </h1>
           </div>
-          <div className='flex gap-2 px-2 rounded-lg'>
+          <div className='flex text-gray-700 gap-2 px-2 rounded-lg'>
             <h1 className='text-lg flex gap-2 font-normal'>
               <GiSkills className='mt-1' />
-              Highlighited Skills: {job.tags}
+              Highlighited Skills:{" "}
+              <span className='bg-lime-200 px-2 rounded'>{job.tags}</span>
             </h1>
           </div>
 
