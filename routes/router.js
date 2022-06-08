@@ -33,6 +33,12 @@ const {
 } = require("../controllers/jobsController");
 
 const { fetchCandidates } = require("../controllers/userController");
+const {
+  newConversation,
+  getConversation,
+  postMessage,
+  getMessage,
+} = require("../controllers/chatController");
 
 //auth routes
 router.get("/login", loginGetController);
@@ -89,4 +95,13 @@ router.get("/api/:userId/fetchCandidates", fetchCandidates);
 // get Applicant
 router.get("/api/job/:jobID", ApplicantsDetails);
 
+// chat controllers
+// new conversation
+router.post("/api/live-chat/conversation", newConversation);
+// get conversation buID
+router.get("/api/live-chat/conversation/:userId", getConversation);
+// post message
+router.post("/api/live-chat/message", postMessage);
+// get message
+router.get("/api/live-chat/message/:conversationId", getMessage);
 module.exports = router;
