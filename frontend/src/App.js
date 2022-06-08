@@ -22,6 +22,7 @@ import ProfileView from "./pages/ProfileView";
 import TotalApplicantsPage from "./pages/TotalApplicantsPage";
 import CreatePost from "./pages/CreatePost";
 import Footer from "./pages/components/Footer";
+import UpdateImage from "./pages/UpdateImage";
 
 // import ProtectedRoute from "./ProtectedRoute";
 
@@ -68,6 +69,7 @@ function App() {
             <Route path="/profileView" exact element={<ProfileView />} />
             <Route path="/applicants" exact element={<TotalApplicantsPage />} />
             <Route path="/createPost" exact element={<CreatePost/>} />
+            <Route path="/updateImage" exact element={<UpdateImage/>} />
           </Routes>
           <Footer/>
         </UserProvider>

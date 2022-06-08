@@ -1,5 +1,6 @@
 const UserClient = require("../models/UserClient");
 const UserCandidate = require("../models/UserCandidate");
+path = require('path')
 
 exports.fetchCandidates = async (req, res) => {
   const { userId } = req.params;
@@ -15,4 +16,10 @@ exports.fetchCandidates = async (req, res) => {
   } catch (error) {
     res.json({ error: error });
   }
-};
+}
+
+exports.updateImageController = (req, res) => {
+  const { userType, userId } = req.params;
+  res.json({msg: "Success"})
+  
+}

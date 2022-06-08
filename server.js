@@ -1,17 +1,22 @@
 const express = require("express");
-var cors = require("cors");
+const cors = require("cors");
 require("dotenv").config();
 const morgan = require("morgan");
 const rateLimit = require("express-rate-limit");
 const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
-const app = express();
 const bodyParser = require("body-parser");
 const connect = require("./config/db");
 const routes = require("./routes/router");
+const path = require('path')
 
+const app = express();
+
+
+app.use('/uploads', express.static('uploads'))
 app.use(cors());
 app.use(morgan("dev"));
+
 
 // rate limit of ip req
 const limit = rateLimit({
@@ -25,6 +30,9 @@ connect();
 //middlewares
 app.use("/", limit);
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true,
+}))
 // no sql query sanitization
 app.use(mongoSanitize());
 // xss sanitization

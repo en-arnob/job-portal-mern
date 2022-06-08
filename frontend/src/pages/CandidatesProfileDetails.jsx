@@ -52,6 +52,9 @@ const CandidatesProfileDetails = () => {
   const toEditProfile = () => {
     navigate("/editProfile", { state: { userData } });
   };
+  const toImageUpload = () => {
+    navigate("/updateImage", { state: { userData } });
+  };
   return (
     <div className=''>
       <div className=' px-2 mx-4 rounded'>
@@ -81,10 +84,10 @@ const CandidatesProfileDetails = () => {
 
           <div class='flex justify-end mt-4'>
             <p
-              href='/'
+              onClick={toImageUpload}
               class='text-sm md:text-lg font-medium cursor-pointer text-blue-700 dark:text-blue-300'
             >
-              Update Profile
+              Update Profile Photo
             </p>
           </div>
         </div>

@@ -32,7 +32,11 @@ const {
   ApplicantsDetails,
 } = require("../controllers/jobsController");
 
-const { fetchCandidates } = require("../controllers/userController");
+const { fetchCandidates, updateImageController } = require("../controllers/userController");
+
+//upload multer
+const uploadMulter = require('../middlewares/upload')
+const uploadValidation = require('../middlewares/uploadValidation')
 
 //auth routes
 router.get("/login", loginGetController);
@@ -87,5 +91,8 @@ router.get("/verify/:userType/:userId/:token", verifyEm);
 router.get("/api/:userId/fetchCandidates", fetchCandidates);
 // get Applicant
 router.get("/api/job/:jobID", ApplicantsDetails);
+
+//image upload
+router.post('/:userType/:userId/image/upload', uploadMulter, uploadValidation, updateImageController)
 
 module.exports = router;
