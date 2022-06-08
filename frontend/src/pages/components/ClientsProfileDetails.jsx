@@ -3,10 +3,12 @@ import axios from "axios";
 import Moment from "moment";
 import { Link } from "react-router-dom";
 import { UsersContext } from "../../hooks/UsersContext";
-import arnobx from "../../assets/images/arnobx.jpeg";
 import { FaMapMarkerAlt } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import dummy from "../../assets/images/blank-profile-picture.webp";
 
 const ClientsProfileDetails = () => {
+  const navigate = useNavigate();
   Moment.locale("en");
   const [user, setUser] = useContext(UsersContext);
   const [userData, setUserData] = useState("");
@@ -24,16 +26,27 @@ const ClientsProfileDetails = () => {
         // console.log(error);
       });
   };
+  const toImageUpload = () => {
+    navigate("/updateImage", { state: { userData } });
+  };
   return (
     <div className=''>
       <div className=' px-2 mx-4 rounded'>
         <div class='w-full px-8 py-4 mx-auto mt-16 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 rounded-lg shadow-md dark:bg-gray-800'>
           <div class='flex justify-center -mt-16 md:justify-end'>
-            <img
-              class='object-cover w-48 h-48 border-2 border-white rounded-full dark:border-blue-400'
-              alt='Testimonial avatar'
-              src={arnobx}
-            />
+            {userData.profileImage === null ? (
+              <img
+                class='object-cover w-48 h-48 border-2 border-white rounded-full dark:border-blue-400'
+                alt='profile'
+                src={dummy}
+              />
+            ) : (
+              <img
+                class='object-cover w-48 h-48 border-2 border-white rounded-full dark:border-blue-400'
+                alt='profileImage'
+                src={`http://localhost:8000/${userData.profileImage}`}
+              />
+            )}
           </div>
 
           <h2 class='mt-2 text-2xl font-semibold text-gray-800 dark:text-white md:mt-0 md:text-3xl'>
@@ -53,10 +66,10 @@ const ClientsProfileDetails = () => {
 
           <div class='flex justify-end mt-4'>
             <p
-              href='/'
+              onClick={toImageUpload}
               class='text-sm md:text-lg font-medium cursor-pointer text-blue-700 dark:text-blue-300'
             >
-              Update Profile
+              Update Profile Photo
             </p>
           </div>
         </div>

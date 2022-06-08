@@ -63,7 +63,7 @@ const CandidatesProfileDetails = () => {
             <img
               class='object-cover w-48 h-48 border-2 border-white rounded-full dark:border-blue-400'
               alt='Testimonial avatar'
-              src={arnobx}
+              src={`http://localhost:8000/${userData.profileImage}`}
             />
           </div>
 

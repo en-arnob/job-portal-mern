@@ -30,7 +30,7 @@ exports.updateImageController = async (req, res) => {
       let user = await UserCandidate.findByIdAndUpdate(userId, {profileImage: image})
       if (!user) {
         fs.unlinkSync(image)
-        res.status(400).json({ msg: "No User"});
+        res.status(400).json({ errors: "No User"});
 
         
       } else{
@@ -39,7 +39,7 @@ exports.updateImageController = async (req, res) => {
       }
     } catch (error) {
       fs.unlinkSync(image)
-      res.status(400).json({ msg: "Error"});
+      res.status(400).json({ errors: error.message});
       
     }
 
@@ -48,20 +48,20 @@ exports.updateImageController = async (req, res) => {
       let user = await UserClient.findByIdAndUpdate(userId, {profileImage: image})
       if (!user) {
         fs.unlinkSync(image)
-        res.status(400).json({ msg: "No User"});
+        res.status(400).json({ errors: "No User"});
         
       } else{
-        res.status(200).json({ msg: "Success"});
+        res.status(200).json({ msg: "Success", user});
         
       }
     } catch (error) {
       fs.unlinkSync(image)
-      res.status(400).json({ msg: "Error"});
+      res.status(400).json({ errors: error.message});
       
     } 
 
   } else {
-    res.status(400).json({msg: "User Error"})
+    res.status(400).json({errors: "User Error"})
   }
   
 }

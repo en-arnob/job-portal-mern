@@ -1,60 +1,147 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import dummy from "../assets/images/blank-profile-picture.webp";
+function App() {
+  const navigate = useNavigate();
 
-const UpdateImage = () => {
-  const location = useLocation();
-  const userData = location.state.userData;
-  const [file, setFile] = useState("");
-  const [uploadedFile, setUploadedFile] = useState({});
+  /** start states */
+  const [formData, setFormData] = useState("");
+  const [info, setInfo] = useState({
+    profileImage: "",
+  });
+  const [progressPercent, setProgressPercent] = useState(0);
+  const [error, setError] = useState({
+    found: false,
+    message: "",
+  });
+  /** end states */
 
-  const onChangeFile = (e) => {
-    setFile(e.target.files[0]);
+  // Upload image
+  const upload = ({ target: { files } }) => {
+    let data = new FormData();
+    data.append("profileImage", files[0]);
+    data.append("name", files[0].name);
+    setFormData(data);
   };
-  const onSubmit = async (e) => {
+
+  // Submit Form
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append("file", file);
-    try {
-      const res = await axios.post(
-        "http://localhost:8000/client/62998d010e0b8f98b5d00abb/image/upload",
+    setInfo({
+      profileImage: "",
+    });
+    setProgressPercent(0);
+    const options = {
+      onUploadProgress: (progressEvent) => {
+        const { loaded, total } = progressEvent;
+        let percent = Math.floor((loaded * 100) / total);
+        console.log(`${loaded}kb of ${total}kb | ${percent}%`);
+        setProgressPercent(percent);
+      },
+    };
+    axios
+      .post(
+        "http://localhost:8000/recruiter/6295adfab5fcb8737187c780/image/upload",
         formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      const { fileName, filePath } = res.data;
-      setUploadedFile({ fileName, filePath });
-      console.log("ji");
-    } catch (error) {
-      console.log(error);
-    }
+        options
+      )
+      .then((res) => {
+        console.log(res.data);
+        setTimeout(() => {
+          setInfo(res.data.user);
+          setProgressPercent(0);
+        }, 1000);
+      })
+      .catch((err) => {
+        console.log(err.response);
+        setError({
+          found: true,
+          message: err.response.data.errors,
+        });
+        setTimeout(() => {
+          setError({
+            found: false,
+            message: "",
+          });
+          setProgressPercent(0);
+        }, 3000);
+      });
+  };
+
+  const redirectToProfile = () => {
+    navigate("/profile");
   };
 
   return (
-    <div className='min-h-screen p-4'>
-      <h1 className='text-center'>{userData.fullname}</h1>
-      <div className='container mt-4 text-center'>
-        <form onSubmit={onSubmit}>
-          <div className='custom-file'>
-            <input
-              onChange={onChangeFile}
-              type='file'
-              className='custom-file-input border-2'
-              id='customFile'
-            />
+    <div
+      style={{ width: "100vw", height: "100vh" }}
+      className='d-flex justify-content-center align-items-center flex-column'
+    >
+      {error.found && (
+        <div
+          className='alert alert-danger'
+          role='alert'
+          style={{ width: "359px" }}
+        >
+          {error.message}
+        </div>
+      )}
+
+      <form onSubmit={handleSubmit} style={{ width: "359px" }}>
+        <div className='progress mb-3 w-100'>
+          <div
+            className='progress-bar'
+            role='progressbar'
+            style={{ width: `${progressPercent}%` }}
+            aria-valuenow={progressPercent}
+            aria-valuemin={0}
+            aria-valuemax={100}
+          >
+            {progressPercent}
           </div>
+        </div>
+        <div className='custom-file mb-3'>
           <input
-            type='submit'
-            value='Upload'
-            className='bg-green-400 mt-4 py-2 px-4 text-white'
+            type='file'
+            className='custom-file-input'
+            id='inputGroupFile04'
+            aria-describedby='inputGroupFileAddon04'
+            onChange={upload}
           />
-        </form>
-      </div>
+          <label className='custom-file-label' htmlFor='inputGroupFile04'>
+            Choose file
+          </label>
+        </div>
+        <button type='submit' className='btn btn-primary w-100'>
+          Upload
+        </button>
+      </form>
+      {!info.profileImage ? (
+        <img
+          className='mt-3'
+          src={dummy}
+          alt={`${info.name}`}
+          style={{ width: "359px" }}
+        />
+      ) : (
+        <img
+          className='mt-3'
+          src={`http://localhost:8000/${info.profileImage}`}
+          alt={`${info.name}`}
+          style={{ width: "359px" }}
+        />
+      )}
+
+      <button
+        onClick={redirectToProfile}
+        type='submit'
+        className='btn btn-success w-25 mt-20'
+      >
+        Confirm
+      </button>
     </div>
   );
-};
+}
 
-export default UpdateImage;
+export default App;
