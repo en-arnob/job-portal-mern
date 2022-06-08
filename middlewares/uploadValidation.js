@@ -19,6 +19,21 @@ module.exports = (req, res, next) => {
         })
     }
 
+    if(req.file.size > 1024 * 1024 ) {
+
+        fs.unlinkSync(image)
+        return res.status(400).json({
+            errors: 'File is too large'
+        })
+
+    }
+
+    if(!name || !image){
+        return res.status(400).json({
+            errors: 'All fields are required'
+        })
+    }
+
     next()
 
 }

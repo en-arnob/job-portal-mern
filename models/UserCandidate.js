@@ -75,6 +75,8 @@ const CandidateSchema = new Schema({
   },
   profileImage: {
     type: String,
+    trim: true,
+    require: true,
   },
   gender: {
     type: String,
