@@ -32,6 +32,7 @@
     "react-truncate": "^2.4.0",
     "web-vitals": "^2.1.4"
   },
+  
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -61,4 +62,5 @@
     "postcss": "^8.4.13",
     "tailwindcss": "^3.0.24"
   }
+  
 }

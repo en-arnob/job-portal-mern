@@ -17,6 +17,7 @@ const CreateJobSection = () => {
     jobType: "Onsite",
   });
 
+  // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState(" ");
 
   const navigate = useNavigate();
@@ -32,6 +33,7 @@ const CreateJobSection = () => {
 
     try {
       const apiUrl = "http://localhost:8000/api/job-post";
+      // eslint-disable-next-line no-unused-vars
       const { data: res } = await axios.post(apiUrl, data);
 
       //   window.location.reload();

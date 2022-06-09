@@ -12,24 +12,23 @@ const TotalApplicantsPage = () => {
   const [userData, setUserData] = useState([]);
 
   useEffect(() => {
+    const getUserDetails = () => {
+      axios
+        .get(`http://127.0.0.1:8000/api/job/${jobDetails._id}`)
+        .then((response) => {
+          const catchData = response.data.data.job.applicants;
+          setUserData(catchData);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
     getUserDetails();
-  }, []);
+  }, [jobDetails]);
   const toApplicatsProfile = (arrElId) => {
     navigate("/profileView", {
       state: { userId: arrElId, userType: "candidate" },
     });
-  };
-
-  const getUserDetails = () => {
-    axios
-      .get(`http://127.0.0.1:8000/api/job/${jobDetails._id}`)
-      .then((response) => {
-        const catchData = response.data.data.job.applicants;
-        setUserData(catchData);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   };
 
   const rejectApplicant = (applicantId, e) => {

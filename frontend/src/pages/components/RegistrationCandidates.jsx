@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+
 import { Container, Row, Col, Card } from "react-bootstrap";
 import RegImg from "../../assets/images/RegCandidates.svg";
 import Modal from "react-modal";
@@ -30,8 +30,6 @@ const RegistrationCandidates = () => {
     birthday: "",
   });
   const [error, setError] = useState(" ");
-
-  const navigate = useNavigate();
 
   let subtitle;
   const [modalIsOpen, setIsOpen] = useState(false);

@@ -10,6 +10,7 @@ function App() {
 
   /** start states */
   const [formData, setFormData] = useState("");
+  // eslint-disable-next-line no-unused-vars
   const [info, setInfo] = useState({
     profileImage: "",
   });
@@ -18,6 +19,7 @@ function App() {
     found: false,
     message: "",
   });
+  const [previewFile, setPreviewFile] = useState(undefined);
   /** end states */
 
   // Upload image
@@ -26,6 +28,7 @@ function App() {
     data.append("profileImage", files[0]);
     data.append("name", files[0].name);
     setFormData(data);
+    setPreviewFile(URL.createObjectURL(files[0]));
   };
 
   // Submit Form
@@ -39,7 +42,7 @@ function App() {
       onUploadProgress: (progressEvent) => {
         const { loaded, total } = progressEvent;
         let percent = Math.floor((loaded * 100) / total);
-        console.log(`${loaded}kb of ${total}kb | ${percent}%`);
+        // console.log(`${loaded}kb of ${total}kb | ${percent}%`);
         setProgressPercent(percent);
       },
     };
@@ -50,14 +53,15 @@ function App() {
         options
       )
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setTimeout(() => {
           setInfo(res.data.updatedUser);
           setProgressPercent(0);
+          navigate("/profile");
         }, 1000);
       })
       .catch((err) => {
-        console.log(err.response);
+        // console.log(err.response);
         setError({
           found: true,
           message: err.response.data.errors,
@@ -72,9 +76,9 @@ function App() {
       });
   };
 
-  const redirectToProfile = () => {
-    navigate("/profile");
-  };
+  // const redirectToProfile = () => {
+  //   navigate("/profile");
+  // };
 
   return (
     <div
@@ -121,29 +125,29 @@ function App() {
           Upload
         </button>
       </form>
-      {!info.profileImage ? (
+      {!previewFile ? (
         <img
           className='mt-3'
           src={dummy}
-          alt={`${info.name}`}
+          alt='preview'
           style={{ width: "359px" }}
         />
       ) : (
         <img
           className='mt-3'
-          src={`http://localhost:8000/${info.profileImage}`}
-          alt={`${info.name}`}
+          src={previewFile}
+          alt='preview'
           style={{ width: "359px" }}
         />
       )}
 
-      <button
+      {/* <button
         onClick={redirectToProfile}
         type='submit'
         className='btn btn-success w-25 mt-20'
       >
         Confirm
-      </button>
+      </button> */}
     </div>
   );
 }

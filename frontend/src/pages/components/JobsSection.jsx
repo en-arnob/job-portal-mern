@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+// eslint-disable-next-line no-unused-vars
 import JobCardSponsored from "./JobCardSponsored";
 import JobCard from "./JobCard";
 import ReactPaginate from "react-paginate";
@@ -7,7 +8,7 @@ const JobsSection = (props) => {
   const jobs = props.jobs;
   const errors = props.errors;
   const searchTerm = props.searchTerm;
-  console.log(jobs);
+  // console.log(jobs);
 
   //pagination stuffs
   const [pageNumber, setPageNumber] = useState(0);
@@ -21,6 +22,7 @@ const JobsSection = (props) => {
       } else if (post.title.toLowerCase().includes(searchTerm.toLowerCase())) {
         return post;
       }
+      return 0;
     })
     .slice(pagesVisited, pagesVisited + postsPerPage)
     .map((post) => {

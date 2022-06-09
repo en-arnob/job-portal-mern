@@ -16,22 +16,24 @@ const ClientsProfileDetails = () => {
   }, []);
   const navigate = useNavigate();
   Moment.locale("en");
+  // eslint-disable-next-line no-unused-vars
   const [user, setUser] = useContext(UsersContext);
   const [userData, setUserData] = useState("");
   useEffect(() => {
+    const getUserDetails = () => {
+      axios
+        .get(`http://127.0.0.1:8000/userDetails/${user.id}/${user.usertype}`)
+        .then((response) => {
+          const catchData = response.data.data.user;
+          setUserData(catchData);
+        })
+        .catch((error) => {
+          // console.log(error);
+        });
+    };
     getUserDetails();
-  }, []);
-  const getUserDetails = () => {
-    axios
-      .get(`http://127.0.0.1:8000/userDetails/${user.id}/${user.usertype}`)
-      .then((response) => {
-        const catchData = response.data.data.user;
-        setUserData(catchData);
-      })
-      .catch((error) => {
-        // console.log(error);
-      });
-  };
+  }, [user]);
+
   const toEditProfile = () => {
     navigate("/editProfile", { state: { userData } });
   };

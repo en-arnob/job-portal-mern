@@ -27,15 +27,15 @@ exports.updateImageController = async (req, res) => {
   if(userType === 'candidate'){
 
     try {
-      let user = await UserCandidate.findByIdAndUpdate(userId, {profileImage: image})
+      let user = await UserCandidate.findById(userId)
       if (!user) {
         fs.unlinkSync(image)
         res.status(400).json({ errors: "No User"});
 
         
       } else{
-        
-        let updatedUser = await UserCandidate.findById(userId)
+        fs.unlinkSync(user.profileImage)
+        let updatedUser = await UserCandidate.findByIdAndUpdate(userId, {profileImage: image})
         res.status(200).json({ msg: "Success", updatedUser});
         
       }
