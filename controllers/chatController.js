@@ -28,7 +28,7 @@ exports.getConversation = async (req, res) => {
     });
     res.status(200).json({
       status: "success",
-      conversation,
+      conversation: conversation,
     });
   } catch (err) {
     res.status(500).json({
@@ -62,10 +62,7 @@ exports.getMessage = async (req, res) => {
     const messages = await ChatMessage.find({
       conversationId: req.params.conversationId,
     });
-    res.status(200).json({
-      status: "success",
-      messages,
-    });
+    res.status(200).json(messages);
   } catch (err) {
     res.status(500).json({
       status: "fail",
