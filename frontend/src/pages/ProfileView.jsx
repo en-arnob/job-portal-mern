@@ -2,9 +2,10 @@ import React, { useState, useContext, useEffect } from "react";
 
 import axios from "axios";
 import Moment from "moment";
-import arnobx from "../assets/images/arnobx.jpeg";
+
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
+import dummy from "../assets/images/blank-profile-picture.webp";
 
 const ProfileView = () => {
   const location = useLocation();
@@ -15,6 +16,10 @@ const ProfileView = () => {
   const [userData, setUserData] = useState("");
   useEffect(() => {
     getUserDetails();
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   }, []);
   const getUserDetails = () => {
     axios
@@ -33,11 +38,19 @@ const ProfileView = () => {
       <div className=' px-2 mx-4 rounded'>
         <div class='w-full px-8 py-4 mx-auto mt-16 bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 rounded-lg shadow-md dark:bg-gray-800'>
           <div class='flex justify-center -mt-16 md:justify-end'>
-            <img
-              class='object-cover w-48 h-48 border-2 border-white rounded-full dark:border-blue-400'
-              alt='Testimonial avatar'
-              src={arnobx}
-            />
+            {userData.profileImage === undefined ? (
+              <img
+                class='object-cover w-48 h-48 border-2 border-white rounded-full dark:border-blue-400'
+                alt='profile'
+                src={dummy}
+              />
+            ) : (
+              <img
+                class='object-cover w-48 h-48 border-2 border-white rounded-full dark:border-blue-400'
+                alt='profileImage'
+                src={`http://localhost:8000/${userData.profileImage}`}
+              />
+            )}
           </div>
 
           <h2 class='mt-2 text-2xl font-semibold text-gray-800 dark:text-white md:mt-0 md:text-3xl'>

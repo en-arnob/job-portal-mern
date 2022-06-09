@@ -1,6 +1,7 @@
 import React from "react";
 import arnob from "../../assets/images/blank-profile-picture.webp";
 import { useNavigate } from "react-router-dom";
+import dummy from "../../assets/images/blank-profile-picture.webp";
 
 const CandidatesCard = ({ candidate }) => {
   const navigate = useNavigate();
@@ -11,11 +12,19 @@ const CandidatesCard = ({ candidate }) => {
   };
   return (
     <div class='max-w-sm w-96 mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800  mb-4'>
-      <img
-        class='object-cover object-center w-full h-48'
-        src={arnob}
-        alt='avatar'
-      />
+      {candidate.profileImage === undefined ? (
+        <img
+          class='object-cover object-center w-full h-48'
+          src={dummy}
+          alt='avatar'
+        />
+      ) : (
+        <img
+          class='object-cover object-center w-full h-48'
+          src={`http://localhost:8000/${candidate.profileImage}`}
+          alt='avatar'
+        />
+      )}
 
       <div class='flex items-center px-2 py-2 bg-green-300'>
         <h1 class='mx-3 text-sm font-semibold text-white'>Open for Work</h1>
