@@ -44,7 +44,7 @@ const TotalApplicantsPage = () => {
     }
   };
   return (
-    <div>
+    <div className='min-h-screen'>
       <Container>
         <div className='text-center'>
           <p className=' text-2xl  text-rose-700 sm:text-3xl font-semibold'>

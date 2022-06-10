@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import jwt_decode from "jwt-decode";
 import { useLocation } from "react-router-dom";
-import { FiBriefcase } from "react-icons/fi";
+import { FiBriefcase, FiType } from "react-icons/fi";
 import { HiOutlineOfficeBuilding, HiOutlineClock } from "react-icons/hi";
 import { RiUserVoiceLine } from "react-icons/ri";
 import { MdOutlineLockClock } from "react-icons/md";
-import { GiSkills } from "react-icons/gi";
+import { SiPolywork } from "react-icons/si";
+import { AiOutlineCoffee } from "react-icons/ai";
+
 import Modal from "react-modal";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -84,12 +86,12 @@ const JobView = () => {
             <FiBriefcase className='text-green-500 mt-1' /> {job.title}
           </div>
           <div className='mt-4 text-gray-700  mx-2 flex md:flex-row flex-col '>
-            <div className='  flex gap-2 mr-4'>
-              <h1 className='text-lg bg-sky-200 rounded px-2 flex gap-2 font-normal'>
+            <div className='   flex gap-2 mr-4'>
+              <h1 className='text-lg bg-sky-200  rounded px-2 flex gap-2 font-normal'>
                 <HiOutlineOfficeBuilding className=' mt-1' />
                 Company Name:
               </h1>
-              <h1 className='text-lg font-normal'>
+              <h1 className='text-lg bg-sky-200 px-2 rounded font-normal'>
                 {job.authorId.organization}
               </h1>
             </div>
@@ -98,25 +100,35 @@ const JobView = () => {
                 <RiUserVoiceLine className=' mt-1' />
                 Posted By:
               </h1>
-              <h1 className='text-lg font-normal'>{job.authorId.fullname}</h1>
+              <h1 className='text-lg bg-blue-200 rounded px-2 font-normal'>
+                {job.authorId.fullname}
+              </h1>
             </div>
           </div>
           <div className='flex gap-2 text-gray-700 px-2 rounded-lg'>
-            <h1 className='text-lg flex gap-2 font-normal'>
+            <h1 className='text-lg flex bg-teal-200 rounded px-2 gap-2 font-normal'>
               <HiOutlineClock className='mt-1' />
               {Moment(job.dateOfPosting).format("d MMM YYYY")}
             </h1>
-            <h1 className='text-lg text-gray-700 bg-red-200 rounded px-2 flex gap-2 font-normal '>
+            <h1 className='text-lg text-gray-700 bg-rose-200 rounded px-2 flex gap-2 font-normal '>
               <MdOutlineLockClock className='mt-1  ' />
               <span className=''>Deadline:</span> {job.deadline}
             </h1>
           </div>
-          <div className='flex text-gray-700 gap-2 px-2 rounded-lg'>
-            <h1 className='text-lg flex gap-2 font-normal'>
-              <GiSkills className='mt-1' />
-              Highlighited Skills:{" "}
-              <span className='bg-lime-200 px-2 rounded'>{job.tags}</span>
-            </h1>
+
+          <div className='text-gray-700  mx-2 flex md:flex-row flex-col '>
+            <div className='flex gap-2 mr-2'>
+              <h1 className='text-lg bg-yellow-200 px-2 rounded flex gap-2 font-normal'>
+                <SiPolywork className='mt-1' />
+                Highlighited Skills: <span className=''>{job.tags}</span>
+              </h1>
+            </div>
+            <div className='flex gap-2 '>
+              <h1 className='text-lg bg-gray-200 px-2 rounded flex gap-2 font-normal'>
+                <FiType className='mt-1' />
+                Job Type: <span className=''>{job.jobType}</span>
+              </h1>
+            </div>
           </div>
 
           <div className='mt-6 p-6 bg-stone-100 rounded-lg'>
@@ -195,7 +207,7 @@ const JobView = () => {
         <div className='p-4'>
           <div className='flex ml-2 gap-4 text-3xl font-normal text-stone-800'>
             {" "}
-            <FiBriefcase className='text-green-500' /> Similar Jobs
+            <AiOutlineCoffee className='text-green-500' /> Sponsored Jobs
           </div>
           <p className='mt-4'>
             {" "}

@@ -14,7 +14,7 @@ const CreateJobSection = () => {
     logoUrl: "",
     vaccancy: "",
     deadline: "",
-    jobType: "Onsite",
+    jobType: "",
   });
 
   // eslint-disable-next-line no-unused-vars
@@ -121,21 +121,21 @@ const CreateJobSection = () => {
 
                 <div>
                   <label class='sr-only' for='image-url'>
-                    Company Logo
+                    Job Type
                   </label>
                   <input
                     class='w-full p-3 text-sm border-gray-200 rounded-lg'
-                    placeholder='Company-logo image url (optional)'
+                    placeholder='Job Type: (ex. Onsite/Remote)'
                     type='text'
-                    id='logoUrl'
+                    id='jobType'
                     onChange={handleChange}
-                    value={data.logoUrl}
-                    name='logoUrl'
+                    value={data.jobType}
+                    name='jobType'
                   />
                 </div>
               </div>
 
-              <div class='grid grid-cols-1 gap-4 text-center sm:grid-cols-3'>
+              {/* <div class='grid grid-cols-1 gap-4 text-center sm:grid-cols-3'>
                 <div>
                   <input
                     class='sr-only'
@@ -183,7 +183,7 @@ const CreateJobSection = () => {
                     <span class='text-sm font-medium'> Contractual </span>
                   </label>
                 </div>
-              </div>
+              </div> */}
 
               {/* <div>
                 <label class='sr-only' for='body'>
