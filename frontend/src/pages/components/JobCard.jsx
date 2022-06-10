@@ -18,7 +18,7 @@ const JobCard = ({ job }) => {
         className='relative block p-8 overflow-hidden border border-gray-100 rounded-lg'
         href=''
       >
-        <span class='absolute inset-x-0 bottom-0 h-2  bg-gradient-to-r from-green-300 via-blue-500 to-purple-600'></span>
+        <span className='absolute inset-x-0 bottom-0 h-2  bg-gradient-to-r from-green-300 via-blue-500 to-purple-600'></span>
 
         <div className='justify-between sm:flex'>
           <div>
@@ -65,18 +65,20 @@ const JobCard = ({ job }) => {
           />
         </div>
 
-        <dl class='flex mt-6'>
-          <div class='flex flex-col-reverse'>
-            <dt class='text-sm font-medium text-gray-600'>{job.tags}</dt>
-            <dd class='text-sm  text-red-800'>Deadline: {job.deadline}</dd>
+        <dl className='flex mt-6'>
+          <div className='flex flex-col-reverse'>
+            <dt className='text-sm font-medium text-gray-600'>{job.tags}</dt>
+            <dd className='text-sm  text-red-800'>Deadline: {job.deadline}</dd>
           </div>
 
-          <div class='flex flex-col-reverse ml-3 sm:ml-6'>
-            <dt class='text-sm font-medium text-indigo-600'>{job.jobType}</dt>
-            <dd class='text-sm  text-gray-800'>Vaccancy: {job.vaccancy}</dd>
+          <div className='flex flex-col-reverse ml-3 sm:ml-6'>
+            <dt className='text-sm font-medium text-indigo-600'>
+              {job.jobType}
+            </dt>
+            <dd className='text-sm  text-gray-800'>Vaccancy: {job.vaccancy}</dd>
           </div>
         </dl>
-        <p class='text-xs flex gap-2  text-gray-800'>
+        <p className='text-xs flex gap-2  text-gray-800'>
           <HiOutlineClock className='text-sm' /> {cdate}
         </p>
       </h1>

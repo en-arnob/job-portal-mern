@@ -112,9 +112,9 @@ exports.clientRegPostController = async (req, res) => {
         gender,
       });
       let transporter = nodemailer.createTransport({
-        service: "gmail",
+        service: "hotmail",
         auth: {
-          user: "testmail.arnob@gmail.com",
+          user: "test_arnob@hotmail.com",
           pass: "w3bdev69",
         },
       });
@@ -124,7 +124,7 @@ exports.clientRegPostController = async (req, res) => {
       }).save();
       const url = `http://localhost:3000/verify/${user.usertype}/${user._id}/${token.token}`;
       const mailOptions = {
-        from: `testmail.arnob@gmail.com`,
+        from: `test_arnob@hotmail.com`,
         to: user.email,
         subject: "Email Verification",
         html: `<h1>Verify Your Email</h1>
@@ -179,9 +179,9 @@ exports.candidateRegPostController = async (req, res) => {
         gender,
       });
       let transporter = nodemailer.createTransport({
-        service: "gmail",
+        service: "hotmail",
         auth: {
-          user: "testmail.arnob@gmail.com",
+          user: "test_arnob@hotmail.com",
           pass: "w3bdev69",
         },
       });
@@ -192,7 +192,7 @@ exports.candidateRegPostController = async (req, res) => {
       const url = `http://localhost:3000/verify/${user.usertype}/${user._id}/${token.token}`;
 
       const mailOptions = {
-        from: `testmail.arnob@gmail.com`,
+        from: `test_arnob@hotmail.com`,
         to: user.email,
         subject: "Email Verification",
         html: `<h1>Verify Your Email</h1>
@@ -243,15 +243,15 @@ exports.clientLoginPostController = async (req, res) => {
         }).save();
       }
       let transporter = nodemailer.createTransport({
-        service: "gmail",
+        service: "hotmail",
         auth: {
-          user: "testmail.arnob@gmail.com",
+          user: "test_arnob@hotmail.com",
           pass: "w3bdev69",
         },
       });
       const url = `http://localhost:3000/verify/${user.usertype}/${user._id}/${token.token}`;
       const mailOptions = {
-        from: `testmail.arnob@gmail.com`,
+        from: `test_arnob@hotmail.com`,
         to: user.email,
         subject: "Email Verification",
         html: `<h1>Verify Your Email</h1>
@@ -314,15 +314,15 @@ exports.candidateLoginPostController = async (req, res) => {
         }).save();
       }
       let transporter = nodemailer.createTransport({
-        service: "gmail",
+        service: "hotmail",
         auth: {
-          user: "testmail.arnob@gmail.com",
+          user: "test_arnob@hotmail.com",
           pass: "w3bdev69",
         },
       });
       const url = `http://localhost:3000/verify/${user.usertype}/${user._id}/${token.token}`;
       const mailOptions = {
-        from: `testmail.arnob@gmail.com`,
+        from: `test_arnob@hotmail.com`,
         to: user.email,
         subject: "Email Verification",
         html: `<h1>Verify Your Email</h1>
