@@ -526,7 +526,7 @@ exports.forgotPassword = async (req, res, next) => {
 };
 
 exports.resetPassword = async (req, res, next) => {
-  console.log(req.params, req.body);
+  // console.log(req.params, req.body);
   const hashToken = crypto
     .createHash("sha256")
     .update(req.params.token)

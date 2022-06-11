@@ -53,6 +53,7 @@ exports.updateImageController = async (req, res) => {
         res.status(400).json({ errors: "No User"});
         
       } else{
+        fs.unlinkSync(user.profileImage)
         let updatedUser = await UserClient.findById(userId)
         res.status(200).json({ msg: "Success", updatedUser});
         
