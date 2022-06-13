@@ -69,7 +69,6 @@ const Messenger = () => {
     };
     getMessages();
   }, [currentChat]);
-  console.log(messages);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const message = {
@@ -90,7 +89,7 @@ const Messenger = () => {
         `http://127.0.0.1:8000/api/live-chat/message`,
         message
       );
-      setMessages([...messages, res.data]);
+      setMessages([...messages, res.data.savedMessage]);
       setNewMessage("");
     } catch (err) {
       console.log(err);

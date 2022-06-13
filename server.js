@@ -15,7 +15,7 @@ app.use(morgan("dev"));
 
 // rate limit of ip req
 const limit = rateLimit({
-  max: 100,
+  max: 200,
   windowMs: 15 * 60 * 1000,
   message: "Too many request from this IP, please try again after an hour",
 });
