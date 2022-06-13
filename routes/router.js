@@ -40,7 +40,7 @@ const {
 //upload multer
 const uploadMulter = require("../middlewares/upload");
 const uploadValidation = require("../middlewares/uploadValidation");
-const { fetchCandidates } = require("../controllers/userController");
+// const { fetchCandidates } = require("../controllers/userController");
 const {
   newConversation,
   getConversation,
