@@ -3,11 +3,13 @@ import React, { useState } from "react";
 import JobCardSponsored from "./JobCardSponsored";
 import JobCard from "./JobCard";
 import ReactPaginate from "react-paginate";
+import ReactLoading from "react-loading";
 
 const JobsSection = (props) => {
   const jobs = props.jobs;
   const errors = props.errors;
   const searchTerm = props.searchTerm;
+  const status = props.status;
   // console.log(jobs);
 
   //pagination stuffs
@@ -39,6 +41,24 @@ const JobsSection = (props) => {
       behavior: "auto",
     });
   };
+
+  if (status === "loading") {
+    return (
+      <div className=' w-full h-auto md:h-auto flex flex-col mt-10 text-center items-center justify-center'>
+        <ReactLoading
+          className='text-center justify-center items-center'
+          type='cylon'
+          color='#06283D'
+          height={150}
+          width={150}
+        />
+      </div>
+    );
+  }
+
+  if (status === "error") {
+    return <span>Error</span>;
+  }
 
   return (
     <div>
