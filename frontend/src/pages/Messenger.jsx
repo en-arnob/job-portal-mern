@@ -26,7 +26,7 @@ const Messenger = () => {
       });
     });
   }, []);
-  console.log(socket);
+
   useEffect(() => {
     arrivalMessage &&
       currentChat?.members.includes(arrivalMessage.sender) &&
@@ -60,7 +60,7 @@ const Messenger = () => {
     const getMessages = async () => {
       try {
         const res = await axios.get(
-          `http://127.0.0.1:8000/api/live-chat/message/${currentChat._id}`
+          `http://127.0.0.1:8000/api/live-chat/message/${currentChat?._id}`
         );
         setMessages(res.data);
       } catch (err) {
@@ -105,7 +105,10 @@ const Messenger = () => {
       <div className="messenger">
         <div className="chatMenu">
           <div className="chatMenuWrapper">
-            <input placeholder="Search for friends" className="chatMenuInput" />
+            <p className="text-gray-600 fwt-bold font-serif chatMenuInput">
+              Select a conversation
+            </p>
+            {/* <input placeholder="Search for friends" className="chatMenuInput" /> */}
             {conversations.map((conversationEl) => (
               <div onClick={() => setCurrentChat(conversationEl)}>
                 <Conversation
