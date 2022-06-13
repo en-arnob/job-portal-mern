@@ -10,7 +10,7 @@ const TotalApplicantsPage = () => {
   const navigate = useNavigate();
   const jobDetails = location.state.jobDetails;
   const [userData, setUserData] = useState([]);
-
+  console.log(jobDetails);
   useEffect(() => {
     const getUserDetails = () => {
       axios
@@ -27,7 +27,11 @@ const TotalApplicantsPage = () => {
   }, [jobDetails]);
   const toApplicatsProfile = (arrElId) => {
     navigate("/profileView", {
-      state: { userId: arrElId, userType: "candidate" },
+      state: {
+        userId: arrElId,
+        userType: "candidate",
+        recruiterId: jobDetails.authorId,
+      },
     });
   };
 
