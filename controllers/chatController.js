@@ -7,10 +7,21 @@ exports.newConversation = async (req, res) => {
   });
 
   try {
-    const savedConversation = await newConversation.save();
-    res.status(200).json({
+    const allConversations = await Conversation.find({
+      members: { $all: [req.body.senderId, req.body.receiverId] },
+    });
+    console.log(allConversations);
+    if (!(allConversations.length > 0)) {
+      const savedConversation = await newConversation.save();
+      return res.status(200).json({
+        status: "success",
+        savedConversation,
+      });
+    }
+    console.log("convo matched");
+    return res.status(200).json({
       status: "success",
-      savedConversation,
+      message: "Existed conversation",
     });
   } catch (err) {
     res.status(500).json({
@@ -25,7 +36,7 @@ exports.getConversation = async (req, res) => {
   try {
     const conversation = await Conversation.find({
       members: { $in: [req.params.userId] },
-    });
+    }).sort([["updatedAt", -1]]);
     res.status(200).json({
       status: "success",
       conversation: conversation,
