@@ -6,13 +6,13 @@ const ClientSchema = new Schema({
     type: String,
     // required: true,
   },
-  username: {
-    type: String,
-    trim: true,
-    required: true,
-    unique: true,
-    maxlength: 20,
-  },
+  // username: {
+  //   type: String,
+  //   trim: true,
+  //   required: true,
+  //   unique: true,
+  //   maxlength: 20,
+  // },
   fullname: {
     type: String,
     required: true,
@@ -71,7 +71,6 @@ const ClientSchema = new Schema({
   },
   passwordTokenExpires: Date,
   passwordResetToken: String,
-
 });
 
 ClientSchema.methods.createPasswordResetToken = function () {

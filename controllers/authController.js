@@ -13,7 +13,7 @@ const AppError = require("../utils/AppError");
 const sendEmail = require("../utils/forgotPasswordEmail");
 
 exports.clRegValidation = [
-  body("username").not().isEmpty().withMessage("Username is required"),
+  // body("username").not().isEmpty().withMessage("Username is required"),
   body("fullname").not().isEmpty().withMessage("Name is required"),
   body("email")
     .not()
@@ -36,7 +36,7 @@ exports.clRegValidation = [
     ),
 ];
 exports.cdRegValidation = [
-  body("username").not().isEmpty().withMessage("Username is required"),
+  // body("username").not().isEmpty().withMessage("Username is required"),
   body("fullname").not().isEmpty().withMessage("Name is required"),
   body("email")
     .not()
@@ -75,7 +75,7 @@ exports.loginGetController = (req, res) => {
 exports.clientRegPostController = async (req, res) => {
   const {
     usertype,
-    username,
+    // username,
     fullname,
     email,
     organization,
@@ -102,7 +102,7 @@ exports.clientRegPostController = async (req, res) => {
     try {
       const user = await UserClient.create({
         usertype,
-        username,
+        // username,
         fullname,
         email,
         organization,
@@ -151,8 +151,7 @@ exports.clientRegPostController = async (req, res) => {
 };
 
 exports.candidateRegPostController = async (req, res) => {
-  const { usertype, username, fullname, email, password, phone, gender } =
-    req.body;
+  const { usertype, fullname, email, password, phone, gender } = req.body;
 
   const xErrors = validationResult(req);
   if (!xErrors.isEmpty()) {
@@ -171,7 +170,7 @@ exports.candidateRegPostController = async (req, res) => {
     try {
       const user = await UserCandidate.create({
         usertype,
-        username,
+        // username,
         fullname,
         email,
         password: hashed,

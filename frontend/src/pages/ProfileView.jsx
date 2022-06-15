@@ -203,7 +203,7 @@ const ProfileView = () => {
               <div class="grid grid-cols-2">
                 <div class="px-4 py-2 font-semibold">Birthday</div>
                 <div class="px-4 py-2">
-                  {Moment(userData.birthday).format("d MMM YYYY")}
+                  {Moment.utc(userData.birthday).format("MMM Do, YYYY")}
                 </div>
               </div>
               <div class="grid grid-cols-2">
