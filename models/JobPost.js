@@ -26,7 +26,7 @@ const jobPostSchema = new Schema({
     required: true,
   },
   vaccancy: {
-    type: String,
+    type: Number,
     required: true,
   },
   dateOfPosting: {
