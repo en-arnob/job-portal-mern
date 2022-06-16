@@ -8,7 +8,7 @@ const JobCard = ({ job, pageNumber }) => {
   const navigate = useNavigate();
   const postDate = job.dateOfPosting;
   const cdate = new Date(postDate).toString();
-  console.log(pageNumber);
+  // console.log(pageNumber);
 
   const toJobViewComponent = () => {
     navigate("/jobView", { state: { job, pageNumber } });
