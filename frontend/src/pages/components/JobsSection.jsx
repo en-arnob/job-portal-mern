@@ -17,7 +17,7 @@ const JobsSection = (props) => {
 
   //pagination stuffs
   const [pageNumber, setPageNumber] = useState(0);
-  const postsPerPage = 5;
+  const postsPerPage = 10;
   const pagesVisited = pageNumber * postsPerPage;
   useEffect(() => {
     if (location.state) {
