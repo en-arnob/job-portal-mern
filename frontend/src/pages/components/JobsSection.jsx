@@ -1,21 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // eslint-disable-next-line no-unused-vars
 import JobCardSponsored from "./JobCardSponsored";
 import JobCard from "./JobCard";
 import ReactPaginate from "react-paginate";
 import ReactLoading from "react-loading";
+import { useLocation } from "react-router-dom";
 
 const JobsSection = (props) => {
+  const location = useLocation();
   const jobs = props.jobs;
   const errors = props.errors;
   const searchTerm = props.searchTerm;
   const status = props.status;
-  // console.log(jobs);
+
+  //
 
   //pagination stuffs
   const [pageNumber, setPageNumber] = useState(0);
-  const postsPerPage = 10;
+  const postsPerPage = 5;
   const pagesVisited = pageNumber * postsPerPage;
+  useEffect(() => {
+    if (location.state) {
+      setPageNumber(location.state.pageNum);
+    }
+  }, []);
 
   const displayPosts = jobs
     .filter((post) => {
@@ -28,7 +36,7 @@ const JobsSection = (props) => {
     })
     .slice(pagesVisited, pagesVisited + postsPerPage)
     .map((post) => {
-      return <JobCard key={post._id} job={post} />;
+      return <JobCard key={post._id} job={post} pageNumber={pageNumber} />;
     });
 
   const pageCount = Math.ceil(jobs.length / postsPerPage);

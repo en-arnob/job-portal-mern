@@ -23,6 +23,9 @@ import TotalApplicantsPage from "./pages/TotalApplicantsPage";
 import CreatePost from "./pages/CreatePost";
 import Footer from "./pages/components/Footer";
 import UpdateImage from "./pages/UpdateImage";
+import Breadcumb from "./pages/components/Breadcumb";
+
+
 
 // import ProtectedRoute from "./ProtectedRoute";
 
@@ -35,9 +38,11 @@ function App() {
       <Router>
         <UserProvider>
           <Nav />
+          
           <Routes>
             {/* <ProtectedRoute exact path='/profile' component={Profile} /> */}
             <Route path="/" exact element={<Home />} />
+            <Route path="/alljobs" exact element={<Home />} />
             <Route path="/login" exact element={<LoginPage />} />
             <Route path="/reg" exact element={<RegistrationPage />} />
             <Route path="/profile" exact element={<Profile />} />

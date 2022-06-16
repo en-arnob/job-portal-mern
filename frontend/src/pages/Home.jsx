@@ -4,7 +4,7 @@ import { UsersContext } from "../hooks/UsersContext";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { AiOutlineArrowDown } from "react-icons/ai";
 import { GoTasklist } from "react-icons/go";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import axios from "axios";
 import JobsSection from "./components/JobsSection";
@@ -16,6 +16,7 @@ const Home = () => {
   const [errors, setErrors] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [status, setStatus] = useState("");
+  const location = useLocation();
 
   //pagination things
 
@@ -152,6 +153,7 @@ const Home = () => {
         status={status}
         errors={errors}
         searchTerm={searchTerm}
+        location={location}
       />
     </div>
   );

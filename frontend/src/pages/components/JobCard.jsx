@@ -4,23 +4,29 @@ import { RiUserVoiceLine } from "react-icons/ri";
 import { HiOutlineOfficeBuilding, HiOutlineClock } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 
-const JobCard = ({ job }) => {
+const JobCard = ({ job, pageNumber }) => {
   const navigate = useNavigate();
   const postDate = job.dateOfPosting;
   const cdate = new Date(postDate).toString();
+  console.log(pageNumber);
 
   const toJobViewComponent = () => {
-    navigate("/jobView", { state: { job } });
+    navigate("/jobView", { state: { job, pageNumber } });
   };
   return (
-    <div className='col-span-2 mx-2'>
+    <div
+      onClick={() => {
+        toJobViewComponent();
+      }}
+      className='col-span-2 mx-2 h-96'
+    >
       <h1
         className='relative block p-8 overflow-hidden border border-gray-100 rounded-lg'
         href=''
       >
         <span className='absolute inset-x-0 bottom-0 h-2  bg-gradient-to-r from-green-300 via-blue-500 to-purple-600'></span>
 
-        <div className='justify-between sm:flex'>
+        <div className='justify-between sm:flex '>
           <div>
             <h5 className='text-xl font-medium text-indigo-900'>{job.title}</h5>
             <p className='flex gap-3 font-normal text-lg  text-blue-700'>
@@ -48,18 +54,18 @@ const JobCard = ({ job }) => {
           className='mt-2 cursor-pointer text-gray-600 sm:pr-8 text-sm font-normal  '
         >
           <TextTruncate
-            line={2}
+            line={1}
             element='span'
             truncateText='…'
-            text={job.body.replace(/<[^>]+>/g, "")}
+            text={job.body.replace(/<[^>]+>/g, " s")}
             textTruncateChild={
               <span
                 onClick={() => {
                   toJobViewComponent();
                 }}
-                className='text-indigo-600 font-semibold mx-2 cursor-pointer'
+                className='text-indigo-600 font-normal mx-2 cursor-pointer'
               >
-                Read more on full post
+                Read more
               </span>
             }
           />

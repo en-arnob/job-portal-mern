@@ -110,7 +110,7 @@ const CreateJobSection = () => {
                   </label>
                   <input
                     class='w-full p-3 text-sm border-gray-200 rounded-lg'
-                    placeholder='Deadline'
+                    placeholder='Deadline: 28-06-2022'
                     type='text'
                     id='deadline'
                     onChange={handleChange}
