@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 
 const Footer = () => {
@@ -7,8 +8,13 @@ const Footer = () => {
         <div class='relative max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8 lg:pt-24'>
           <div class='absolute top-4 sm:top-6 lg:top-8 right-4 sm:right-6 lg:right-8'>
             <a
-              class='inline-block p-2 text-white transition bg-teal-600 rounded-full sm:p-3 lg:p-4 hover:bg-gray-600'
-              href='/'
+              class='inline-block p-2 text-white transition bg-teal-600 rounded-full sm:p-3 lg:p-4 hover:bg-gray-600 cursor-pointer'
+              onClick={() => {
+                window.scrollTo({
+                  top: 0,
+                  behavior: "auto",
+                });
+              }}
             >
               <span class='sr-only'>Back to top</span>
 

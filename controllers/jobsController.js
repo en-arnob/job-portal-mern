@@ -1,7 +1,9 @@
-const req = require("express/lib/request");
+
 const jwt_decode = require("jwt-decode");
 const JobPost = require("../models/JobPost");
 const UserCandidate = require("../models/UserCandidate");
+const dfs = require('date-from-string');
+
 
 exports.getAllJobsController = async (req, res) => {
   try {
@@ -84,6 +86,9 @@ exports.applyController = async (req, res) => {
             msg: "You already have applied to this job",
           });
         }
+
+        
+        
         await JobPost.findOneAndUpdate(
           { _id: postId },
           { $push: { applicants: user._id } }
