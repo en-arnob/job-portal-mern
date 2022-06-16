@@ -11,7 +11,12 @@ const CandidatesCard = ({ candidate, pageNumber }) => {
     });
   };
   return (
-    <div class='max-w-sm w-96 mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800  mb-4'>
+    <div
+      class='w-80 mx-auto overflow-hidden bg-gray-800 rounded-lg  dark:bg-gray-800  mb-4'
+      onClick={() => {
+        toCandidateProfile(candidate._id);
+      }}
+    >
       {candidate.profileImage === undefined ? (
         <img
           class='object-cover object-center w-full h-48'
@@ -35,16 +40,16 @@ const CandidatesCard = ({ candidate, pageNumber }) => {
           onClick={() => {
             toCandidateProfile(candidate._id);
           }}
-          class='text-xl cursor-pointer font-semibold text-gray-800 dark:text-white'
+          class='text-xl cursor-pointer font-semibold text-white'
         >
           {candidate.fullname}
         </h1>
 
-        <p class='py-2 text-gray-700 dark:text-gray-400'>
+        <p class='py-2 text-gray-200 dark:text-gray-400'>
           {candidate.expertise || "No Expertise Tag"}
         </p>
 
-        <div class='flex items-center mt-4 text-gray-700 dark:text-gray-200'>
+        <div class='flex items-center mt-4 text-gray-200'>
           <svg
             class='w-6 h-6 fill-current'
             viewBox='0 0 24 24'
@@ -64,7 +69,7 @@ const CandidatesCard = ({ candidate, pageNumber }) => {
           </h1>
         </div>
 
-        <div class='flex items-center mt-4 text-gray-700 dark:text-gray-200'>
+        <div class='flex items-center mt-4 text-gray-200'>
           <svg
             class='w-6 h-6 fill-current'
             viewBox='0 0 24 24'
@@ -86,7 +91,7 @@ const CandidatesCard = ({ candidate, pageNumber }) => {
           <h1 class='px-2 text-sm'>Dhaka, Bangladesh</h1>
         </div>
 
-        <div class='flex items-center mt-4 text-gray-700 dark:text-gray-200'>
+        <div class='flex items-center mt-4 text-gray-200'>
           <svg
             class='w-6 h-6 fill-current'
             viewBox='0 0 24 24'

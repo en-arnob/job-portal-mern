@@ -13,6 +13,7 @@ const JobCard = ({ job, pageNumber }) => {
   const toJobViewComponent = () => {
     navigate("/jobView", { state: { job, pageNumber } });
   };
+
   return (
     <div
       onClick={() => {
@@ -57,7 +58,7 @@ const JobCard = ({ job, pageNumber }) => {
             line={1}
             element='span'
             truncateText='…'
-            text={job.body.replace(/<[^>]+>/g, " s")}
+            text={job.body.replace(/<[^>]+>/g, " ").replace(/&.*;/g, " ")}
             textTruncateChild={
               <span
                 onClick={() => {
