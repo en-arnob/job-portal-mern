@@ -97,7 +97,7 @@ const CreateJobSection = () => {
                   <input
                     class='w-full p-3 text-sm border-gray-200 rounded-lg'
                     placeholder='Vaccancy'
-                    type='text'
+                    type='number'
                     id='vaccancy'
                     onChange={handleChange}
                     value={data.vaccancy}
