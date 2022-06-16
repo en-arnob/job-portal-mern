@@ -40,6 +40,9 @@ const ClientsProfileDetails = () => {
   const toImageUpload = () => {
     navigate("/updateImage", { state: { userData } });
   };
+  const messageBtn = () => {
+    navigate("/messenger");
+  };
   return (
     <div className="">
       <div className=" px-2 mx-4 rounded">
@@ -126,7 +129,10 @@ const ClientsProfileDetails = () => {
             </Link>
           </button>
 
-          <button class="flex items-center h-12 px-2 py-2 text-center text-gray-700 bg-transparent border-b border-gray-300 sm:px-4 dark:border-gray-500 -px-1 dark:text-white whitespace-nowrap cursor-base focus:outline-none hover:border-gray-400 dark:hover:border-gray-300">
+          <button
+            onClick={messageBtn}
+            class="flex items-center h-12 px-2 py-2 text-center text-gray-700 bg-transparent border-b border-gray-300 sm:px-4 dark:border-gray-500 -px-1 dark:text-white whitespace-nowrap cursor-base focus:outline-none hover:border-gray-400 dark:hover:border-gray-300"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="w-4 h-4 mx-1 sm:w-6 sm:h-6"

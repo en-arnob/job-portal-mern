@@ -14,36 +14,13 @@ module.exports = (values) => {
 
     // Education Information
     institute,
-    fromyear1,
-    toyear1,
-    qualification1,
-    description1,
-    school,
-    fromyear2,
-    toyear2,
-    qualification2,
-    description2,
 
-    // Project Information...
-    title1,
-    link1,
-    projectDescription1,
-    title2,
-    link2,
-    projectDescription2,
-    title3,
-    link3,
-    projectDescription3,
+    // certification
+    certification,
 
     // Experience Information
     experience,
     designation,
-    duration1,
-    experienceDescription1,
-    institute2,
-    position2,
-    duration2,
-    experienceDescription2,
 
     // Extra Information
     skills,
@@ -180,7 +157,7 @@ module.exports = (values) => {
 		height: 120px;
 		text-align: center;
 		font-family: 'Roboto Slab';
-		font-size: 58px;
+		font-size: 40px;
 		letter-spacing: 8px;
 		font-weight: 100;
 		line-height: 60px;
@@ -248,7 +225,7 @@ module.exports = (values) => {
 		font-size: 20px;
 		letter-spacing: 0px;
 		font-weight: 400;
-		line-height: 58.333333333333336px;
+		line-height: 30px;
 		font-style: normal;
 	  }
 	  .social {
@@ -391,43 +368,26 @@ module.exports = (values) => {
   htmlTemplate += `<div class="rela-block caps greyed">Education</div>`;
   if (institute != "" && institute != null)
     htmlTemplate += `<h3 class="mb-0">${institute}</h3>
-			<p class="text-muted light mt-0 mb-1">${fromyear1}<span class="mx-2">to</span>${toyear1}</p>
-			<p class="justified mt-0 mb-1" style="font-size: 17px;">${qualification1}</p>
-			<p class="justified mt-0 mb-3" style="font-size: 17px;">${description1}</p>`;
-
-  if (school != "" && school != null)
-    htmlTemplate += `  <h3 class="mb-0">${school}</h3>
-			<p class="text-muted light mt-0 mb-1">${fromyear2}<span class="mx-2">to</span>${toyear2}</p>
-			<p class="justified mt-0 mb-1" style="font-size: 17px;">${qualification2}</p>
-			<p class="justified mt-0 mb-1" style="font-size: 17px;">${description2}</p>`;
+		</br>
+		</br>`;
 
   htmlTemplate += `<div class="rela-block caps greyed">Experience</div>`;
 
   if (experience != "" && experience != null)
     htmlTemplate += `<h3>${experience}</h3>
-            <p class="text-muted light mt-1 mb-2" style="font-size:17px;">${designation}<span class="ml-5 pl-5">Duration: ${duration1}</span></p>
-            <p class="justified" style="font-size:17px;">${experienceDescription1}</p>`;
+            <p class="text-muted light mt-1 mb-2" style="font-size:17px;">${designation}</p>
+			</br>
+			</br>`;
 
-  if (institute2 != "" && institute2 != null)
-    htmlTemplate += `<h3>${institute2}</h3>
-            <p class="text-muted light mt-1 mb-2" style="font-size:17px;">${position2}<span class="ml-5 pl-5">Duration: ${duration2}</span></p>
-            <p class="justified" style="font-size:17px;">${experienceDescription2}</p>`;
+  htmlTemplate += `<div class="rela-block caps greyed">Certification</div>`;
 
-  htmlTemplate += `<div class="rela-block caps greyed">Projects</div>`;
-
-  if (title1 != "" && title1 != null)
+  if (certification != "" && certification != null)
     htmlTemplate += `
-			<h3>${title1}</h3>
-            <p class="light mt-1 mb-2" style="font-size:17px;"><span class="mr-2"><i class="fas fa-link"></i></span>${link1}</p>
-            <p class="justified" style="font-size:17px;">${experienceDescription1}</p>`;
+			<h3>${certification}</h3>
+			</br>
+		</br>`;
 
-  if (title2 != "" && title2 != null)
-    htmlTemplate += `
-            <h3>${title2}</h3>
-            <p class="light mt-1 mb-2" style="font-size:17px;"><span class="mr-2"><i class="fas fa-link"></i></span>${link1}</p>
-            <p class="justified" style="font-size:17px;">${experienceDescription2}</p>
-			
-        </div>
+  `</div>
     </div>
     </body>
     </html>
