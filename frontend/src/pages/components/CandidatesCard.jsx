@@ -3,11 +3,11 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import dummy from "../../assets/images/blank-profile-picture.webp";
 
-const CandidatesCard = ({ candidate }) => {
+const CandidatesCard = ({ candidate, pageNumber }) => {
   const navigate = useNavigate();
   const toCandidateProfile = (candidateId) => {
     navigate("/profileView", {
-      state: { userId: candidateId, userType: "candidate" },
+      state: { userId: candidateId, userType: "candidate", pageNumber },
     });
   };
   return (

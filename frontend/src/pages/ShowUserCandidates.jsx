@@ -4,11 +4,13 @@ import NoAccess from "./components/NoAccess";
 import axios from "axios";
 import CandidatesCard from "./components/CandidatesCard";
 import ReactPaginate from "react-paginate";
+import { useLocation } from "react-router-dom";
 
 const ShowUserCandidates = () => {
   const token = localStorage.getItem("myToken");
   const usr = jwt_decode(token);
   const user = usr.user;
+  const location = useLocation();
 
   const [candidates, setCandidates] = useState([]);
   //pagination stuffs
@@ -17,6 +19,11 @@ const ShowUserCandidates = () => {
   const pagesVisited = pageNumber * postsPerPage;
   const [errors, setErrors] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  useEffect(() => {
+    if (location.state) {
+      setPageNumber(location.state.pageNum);
+    }
+  }, []);
   const fetchCandidates = () => {
     axios
       .get(`http://localhost:8000/api/${user.id}/fetchCandidates`)
@@ -48,7 +55,13 @@ const ShowUserCandidates = () => {
     })
     .slice(pagesVisited, pagesVisited + postsPerPage)
     .map((candidate) => {
-      return <CandidatesCard key={candidate._id} candidate={candidate} />;
+      return (
+        <CandidatesCard
+          key={candidate._id}
+          candidate={candidate}
+          pageNumber={pageNumber}
+        />
+      );
     });
 
   const pageCount = Math.ceil(candidates.length / postsPerPage);
