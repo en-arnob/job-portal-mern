@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-
+import PasswordStrengthBar from "react-password-strength-bar";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import RegImg from "../../assets/images/RegClient.svg";
 
@@ -34,6 +34,7 @@ const RegistrationClients = () => {
     birthday: "",
   });
   const [error, setError] = useState(" ");
+  const [passError, setPassError] = useState("");
 
   let subtitle;
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -57,20 +58,27 @@ const RegistrationClients = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const url = "http://127.0.0.1:8000/client-register";
-      const { data: res } = await axios.post(url, data);
+    const confirmPassword = document.getElementById("confirmPassword").value;
+    if (data.password === confirmPassword) {
+      setPassError("");
+      try {
+        const url = "http://127.0.0.1:8000/client-register";
+        const { data: res } = await axios.post(url, data);
 
-      setModalMsg(res.msg);
-      openModal();
-    } catch (error) {
-      if (
-        error.response &&
-        error.response.status >= 400 &&
-        error.response.status <= 500
-      ) {
-        setError(error.response.data.errors[0]);
+        setModalMsg(res.msg);
+        openModal();
+      } catch (error) {
+        if (
+          error.response &&
+          error.response.status >= 400 &&
+          error.response.status <= 500
+        ) {
+          setError(error.response.data.errors[0]);
+        }
       }
+    } else {
+      setError("");
+      setPassError("Password are not same!!");
     }
   };
   return (
@@ -291,6 +299,7 @@ const RegistrationClients = () => {
                       value={data.password}
                       name="password"
                     />
+                    <PasswordStrengthBar password={data.password} />
                     <label
                       class="block text-gray-700 text-sm font-bold mb-2"
                       for="password"
@@ -299,11 +308,17 @@ const RegistrationClients = () => {
                     </label>
                     <input
                       class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                      id="grid-password"
+                      id="confirmPassword"
                       type="password"
                       placeholder="******************"
+                      // onChange={(e) => checkValidation(e.target.value)}
+                      // value={confirmPassword}
                       name="confirmPassword"
                     />
+
+                    {passError && (
+                      <p class="text-red-500 text-xs italic">{passError}</p>
+                    )}
                     {error && (
                       <p class="text-red-500 text-xs italic">{error.msg}</p>
                     )}
