@@ -5,6 +5,7 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import RegImg from "../../assets/images/RegCandidates.svg";
 import Modal from "react-modal";
 import PasswordStrengthBar from "react-password-strength-bar";
+import { useEffect } from "react";
 
 const customStyles = {
   content: {
@@ -32,6 +33,8 @@ const RegistrationCandidates = () => {
   });
   const [error, setError] = useState(" ");
   const [passError, setPassError] = useState("");
+  const [ageError, setAgeError] = useState("");
+  const [age, setAge] = useState(0);
 
   let subtitle;
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -49,11 +52,20 @@ const RegistrationCandidates = () => {
     setIsOpen(false);
   }
   const [modalMsg, setModalMsg] = useState(" ");
-
+  const getAge = (birthDate) =>
+    Math.floor((new Date() - new Date(birthDate).getTime()) / 3.15576e10);
   const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.name]: input.value });
+    setAge(getAge(data.birthday));
   };
+  // let age = 0;
 
+  // useEffect = () => {
+  //   if (data.birthday) {
+  //     setAge(getAge(data.birthday));
+  //     console.log(getAge(data.birthday));
+  //   }
+  // };
   // const checkValidation = (e) => {
   //   setConfirmPassword(e);
   //   console.log(confirmPassword, data.password);
@@ -69,20 +81,27 @@ const RegistrationCandidates = () => {
     const confirmPassword = document.getElementById("confirmPassword").value;
     if (data.password === confirmPassword) {
       setPassError("");
-      try {
-        const url = "http://127.0.0.1:8000/candidate-register";
-        const { data: res } = await axios.post(url, data);
 
-        setModalMsg(res.msg);
-        openModal();
-      } catch (error) {
-        if (
-          error.response &&
-          error.response.status >= 400 &&
-          error.response.status <= 500
-        ) {
-          setError(error.response.data.errors[0]);
+      if (age >= 16) {
+        setAgeError("");
+        try {
+          const url = "http://127.0.0.1:8000/candidate-register";
+          const { data: res } = await axios.post(url, data);
+
+          setModalMsg(res.msg);
+          openModal();
+        } catch (error) {
+          if (
+            error.response &&
+            error.response.status >= 400 &&
+            error.response.status <= 500
+          ) {
+            setError(error.response.data.errors[0]);
+          }
         }
+      } else {
+        setError("");
+        setAgeError("User age should be at least 16 year for creating account");
       }
     } else {
       setError("");
@@ -182,7 +201,9 @@ const RegistrationCandidates = () => {
                       value={data.birthday}
                       name="birthday"
                     />
-
+                    {ageError && (
+                      <p class="text-red-500 text-xs italic">{ageError}</p>
+                    )}
                     <label
                       class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                       for="grid-gender"

@@ -55,6 +55,10 @@ const ClientSchema = new Schema({
     required: true,
     unique: true,
   },
+  address: {
+    type: String,
+    trim: true,
+  },
   birthday: {
     type: Date,
   },

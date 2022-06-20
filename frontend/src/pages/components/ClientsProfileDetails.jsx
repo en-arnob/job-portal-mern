@@ -180,7 +180,7 @@ const ClientsProfileDetails = () => {
                 <div class="px-4 py-2">{userData.fullname}</div>
               </div>
               <div class="grid grid-cols-2">
-                <div class="px-4 py-2 font-semibold">Address</div>
+                <div class="px-4 py-2 font-semibold">Office Address</div>
                 <div class="px-4 py-2">{userData.officeAdress}</div>
               </div>
               <div class="grid grid-cols-2">
@@ -220,8 +220,8 @@ const ClientsProfileDetails = () => {
                 <div class="px-4 py-2">{userData.edu || "No Data"}</div>
               </div>
               <div class="grid grid-cols-2">
-                <div class="px-4 py-2 font-semibold">Details</div>
-                <div class="px-4 py-2">{userData.eduDetails || "No Data"}</div>
+                <div class="px-4 py-2 font-semibold">Address</div>
+                <div class="px-4 py-2">{userData.address || "No Data"}</div>
               </div>
               {/* <div class="grid grid-cols-2">
                 <div class="px-4 py-2 font-semibold">Expertise</div>

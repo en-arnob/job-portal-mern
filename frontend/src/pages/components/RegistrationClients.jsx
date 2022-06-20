@@ -35,6 +35,8 @@ const RegistrationClients = () => {
   });
   const [error, setError] = useState(" ");
   const [passError, setPassError] = useState("");
+  const [ageError, setAgeError] = useState("");
+  const [age, setAge] = useState(0);
 
   let subtitle;
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -52,29 +54,37 @@ const RegistrationClients = () => {
     setIsOpen(false);
   }
   const [modalMsg, setModalMsg] = useState(" ");
-
+  const getAge = (birthDate) =>
+    Math.floor((new Date() - new Date(birthDate).getTime()) / 3.15576e10);
   const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.name]: input.value });
+    setAge(getAge(data.birthday));
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
     const confirmPassword = document.getElementById("confirmPassword").value;
     if (data.password === confirmPassword) {
       setPassError("");
-      try {
-        const url = "http://127.0.0.1:8000/client-register";
-        const { data: res } = await axios.post(url, data);
+      if (age >= 16) {
+        setAgeError("");
+        try {
+          const url = "http://127.0.0.1:8000/client-register";
+          const { data: res } = await axios.post(url, data);
 
-        setModalMsg(res.msg);
-        openModal();
-      } catch (error) {
-        if (
-          error.response &&
-          error.response.status >= 400 &&
-          error.response.status <= 500
-        ) {
-          setError(error.response.data.errors[0]);
+          setModalMsg(res.msg);
+          openModal();
+        } catch (error) {
+          if (
+            error.response &&
+            error.response.status >= 400 &&
+            error.response.status <= 500
+          ) {
+            setError(error.response.data.errors[0]);
+          }
         }
+      } else {
+        setError("");
+        setAgeError("User age should be at least 16 year for creating account");
       }
     } else {
       setError("");
@@ -206,6 +216,9 @@ const RegistrationClients = () => {
                       value={data.birthday}
                       name="birthday"
                     />
+                    {ageError && (
+                      <p class="text-red-500 text-xs italic">{ageError}</p>
+                    )}
 
                     <label
                       class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"

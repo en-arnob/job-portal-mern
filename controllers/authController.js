@@ -76,6 +76,7 @@ exports.clientRegPostController = async (req, res) => {
   const {
     usertype,
     // username,
+    address,
     fullname,
     email,
     organization,
@@ -103,6 +104,7 @@ exports.clientRegPostController = async (req, res) => {
       const user = await UserClient.create({
         usertype,
         // username,
+        address,
         fullname,
         email,
         organization,
@@ -151,7 +153,8 @@ exports.clientRegPostController = async (req, res) => {
 };
 
 exports.candidateRegPostController = async (req, res) => {
-  const { usertype, fullname, email, password, phone, gender } = req.body;
+  const { usertype, fullname, email, address, password, phone, gender } =
+    req.body;
 
   const xErrors = validationResult(req);
   if (!xErrors.isEmpty()) {
@@ -171,6 +174,7 @@ exports.candidateRegPostController = async (req, res) => {
       const user = await UserCandidate.create({
         usertype,
         // username,
+        address,
         fullname,
         email,
         password: hashed,

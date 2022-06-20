@@ -73,7 +73,16 @@ const EditCandidateProfile = () => {
                 </div>
                 <div class="grid grid-cols-2">
                   <div class="px-4 py-2 font-semibold">Address</div>
-                  <div class="px-4 py-2">West Razabazar, Dhaka</div>
+                  <div class="px-4 py-2">
+                    <input
+                      className="appearance-none block w-full h-5 rounded-md p-3  focus:bg-slate-200 focus:text-slate-700"
+                      type="text"
+                      placeholder={currentData.address}
+                      onChange={handleChange}
+                      value={data.address}
+                      name="address"
+                    />
+                  </div>
                 </div>
                 <div class="grid grid-cols-2">
                   <div class="px-4 py-2 font-semibold">Gender</div>
