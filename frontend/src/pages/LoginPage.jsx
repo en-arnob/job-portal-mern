@@ -17,7 +17,7 @@ const LoginPage = ({ history }) => {
       //     localStorage.getItem("myToken");
       //   }
       // }
-      navigate("/");
+      window.location.href = "/";
     }
   });
 

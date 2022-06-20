@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import dummy from "../../assets/images/blank-profile-picture.webp";
 
 const Conversation = ({ conversation, currentUser }) => {
   const [user, setUser] = useState(null);
@@ -25,14 +26,12 @@ const Conversation = ({ conversation, currentUser }) => {
     };
     getUser();
   }, [currentUser, conversation]);
+
   return (
-    <div className="conversation">
-      <img
-        className="conversationImg"
-        src="https://images.pexels.com/photos/3686769/pexels-photo-3686769.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-        alt=""
-      />
-      {user && <span className="conversationName">{user.fullname}</span>}
+    <div className='conversation'>
+      <img className='conversationImg' alt='profile' src={dummy} />
+
+      {user && <span className='conversationName'>{user.fullname}</span>}
     </div>
   );
 };
