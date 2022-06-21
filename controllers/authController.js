@@ -114,19 +114,26 @@ exports.clientRegPostController = async (req, res) => {
         gender,
       });
       let transporter = nodemailer.createTransport({
-        service: "hotmail",
+        name: 'laptop-repair-putney.co.uk',
+        pool: true,
+        host: 'mail.laptop-repair-putney.co.uk', //<----change
+        port: 587,               //<----change
+        secure: false,           //<----change
         auth: {
-          user: "test_arnob@hotmail.com",
-          pass: "w3bdev69",
+          user: 'jobtest@laptop-repair-putney.co.uk',
+          pass: 'Email@Test.Job247',
+        },
+        tls: {
+          rejectUnauthorized: false,
         },
       });
       const token = await new Token({
         userId: user._id,
         token: crypto.randomBytes(32).toString("hex"),
       }).save();
-      const url = `http://localhost:3000/verify/${user.usertype}/${user._id}/${token.token}`;
+      const url = `http://job-portal.laptop-repair-putney.co.uk/front/verify/${user.usertype}/${user._id}/${token.token}`;
       const mailOptions = {
-        from: `test_arnob@hotmail.com`,
+        from: `jobtest@laptop-repair-putney.co.uk`,
         to: user.email,
         subject: "Email Verification",
         html: `<h1>Verify Your Email</h1>
@@ -182,20 +189,27 @@ exports.candidateRegPostController = async (req, res) => {
         gender,
       });
       let transporter = nodemailer.createTransport({
-        service: "hotmail",
+        name: 'laptop-repair-putney.co.uk',
+        pool: true,
+        host: 'mail.laptop-repair-putney.co.uk', //<----change
+        port: 587,               //<----change
+        secure: false,           //<----change
         auth: {
-          user: "test_arnob@hotmail.com",
-          pass: "w3bdev69",
+          user: 'jobtest@laptop-repair-putney.co.uk',
+          pass: 'Email@Test.Job247',
+        },
+        tls: {
+          rejectUnauthorized: false,
         },
       });
       const token = await new Token({
         userId: user._id,
         token: crypto.randomBytes(32).toString("hex"),
       }).save();
-      const url = `http://localhost:3000/verify/${user.usertype}/${user._id}/${token.token}`;
+      const url = `http://job-portal.laptop-repair-putney.co.uk/front/verify/${user.usertype}/${user._id}/${token.token}`;
 
       const mailOptions = {
-        from: `test_arnob@hotmail.com`,
+        from: `jobtest@laptop-repair-putney.co.uk`,
         to: user.email,
         subject: "Email Verification",
         html: `<h1>Verify Your Email</h1>
@@ -246,15 +260,22 @@ exports.clientLoginPostController = async (req, res) => {
         }).save();
       }
       let transporter = nodemailer.createTransport({
-        service: "hotmail",
+        name: 'laptop-repair-putney.co.uk',
+        pool: true,
+        host: 'mail.laptop-repair-putney.co.uk', //<----change
+        port: 587,               //<----change
+        secure: false,           //<----change
         auth: {
-          user: "test_arnob@hotmail.com",
-          pass: "w3bdev69",
+          user: 'jobtest@laptop-repair-putney.co.uk',
+          pass: 'Email@Test.Job247',
+        },
+        tls: {
+          rejectUnauthorized: false,
         },
       });
-      const url = `http://localhost:3000/verify/${user.usertype}/${user._id}/${token.token}`;
+      const url = `http://job-portal.laptop-repair-putney.co.uk/front/verify/${user.usertype}/${user._id}/${token.token}`;
       const mailOptions = {
-        from: `test_arnob@hotmail.com`,
+        from: `jobtest@laptop-repair-putney.co.uk`,
         to: user.email,
         subject: "Email Verification",
         html: `<h1>Verify Your Email</h1>
@@ -317,15 +338,22 @@ exports.candidateLoginPostController = async (req, res) => {
         }).save();
       }
       let transporter = nodemailer.createTransport({
-        service: "hotmail",
+        name: 'laptop-repair-putney.co.uk',
+        pool: true,
+        host: 'mail.laptop-repair-putney.co.uk', //<----change
+        port: 587,               //<----change
+        secure: false,           //<----change
         auth: {
-          user: "test_arnob@hotmail.com",
-          pass: "w3bdev69",
+          user: 'jobtest@laptop-repair-putney.co.uk',
+          pass: 'Email@Test.Job247',
+        },
+        tls: {
+          rejectUnauthorized: false,
         },
       });
-      const url = `http://localhost:3000/verify/${user.usertype}/${user._id}/${token.token}`;
+      const url = `http://job-portal.laptop-repair-putney.co.uk/front/verify/${user.usertype}/${user._id}/${token.token}`;
       const mailOptions = {
-        from: `test_arnob@hotmail.com`,
+        from: `jobtest@laptop-repair-putney.co.uk`,
         to: user.email,
         subject: "Email Verification",
         html: `<h1>Verify Your Email</h1>
