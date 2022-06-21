@@ -26,12 +26,12 @@ const Conversation = ({ conversation, currentUser }) => {
     };
     getUser();
   }, [currentUser, conversation]);
-
+  console.log(user);
   return (
-    <div className='conversation'>
-      <img className='conversationImg' alt='profile' src={dummy} />
+    <div className="conversation">
+      <img className="conversationImg rounded-full" alt="profile" src={dummy} />
 
-      {user && <span className='conversationName'>{user.fullname}</span>}
+      {user && <span className="conversationName">{user.fullname}</span>}
     </div>
   );
 };
