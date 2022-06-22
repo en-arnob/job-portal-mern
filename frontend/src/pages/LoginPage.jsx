@@ -17,21 +17,21 @@ const LoginPage = ({ history }) => {
       //     localStorage.getItem("myToken");
       //   }
       // }
-      navigate("/");
+      window.location.href = "/";
     }
   });
 
   return (
     <div>
-      <div class='flex items-center justify-center'>
+      <div className='flex items-center justify-center'>
         <div
-          class='inline-flex shadow-md hover:shadow-lg focus:shadow-lg'
+          className='inline-flex shadow-md hover:shadow-lg focus:shadow-lg'
           role='group'
         >
           <button
             onClick={() => setLoginC(1)}
             type='button'
-            class='rounded-l inline-block px-6 py-2.5 bg-green-500 text-white font-medium text-md leading-tight uppercase hover:bg-green-700 focus:bg-green-700 focus:outline-none focus:ring-0 active:bg-green-800 transition duration-150 ease-in-out'
+            className='rounded-l inline-block px-6 py-2.5 bg-green-500 text-white font-medium text-md leading-tight uppercase hover:bg-green-700 focus:bg-green-700 focus:outline-none focus:ring-0 active:bg-green-800 transition duration-150 ease-in-out'
           >
             Job Seeker
           </button>

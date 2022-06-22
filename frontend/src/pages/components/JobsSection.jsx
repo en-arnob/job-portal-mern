@@ -1,19 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // eslint-disable-next-line no-unused-vars
 import JobCardSponsored from "./JobCardSponsored";
 import JobCard from "./JobCard";
 import ReactPaginate from "react-paginate";
+// import ReactLoading from "react-loading";
+import { useLocation } from "react-router-dom";
 
 const JobsSection = (props) => {
+  const location = useLocation();
   const jobs = props.jobs;
   const errors = props.errors;
   const searchTerm = props.searchTerm;
-  // console.log(jobs);
+  const status = props.status;
+
+  //
 
   //pagination stuffs
   const [pageNumber, setPageNumber] = useState(0);
   const postsPerPage = 10;
   const pagesVisited = pageNumber * postsPerPage;
+
+  useEffect(() => {
+    if (location.state) {
+      setPageNumber(location.state.pageNum);
+    }
+  }, [location.state]);
 
   const displayPosts = jobs
     .filter((post) => {
@@ -26,7 +37,7 @@ const JobsSection = (props) => {
     })
     .slice(pagesVisited, pagesVisited + postsPerPage)
     .map((post) => {
-      return <JobCard key={post._id} job={post} />;
+      return <JobCard key={post._id} job={post} pageNumber={pageNumber} />;
     });
 
   const pageCount = Math.ceil(jobs.length / postsPerPage);
@@ -39,6 +50,18 @@ const JobsSection = (props) => {
       behavior: "auto",
     });
   };
+
+  if (status === "loading") {
+    return (
+      <div className=' w-full h-auto md:h-auto flex flex-col mt-10 text-center items-center justify-center'>
+        <div className='w-16 h-16 border-4 border-dashed  rounded-full animate-spin dark:border-violet-400'></div>
+      </div>
+    );
+  }
+
+  if (status === "error") {
+    return <span>Error</span>;
+  }
 
   return (
     <div>

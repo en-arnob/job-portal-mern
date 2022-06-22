@@ -12,7 +12,7 @@ const UserClientDetails = () => {
 
   const getUserDetails = () => {
     axios
-      .get(`http://127.0.0.1:8000/userDetails/${user.id}/${user.usertype}`)
+      .get(`/${user.id}/${user.usertype}`)
       .then((response) => {
         const catchData = response.data.data.user;
         setUserData(catchData);
@@ -26,36 +26,36 @@ const UserClientDetails = () => {
       {user && (
         <Card>
           <Card.Body>
-            <div className="sections">
-              <div className="sectionTitle">
+            <div className='sections'>
+              <div className='sectionTitle'>
                 <h4>
-                  <FaUserAlt className="d-inline-block" /> &nbsp; &nbsp;{" "}
-                  <span className="text-black-50">Profile</span>{" "}
+                  <FaUserAlt className='d-inline-block' /> &nbsp; &nbsp;{" "}
+                  <span className='text-black-50'>Profile</span>{" "}
                 </h4>
               </div>
-              <div className="sectionInfo mt-3">
+              <div className='sectionInfo mt-3'>
                 <Row>
                   <Col lg={4} md={12} sm={12}>
                     <p>
-                      <span className="fw-bolder fst-italic">Name: </span>{" "}
+                      <span className='fw-bolder fst-italic'>Name: </span>{" "}
                       {userData.fullname}
                     </p>
                     <p>
-                      <span className="fw-bolder fst-italic">Birthday: </span>{" "}
+                      <span className='fw-bolder fst-italic'>Birthday: </span>{" "}
                       {new Date(userData.birthday).toDateString()}
                     </p>
                     <p>
-                      <span className="fw-bolder fst-italic">NID: </span>{" "}
+                      <span className='fw-bolder fst-italic'>NID: </span>{" "}
                       {userData.nid}
                     </p>
                   </Col>
                   <Col lg={4} md={12} sm={12}>
                     <p>
-                      <span className="fw-bold fst-italic">Gender: </span>{" "}
+                      <span className='fw-bold fst-italic'>Gender: </span>{" "}
                       {userData.gender}
                     </p>
                     <p>
-                      <span className="fw-bold fst-italic">Phone: </span>{" "}
+                      <span className='fw-bold fst-italic'>Phone: </span>{" "}
                       {userData.phone}
                     </p>
                   </Col>
@@ -63,24 +63,24 @@ const UserClientDetails = () => {
               </div>
             </div>
 
-            <div className="sections">
-              <div className="sectionTitle">
+            <div className='sections'>
+              <div className='sectionTitle'>
                 <h4>
-                  <FaHome className="d-inline-block" /> &nbsp; &nbsp;{" "}
-                  <span className="text-black-50">Organization</span>{" "}
+                  <FaHome className='d-inline-block' /> &nbsp; &nbsp;{" "}
+                  <span className='text-black-50'>Organization</span>{" "}
                 </h4>
               </div>
-              <div className="sectionInfo mt-3">
+              <div className='sectionInfo mt-3'>
                 <Row>
                   <Col>
                     <p>
-                      <span className="fw-bolder fst-italic">
+                      <span className='fw-bolder fst-italic'>
                         Organization:{" "}
                       </span>{" "}
                       {userData.organization}
                     </p>
                     <p>
-                      <span className="fw-bolder fst-italic">
+                      <span className='fw-bolder fst-italic'>
                         Office Address:{" "}
                       </span>{" "}
                       {userData.officeAdress}
@@ -90,24 +90,24 @@ const UserClientDetails = () => {
               </div>
             </div>
 
-            <div className="sections">
-              <div className="sectionTitle">
+            <div className='sections'>
+              <div className='sectionTitle'>
                 <h4>
-                  <FaBriefcase className="d-inline-block" /> &nbsp; &nbsp;{" "}
-                  <span className="text-black-50">Experience</span>{" "}
+                  <FaBriefcase className='d-inline-block' /> &nbsp; &nbsp;{" "}
+                  <span className='text-black-50'>Experience</span>{" "}
                 </h4>
               </div>
-              <div className="sectionInfo mt-3">
+              <div className='sectionInfo mt-3'>
                 <Row>
                   <Col>
                     <p>
-                      <span className="fw-bolder fst-italic">
+                      <span className='fw-bolder fst-italic'>
                         Designation:{" "}
                       </span>{" "}
                       {userData.designation}
                     </p>
                     <p>
-                      <span className="fw-bolder fst-italic">
+                      <span className='fw-bolder fst-italic'>
                         Experiences:{" "}
                       </span>
                       Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -118,24 +118,24 @@ const UserClientDetails = () => {
               </div>
             </div>
 
-            <div className="sections">
-              <div className="sectionTitle">
+            <div className='sections'>
+              <div className='sectionTitle'>
                 <h4>
-                  <FaLink className="d-inline-block" /> &nbsp; &nbsp;{" "}
-                  <span className="text-black-50">Links</span>{" "}
+                  <FaLink className='d-inline-block' /> &nbsp; &nbsp;{" "}
+                  <span className='text-black-50'>Links</span>{" "}
                 </h4>
               </div>
-              <div className="sectionInfo mt-3">
+              <div className='sectionInfo mt-3'>
                 <Row>
                   <Col>
                     <p>
-                      <span className="fw-bolder fst-italic">
+                      <span className='fw-bolder fst-italic'>
                         Company Webiste:
                       </span>{" "}
                       {userData.website}
                     </p>
                     <p>
-                      <span className="fw-bolder fst-italic">Email:</span>{" "}
+                      <span className='fw-bolder fst-italic'>Email:</span>{" "}
                       {userData.email}
                     </p>
                   </Col>

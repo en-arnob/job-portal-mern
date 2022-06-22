@@ -7,12 +7,15 @@ import axios from "axios";
 import NoAccess from "./components/NoAccess";
 import TextTruncate from "react-text-truncate";
 import { useNavigate } from "react-router-dom";
+import Moment from "moment";
 
 const AppliedJobs = () => {
   const navigate = useNavigate();
   const [appliedJobs, setAppliedJobs] = useState([]);
   const [errors, setErrors] = useState([]);
   const [msg, setMsg] = useState("");
+  const fallback = "/appliedJob";
+  const [status, setStatus] = useState("");
 
   const token = localStorage.getItem("myToken");
   let usr = "";
@@ -26,26 +29,27 @@ const AppliedJobs = () => {
   }, []);
 
   const getAppliedJobs = () => {
+    setStatus("loading");
     axios
-      .get(`http://localhost:8000/api/jobs/applied-jobs/${usr.id}`)
+      .get(`/api/jobs/applied-jobs/${usr.id}`)
       .then((response) => {
         const jobData = response.data.jobs;
         setAppliedJobs(jobData);
+        setStatus("success");
       })
       .catch((error) => {
         setErrors(error);
+        setStatus("error");
       });
   };
   const toJobViewComponent = (job) => {
-    navigate("/jobView", { state: { job } });
+    navigate("/jobView", { state: { job, fallback } });
   };
   const deleteThisApplication = (job) => {
     const jobId = job._id;
     const applicantId = usr.id;
     axios
-      .patch(
-        `http://localhost:8000/api/job/deleteApplication/${jobId}/${applicantId}`
-      )
+      .patch(`/api/job/deleteApplication/${jobId}/${applicantId}`)
       .then((response) => {
         setMsg(response.data.msg);
         setAppliedJobs(appliedJobs.filter((item) => item._id !== jobId));
@@ -54,6 +58,18 @@ const AppliedJobs = () => {
         setErrors(error);
       });
   };
+
+  if (status === "loading") {
+    return (
+      <div className=' w-full h-auto md:h-auto flex flex-col mt-10 text-center items-center justify-center'>
+        <div className='w-16 h-16 border-4 border-dashed  rounded-full animate-spin dark:border-violet-400'></div>
+      </div>
+    );
+  }
+
+  if (status === "error") {
+    return <span>Error</span>;
+  }
 
   return (
     <div>
@@ -92,7 +108,11 @@ const AppliedJobs = () => {
                 {appliedJobs.map((job) => {
                   return (
                     <div key={job._id} className='mb-4 rounded-lg bg-gray-100'>
-                      <Card.Body>
+                      <Card.Body
+                        onClick={() => {
+                          toJobViewComponent(job);
+                        }}
+                      >
                         <Card.Title>{job.title}</Card.Title>
                         <Card.Subtitle className='mb-2 text-muted'>
                           <p className='flex gap-3 font-normal text-sm  text-blue-700'>
@@ -102,13 +122,15 @@ const AppliedJobs = () => {
                         </Card.Subtitle>
                         <Card.Text>
                           <TextTruncate
-                            line={2}
+                            line={1}
                             element='span'
                             truncateText='…'
-                            text={job.body}
+                            text={job.body
+                              .replace(/<[^>]+>/g, " ")
+                              .replace(/&.*;/g, " ")}
                             textTruncateChild={
-                              <span className='text-stone-600 mx-2'>
-                                Expand on full post
+                              <span className='text-gray-700 font-normal mx-2 cursor-pointer'>
+                                Read more
                               </span>
                             }
                           />
@@ -117,7 +139,7 @@ const AppliedJobs = () => {
                         <dl className='flex mt-6'>
                           <div className='flex flex-col-reverse'>
                             <dd className='text-sm  text-red-800'>
-                              {job.deadline}
+                              {Moment(job.deadline).format("d MMM YYYY")}
                             </dd>
                           </div>
 
@@ -131,17 +153,9 @@ const AppliedJobs = () => {
                           <div className='text-center'>
                             <button
                               onClick={() => {
-                                toJobViewComponent(job);
-                              }}
-                              className='bg-green-600 hover:bg-green-700 text-white font-bold mx-1 py-2 px-3 rounded-full'
-                            >
-                              View Job
-                            </button>
-                            <button
-                              onClick={() => {
                                 deleteThisApplication(job);
                               }}
-                              className='bg-red-600 hover:bg-red-700 text-white font-bold mx-1 py-2 px-4 rounded-full'
+                              className='bg-blue-500 hover:bg-red-500 text-white font-semibold mx-1 py-2 px-4 rounded-lg'
                             >
                               Delete Application
                             </button>

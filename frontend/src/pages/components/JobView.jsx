@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import jwt_decode from "jwt-decode";
 import { useLocation } from "react-router-dom";
-import { FiBriefcase, FiType } from "react-icons/fi";
+import { FiMapPin } from "react-icons/fi";
 import { HiOutlineOfficeBuilding, HiOutlineClock } from "react-icons/hi";
 import { RiUserVoiceLine } from "react-icons/ri";
 import { MdOutlineLockClock } from "react-icons/md";
@@ -13,6 +13,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import parse from "html-react-parser";
 import Moment from "moment";
+import Breadcumb from "./Breadcumb";
 
 const customStyles = {
   content: {
@@ -28,22 +29,45 @@ const customStyles = {
 Modal.setAppElement("*");
 
 const JobView = () => {
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  }, []);
-
   const navigate = useNavigate();
   const token = localStorage.getItem("myToken");
   let usr = "";
   if (token) {
     usr = jwt_decode(token).user;
   }
+  const [userData, setUserData] = useState("");
+  const [status, setStatus] = useState("");
+  const getUserDetails = () => {
+    setStatus("loading");
+    axios
+      .get(`/userDetails/${usr.id}/${usr.usertype}`)
+      .then((response) => {
+        const catchData = response.data.data.user;
+        setUserData(catchData);
+        setStatus("success");
+      })
+      .catch((error) => {
+        // console.log(error);
+        setStatus("error");
+      });
+  };
   const location = useLocation();
   const job = location.state.job;
-  console.log(job);
+
+  //moment
+  const deadlineD = Moment.utc(job.deadline);
+  const todayD = Moment.utc();
+
+  const pageNum = location.state.pageNumber;
+  const fallback = location.state.fallback;
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+    getUserDetails();
+  }, []);
 
   let subtitle;
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -67,7 +91,7 @@ const JobView = () => {
   const [modalMsg, setModalMsg] = useState(" ");
   const applyJob = () => {
     axios
-      .get(`http://localhost:8000/apply/${job._id}/${usr.id}`)
+      .get(`/apply/${job._id}/${usr.id}`)
       .then((response) => {
         setModalMsg(response.data.msg);
         openModal();
@@ -78,142 +102,180 @@ const JobView = () => {
   };
 
   return (
-    <div className='grid grid-cols-1 md:grid-cols-4 md:divide-x divide-green-500  gap-2 min-h-screen'>
-      <div className=' w-full h-auto col-span-3'>
-        <div className='p-4'>
-          <div className='flex ml-2 gap-4 text-3xl font-normal text-stone-800'>
-            {" "}
-            <FiBriefcase className='text-green-500 mt-1' /> {job.title}
-          </div>
-          <div className='mt-4 text-gray-700  mx-2 flex md:flex-row flex-col '>
-            <div className='   flex gap-2 mr-4'>
-              <h1 className='text-lg bg-sky-200  rounded px-2 flex gap-2 font-normal'>
-                <HiOutlineOfficeBuilding className=' mt-1' />
-                Company Name:
-              </h1>
-              <h1 className='text-lg bg-sky-200 px-2 rounded font-normal'>
-                {job.authorId.organization}
-              </h1>
-            </div>
-            <div className='flex gap-2 '>
-              <h1 className='text-lg bg-blue-200 rounded px-2 flex gap-2 font-normal'>
-                <RiUserVoiceLine className=' mt-1' />
-                Posted By:
-              </h1>
-              <h1 className='text-lg bg-blue-200 rounded px-2 font-normal'>
-                {job.authorId.fullname}
-              </h1>
-            </div>
-          </div>
-          <div className='flex gap-2 text-gray-700 px-2 rounded-lg'>
-            <h1 className='text-lg flex bg-teal-200 rounded px-2 gap-2 font-normal'>
-              <HiOutlineClock className='mt-1' />
-              {Moment(job.dateOfPosting).format("d MMM YYYY")}
-            </h1>
-            <h1 className='text-lg text-gray-700 bg-rose-200 rounded px-2 flex gap-2 font-normal '>
-              <MdOutlineLockClock className='mt-1  ' />
-              <span className=''>Deadline:</span> {job.deadline}
-            </h1>
-          </div>
+    <div>
+      {fallback ? (
+        <Breadcumb pageName='Job View' back={"/appliedJobs"} pageNum={0} />
+      ) : (
+        <Breadcumb pageName='Job View' back={"/"} pageNum={pageNum} />
+      )}
 
-          <div className='text-gray-700  mx-2 flex md:flex-row flex-col '>
-            <div className='flex gap-2 mr-2'>
-              <h1 className='text-lg bg-yellow-200 px-2 rounded flex gap-2 font-normal'>
-                <SiPolywork className='mt-1' />
-                Highlighited Skills: <span className=''>{job.tags}</span>
-              </h1>
-            </div>
-            <div className='flex gap-2 '>
-              <h1 className='text-lg bg-gray-200 px-2 rounded flex gap-2 font-normal'>
-                <FiType className='mt-1' />
-                Job Type: <span className=''>{job.jobType}</span>
-              </h1>
-            </div>
-          </div>
+      <div className='grid grid-cols-1 md:grid-cols-4 md:divide-x divide-green-500  gap-2 min-h-screen'>
+        <div className=' w-full h-auto col-span-3'>
+          <div className='p-4'>
+            <div className='px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20 dark:bg-gray-800 dark:text-gray-100'>
+              <h2 className='mb-8 text-4xl font-bold leading-none text-center'>
+                {job.title}
+              </h2>
 
-          <div className='mt-6 p-6 bg-stone-100 rounded-lg'>
-            <p className='text-lg font-normal'>{parse(job.body)}</p>
+              <ul className='grid gap-3 md:grid-cols-2 lg:grid-cols-3'>
+                <li className='flex items-center space-x-2'>
+                  <HiOutlineOfficeBuilding />
+                  <span>{job.authorId.organization}</span>
+                </li>
+                <li className='flex items-center space-x-2'>
+                  <RiUserVoiceLine />
+                  <span>{job.authorId.fullname} </span>
+                </li>
+                <li className='flex items-center space-x-2'>
+                  <FiMapPin />
+                  <span>{job.jobType}</span>
+                </li>
+                <li className='flex items-center space-x-2'>
+                  <SiPolywork />
+                  <span>{job.tags}</span>
+                </li>
+                <li className='flex items-center space-x-2'>
+                  <HiOutlineClock />
+                  <span>
+                    {Moment.utc(job.dateOfPosting).format("MMM Do, YYYY")}
+                  </span>
+                </li>
+                <li className='flex items-center space-x-2'>
+                  <MdOutlineLockClock />
+                  <span>
+                    Deadline: {Moment.utc(job.deadline).format("MMM Do, YYYY")}
+                  </span>
+                </li>
+              </ul>
+            </div>
+            {todayD > deadlineD ? (
+              <p className='mb-8 p-2 inline text-base justify-center items-center text-center text-red-700 border-l-4 border-red-700 bg-red-50'>
+                Opportunity Over
+              </p>
+            ) : (
+              ""
+            )}
+            <div className='mt-4 p-4 bg-stone-100 rounded-lg'>
+              <p className='text-base font-normal'>{parse(job.body)}</p>
+            </div>
+            {usr && usr.usertype === "candidate" ? (
+              <div>
+                {status === "loading" ? (
+                  <div className=' w-full h-auto md:h-auto flex flex-col mt-10 text-center items-center justify-center'>
+                    <div className='w-16 h-16 border-4 border-dashed  rounded-full animate-spin dark:border-violet-400'></div>
+                  </div>
+                ) : (
+                  <div>
+                    {userData.skills &&
+                    userData.expertise &&
+                    userData.bio &&
+                    userData.institute &&
+                    userData.profileImage ? (
+                      <div className='block'>
+                        <button
+                          onClick={applyJob}
+                          className='mt-4 relative inline-flex items-center px-8 py-3 overflow-hidden text-indigo-600 border border-current rounded group active:text-indigo-500 focus:outline-none focus:ring'
+                          href='/download'
+                        >
+                          <span className='absolute left-0 transition-transform -translate-x-full group-hover:translate-x-4'>
+                            <svg
+                              className='w-5 h-5'
+                              xmlns='http://www.w3.org/2000/svg'
+                              fill='none'
+                              viewBox='0 0 24 24'
+                              stroke='currentColor'
+                            >
+                              <path
+                                strokeLinecap='round'
+                                strokeLinejoin='round'
+                                strokeWidth='2'
+                                d='M17 8l4 4m0 0l-4 4m4-4H3'
+                              />
+                            </svg>
+                          </span>
+
+                          <span className='text-sm font-medium transition-all group-hover:ml-4'>
+                            Apply to this job
+                          </span>
+                        </button>
+                      </div>
+                    ) : (
+                      <div className='mt-4 '>
+                        <h1 className='text-lg rounded-lg bg-rose-600 inline-block text-white px-2 py-1'>
+                          You need to complete your profile before applying to a
+                          job. We suggest you to provide your valid information
+                          and real photo in order to not getting rejected by
+                          recruiters.
+                        </h1>
+                        <h1 className='text-lg inline-block  px-2 py-1'>
+                          You can update your information and profile image
+                          anytime from
+                          <span
+                            onClick={() => navigate("/profile")}
+                            className='text-blue-700 cursor-pointer font-semibold'
+                          >
+                            {" "}
+                            Profile
+                          </span>
+                          .
+                        </h1>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <h1 className='text-lg text-red-500 font-normal py-2'>
+                ** In order to apply to a job you need to login with a
+                Job-Seeker Account
+              </h1>
+            )}
           </div>
-          {usr && usr.usertype === "candidate" ? (
-            <div className='block'>
-              <button
-                onClick={applyJob}
-                className='mt-4 relative inline-flex items-center px-8 py-3 overflow-hidden text-indigo-600 border border-current rounded group active:text-indigo-500 focus:outline-none focus:ring'
-                href='/download'
+          <div>
+            <Modal
+              appElement={document.getElementById("app")}
+              isOpen={modalIsOpen}
+              onAfterOpen={afterOpenModal}
+              onRequestClose={closeModal}
+              style={customStyles}
+              contentLabel='Apply Status Modal'
+            >
+              <h2
+                className='text-2xl'
+                ref={(_subtitle) => (subtitle = _subtitle)}
               >
-                <span className='absolute left-0 transition-transform -translate-x-full group-hover:translate-x-4'>
-                  <svg
-                    className='w-5 h-5'
-                    xmlns='http://www.w3.org/2000/svg'
-                    fill='none'
-                    viewBox='0 0 24 24'
-                    stroke='currentColor'
-                  >
-                    <path
-                      stroke-linecap='round'
-                      stroke-linejoin='round'
-                      stroke-width='2'
-                      d='M17 8l4 4m0 0l-4 4m4-4H3'
-                    />
-                  </svg>
-                </span>
+                {job.title}
+              </h2>
 
-                <span className='text-sm font-medium transition-all group-hover:ml-4'>
-                  Apply to this job
-                </span>
+              <div className='text-xl py-4'>{modalMsg}</div>
+              <button
+                onClick={closeModal}
+                className='bg-red-600 px-4 py-2 mt-2 text-white rounded-lg'
+              >
+                close
               </button>
-            </div>
-          ) : (
-            <h1 className='text-lg text-red-500 font-normal py-2'>
-              ** In order to apply to a job you need to login with a Job-Seeker
-              Account
-            </h1>
-          )}
-        </div>
-        <div>
-          <Modal
-            appElement={document.getElementById("app")}
-            isOpen={modalIsOpen}
-            onAfterOpen={afterOpenModal}
-            onRequestClose={closeModal}
-            style={customStyles}
-            contentLabel='Apply Status Modal'
-          >
-            <h2
-              className='text-2xl'
-              ref={(_subtitle) => (subtitle = _subtitle)}
-            >
-              {job.title}
-            </h2>
 
-            <div className='text-xl py-4'>{modalMsg}</div>
-            <button
-              onClick={closeModal}
-              className='bg-red-600 px-4 py-2 mt-2 text-white rounded-lg'
-            >
-              close
-            </button>
-
-            <button
-              onClick={navig}
-              className='pl-4 text-center justify-center items-center'
-            >
-              View Apply List
-            </button>
-          </Modal>
-        </div>
-      </div>
-      <div className=' w-full h-auto'>
-        <div className='p-4'>
-          <div className='flex ml-2 gap-4 text-3xl font-normal text-stone-800'>
-            {" "}
-            <AiOutlineCoffee className='text-green-500' /> Sponsored Jobs
+              <button
+                onClick={navig}
+                className='pl-4 text-center justify-center items-center'
+              >
+                View Apply List
+              </button>
+            </Modal>
           </div>
-          <p className='mt-4'>
-            {" "}
-            <span className='text-red-500'>*</span> Currently no data for this
-            section
-          </p>
+        </div>
+        <div className=' w-full h-auto'>
+          <div className='p-4'>
+            <div className='flex ml-2 gap-4 text-3xl font-normal text-stone-800'>
+              {" "}
+              <AiOutlineCoffee className='text-green-500' /> Sponsored Jobs
+            </div>
+            <p className='mt-4'>
+              {" "}
+              <span className='text-red-500'>*</span> Currently no data for this
+              section
+            </p>
+          </div>
         </div>
       </div>
     </div>

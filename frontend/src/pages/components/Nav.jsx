@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { UsersContext } from "../../hooks/UsersContext";
 import { Link } from "react-router-dom";
-import { CgMenu } from "react-icons/cg";
+import { CgMenu, CgClose } from "react-icons/cg";
 import { UserContext } from "../../App";
 
 const Nav = () => {
@@ -17,6 +17,7 @@ const Nav = () => {
           <ul className='flex flex-col lg:flex-row list-none lg:ml-auto'>
             <li className='nav-item'>
               <Link
+                onClick={() => setNavbarOpen(!navbarOpen)}
                 className='px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-white hover:opacity-75 no-underline'
                 to='/'
               >
@@ -25,6 +26,7 @@ const Nav = () => {
             </li>
             <li className='nav-item'>
               <Link
+                onClick={() => setNavbarOpen(!navbarOpen)}
                 className='px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-white hover:opacity-75 no-underline'
                 to='/login'
               >
@@ -33,6 +35,7 @@ const Nav = () => {
             </li>
             <li className='nav-item'>
               <Link
+                onClick={() => setNavbarOpen(!navbarOpen)}
                 className='px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-white hover:opacity-75 no-underline'
                 to='/reg'
               >
@@ -49,6 +52,7 @@ const Nav = () => {
             <ul className='flex flex-col lg:flex-row list-none lg:ml-auto'>
               <li className='nav-item'>
                 <Link
+                  onClick={() => setNavbarOpen(!navbarOpen)}
                   className='px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-white hover:opacity-75 no-underline'
                   to='/profile'
                 >
@@ -57,6 +61,7 @@ const Nav = () => {
               </li>
               <li className='nav-item'>
                 <Link
+                  onClick={() => setNavbarOpen(!navbarOpen)}
                   className='px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-white hover:opacity-75 no-underline'
                   to='/mypost'
                 >
@@ -65,6 +70,16 @@ const Nav = () => {
               </li>
               <li className='nav-item'>
                 <Link
+                  onClick={() => setNavbarOpen(!navbarOpen)}
+                  className='px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-white hover:opacity-75 no-underline'
+                  to='/messenger'
+                >
+                  Messenger
+                </Link>
+              </li>
+              <li className='nav-item'>
+                <Link
+                  onClick={() => setNavbarOpen(!navbarOpen)}
                   className='px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-white hover:opacity-75 no-underline'
                   to='/logout'
                 >
@@ -80,22 +95,26 @@ const Nav = () => {
             <ul className='flex flex-col lg:flex-row list-none lg:ml-auto'>
               <li className='nav-item'>
                 <Link
+                  onClick={() => setNavbarOpen(!navbarOpen)}
                   className='px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-white hover:opacity-75 no-underline'
                   to='/profile'
                 >
                   Profile
                 </Link>
               </li>
+
               <li className='nav-item'>
                 <Link
+                  onClick={() => setNavbarOpen(!navbarOpen)}
                   className='px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-white hover:opacity-75 no-underline'
-                  to='/editProfile'
+                  to='/messenger'
                 >
-                  Edit Profile
+                  Messenger
                 </Link>
               </li>
               <li className='nav-item'>
                 <Link
+                  onClick={() => setNavbarOpen(!navbarOpen)}
                   className='px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-white hover:opacity-75 no-underline'
                   to='/logout'
                 >
@@ -125,7 +144,7 @@ const Nav = () => {
               type='button'
               onClick={() => setNavbarOpen(!navbarOpen)}
             >
-              <CgMenu />
+              {!navbarOpen ? <CgMenu /> : <CgClose />}
             </button>
           </div>
           <div

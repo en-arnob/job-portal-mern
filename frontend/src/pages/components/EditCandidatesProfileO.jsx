@@ -36,155 +36,155 @@ const EditCandidatesProfile = () => {
         <Row>
           <Col lg={3} md={12} sm={12}></Col>
           <Col lg={6} md={12} sm={12}>
-            <div className="text-center">
-              <img src={EditImg} className="img-fluid" />
+            <div className='text-center'>
+              <img src={EditImg} className='img-fluid' />
             </div>
           </Col>
           <Col lg={3} md={12} sm={12}></Col>
         </Row>
         <form onSubmit={handleSubmit}>
           <Row>
-            <div className="text-center">
-              <p className="font-mono text-3xl font-extrabold text-blue-700">
+            <div className='text-center'>
+              <p className='font-mono text-3xl font-extrabold text-blue-700'>
                 Edit your Profile
               </p>
             </div>
 
             <Col lg={6} md={6} sm={12}>
-              <div className="mt-5">
-                <Card.Body className="text-center">
-                  <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                    <div class="mb-4">
+              <div className='mt-5'>
+                <Card.Body className='text-center'>
+                  <div className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'>
+                    <div className='mb-4'>
                       <label
-                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        for="grid-first-name"
+                        className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+                        for='grid-first-name'
                       >
                         Full Name
                       </label>
                       <input
-                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                        id="grid-full-name"
-                        type="text"
-                        placeholder="Enter Name"
+                        className='appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+                        id='grid-full-name'
+                        type='text'
+                        placeholder='Enter Name'
                         onChange={handleChange}
                         value={data.fullname}
-                        name="fullname"
+                        name='fullname'
                       />
 
                       <label
-                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        for="grid-user-name"
+                        className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+                        for='grid-user-name'
                       >
                         Username
                       </label>
                       <input
-                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                        id="grid-full-name"
-                        type="text"
-                        placeholder="Enter username"
+                        className='appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+                        id='grid-full-name'
+                        type='text'
+                        placeholder='Enter username'
                         onChange={handleChange}
                         value={data.username}
-                        name="username"
+                        name='username'
                       />
 
                       <label
-                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        for="grid-phone"
+                        className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+                        for='grid-phone'
                       >
                         Phone
                       </label>
                       <input
-                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                        id="grid-full-name"
-                        type="text"
-                        placeholder="Enter phone number"
+                        className='appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+                        id='grid-full-name'
+                        type='text'
+                        placeholder='Enter phone number'
                         onChange={handleChange}
                         value={data.phone}
-                        name="phone"
+                        name='phone'
                       />
 
                       <label
-                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        for="grid-birthday"
+                        className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+                        for='grid-birthday'
                       >
                         Birthday
                       </label>
                       <input
-                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                        id="grid-full-name"
-                        type="date"
+                        className='appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+                        id='grid-full-name'
+                        type='date'
                         onChange={handleChange}
                         value={data.birthday}
-                        name="birthday"
+                        name='birthday'
                       />
                       <label
-                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        for="grid-image"
+                        className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+                        for='grid-image'
                       >
                         Upload Image
                       </label>
                       <input
-                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                        id="grid-image"
-                        type="file"
+                        className='appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+                        id='grid-image'
+                        type='file'
                         //   onChange={handleChange}
                         //   value={data.phone}
-                        name="image"
+                        name='image'
                       />
 
                       <label
-                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        for="grid-gender"
+                        className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+                        for='grid-gender'
                       >
                         Select Gender
                       </label>
-                      <div class="flex">
+                      <div className='flex'>
                         <div>
-                          <div class="form-check">
+                          <div className='form-check'>
                             <input
-                              class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-sky-500 checked:bg-blue-800 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-                              type="radio"
-                              name="gender"
-                              id="flexRadioDefault1"
+                              className='form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-sky-500 checked:bg-blue-800 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer'
+                              type='radio'
+                              name='gender'
+                              id='flexRadioDefault1'
                               onChange={handleChange}
-                              value="male"
+                              value='male'
                             />
                             <label
-                              class="form-check-label inline-block text-gray-800"
-                              for="flexRadioDefault1"
+                              className='form-check-label inline-block text-gray-800'
+                              for='flexRadioDefault1'
                             >
                               Male
                             </label>
                           </div>
-                          <div class="form-check">
+                          <div className='form-check'>
                             <input
-                              class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-sky-500 checked:bg-blue-800 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-                              type="radio"
-                              name="gender"
-                              id="flexRadioDefault2"
+                              className='form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-sky-500 checked:bg-blue-800 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer'
+                              type='radio'
+                              name='gender'
+                              id='flexRadioDefault2'
                               onChange={handleChange}
-                              value="female"
+                              value='female'
                             />
                             <label
-                              class="form-check-label inline-block text-gray-800"
-                              for="flexRadioDefault2"
+                              className='form-check-label inline-block text-gray-800'
+                              for='flexRadioDefault2'
                             >
                               Female
                             </label>
                           </div>
 
-                          <div class="form-check">
+                          <div className='form-check'>
                             <input
-                              class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-sky-500 checked:bg-blue-800 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-                              type="radio"
-                              name="gender"
-                              id="flexRadioDefault3"
+                              className='form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-sky-500 checked:bg-blue-800 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer'
+                              type='radio'
+                              name='gender'
+                              id='flexRadioDefault3'
                               onChange={handleChange}
-                              value="other"
+                              value='other'
                             />
                             <label
-                              class="form-check-label inline-block text-gray-800"
-                              for="flexRadioDefault3"
+                              className='form-check-label inline-block text-gray-800'
+                              for='flexRadioDefault3'
                             >
                               Other
                             </label>
@@ -193,34 +193,34 @@ const EditCandidatesProfile = () => {
                       </div>
 
                       <label
-                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        for="grid-cover"
+                        className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+                        for='grid-cover'
                       >
                         Cover letter
                       </label>
                       <textarea
-                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                        id="grid-cover"
-                        type="text"
+                        className='appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+                        id='grid-cover'
+                        type='text'
                         onChange={handleChange}
                         value={data.coverLetter}
-                        name="coverLetter"
-                        placeholder="Write a cover letter"
+                        name='coverLetter'
+                        placeholder='Write a cover letter'
                       />
                       <label
-                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        for="grid-bio"
+                        className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+                        for='grid-bio'
                       >
                         Bio
                       </label>
                       <textarea
-                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                        id="grid-experience"
-                        type="text"
+                        className='appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+                        id='grid-experience'
+                        type='text'
                         onChange={handleChange}
                         value={data.bio}
-                        name="bio"
-                        placeholder="Write your bio"
+                        name='bio'
+                        placeholder='Write your bio'
                       />
                     </div>
                   </div>
@@ -228,162 +228,164 @@ const EditCandidatesProfile = () => {
               </div>
             </Col>
             <Col lg={6} md={6} sm={12}>
-              <div className="mt-5 md:mt-0 sm:mt-0">
-                <Card.Body className="text-center">
-                  <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                    <div class="mb-4">
+              <div className='mt-5 md:mt-0 sm:mt-0'>
+                <Card.Body className='text-center'>
+                  <div className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'>
+                    <div className='mb-4'>
                       <label
-                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        for="grid-insOrg"
+                        className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+                        for='grid-insOrg'
                       >
                         Institute/Organization
                       </label>
                       <input
-                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                        id="grid-insOrg"
-                        type="text"
-                        placeholder="Enter Institute/Organization"
+                        className='appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+                        id='grid-insOrg'
+                        type='text'
+                        placeholder='Enter Institute/Organization'
                         onChange={handleChange}
                         value={data.institute}
-                        name="institute"
+                        name='institute'
                       />
 
                       <label
-                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        for="grid-designation"
+                        className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+                        for='grid-designation'
                       >
                         Designation
                       </label>
                       <input
-                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                        id="grid-designation"
-                        type="text"
-                        placeholder="Enter designation"
+                        className='appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+                        id='grid-designation'
+                        type='text'
+                        placeholder='Enter designation'
                         onChange={handleChange}
                         value={data.designation}
-                        name="designation"
+                        name='designation'
                       />
 
                       <label
-                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        for="grid-skill"
+                        className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+                        for='grid-skill'
                       >
                         Skills
                       </label>
                       <input
-                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                        id="grid-skill"
-                        type="text"
-                        placeholder="Skill1,Skill2...."
+                        className='appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+                        id='grid-skill'
+                        type='text'
+                        placeholder='Skill1,Skill2....'
                         onChange={handleChange}
                         value={data.skills}
-                        name="skills"
+                        name='skills'
                       />
 
                       <label
-                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        for="grid-Expertisee"
+                        className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+                        for='grid-Expertisee'
                       >
                         Expertise
                       </label>
                       <input
-                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                        id="grid-Expertise"
-                        type="text"
-                        placeholder="Expertise1,Expertise2..."
+                        className='appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+                        id='grid-Expertise'
+                        type='text'
+                        placeholder='Expertise1,Expertise2...'
                         onChange={handleChange}
                         value={data.expertise}
-                        name="expertise"
+                        name='expertise'
                       />
 
                       <label
-                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        for="grid-language"
+                        className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+                        for='grid-language'
                       >
                         Language
                       </label>
                       <input
-                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                        id="grid-language"
-                        type="text"
-                        placeholder="language1,language2..."
+                        className='appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+                        id='grid-language'
+                        type='text'
+                        placeholder='language1,language2...'
                         onChange={handleChange}
                         value={data.language}
-                        name="language"
+                        name='language'
                       />
 
                       <label
-                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        for="grid-experience"
+                        className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+                        for='grid-experience'
                       >
                         Experience
                       </label>
                       <textarea
-                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                        id="grid-experience"
-                        type="text"
+                        className='appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+                        id='grid-experience'
+                        type='text'
                         onChange={handleChange}
                         value={data.experience}
-                        name="experience"
-                        placeholder="Enter experinces"
+                        name='experience'
+                        placeholder='Enter experinces'
                       />
 
                       <label
-                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        for="grid-portfolio"
+                        className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+                        for='grid-portfolio'
                       >
                         Portfolio Link
                       </label>
                       <input
-                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                        id="grid-portfolio"
-                        type="text"
-                        placeholder="Enter portfolio url"
+                        className='appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+                        id='grid-portfolio'
+                        type='text'
+                        placeholder='Enter portfolio url'
                         onChange={handleChange}
                         value={data.portfolioLink}
-                        name="portfolioLink"
+                        name='portfolioLink'
                       />
                       <label
-                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        for="grid-certificate"
+                        className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+                        for='grid-certificate'
                       >
                         Certificate
                       </label>
                       <input
-                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                        id="grid-certificate"
-                        type="text"
-                        placeholder="Online certificate only"
+                        className='appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+                        id='grid-certificate'
+                        type='text'
+                        placeholder='Online certificate only'
                         onChange={handleChange}
                         value={data.certification}
-                        name="certification"
+                        name='certification'
                       />
 
                       <label
-                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        for="grid-resume"
+                        className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+                        for='grid-resume'
                       >
                         Upload Resume
                       </label>
                       <input
-                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                        id="grid-resume"
-                        type="file"
+                        className='appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+                        id='grid-resume'
+                        type='file'
                         //   onChange={handleChange}
                         //   value={data.resume}
-                        name="resume"
+                        name='resume'
                       />
                     </div>
 
-                    <div class="mb-6">
+                    <div className='mb-6'>
                       {error && (
-                        <p class="text-red-500 text-xs italic">{error.msg}</p>
+                        <p className='text-red-500 text-xs italic'>
+                          {error.msg}
+                        </p>
                       )}
                     </div>
-                    <div class="content-center">
+                    <div className='content-center'>
                       <button
-                        class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                        type="submit"
+                        className='bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+                        type='submit'
                       >
                         Update Profile
                       </button>

@@ -17,10 +17,10 @@ const EditClientProfile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = `http://127.0.0.1:8000/userDetails/${user.id}/${user.usertype}`;
+      const url = `/userDetails/${user.id}/${user.usertype}`;
       // eslint-disable-next-line no-unused-vars
       const { data: res } = await axios.patch(url, data);
-      navigate("/");
+      navigate("/profile");
     } catch (error) {
       if (
         error.response &&
@@ -35,11 +35,11 @@ const EditClientProfile = () => {
     <div className=''>
       <form onSubmit={handleSubmit}>
         <div className='mx-6 mt-4 '>
-          <div class='bg-white  p-3 shadow-sm rounded-lg'>
-            <div class='flex items-center space-x-2 font-semibold text-gray-900 leading-8'>
+          <div className='bg-white  p-3 shadow-sm rounded-lg'>
+            <div className='flex items-center space-x-2 font-semibold text-gray-900 leading-8'>
               <span clas='text-green-500'>
                 <svg
-                  class='h-5'
+                  className='h-5'
                   xmlns='http://www.w3.org/2000/svg'
                   fill='none'
                   viewBox='0 0 24 24'
@@ -48,18 +48,18 @@ const EditClientProfile = () => {
                   <path
                     stroke-linecap='round'
                     stroke-linejoin='round'
-                    stroke-width='2'
+                    strokeWidth='2'
                     d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'
                   />
                 </svg>
               </span>
-              <span class='tracking-wide'>About</span>
+              <span className='tracking-wide'>About</span>
             </div>
-            <div class='text-gray-700'>
-              <div class='grid md:grid-cols-2 text-sm'>
-                <div class='grid grid-cols-2'>
-                  <div class='px-4 py-2 font-semibold'>Full Name</div>
-                  <div class='px-4 py-2'>
+            <div className='text-gray-700'>
+              <div className='grid md:grid-cols-2 text-sm'>
+                <div className='grid grid-cols-2'>
+                  <div className='px-4 py-2 font-semibold'>Full Name</div>
+                  <div className='px-4 py-2'>
                     <input
                       className='appearance-none block w-full h-5 rounded-md p-3 focus:bg-slate-200 focus:text-slate-700'
                       type='text'
@@ -70,16 +70,25 @@ const EditClientProfile = () => {
                     />
                   </div>
                 </div>
-                <div class='grid grid-cols-2'>
-                  <div class='px-4 py-2 font-semibold'>Address</div>
-                  <div class='px-4 py-2'>{currentData.officeAdress}</div>
+                <div className='grid grid-cols-2'>
+                  <div className='px-4 py-2 font-semibold'>Address</div>
+                  <div className='px-4 py-2'>
+                    <input
+                      className='appearance-none block w-full h-5 rounded-md p-3  focus:bg-slate-200 focus:text-slate-700'
+                      type='text'
+                      placeholder={currentData.address}
+                      onChange={handleChange}
+                      value={data.address}
+                      name='address'
+                    />
+                  </div>
                 </div>
-                <div class='grid grid-cols-2'>
-                  <div class='px-4 py-2 font-semibold'>Gender</div>
-                  <div class='px-4 py-2'>
-                    <div class='form-check'>
+                <div className='grid grid-cols-2'>
+                  <div className='px-4 py-2 font-semibold'>Gender</div>
+                  <div className='px-4 py-2'>
+                    <div className='form-check'>
                       <input
-                        class='form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 focus:bg-slate-200 focus:text-slate-700 checked:bg-blue-600 checked:border-blue-600 transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer'
+                        className='form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 focus:bg-slate-200 focus:text-slate-700 checked:bg-blue-600 checked:border-blue-600 transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer'
                         type='radio'
                         name='gender'
                         id='flexRadioDefault1'
@@ -87,15 +96,15 @@ const EditClientProfile = () => {
                         value='male'
                       />
                       <label
-                        class='form-check-label inline-block text-gray-800'
+                        className='form-check-label inline-block text-gray-800'
                         for='flexRadioDefault1'
                       >
                         Male
                       </label>
                     </div>
-                    <div class='form-check'>
+                    <div className='form-check'>
                       <input
-                        class='form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 focus:bg-slate-200 focus:text-slate-700 checked:bg-blue-600 checked:border-blue-600 transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer'
+                        className='form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 focus:bg-slate-200 focus:text-slate-700 checked:bg-blue-600 checked:border-blue-600 transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer'
                         type='radio'
                         name='gender'
                         id='flexRadioDefault2'
@@ -103,15 +112,15 @@ const EditClientProfile = () => {
                         value='female'
                       />
                       <label
-                        class='form-check-label inline-block text-gray-800'
+                        className='form-check-label inline-block text-gray-800'
                         for='flexRadioDefault2'
                       >
                         Female
                       </label>
                     </div>
-                    <div class='form-check'>
+                    <div className='form-check'>
                       <input
-                        class='form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 focus:bg-slate-200 focus:text-slate-700 checked:bg-blue-600 checked:border-blue-600 transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer'
+                        className='form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 focus:bg-slate-200 focus:text-slate-700 checked:bg-blue-600 checked:border-blue-600 transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer'
                         type='radio'
                         name='gender'
                         id='flexRadioDefault3'
@@ -119,7 +128,7 @@ const EditClientProfile = () => {
                         value='other'
                       />
                       <label
-                        class='form-check-label inline-block text-gray-800'
+                        className='form-check-label inline-block text-gray-800'
                         for='flexRadioDefault2'
                       >
                         Other
@@ -127,9 +136,9 @@ const EditClientProfile = () => {
                     </div>
                   </div>
                 </div>
-                <div class='grid grid-cols-2'>
-                  <div class='px-4 py-2 font-semibold'>Contact No.</div>
-                  <div class='px-4 py-2'>
+                <div className='grid grid-cols-2'>
+                  <div className='px-4 py-2 font-semibold'>Contact No.</div>
+                  <div className='px-4 py-2'>
                     <input
                       className='appearance-none block w-full h-5 rounded-md p-3  focus:bg-slate-200 focus:text-slate-700'
                       type='text'
@@ -140,9 +149,9 @@ const EditClientProfile = () => {
                     />
                   </div>
                 </div>
-                <div class='grid grid-cols-2'>
-                  <div class='px-4 py-2 font-semibold'>NID</div>
-                  <div class='px-4 py-2'>
+                <div className='grid grid-cols-2'>
+                  <div className='px-4 py-2 font-semibold'>NID</div>
+                  <div className='px-4 py-2'>
                     <input
                       className='appearance-none block w-full h-5 rounded-md p-3  focus:bg-slate-200 focus:text-slate-700'
                       id='grid-nid'
@@ -154,11 +163,11 @@ const EditClientProfile = () => {
                     />
                   </div>
                 </div>
-                <div class='grid grid-cols-2'>
-                  <div class='px-4 py-2 font-semibold'>
+                <div className='grid grid-cols-2'>
+                  <div className='px-4 py-2 font-semibold'>
                     Last/Current Organization
                   </div>
-                  <div class='px-4 py-2'>
+                  <div className='px-4 py-2'>
                     <input
                       className='appearance-none block w-full h-5 rounded-md p-3  focus:bg-slate-200 focus:text-slate-700'
                       id='grid-insOrg'
@@ -170,9 +179,9 @@ const EditClientProfile = () => {
                     />
                   </div>
                 </div>
-                <div class='grid grid-cols-2'>
-                  <div class='px-4 py-2 font-semibold'>Designation</div>
-                  <div class='px-4 py-2'>
+                <div className='grid grid-cols-2'>
+                  <div className='px-4 py-2 font-semibold'>Designation</div>
+                  <div className='px-4 py-2'>
                     <input
                       className='appearance-none block w-full h-5 rounded-md p-3  focus:bg-slate-200 focus:text-slate-700'
                       id='grid-designation'
@@ -184,17 +193,17 @@ const EditClientProfile = () => {
                     />
                   </div>
                 </div>
-                <div class='grid grid-cols-2'>
-                  <div class='px-4 py-2 font-semibold'>Email</div>
-                  <div class='px-4 py-2'>
-                    <a class='text-blue-800' href='mailto:jane@example.com'>
+                <div className='grid grid-cols-2'>
+                  <div className='px-4 py-2 font-semibold'>Email</div>
+                  <div className='px-4 py-2'>
+                    <a className='text-blue-800' href='mailto:jane@example.com'>
                       {currentData.email}
                     </a>
                   </div>
                 </div>
-                <div class='grid grid-cols-2'>
-                  <div class='px-4 py-2 font-semibold'>Birthday</div>
-                  <div class='px-4 py-2'>
+                <div className='grid grid-cols-2'>
+                  <div className='px-4 py-2 font-semibold'>Birthday</div>
+                  <div className='px-4 py-2'>
                     <input
                       className='appearance-none block w-full h-5 rounded-md p-3  focus:bg-slate-200 focus:text-slate-700'
                       type='date'
@@ -204,9 +213,9 @@ const EditClientProfile = () => {
                     />
                   </div>
                 </div>
-                <div class='grid grid-cols-2'>
-                  <div class='px-4 py-2 font-semibold'>Office Address</div>
-                  <div class='px-4 py-2'>
+                <div className='grid grid-cols-2'>
+                  <div className='px-4 py-2 font-semibold'>Office Address</div>
+                  <div className='px-4 py-2'>
                     <input
                       className='appearance-none block w-full h-5 rounded-md p-3  focus:bg-slate-200 focus:text-slate-700'
                       id='grid-address'
@@ -218,9 +227,9 @@ const EditClientProfile = () => {
                     />
                   </div>
                 </div>
-                <div class='grid grid-cols-2'>
-                  <div class='px-4 py-2 font-semibold'>Website link</div>
-                  <div class='px-4 py-2'>
+                <div className='grid grid-cols-2'>
+                  <div className='px-4 py-2 font-semibold'>Website link</div>
+                  <div className='px-4 py-2'>
                     <input
                       className='appearance-none block w-full h-5 rounded-md p-3  focus:bg-slate-200 focus:text-slate-700'
                       id='grid-website'
@@ -234,12 +243,14 @@ const EditClientProfile = () => {
                 </div>
               </div>
             </div>
-            <div class='mb-6'>
-              {error && <p class='text-red-500 text-xs italic'>{error.msg}</p>}
+            <div className='mb-6'>
+              {error && (
+                <p className='text-red-500 text-xs italic'>{error.msg}</p>
+              )}
             </div>
             <button
               type='submit'
-              class='block w-full text-blue-800 text-sm font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4'
+              className='block w-full text-blue-800 text-sm font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4'
             >
               Update Profile
             </button>

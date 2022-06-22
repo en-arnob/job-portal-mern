@@ -3,24 +3,31 @@ import TextTruncate from "react-text-truncate";
 import { RiUserVoiceLine } from "react-icons/ri";
 import { HiOutlineOfficeBuilding, HiOutlineClock } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
+import Moment from "moment";
 
-const JobCard = ({ job }) => {
+const JobCard = ({ job, pageNumber }) => {
   const navigate = useNavigate();
-  const postDate = job.dateOfPosting;
-  const cdate = new Date(postDate).toString();
+
+  // console.log(pageNumber);
 
   const toJobViewComponent = () => {
-    navigate("/jobView", { state: { job } });
+    navigate("/jobView", { state: { job, pageNumber } });
   };
+
   return (
-    <div className='col-span-2 mx-2'>
+    <div
+      onClick={() => {
+        toJobViewComponent();
+      }}
+      className='col-span-2 mx-2 lg:h-96'
+    >
       <h1
         className='relative block p-8 overflow-hidden border border-gray-100 rounded-lg'
         href=''
       >
         <span className='absolute inset-x-0 bottom-0 h-2  bg-gradient-to-r from-green-300 via-blue-500 to-purple-600'></span>
 
-        <div className='justify-between sm:flex'>
+        <div className='justify-between sm:flex '>
           <div>
             <h5 className='text-xl font-medium text-indigo-900'>{job.title}</h5>
             <p className='flex gap-3 font-normal text-lg  text-blue-700'>
@@ -48,18 +55,18 @@ const JobCard = ({ job }) => {
           className='mt-2 cursor-pointer text-gray-600 sm:pr-8 text-sm font-normal  '
         >
           <TextTruncate
-            line={2}
+            line={1}
             element='span'
             truncateText='…'
-            text={job.body.replace(/<[^>]+>/g, "")}
+            text={job.body.replace(/<[^>]+>/g, " ").replace(/&.*;/g, " ")}
             textTruncateChild={
               <span
                 onClick={() => {
                   toJobViewComponent();
                 }}
-                className='text-indigo-600 font-semibold mx-2 cursor-pointer'
+                className='text-indigo-600 font-normal mx-2 cursor-pointer'
               >
-                Read more on full post
+                Read more
               </span>
             }
           />
@@ -68,7 +75,9 @@ const JobCard = ({ job }) => {
         <dl className='flex mt-6'>
           <div className='flex flex-col-reverse'>
             <dt className='text-sm font-medium text-gray-600'>{job.tags}</dt>
-            <dd className='text-sm  text-red-800'>Deadline: {job.deadline}</dd>
+            <dd className='text-sm  text-red-800'>
+              Deadline: {Moment.utc(job.deadline).format("MMM Do, YYYY")}
+            </dd>
           </div>
 
           <div className='flex flex-col-reverse ml-3 sm:ml-6'>
@@ -79,7 +88,8 @@ const JobCard = ({ job }) => {
           </div>
         </dl>
         <p className='text-xs flex gap-2  text-gray-800'>
-          <HiOutlineClock className='text-sm' /> {cdate}
+          <HiOutlineClock className='text-sm' />{" "}
+          {Moment.utc(job.dateOfPosting).format("MMM Do, YYYY")}
         </p>
       </h1>
     </div>

@@ -4,6 +4,7 @@ import axios from "axios";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import RegImg from "../../assets/images/RegCandidates.svg";
 import Modal from "react-modal";
+import PasswordStrengthBar from "react-password-strength-bar";
 
 const customStyles = {
   content: {
@@ -21,7 +22,7 @@ Modal.setAppElement("*");
 const RegistrationCandidates = () => {
   const [data, setData] = useState({
     usertype: "candidate",
-    username: "",
+    // username: "",
     fullname: "",
     email: "",
     phone: "",
@@ -30,6 +31,9 @@ const RegistrationCandidates = () => {
     birthday: "",
   });
   const [error, setError] = useState(" ");
+  const [passError, setPassError] = useState("");
+  const [ageError, setAgeError] = useState("");
+  const [age, setAge] = useState(0);
 
   let subtitle;
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -47,26 +51,60 @@ const RegistrationCandidates = () => {
     setIsOpen(false);
   }
   const [modalMsg, setModalMsg] = useState(" ");
-
+  const getAge = (birthDate) =>
+    Math.floor((new Date() - new Date(birthDate).getTime()) / 3.15576e10);
   const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.name]: input.value });
+    setAge(getAge(data.birthday));
   };
+  // let age = 0;
+
+  // useEffect = () => {
+  //   if (data.birthday) {
+  //     setAge(getAge(data.birthday));
+  //     console.log(getAge(data.birthday));
+  //   }
+  // };
+  // const checkValidation = (e) => {
+  //   setConfirmPassword(e);
+  //   console.log(confirmPassword, data.password);
+  //   console.log(data.password);
+  //   if (data.password !== confirmPassword) {
+  //     console.log("Passwrd are not same");
+  //   } else {
+  //     console.log("matched");
+  //   }
+  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const url = "http://127.0.0.1:8000/candidate-register";
-      const { data: res } = await axios.post(url, data);
+    const confirmPassword = document.getElementById("confirmPassword").value;
+    if (data.password === confirmPassword) {
+      setPassError("");
 
-      setModalMsg(res.msg);
-      openModal();
-    } catch (error) {
-      if (
-        error.response &&
-        error.response.status >= 400 &&
-        error.response.status <= 500
-      ) {
-        setError(error.response.data.errors[0]);
+      if (age >= 16) {
+        setAgeError("");
+        try {
+          const url = "/candidate-register";
+          const { data: res } = await axios.post(url, data);
+
+          setModalMsg(res.msg);
+          openModal();
+        } catch (error) {
+          if (
+            error.response &&
+            error.response.status >= 400 &&
+            error.response.status <= 500
+          ) {
+            setError(error.response.data.errors[0]);
+          }
+        }
+      } else {
+        setError("");
+        setAgeError("User age should be at least 16 year for creating account");
       }
+    } else {
+      setError("");
+      setPassError("Password are not same!!");
     }
   };
   return (
@@ -80,18 +118,18 @@ const RegistrationCandidates = () => {
                   Sign UP as Job Seeker
                 </p>
                 <form
-                  class='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'
+                  className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'
                   onSubmit={handleSubmit}
                 >
-                  <div class='mb-4'>
+                  <div className='mb-4'>
                     <label
-                      class='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+                      className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
                       for='grid-first-name'
                     >
                       Full Name
                     </label>
                     <input
-                      class='appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+                      className='appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
                       id='grid-full-name'
                       type='text'
                       placeholder='Enter Name'
@@ -100,30 +138,30 @@ const RegistrationCandidates = () => {
                       name='fullname'
                     />
 
-                    <label
-                      class='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
-                      for='grid-user-name'
+                    {/* <label
+                      className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                      for="grid-user-name"
                     >
                       Username
                     </label>
                     <input
-                      class='appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
-                      id='grid-full-name'
-                      type='text'
-                      placeholder='Enter username'
+                      className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                      id="grid-full-name"
+                      type="text"
+                      placeholder="Enter username"
                       onChange={handleChange}
                       value={data.username}
-                      name='username'
-                    />
+                      name="username"
+                    /> */}
 
                     <label
-                      class='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+                      className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
                       for='grid-email'
                     >
                       Email
                     </label>
                     <input
-                      class='appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+                      className='appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
                       id='grid-full-name'
                       type='email'
                       placeholder='Enter email address'
@@ -133,13 +171,13 @@ const RegistrationCandidates = () => {
                     />
 
                     <label
-                      class='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+                      className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
                       for='grid-phone'
                     >
                       Phone
                     </label>
                     <input
-                      class='appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+                      className='appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
                       id='grid-full-name'
                       type='text'
                       placeholder='Enter phone number'
@@ -149,31 +187,33 @@ const RegistrationCandidates = () => {
                     />
 
                     <label
-                      class='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+                      className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
                       for='grid-birthday'
                     >
                       Birthday
                     </label>
                     <input
-                      class='appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+                      className='appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
                       id='grid-full-name'
                       type='date'
                       onChange={handleChange}
                       value={data.birthday}
                       name='birthday'
                     />
-
+                    {ageError && (
+                      <p className='text-red-500 text-xs italic'>{ageError}</p>
+                    )}
                     <label
-                      class='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+                      className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
                       for='grid-gender'
                     >
                       Select Gender
                     </label>
-                    <div class='flex'>
+                    <div className='flex'>
                       <div>
-                        <div class='form-check'>
+                        <div className='form-check'>
                           <input
-                            class='form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-sky-500 checked:bg-blue-800 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer'
+                            className='form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-sky-500 checked:bg-blue-800 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer'
                             type='radio'
                             name='gender'
                             id='flexRadioDefault1'
@@ -181,15 +221,15 @@ const RegistrationCandidates = () => {
                             value='male'
                           />
                           <label
-                            class='form-check-label inline-block text-gray-800'
+                            className='form-check-label inline-block text-gray-800'
                             for='flexRadioDefault1'
                           >
                             Male
                           </label>
                         </div>
-                        <div class='form-check'>
+                        <div className='form-check'>
                           <input
-                            class='form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-sky-500 checked:bg-blue-800 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer'
+                            className='form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-sky-500 checked:bg-blue-800 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer'
                             type='radio'
                             name='gender'
                             id='flexRadioDefault2'
@@ -197,16 +237,16 @@ const RegistrationCandidates = () => {
                             value='female'
                           />
                           <label
-                            class='form-check-label inline-block text-gray-800'
+                            className='form-check-label inline-block text-gray-800'
                             for='flexRadioDefault2'
                           >
                             Female
                           </label>
                         </div>
 
-                        <div class='form-check'>
+                        <div className='form-check'>
                           <input
-                            class='form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-sky-500 checked:bg-blue-800 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer'
+                            className='form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-sky-500 checked:bg-blue-800 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer'
                             type='radio'
                             name='gender'
                             id='flexRadioDefault3'
@@ -214,7 +254,7 @@ const RegistrationCandidates = () => {
                             value='other'
                           />
                           <label
-                            class='form-check-label inline-block text-gray-800'
+                            className='form-check-label inline-block text-gray-800'
                             for='flexRadioDefault3'
                           >
                             Other
@@ -224,15 +264,15 @@ const RegistrationCandidates = () => {
                     </div>
                   </div>
 
-                  <div class='mb-6'>
+                  <div className='mb-6'>
                     <label
-                      class='block text-gray-700 text-sm font-bold mb-2'
+                      className='block text-gray-700 text-sm font-bold mb-2'
                       for='password'
                     >
                       Password
                     </label>
                     <input
-                      class='appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+                      className='appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
                       id='grid-password'
                       type='password'
                       placeholder='******************'
@@ -240,29 +280,35 @@ const RegistrationCandidates = () => {
                       value={data.password}
                       name='password'
                     />
+                    <PasswordStrengthBar password={data.password} />
+
                     <label
-                      class='block text-gray-700 text-sm font-bold mb-2'
+                      className='block text-gray-700 text-sm font-bold mb-2'
                       for='password'
                     >
                       Confirm Password
                     </label>
                     <input
-                      class='appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
-                      id='grid-password'
+                      className='appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+                      id='confirmPassword'
                       type='password'
                       placeholder='******************'
-                      // onChange={handleChange}
-                      // value={data.confirmPassword}
-                      // name="confirmPassword"
+                      // onChange={(e) => checkValidation(e.target.value)}
+                      // value={confirmPassword}
+                      name='confirmPassword'
                     />
+
+                    {passError && (
+                      <p className='text-red-500 text-xs italic'>{passError}</p>
+                    )}
                     {error && (
-                      <p class='text-red-500 text-xs italic'>{error.msg}</p>
+                      <p className='text-red-500 text-xs italic'>{error.msg}</p>
                     )}
                   </div>
 
-                  <div class='content-center'>
+                  <div className='content-center'>
                     <button
-                      class='bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+                      className='bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
                       type='submit'
                     >
                       Sign Up

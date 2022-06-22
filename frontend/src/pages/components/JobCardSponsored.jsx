@@ -10,7 +10,7 @@ const JobCardSponsored = () => {
         className='relative block p-8 overflow-hidden border bg-green-50 border-gray-100 rounded-lg'
         href=''
       >
-        <span class='absolute inset-x-0 bottom-0 h-2  bg-gradient-to-r from-green-500 via-green-500 to-green-900'></span>
+        <span className='absolute inset-x-0 bottom-0 h-2  bg-gradient-to-r from-green-500 via-green-500 to-green-900'></span>
 
         <div className='justify-between sm:flex'>
           <div>
@@ -50,20 +50,22 @@ const JobCardSponsored = () => {
           />
         </div>
 
-        <dl class='flex mt-6'>
-          <div class='flex flex-col-reverse'>
-            <dt class='text-sm font-medium text-gray-600'>
+        <dl className='flex mt-6'>
+          <div className='flex flex-col-reverse'>
+            <dt className='text-sm font-medium text-gray-600'>
               #JavaScript #Angular
             </dt>
-            <dd class='text-sm  text-stone-800'>Deadline: 31st June, 2022</dd>
+            <dd className='text-sm  text-stone-800'>
+              Deadline: 31st June, 2022
+            </dd>
           </div>
 
-          <div class='flex flex-col-reverse ml-3 sm:ml-6'>
-            <dt class='text-sm font-medium text-green-600'>Remote</dt>
-            <dd class='text-sm  text-gray-800'>Vaccancy: 3</dd>
+          <div className='flex flex-col-reverse ml-3 sm:ml-6'>
+            <dt className='text-sm font-medium text-green-600'>Remote</dt>
+            <dd className='text-sm  text-gray-800'>Vaccancy: 3</dd>
           </div>
         </dl>
-        <p class='text-xs flex gap-2  text-gray-800'>
+        <p className='text-xs flex gap-2  text-gray-800'>
           <HiOutlineClock className='text-sm' /> Thu May 19 2022 03:22:35
           GMT+0600 (Bangladesh Standard Time)
         </p>

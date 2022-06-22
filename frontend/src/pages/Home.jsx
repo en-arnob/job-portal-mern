@@ -4,7 +4,7 @@ import { UsersContext } from "../hooks/UsersContext";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { AiOutlineArrowDown } from "react-icons/ai";
 import { GoTasklist } from "react-icons/go";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import axios from "axios";
 import JobsSection from "./components/JobsSection";
@@ -15,6 +15,8 @@ const Home = () => {
   const [jobs, setJobs] = useState([]);
   const [errors, setErrors] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [status, setStatus] = useState("");
+  const location = useLocation();
 
   //pagination things
 
@@ -29,22 +31,24 @@ const Home = () => {
   }, []);
 
   const getAllJobs = () => {
+    setStatus("loading");
     axios
-      .get("http://127.0.0.1:8000/api/jobs/all")
+      .get("/api/jobs/all")
       .then((response) => {
         const allJobs = response.data.jobs;
         setJobs(allJobs);
-        // console.log(allJobs);
+        setStatus("success");
       })
       .catch((error) => {
         setErrors(error);
+        setStatus("error");
       });
   };
 
   return (
     <div className='text-xl min-h-screen'>
       {user && (
-        <header className='bg-gradient-to-r from-indigo-200 via-red-200 to-yellow-100 rounded-lg md:mx-6'>
+        <header className='bg-gradient-to-r from-indigo-200 via-red-200 to-yellow-100 md:rounded-lg md:mx-6'>
           <div className='max-w-screen-xl px-4 py-8 mx-auto sm:py-12 sm:px-6 lg:px-8'>
             <div className='sm:justify-between sm:items-center sm:flex'>
               <div className='text-center sm:text-left'>
@@ -110,14 +114,14 @@ const Home = () => {
                   <div className='flex gap-2 justify-between'>
                     <button
                       onClick={() => navigate("/createPost")}
-                      className='flex gap-2 items-center justify-center px-5 py-3 text-sm font-medium text-white transition bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring'
+                      className='flex gap-2 items-center justify-center px-3 py-3 text-sm font-medium text-white transition bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring'
                       type='button'
                     >
                       Create Job <AiOutlineArrowDown className='text-lg' />
                     </button>
                     <button
                       onClick={() => navigate("/show-UserCandidates")}
-                      className='flex gap-2 items-center justify-center px-5 py-3 text-sm font-medium text-white transition bg-blue-600 rounded-lg hover:bg-blue-900 focus:outline-none focus:ring'
+                      className='flex gap-2 items-center justify-center px-3 py-3 text-sm font-medium text-white transition bg-blue-600 rounded-lg hover:bg-blue-900 focus:outline-none focus:ring'
                       type='button'
                     >
                       Available Job Seekers
@@ -144,7 +148,13 @@ const Home = () => {
       <h1 className='flex items-center justify-center gap-2 text-center font-normal text-2xl p-4'>
         Latest job offerings nearby <FaMapMarkerAlt className='text-red-500' />
       </h1>
-      <JobsSection jobs={jobs} errors={errors} searchTerm={searchTerm} />
+      <JobsSection
+        jobs={jobs}
+        status={status}
+        errors={errors}
+        searchTerm={searchTerm}
+        location={location}
+      />
     </div>
   );
 };
