@@ -20,7 +20,7 @@ app.use(morgan("dev"));
 
 // rate limit of ip req
 const limit = rateLimit({
-  max: 100,
+  max: 200,
   windowMs: 15 * 60 * 1000,
   message: "Too many request from this IP, please try again after an hour",
 });
@@ -41,9 +41,17 @@ app.use(mongoSanitize());
 //routes
 app.use(routes);
 
-app.get("/", (req, res) => {
-  res.send("Hello Symstar!");
-});
+if(process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '/frontend/build')))
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html'))
+  })
+} else{
+  app.get("/", (req, res) => {
+    res.send("Hello Symstar!");
+  });
+}
+
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
   console.log(`Server running on port: ${PORT}`);
