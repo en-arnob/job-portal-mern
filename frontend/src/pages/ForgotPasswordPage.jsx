@@ -8,7 +8,6 @@ const ForgotPasswordPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const usertype = location.state.usertype;
-  console.log(usertype);
 
   const [data, setData] = useState({
     email: "",

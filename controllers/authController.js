@@ -114,14 +114,14 @@ exports.clientRegPostController = async (req, res) => {
         gender,
       });
       let transporter = nodemailer.createTransport({
-        name: 'laptop-repair-putney.co.uk',
+        name: "laptop-repair-putney.co.uk",
         pool: true,
-        host: 'mail.laptop-repair-putney.co.uk', //<----change
-        port: 587,               //<----change
-        secure: false,           //<----change
+        host: "mail.laptop-repair-putney.co.uk", //<----change
+        port: 587, //<----change
+        secure: false, //<----change
         auth: {
-          user: 'jobtest@laptop-repair-putney.co.uk',
-          pass: 'Email@Test.Job247',
+          user: "jobtest@laptop-repair-putney.co.uk",
+          pass: "Email@Test.Job247",
         },
         tls: {
           rejectUnauthorized: false,
@@ -189,14 +189,14 @@ exports.candidateRegPostController = async (req, res) => {
         gender,
       });
       let transporter = nodemailer.createTransport({
-        name: 'laptop-repair-putney.co.uk',
+        name: "laptop-repair-putney.co.uk",
         pool: true,
-        host: 'mail.laptop-repair-putney.co.uk', //<----change
-        port: 587,               //<----change
-        secure: false,           //<----change
+        host: "mail.laptop-repair-putney.co.uk", //<----change
+        port: 587, //<----change
+        secure: false, //<----change
         auth: {
-          user: 'jobtest@laptop-repair-putney.co.uk',
-          pass: 'Email@Test.Job247',
+          user: "jobtest@laptop-repair-putney.co.uk",
+          pass: "Email@Test.Job247",
         },
         tls: {
           rejectUnauthorized: false,
@@ -260,14 +260,14 @@ exports.clientLoginPostController = async (req, res) => {
         }).save();
       }
       let transporter = nodemailer.createTransport({
-        name: 'laptop-repair-putney.co.uk',
+        name: "laptop-repair-putney.co.uk",
         pool: true,
-        host: 'mail.laptop-repair-putney.co.uk', //<----change
-        port: 587,               //<----change
-        secure: false,           //<----change
+        host: "mail.laptop-repair-putney.co.uk", //<----change
+        port: 587, //<----change
+        secure: false, //<----change
         auth: {
-          user: 'jobtest@laptop-repair-putney.co.uk',
-          pass: 'Email@Test.Job247',
+          user: "jobtest@laptop-repair-putney.co.uk",
+          pass: "Email@Test.Job247",
         },
         tls: {
           rejectUnauthorized: false,
@@ -338,14 +338,14 @@ exports.candidateLoginPostController = async (req, res) => {
         }).save();
       }
       let transporter = nodemailer.createTransport({
-        name: 'laptop-repair-putney.co.uk',
+        name: "laptop-repair-putney.co.uk",
         pool: true,
-        host: 'mail.laptop-repair-putney.co.uk', //<----change
-        port: 587,               //<----change
-        secure: false,           //<----change
+        host: "mail.laptop-repair-putney.co.uk", //<----change
+        port: 587, //<----change
+        secure: false, //<----change
         auth: {
-          user: 'jobtest@laptop-repair-putney.co.uk',
-          pass: 'Email@Test.Job247',
+          user: "jobtest@laptop-repair-putney.co.uk",
+          pass: "Email@Test.Job247",
         },
         tls: {
           rejectUnauthorized: false,
@@ -450,8 +450,8 @@ exports.generatePdf = (req, res) => {
   const pdfTemplate = require("../documents/index");
   const options = {
     height: "42cm",
-    width: "29.7cm",
-    timeout: "6000",
+    width: "35.7cm",
+    timeout: "10000",
   };
   console.log("Let's generate");
   pdf.create(pdfTemplate(req.body), options).toFile("Resume.pdf", (err) => {

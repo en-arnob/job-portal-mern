@@ -12,6 +12,8 @@ module.exports = (values) => {
     facebook,
     instagram,
 
+    // userImage
+    profileImage,
     // Education Information
     institute,
 
@@ -157,7 +159,7 @@ module.exports = (values) => {
 		height: 120px;
 		text-align: center;
 		font-family: 'Roboto Slab';
-		font-size: 40px;
+		font-size: 30px;
 		letter-spacing: 8px;
 		font-weight: 100;
 		line-height: 60px;
@@ -203,30 +205,21 @@ module.exports = (values) => {
 		z-index: 100;
 		margin: 0;
 		color: #000;
-		height: 250px;
-		width: 250px;
-	  }
-	  .logo .logo-svg {
-		height: 100%;
-		width: 100%;
-		stroke: #000;
-		cursor: pointer;
+		height: 350px;
+		width: 350px;
 	  }
 	  .logo .logo-text {
 		display: false;
-		position: absolute;
-		margin: false;
-		top: 30%;
-		left: 30%;
-		right: 20%;
-		bottom: ;
-		cursor: pointer;
-		font-family: 'Roboto Slab', serif;
-		font-size: 20px;
-		letter-spacing: 0px;
-		font-weight: 400;
-		line-height: 30px;
-		font-style: normal;
+          position: absolute;
+          margin: false;
+          top: -7%;
+          bottom: 0;
+          cursor: pointer;
+	  }
+	  .imgCust{
+		height: 300px;
+		width:300px;
+		border-radius: 50%;
 	  }
 	  .social {
 		padding-left: 10px;
@@ -286,7 +279,7 @@ module.exports = (values) => {
 		.name {
 		  color: #fff;
 		  font-family: 'Roboto Slab';
-		  font-size: 38px;
+		  font-size: 30px;
 		  letter-spacing: 6px;
 		  font-weight: 100;
 		  line-height: 48px;
@@ -306,10 +299,7 @@ module.exports = (values) => {
         <div class="side-bar">
             <div class="mugshot">
                 <div class="logo">
-                    <svg viewbox="0 0 80 80" class="rela-block logo-svg">
-                        <path d="M 10 10 L 52 10 L 72 30 L 72 70 L 30 70 L 10 50 Z" stroke-width="2.5" fill="none"/>
-                    </svg>
-                    <p class="logo-text">${fullname}</p>
+				<img src="https://avatars.githubusercontent.com/u/47500806?s=400&u=b1b7328fd58d385d641cd98b2b19d4916e737107&v=4" alt="" class="logo-text imgCust">
                 </div>
 			</div>
 			<!--

@@ -5,7 +5,6 @@ import dummy from "../../assets/images/blank-profile-picture.webp";
 const Conversation = ({ conversation, currentUser }) => {
   const [user, setUser] = useState(null);
 
-  console.log(currentUser.usertype);
   useEffect(() => {
     const friendId = conversation.members.find((m) => m !== currentUser.id);
     const getUser = async () => {
@@ -26,7 +25,6 @@ const Conversation = ({ conversation, currentUser }) => {
     };
     getUser();
   }, [currentUser, conversation]);
-  console.log(user);
   return (
     <div className="conversation">
       <img className="conversationImg rounded-full" alt="profile" src={dummy} />
