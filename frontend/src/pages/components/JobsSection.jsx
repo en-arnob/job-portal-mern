@@ -32,6 +32,8 @@ const JobsSection = (props) => {
         return post;
       } else if (post.title.toLowerCase().includes(searchTerm.toLowerCase())) {
         return post;
+      } else if (post.tags.toLowerCase().includes(searchTerm.toLowerCase())) {
+        return post;
       }
       return 0;
     })
