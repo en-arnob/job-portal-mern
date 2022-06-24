@@ -120,6 +120,7 @@ const RegistrationClients = () => {
                       value={data.fullname}
                       placeholder="Enter Name"
                       name="fullname"
+                      required
                     />
 
                     {/* <label
@@ -152,6 +153,7 @@ const RegistrationClients = () => {
                       value={data.email}
                       placeholder="Enter email address"
                       name="email"
+                      required
                     />
 
                     <label
@@ -168,6 +170,7 @@ const RegistrationClients = () => {
                       value={data.phone}
                       placeholder="Enter phone number"
                       name="phone"
+                      required
                     />
 
                     <label
@@ -184,6 +187,7 @@ const RegistrationClients = () => {
                       value={data.nid}
                       placeholder="Enter nid number"
                       name="nid"
+                      required
                     />
 
                     <label
@@ -215,6 +219,7 @@ const RegistrationClients = () => {
                       onChange={handleChange}
                       value={data.birthday}
                       name="birthday"
+                      required
                     />
                     {ageError && (
                       <p class="text-red-500 text-xs italic">{ageError}</p>
@@ -251,6 +256,7 @@ const RegistrationClients = () => {
                             id="flexRadioDefault1"
                             onChange={handleChange}
                             value="male"
+                            required
                           />
                           <label
                             class="form-check-label inline-block text-gray-800"
@@ -267,6 +273,7 @@ const RegistrationClients = () => {
                             id="flexRadioDefault2"
                             onChange={handleChange}
                             value="female"
+                            required
                           />
                           <label
                             class="form-check-label inline-block text-gray-800"
@@ -284,6 +291,7 @@ const RegistrationClients = () => {
                             id="flexRadioDefault3"
                             onChange={handleChange}
                             value="other"
+                            required
                           />
                           <label
                             class="form-check-label inline-block text-gray-800"
@@ -311,6 +319,7 @@ const RegistrationClients = () => {
                       onChange={handleChange}
                       value={data.password}
                       name="password"
+                      required
                     />
                     <PasswordStrengthBar password={data.password} />
                     <label
@@ -327,6 +336,7 @@ const RegistrationClients = () => {
                       // onChange={(e) => checkValidation(e.target.value)}
                       // value={confirmPassword}
                       name="confirmPassword"
+                      required
                     />
 
                     {passError && (
