@@ -13,7 +13,6 @@ const type = [
 ];
 
 const CreateJobSection = () => {
-  const [jType, setJType] = useState("");
   const [data, setData] = useState({
     token: localStorage.getItem("myToken"),
     title: "",
@@ -35,8 +34,6 @@ const CreateJobSection = () => {
 
   const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.name]: input.value });
-    setJType(data.jobType);
-    console.log(jType);
   };
 
   const handleSubmit = async (e) => {
@@ -57,7 +54,6 @@ const CreateJobSection = () => {
       }
     }
   };
-  console.log(data);
 
   return (
     <div>

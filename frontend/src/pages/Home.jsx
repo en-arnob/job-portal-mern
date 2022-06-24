@@ -11,6 +11,7 @@ import JobsSection from "./components/JobsSection";
 import CityJobsSection from "./components/CityJobsSection";
 
 import Select from "react-select";
+import CatagoryJobsSection from "./components/CatagoryJobSection";
 
 const areaOptions = [
   { value: "Dhaka", label: "Dhaka" },
@@ -18,6 +19,29 @@ const areaOptions = [
   { value: "Chittagong", label: "Chittagong" },
   { value: "Mymensingh", label: "Mymensingh" },
   { value: "Rajshahi", label: "Rajshahi" },
+];
+const catagoryOptions = [
+  { value: "IT/Software", label: "IT/Software" },
+  { value: "Accounting/Finance", label: "Accounting/Finance" },
+  { value: "Bank", label: "Bank" },
+  { value: "Engineer/Architects", label: "Engineer/Architects" },
+  { value: "Textile", label: "Textile" },
+  { value: "HR", label: "HR" },
+  { value: "Management", label: "Management" },
+  { value: "Graphic Design", label: "Graphic Design" },
+  { value: "Product/Operation", label: "Product/Operation" },
+  { value: "Digital Marketing", label: "Digital Marketing" },
+  { value: "Marketing/Sales", label: "Marketing/Sales" },
+  { value: "Security Consultant", label: "Security Consultant" },
+  { value: "Research", label: "Research" },
+  { value: "Electrical", label: "Electrical" },
+  { value: "Telecommunications", label: "Telecommunications" },
+  { value: "Medical", label: "Medical" },
+  { value: "Pharmaceuticals", label: "Pharmaceuticals" },
+  { value: "NGO", label: "NGO" },
+  { value: "Data Entry", label: "Data Entry" },
+  { value: "Driving", label: "Driving" },
+  { value: "Law", label: "Law" },
 ];
 
 const Home = () => {
@@ -32,6 +56,8 @@ const Home = () => {
   //city
 
   const [city, setCity] = useState({});
+  const [catagory, setCatagory] = useState({});
+  const [sortType, setSortType] = useState("");
 
   //pagination things
 
@@ -59,7 +85,7 @@ const Home = () => {
         setStatus("error");
       });
   };
-  console.log(city);
+
   return (
     <div className='text-xl min-h-screen'>
       {user && (
@@ -159,31 +185,69 @@ const Home = () => {
           {/* <CreateJobSection /> */}
         </header>
       )}
-      <div className='container flex gap-4 my-4 justify-center items-center text-center'>
-        <h1 className='text-xl mt-1 font-light'>City: </h1>
-        <Select
-          options={areaOptions}
-          placeholder='Select your city'
-          isSearchable
-          isClearable={true}
-          name='fuc'
-          autoFocus
-          onChange={setCity}
-        />
+
+      <div className='grid md:grid-cols-3 py-2 px-2 bg-slate-200 mt-4 mx-4 rounded-lg'>
+        <h1 className='text-xl text-center my-4 '>Sort by City/Catagory</h1>
+        <div className='justify-center'>
+          <div className='flex gap-4 my-4 justify-center items-center '>
+            <h1 className='text-xl mt-1 font-light justify-end'>City: </h1>
+            <Select
+              options={areaOptions}
+              placeholder='Select your city'
+              isSearchable
+              isClearable={true}
+              name='fuc'
+              onChange={setCity}
+            />
+          </div>
+        </div>
+        <div className='justify-center'>
+          <div className='flex gap-4 my-4 justify-center items-center '>
+            <h1 className='text-xl mt-1 font-light justify-end'>Catagory: </h1>
+            <Select
+              options={catagoryOptions}
+              placeholder='Select Catagory'
+              isSearchable
+              isClearable
+              name='fu'
+              onChange={setCatagory}
+            />
+          </div>
+        </div>
       </div>
-      {city && city.value ? (
+      {city || catagory ? (
         <div>
-          <h1 className='flex items-center justify-center gap-2 text-center font-normal text-2xl p-4'>
-            Hot jobs in {city.value} <FaMapMarkerAlt className='text-red-500' />
-          </h1>
-          <CityJobsSection
-            jobs={jobs}
-            status={status}
-            errors={errors}
-            searchTerm={searchTerm}
-            location={location}
-            city={city.value}
-          />
+          {city.value ? (
+            <div>
+              <h1 className='flex items-center justify-center gap-2 text-center font-normal text-2xl p-4'>
+                Hot jobs in {city.value}{" "}
+                <FaMapMarkerAlt className='text-red-500' />
+              </h1>
+              <CityJobsSection
+                jobs={jobs}
+                status={status}
+                errors={errors}
+                searchTerm={searchTerm}
+                location={location}
+                city={city.value}
+              />
+            </div>
+          ) : (
+            <div>
+              <h1 className='flex items-center justify-center gap-2 text-center font-normal text-2xl p-4'>
+                Hot jobs in {catagory.value}{" "}
+                <FaMapMarkerAlt className='text-red-500' />
+              </h1>
+              <CatagoryJobsSection
+                jobs={jobs}
+                status={status}
+                errors={errors}
+                searchTerm={searchTerm}
+                location={location}
+                catagory={catagory.value}
+              />
+            </div>
+          )}
         </div>
       ) : (
         <div>
