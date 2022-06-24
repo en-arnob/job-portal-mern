@@ -1,13 +1,24 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UsersContext } from "../hooks/UsersContext";
 
-import { AiOutlineFire } from "react-icons/ai";
-import { AiOutlineArrowDown } from "react-icons/ai";
+import { FaMapMarkerAlt } from "react-icons/fa";
+import { AiOutlineArrowDown, AiOutlineFire } from "react-icons/ai";
 import { GoTasklist } from "react-icons/go";
 import { useNavigate, useLocation } from "react-router-dom";
 
 import axios from "axios";
 import JobsSection from "./components/JobsSection";
+import CityJobsSection from "./components/CityJobsSection";
+
+import Select from "react-select";
+
+const areaOptions = [
+  { value: "Dhaka", label: "Dhaka" },
+  { value: "Sylhet", label: "Sylhet" },
+  { value: "Chittagong", label: "Chittagong" },
+  { value: "Mymensingh", label: "Mymensingh" },
+  { value: "Rajshahi", label: "Rajshahi" },
+];
 
 const Home = () => {
   const navigate = useNavigate();
@@ -17,6 +28,10 @@ const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [status, setStatus] = useState("");
   const location = useLocation();
+
+  //city
+
+  const [city, setCity] = useState({});
 
   //pagination things
 
@@ -44,7 +59,7 @@ const Home = () => {
         setStatus("error");
       });
   };
-
+  console.log(city);
   return (
     <div className='text-xl min-h-screen'>
       {user && (
@@ -144,59 +159,46 @@ const Home = () => {
           {/* <CreateJobSection /> */}
         </header>
       )}
-      <div className='my-4 px-4 justify-center items-center text-center'>
-        <div class='grid md:grid-cols-6 gap-2 items-center -space-x-px text-xs rounded-md'>
-          <button
-            class='px-5 py-3 font-medium border rounded-l-md hover:z-10 focus:outline-none focus:border-indigo-600 focus:z-10 hover:bg-gray-50 active:opacity-75'
-            type='button'
-          >
-            Dhaka
-          </button>
-          <button
-            class='px-5 py-3 font-medium border rounded-l-md hover:z-10 focus:outline-none focus:border-indigo-600 focus:z-10 hover:bg-gray-50 active:opacity-75'
-            type='button'
-          >
-            Sylhet
-          </button>
-          <button
-            class='px-5 py-3 font-medium border rounded-l-md hover:z-10 focus:outline-none focus:border-indigo-600 focus:z-10 hover:bg-gray-50 active:opacity-75'
-            type='button'
-          >
-            Chittagong
-          </button>
-          <button
-            class='px-5 py-3 font-medium border rounded-l-md hover:z-10 focus:outline-none focus:border-indigo-600 focus:z-10 hover:bg-gray-50 active:opacity-75'
-            type='button'
-          >
-            Mymensingh
-          </button>
-
-          <button
-            class='px-5 py-3 font-medium border hover:z-10 focus:outline-none focus:border-indigo-600 focus:z-10 hover:bg-gray-50 active:opacity-75'
-            type='button'
-          >
-            Export
-          </button>
-
-          <button
-            class='px-5 py-3 font-medium border rounded-r-md hover:z-10 focus:outline-none focus:border-indigo-600 focus:z-10 hover:bg-gray-50 active:opacity-75'
-            type='button'
-          >
-            Print
-          </button>
-        </div>
+      <div className='container flex gap-4 my-4 justify-center items-center text-center'>
+        <h1 className='text-xl mt-1 font-light'>City: </h1>
+        <Select
+          options={areaOptions}
+          placeholder='Select your city'
+          isSearchable
+          isClearable={true}
+          name='fuc'
+          autoFocus
+          onChange={setCity}
+        />
       </div>
-
-      <h1 className='flex items-center justify-center gap-2 text-center font-normal text-2xl p-4'>
-        Recent Job Offerings <AiOutlineFire className='text-red-500' />
-      </h1>
-      <JobsSection
-        jobs={jobs}
-        status={status}
-        errors={errors}
-        searchTerm={searchTerm}
-        location={location}
-      />
+      {city && city.value ? (
+        <div>
+          <h1 className='flex items-center justify-center gap-2 text-center font-normal text-2xl p-4'>
+            Hot jobs in {city.value} <FaMapMarkerAlt className='text-red-500' />
+          </h1>
+          <CityJobsSection
+            jobs={jobs}
+            status={status}
+            errors={errors}
+            searchTerm={searchTerm}
+            location={location}
+            city={city.value}
+          />
+        </div>
+      ) : (
+        <div>
+          <h1 className='flex items-center justify-center gap-2 text-center font-normal text-2xl p-4'>
+            Recent Job Offerings <AiOutlineFire className='text-red-500' />
+          </h1>
+          <JobsSection
+            jobs={jobs}
+            status={status}
+            errors={errors}
+            searchTerm={searchTerm}
+            location={location}
+          />
+        </div>
+      )}
     </div>
   );
 };

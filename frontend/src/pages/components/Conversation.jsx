@@ -5,7 +5,6 @@ import dummy from "../../assets/images/blank-profile-picture.webp";
 const Conversation = ({ conversation, currentUser }) => {
   const [user, setUser] = useState(null);
 
-  console.log(currentUser.usertype);
   useEffect(() => {
     const friendId = conversation.members.find((m) => m !== currentUser.id);
     const getUser = async () => {

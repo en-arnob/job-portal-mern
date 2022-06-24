@@ -5,8 +5,15 @@ import { useNavigate } from "react-router-dom";
 import RichTextEditor from "./RichTextEditor";
 import { VscNote } from "react-icons/vsc";
 import Breadcumb from "./Breadcumb";
+import Select from "react-select";
+
+const type = [
+  { value: "Onsite", label: "Onsite" },
+  { value: "Remote", label: "Remote" },
+];
 
 const CreateJobSection = () => {
+  const [jType, setJType] = useState("");
   const [data, setData] = useState({
     token: localStorage.getItem("myToken"),
     title: "",
@@ -16,6 +23,9 @@ const CreateJobSection = () => {
     vaccancy: "",
     deadline: "",
     jobType: "",
+    cityName: "",
+    zip: "",
+    address: "",
   });
 
   // eslint-disable-next-line no-unused-vars
@@ -25,6 +35,8 @@ const CreateJobSection = () => {
 
   const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.name]: input.value });
+    setJType(data.jobType);
+    console.log(jType);
   };
 
   const handleSubmit = async (e) => {
@@ -45,6 +57,7 @@ const CreateJobSection = () => {
       }
     }
   };
+  console.log(data);
 
   return (
     <div>
@@ -59,7 +72,7 @@ const CreateJobSection = () => {
             <div className='p-8 bg-white rounded-lg shadow-lg lg:p-12 lg:col-span-4'>
               <form className='space-y-4' onSubmit={handleSubmit}>
                 <div>
-                  <label className='' for='name'>
+                  <label className='' htmlFor='name'>
                     Title
                   </label>
                   <input
@@ -124,19 +137,64 @@ const CreateJobSection = () => {
 
                   <div>
                     <label className='' for='image-url'>
-                      Location
+                      Job Type
                     </label>
-                    <input
-                      className='w-full p-3 text-sm border-gray-200 rounded-lg'
-                      placeholder='Onsite/Remote/CityName'
-                      type='text'
-                      id='jobType'
-                      onChange={handleChange}
-                      value={data.jobType}
+                    {/* <Select
+                      options={type}
+                      placeholder='Onsite/Remote'
+                      isSearchable
+                      isClearable={true}
                       name='jobType'
-                      required
-                    />
+                      autoFocus
+                      onChange={setJType}
+                      className='mt-2'
+                    /> */}
+                    <select
+                      className='w-full p-3 text-sm border-gray-200 rounded-lg'
+                      onChange={handleChange}
+                      name='jobType'
+                      id='jobType'
+                    >
+                      <option value='Remote'>Remote</option>
+                      <option value='Onsite'>Onsite</option>
+                    </select>
                   </div>
+                  {data.jobType && data.jobType === "Onsite" ? (
+                    <div>
+                      <label className=''>Location</label>
+                      <div className='grid md: grid-cols-3 gap-2'>
+                        <input
+                          className='w-full p-3 text-sm border-gray-200 rounded-lg'
+                          placeholder='City Name'
+                          type='text'
+                          id='cityName'
+                          onChange={handleChange}
+                          value={data.cityName}
+                          name='cityName'
+                        />
+                        <input
+                          className='w-full p-3 text-sm border-gray-200 rounded-lg'
+                          placeholder='Zip'
+                          type='text'
+                          id='zip'
+                          onChange={handleChange}
+                          value={data.zip}
+                          name='zip'
+                        />
+                        <input
+                          className='w-full p-3 text-sm border-gray-200 rounded-lg'
+                          placeholder='Address'
+                          type='text'
+                          id='address'
+                          onChange={handleChange}
+                          value={data.address}
+                          name='address'
+                        />
+                      </div>
+                    </div>
+                  ) : (
+                    ""
+                  )}
                 </div>
 
                 {/* <div className='grid grid-cols-1 gap-4 text-center sm:grid-cols-3'>

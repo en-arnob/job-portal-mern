@@ -17,7 +17,7 @@ const Messenger = () => {
   const socket = useRef();
 
   useEffect(() => {
-    socket.current = io("ws://localhost:8900");
+    socket.current = io("http://job-portal.laptop-repair-putney.co.uk:8000");
     socket.current.on("getMessage", (data) => {
       setArrivalMessage({
         sender: data.senderId,

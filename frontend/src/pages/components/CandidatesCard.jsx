@@ -7,7 +7,12 @@ const CandidatesCard = ({ candidate, pageNumber }) => {
   const navigate = useNavigate();
   const toCandidateProfile = (candidateId) => {
     navigate("/profileView", {
-      state: { userId: candidateId, userType: "candidate", pageNumber },
+      state: {
+        userId: candidateId,
+        userType: "candidate",
+        pageNumber,
+        fromPage: "availableJobSeeker",
+      },
     });
   };
   return (
@@ -26,7 +31,7 @@ const CandidatesCard = ({ candidate, pageNumber }) => {
       ) : (
         <img
           className='object-cover object-center w-full h-48'
-          src={`http://localhost:8000/${candidate.profileImage}`}
+          src={`http://job-portal.laptop-repair-putney.co.uk${candidate.profileImage}`}
           alt='avatar'
         />
       )}

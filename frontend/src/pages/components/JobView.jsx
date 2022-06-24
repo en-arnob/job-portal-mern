@@ -128,7 +128,11 @@ const JobView = () => {
                 </li>
                 <li className='flex items-center space-x-2'>
                   <FiMapPin />
-                  <span>{job.jobType}</span>
+                  <span>
+                    {job.jobType === "Onsite"
+                      ? `${job.address} ${job.cityName} ${job.zip}`
+                      : job.jobType}
+                  </span>
                 </li>
                 <li className='flex items-center space-x-2'>
                   <SiPolywork />
