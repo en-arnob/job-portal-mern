@@ -21,7 +21,7 @@ const areaOptions = [
   { value: "Rajshahi", label: "Rajshahi" },
 ];
 const catagoryOptions = [
-  { value: "IT/Software", label: "IT/Software" },
+  { value: "IT/Software/Web", label: "IT/Software/Web" },
   { value: "Accounting/Finance", label: "Accounting/Finance" },
   { value: "Bank", label: "Bank" },
   { value: "Engineer/Architects", label: "Engineer/Architects" },
@@ -31,7 +31,7 @@ const catagoryOptions = [
   { value: "Graphic Design", label: "Graphic Design" },
   { value: "Product/Operation", label: "Product/Operation" },
   { value: "Digital Marketing", label: "Digital Marketing" },
-  { value: "Marketing/Sales", label: "Marketing/Sales" },
+  { value: "Sales/Marketing", label: "Sales/Marketing" },
   { value: "Security Consultant", label: "Security Consultant" },
   { value: "Research", label: "Research" },
   { value: "Electrical", label: "Electrical" },
@@ -185,9 +185,7 @@ const Home = () => {
           {/* <CreateJobSection /> */}
         </header>
       )}
-
-      <div className='grid md:grid-cols-3 py-2 px-2 bg-slate-200 mt-4 mx-4 rounded-lg'>
-        <h1 className='text-xl text-center my-4 '>Sort by City/Catagory</h1>
+      <div className='grid md:grid-cols-2 py-2 px-2 bg-slate-200 mt-4 mx-4 rounded-lg'>
         <div className='justify-center'>
           <div className='flex gap-4 my-4 justify-center items-center '>
             <h1 className='text-xl mt-1 font-light justify-end'>City: </h1>
@@ -203,7 +201,6 @@ const Home = () => {
         </div>
         <div className='justify-center'>
           <div className='flex gap-4 my-4 justify-center items-center '>
-            <h1 className='text-xl mt-1 font-light justify-end'>Catagory: </h1>
             <Select
               options={catagoryOptions}
               placeholder='Select Catagory'
@@ -212,57 +209,47 @@ const Home = () => {
               name='fu'
               onChange={setCatagory}
             />
+            <button
+              onClick={() => navigate("/createPost")}
+              className='items-center justify-center px-3 py-2 text-sm font-medium text-white transition bg-gray-600 rounded-sm hover:bg-green-700 focus:outline-none focus:ring'
+              type='button'
+            >
+              Browse by Catagory
+            </button>
           </div>
         </div>
       </div>
-      {city || catagory ? (
-        <div>
-          {city.value ? (
-            <div>
-              <h1 className='flex items-center justify-center gap-2 text-center font-normal text-2xl p-4'>
-                Hot jobs in {city.value}{" "}
-                <FaMapMarkerAlt className='text-red-500' />
-              </h1>
-              <CityJobsSection
-                jobs={jobs}
-                status={status}
-                errors={errors}
-                searchTerm={searchTerm}
-                location={location}
-                city={city.value}
-              />
-            </div>
-          ) : (
-            <div>
-              <h1 className='flex items-center justify-center gap-2 text-center font-normal text-2xl p-4'>
-                Hot jobs in {catagory.value}{" "}
-                <FaMapMarkerAlt className='text-red-500' />
-              </h1>
-              <CatagoryJobsSection
-                jobs={jobs}
-                status={status}
-                errors={errors}
-                searchTerm={searchTerm}
-                location={location}
-                catagory={catagory.value}
-              />
-            </div>
-          )}
-        </div>
-      ) : (
-        <div>
-          <h1 className='flex items-center justify-center gap-2 text-center font-normal text-2xl p-4'>
-            Recent Job Offerings <AiOutlineFire className='text-red-500' />
-          </h1>
-          <JobsSection
-            jobs={jobs}
-            status={status}
-            errors={errors}
-            searchTerm={searchTerm}
-            location={location}
-          />
-        </div>
-      )}
+      <div>
+        {city && city.value ? (
+          <div>
+            <h1 className='flex items-center justify-center gap-2 text-center font-normal text-2xl p-4'>
+              Hot jobs in {city.value}{" "}
+              <FaMapMarkerAlt className='text-red-500' />
+            </h1>
+            <CityJobsSection
+              jobs={jobs}
+              status={status}
+              errors={errors}
+              searchTerm={searchTerm}
+              location={location}
+              city={city.value}
+            />
+          </div>
+        ) : (
+          <div>
+            <h1 className='flex items-center justify-center gap-2 text-center font-normal text-2xl p-4'>
+              Recent Job Offerings <AiOutlineFire className='text-red-500' />
+            </h1>
+            <JobsSection
+              jobs={jobs}
+              status={status}
+              errors={errors}
+              searchTerm={searchTerm}
+              location={location}
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 };

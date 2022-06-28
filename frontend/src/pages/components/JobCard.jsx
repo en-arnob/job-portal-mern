@@ -74,7 +74,9 @@ const JobCard = ({ job, pageNumber }) => {
 
         <dl className='flex mt-6'>
           <div className='flex flex-col-reverse'>
-            <dt className='text-sm font-medium text-gray-600'>{job.tags}</dt>
+            <dt className='text-sm font-medium text-gray-600'>
+              {job.category || "Category"}
+            </dt>
             <dd className='text-sm  text-red-800'>
               Deadline: {Moment.utc(job.deadline).format("MMM Do, YYYY")}
             </dd>

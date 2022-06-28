@@ -38,6 +38,7 @@ exports.postJobsController = async (req, res) => {
         cityName: data.cityName,
         zip: data.zip,
         address: data.address,
+        category: data.category,
       });
       return res.status(200).json({ msg: "Job Posted Successfully" });
     } catch (error) {

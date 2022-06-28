@@ -191,6 +191,51 @@ const CreateJobSection = () => {
                   ) : (
                     ""
                   )}
+                  <div>
+                    <label className='' for='image-url'>
+                      Catagory
+                    </label>
+                    <select
+                      className='w-full p-3 text-sm border-gray-200 rounded-lg'
+                      onChange={handleChange}
+                      name='category'
+                      id='category'
+                    >
+                      <option value='IT/Software/Web'>IT/Software/Web</option>
+                      <option value='Accounting/Finance'>
+                        Accounting/Finance
+                      </option>
+                      <option value='Bank'>Bank</option>
+                      <option value='Engineer/Architects'>
+                        Engineer/Architects
+                      </option>
+                      <option value='Textile'>Textile</option>
+                      <option value='HR'>HR</option>
+                      <option value='Management'>Management</option>
+                      <option value='Graphic Design'>Graphic Design</option>
+                      <option value='Product/Operation'>
+                        Product/Operation
+                      </option>
+                      <option value='Digital Marketing'>
+                        Digital Marketing
+                      </option>
+                      <option value='Sales/Marketing'>Sales/Marketing</option>
+                      <option value='Security Consultant'>
+                        Security Consultant
+                      </option>
+                      <option value='Research'>Research</option>
+                      <option value='Electrical'>Electrical</option>
+                      <option value='Telecommunications'>
+                        Telecommunications
+                      </option>
+                      <option value='Medical'>Medical</option>
+                      <option value='Pharmaceuticals'>Pharmaceuticals</option>
+                      <option value='NGO'>NGO</option>
+                      <option value='Data Entry'>Data Entry</option>
+                      <option value='Driving'>Driving</option>
+                      <option value='Law'>Law</option>
+                    </select>
+                  </div>
                 </div>
 
                 {/* <div className='grid grid-cols-1 gap-4 text-center sm:grid-cols-3'>

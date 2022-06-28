@@ -43,16 +43,24 @@ const jobPostSchema = new Schema({
   },
   cityName: {
     type: String,
+    required: true,
     
   },
   zip: {
     type: String,
+    required: true,
     
   },
   address: {
     type: String,
+    required: true,
   
   },
+  category: {
+    type: String,
+    required: true,
+  },
+  
   
   applicants: [
     {
