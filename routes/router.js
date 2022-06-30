@@ -30,6 +30,8 @@ const {
   updateJob,
   rejectApplicant,
   ApplicantsDetails,
+  getJobsByCat,
+  getJobsCount,
 } = require("../controllers/jobsController");
 
 const { fetchCandidates, updateImageController } = require("../controllers/userController");
@@ -95,5 +97,9 @@ router.get("/api/job/:jobID", ApplicantsDetails);
 
 //image upload
 router.post('/:userType/:userId/image/upload', uploadMulter, uploadValidation, updateImageController)
+
+//category-job
+router.get("/api/jobs/:category", getJobsByCat);
+router.get("/api/jobs/cat/counter", getJobsCount);
 
 module.exports = router;

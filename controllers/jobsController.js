@@ -1,6 +1,7 @@
 const req = require("express/lib/request");
 const jwt_decode = require("jwt-decode");
 const JobPost = require("../models/JobPost");
+const { count } = require("../models/UserCandidate");
 const UserCandidate = require("../models/UserCandidate");
 
 exports.getAllJobsController = async (req, res) => {
@@ -196,7 +197,7 @@ exports.updateJob = async (req, res) => {
 };
 
 exports.ApplicantsDetails = async (req, res) => {
-  console.log(req.params);
+  // console.log(req.params);
   try {
     let job = await JobPost.findById(req.params.jobID).populate("applicants");
     res.status(200).json({
@@ -235,3 +236,159 @@ exports.rejectApplicant = async (req, res) => {
     });
   }
 };
+
+exports.getJobsByCat = async (req, res) => {
+  let passedCategory = req.params.category
+
+  try {
+
+    let jobs = await JobPost.find({ category: passedCategory })
+      .populate("authorId")
+      .sort([["dateOfPosting", -1]]);
+    return res.status(200).json({ msg: "Success", jobs });
+    
+  } catch (error) {
+    res.json(error);
+  }
+}
+
+exports.getJobsCount = async (req, res) => {
+  let counter = {}
+  
+  try {
+    let it = await (await JobPost.find({category: 'IT-Software-Web' })).length
+    
+    if(it){
+      counter["IT-Software-Web"] = it
+    } else {
+      counter["IT-Software-Web"] = 0
+    }
+    
+    let pharm = await (await JobPost.find({category: 'Pharmaceuticals' })).length
+    
+    if(pharm){
+      counter['Pharmaceuticals'] = pharm
+    } else{
+      counter['Pharmaceuticals'] = 0
+    }
+    let fin = await (await JobPost.find({category: 'Accounting-Finance' })).length
+    if(fin){
+      counter["Accounting-Finance"] = fin
+    } else {
+      counter["Accounting-Finance"] = 0
+    } 
+    let bnk = await (await JobPost.find({category: 'Bank' })).length
+    if(bnk){
+      counter["Bank"] = bnk
+    } else {
+      counter["Bank"] = 0
+    } 
+    let arch = await (await JobPost.find({category: 'Engineer-Architects' })).length
+    if(arch){
+      counter["Engineer-Architects"] = arch
+    } else {
+      counter["Engineer-Architects"] = 0
+    }
+    let textile = await (await JobPost.find({category: 'Textile' })).length
+    if(textile){
+      counter["Textile"] = textile
+    } else {
+      counter["Textile"] = 0
+    } 
+    let hr = await (await JobPost.find({ category: 'HR' })).length
+    if(hr){
+      counter["HR"] = hr
+    } else {
+      counter["HR"] = 0
+    } 
+    let man = await (await JobPost.find({ category: 'Management' })).length
+    if(man){
+      counter["Management"] = man
+    } else {
+      counter["Management"] = 0
+    } 
+    let grph = await (await JobPost.find({ category: 'Graphic-Design' })).length
+    if(grph){
+      counter["Graphic-Design"] = grph
+    } else {
+      counter["Graphic-Design"] = 0
+    } 
+    let pdc = await (await JobPost.find({ category: 'Product-Operation' })).length
+    if(pdc){
+      counter["Product-Operation"] = pdc
+    } else {
+      counter["Product-Operation"] = 0
+    } 
+    let dm = await (await JobPost.find({ category: 'Digital-Marketing' })).length
+    if(dm){
+      counter["Digital-Marketing"] = dm
+    } else {
+      counter["Digital-Marketing"] = 0
+    } 
+    let sls = await (await JobPost.find({ category: 'Sales-Marketing' })).length
+    if(sls){
+      counter["Sales-Marketing"] = sls
+    } else {
+      counter["Sales-Marketing"] = 0
+    } 
+    let sec = await (await JobPost.find({ category: 'Security-Consultant' })).length
+    if(sec){
+      counter["Security-Consultant"] = sec
+    } else {
+      counter["Security-Consultant"] = 0
+    } 
+    let resr = await (await JobPost.find({ category: 'Research' })).length
+    if(resr){
+      counter["Research"] = resr
+    } else {
+      counter["Research"] = 0
+    } 
+    let elec = await (await JobPost.find({ category: 'Electrical' })).length
+    if(elec){
+      counter["Electrical"] = elec
+    } else {
+      counter["Electrical"] = 0
+    } 
+    let tele = await (await JobPost.find({ category: 'Telecommunications' })).length
+    if(tele){
+      counter["Telecommunications"] = tele
+    } else {
+      counter["Telecommunications"] = 0
+    } 
+    let med = await (await JobPost.find({ category: 'Medical' })).length
+    if(med){
+      counter["Medical"] = med
+    } else {
+      counter["Electrical"] = 0
+    } 
+    let ngo = await (await JobPost.find({ category: 'NGO' })).length
+    if(ngo){
+      counter["NGO"] = ngo
+    } else {
+      counter["Electrical"] = 0
+    } 
+    let dt = await (await JobPost.find({ category: 'Data-Entry' })).length
+    if(dt){
+      counter["Data-Entry"] = dt
+    } else {
+      counter["Data-Entry"] = 0
+    } 
+    let dr = await (await JobPost.find({ category: 'Driving' })).length
+    if(dr){
+      counter["Driving"] = dr
+    } else {
+      counter["Driving"] = 0
+    } 
+    let law = await (await JobPost.find({ category: 'Law' })).length
+    if(law){
+      counter["Law"] = law
+    } else {
+      counter["Law"] = 0
+    } 
+
+    return res.status(200).json({ msg: "Success", counter });
+  } catch (error) {
+    res.json(error);
+  }
+  
+}

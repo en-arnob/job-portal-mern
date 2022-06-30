@@ -11,7 +11,7 @@ import JobsSection from "./components/JobsSection";
 import CityJobsSection from "./components/CityJobsSection";
 
 import Select from "react-select";
-import CatagoryJobsSection from "./components/CatagoryJobSection";
+import OTSCall from "./components/OTSCall";
 
 const areaOptions = [
   { value: "Dhaka", label: "Dhaka" },
@@ -21,25 +21,25 @@ const areaOptions = [
   { value: "Rajshahi", label: "Rajshahi" },
 ];
 const catagoryOptions = [
-  { value: "IT/Software/Web", label: "IT/Software/Web" },
-  { value: "Accounting/Finance", label: "Accounting/Finance" },
+  { value: "IT-Software-Web", label: "IT-Software-Web" },
+  { value: "Accounting-Finance", label: "Accounting-Finance" },
   { value: "Bank", label: "Bank" },
-  { value: "Engineer/Architects", label: "Engineer/Architects" },
+  { value: "Engineer-Architects", label: "Engineer-Architects" },
   { value: "Textile", label: "Textile" },
   { value: "HR", label: "HR" },
   { value: "Management", label: "Management" },
-  { value: "Graphic Design", label: "Graphic Design" },
-  { value: "Product/Operation", label: "Product/Operation" },
-  { value: "Digital Marketing", label: "Digital Marketing" },
+  { value: "Graphic-Design", label: "Graphic-Design" },
+  { value: "Product-Operation", label: "Product-Operation" },
+  { value: "Digital-Marketing", label: "Digital-Marketing" },
   { value: "Sales/Marketing", label: "Sales/Marketing" },
-  { value: "Security Consultant", label: "Security Consultant" },
+  { value: "Security-Consultant", label: "Security-Consultant" },
   { value: "Research", label: "Research" },
   { value: "Electrical", label: "Electrical" },
   { value: "Telecommunications", label: "Telecommunications" },
   { value: "Medical", label: "Medical" },
   { value: "Pharmaceuticals", label: "Pharmaceuticals" },
   { value: "NGO", label: "NGO" },
-  { value: "Data Entry", label: "Data Entry" },
+  { value: "Data-Entry", label: "Data-Entry" },
   { value: "Driving", label: "Driving" },
   { value: "Law", label: "Law" },
 ];
@@ -85,6 +85,13 @@ const Home = () => {
         setStatus("error");
       });
   };
+  const nav2Cat = () => {
+    navigate("/categoryPage", { state: { catagory } });
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   return (
     <div className='text-xl min-h-screen'>
@@ -115,42 +122,6 @@ const Home = () => {
               </div>
 
               <div className='flex flex-col gap-4 mt-4 sm:flex-row sm:mt-0 sm:items-center'>
-                <div className='relative'>
-                  <label className='sr-only' htmlFor='search'>
-                    Search
-                  </label>
-
-                  <input
-                    onChange={(event) => {
-                      setSearchTerm(event.target.value);
-                    }}
-                    className='w-full h-10 pl-4 pr-10 text-sm bg-white border-none rounded-full shadow-sm sm:w-56'
-                    id='search'
-                    type='text'
-                    placeholder='Search for jobs...'
-                  />
-
-                  <button
-                    className='absolute p-2 text-gray-600 transition -translate-y-1/2 rounded-full hover:text-gray-700 bg-gray-50 top-1/2 right-1'
-                    type='button'
-                    aria-label='Submit Search'
-                  >
-                    <svg
-                      xmlns='http://www.w3.org/2000/svg'
-                      className='w-4 h-4'
-                      fill='none'
-                      viewBox='0 0 24 24'
-                      stroke='currentColor'
-                      strokeWidth='2'
-                    >
-                      <path
-                        strokeLinecap='round'
-                        strokeLinejoin='round'
-                        d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'
-                      />
-                    </svg>
-                  </button>
-                </div>
                 {user.usertype === "recruiter" && (
                   <div className='flex gap-2 justify-between'>
                     <button
@@ -185,10 +156,32 @@ const Home = () => {
           {/* <CreateJobSection /> */}
         </header>
       )}
-      <div className='grid md:grid-cols-2 py-2 px-2 bg-slate-200 mt-4 mx-4 rounded-lg'>
+      <OTSCall />
+      <div className='grid md:grid-cols-3 py-2 px-2 bg-stone-100 mt-4 mx-4 rounded-lg'>
         <div className='justify-center'>
           <div className='flex gap-4 my-4 justify-center items-center '>
-            <h1 className='text-xl mt-1 font-light justify-end'>City: </h1>
+            <label className='sr-only' htmlFor='search'>
+              Search
+            </label>
+            <input
+              onChange={(event) => {
+                setSearchTerm(event.target.value);
+              }}
+              className='w-full h-10 pl-4 pr-10 text-sm bg-white border-none rounded-full shadow-sm sm:w-56'
+              id='search'
+              type='text'
+              placeholder='Search for jobs...'
+            />
+          </div>
+        </div>
+        <div className='justify-center'>
+          <div className='flex gap-4 my-4 justify-center items-center '>
+            <h1
+              className='items-center justify-center px-3 py-2 text-base font-medium text-stone-900 transition  rounded-sm  '
+              type='button'
+            >
+              Browse from City
+            </h1>
             <Select
               options={areaOptions}
               placeholder='Select your city'
@@ -199,6 +192,7 @@ const Home = () => {
             />
           </div>
         </div>
+
         <div className='justify-center'>
           <div className='flex gap-4 my-4 justify-center items-center '>
             <Select
@@ -210,8 +204,8 @@ const Home = () => {
               onChange={setCatagory}
             />
             <button
-              onClick={() => navigate("/createPost")}
-              className='items-center justify-center px-3 py-2 text-sm font-medium text-white transition bg-gray-600 rounded-sm hover:bg-green-700 focus:outline-none focus:ring'
+              onClick={nav2Cat}
+              className='items-center justify-center px-3 py-2 text-sm font-medium text-white transition  bg-green-700 rounded-sm hover:bg-gray-600 focus:outline-none focus:ring'
               type='button'
             >
               Browse by Catagory

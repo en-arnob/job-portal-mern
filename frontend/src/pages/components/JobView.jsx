@@ -53,13 +53,15 @@ const JobView = () => {
   };
   const location = useLocation();
   const job = location.state.job;
+  const fallback = location.state.fallback;
+  // const fallbackk = location.state.fallbackk;
+  // console.log(fallbackk);
 
   //moment
   const deadlineD = Moment.utc(job.deadline);
   const todayD = Moment.utc();
 
   const pageNum = location.state.pageNumber;
-  const fallback = location.state.fallback;
 
   useEffect(() => {
     window.scrollTo({
@@ -100,14 +102,26 @@ const JobView = () => {
         console.log(error);
       });
   };
+  // const displayBreadcumb = (fallback, fallbackk) => {
+  //   if (fallback) {
+  //     return <Breadcumb pageName='Job View' back={fallback} pageNum={0} />;
+  //   } else if (fallbackk) {
+  //     return (
+  //       <Breadcumb pageName='Job View' back={fallbackk} pageNum={pageNum} />
+  //     );
+  //   } else {
+  //     return <Breadcumb pageName='Job View' back={"/"} pageNum={pageNum} />;
+  //   }
+  // };
 
   return (
     <div>
       {fallback ? (
-        <Breadcumb pageName='Job View' back={"/appliedJobs"} pageNum={0} />
+        <Breadcumb pageName='Job View' back={fallback} pageNum={0} />
       ) : (
         <Breadcumb pageName='Job View' back={"/"} pageNum={pageNum} />
       )}
+      {/* {displayBreadcumb(fallback, fallbackk)} */}
 
       <div className='grid grid-cols-1 md:grid-cols-4 md:divide-x divide-green-500  gap-2 min-h-screen'>
         <div className=' w-full h-auto col-span-3'>

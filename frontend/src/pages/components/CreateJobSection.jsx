@@ -201,27 +201,27 @@ const CreateJobSection = () => {
                       name='category'
                       id='category'
                     >
-                      <option value='IT/Software/Web'>IT/Software/Web</option>
-                      <option value='Accounting/Finance'>
-                        Accounting/Finance
+                      <option value='IT-Software-Web'>IT-Software-Web</option>
+                      <option value='Accounting-Finance'>
+                        Accounting-Finance
                       </option>
                       <option value='Bank'>Bank</option>
-                      <option value='Engineer/Architects'>
-                        Engineer/Architects
+                      <option value='Engineer-Architects'>
+                        Engineer-Architects
                       </option>
                       <option value='Textile'>Textile</option>
                       <option value='HR'>HR</option>
                       <option value='Management'>Management</option>
-                      <option value='Graphic Design'>Graphic Design</option>
-                      <option value='Product/Operation'>
+                      <option value='Graphic-Design'>Graphic-Design</option>
+                      <option value='Product-Operation'>
                         Product/Operation
                       </option>
-                      <option value='Digital Marketing'>
-                        Digital Marketing
+                      <option value='Digital-Marketing'>
+                        Digital-Marketing
                       </option>
-                      <option value='Sales/Marketing'>Sales/Marketing</option>
-                      <option value='Security Consultant'>
-                        Security Consultant
+                      <option value='Sales-Marketing'>Sales-Marketing</option>
+                      <option value='Security-Consultant'>
+                        Security-Consultant
                       </option>
                       <option value='Research'>Research</option>
                       <option value='Electrical'>Electrical</option>
@@ -231,7 +231,7 @@ const CreateJobSection = () => {
                       <option value='Medical'>Medical</option>
                       <option value='Pharmaceuticals'>Pharmaceuticals</option>
                       <option value='NGO'>NGO</option>
-                      <option value='Data Entry'>Data Entry</option>
+                      <option value='Data-Entry'>Data-Entry</option>
                       <option value='Driving'>Driving</option>
                       <option value='Law'>Law</option>
                     </select>

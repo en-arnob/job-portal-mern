@@ -14,7 +14,7 @@ const AppliedJobs = () => {
   const [appliedJobs, setAppliedJobs] = useState([]);
   const [errors, setErrors] = useState([]);
   const [msg, setMsg] = useState("");
-  const fallback = "/appliedJob";
+  const fallback = "/appliedJobs";
   const [status, setStatus] = useState("");
 
   const token = localStorage.getItem("myToken");
