@@ -24,7 +24,8 @@ import CreatePost from "./pages/CreatePost";
 import Footer from "./pages/components/Footer";
 import UpdateImage from "./pages/UpdateImage";
 import Messenger from "./pages/Messenger";
-import Breadcumb from "./pages/components/Breadcumb";
+import CategoryJobs from "./pages/components/CategoryJobs";
+
 
 
 
@@ -38,6 +39,7 @@ function App() {
     <UserContext.Provider value={{ state, dispatch }}>
       <Router>
         <UserProvider>
+          
           <Nav />
           
           <Routes>
@@ -53,7 +55,7 @@ function App() {
             <Route path="/mypost" exact element={<MyPostsPage />} />
             <Route path="/appliedJobs" exact element={<AppliedJobs />} />
             <Route
-              path="/verify/:userType/:userId/:token"
+              path="/front/verify/:userType/:userId/:token"
               exact
               element={<EmailVerify />}
             />
@@ -78,10 +80,12 @@ function App() {
             <Route path="/updateImage" exact element={<UpdateImage />} />
             <Route path="/createPost" exact element={<CreatePost />} />
             <Route path="/messenger" exact element={<Messenger />} />
+            <Route path="/categoryPage" exact element={<CategoryJobs />} />
           </Routes>
           <Footer />
         </UserProvider>
       </Router>
+      
     </UserContext.Provider>
   );
 }

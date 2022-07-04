@@ -17,7 +17,7 @@ const Messenger = () => {
   const socket = useRef();
 
   useEffect(() => {
-    socket.current = io("ws://localhost:8900");
+    socket.current = io("http://job-portal.laptop-repair-putney.co.uk:8000");
     socket.current.on("getMessage", (data) => {
       setArrivalMessage({
         sender: data.senderId,
@@ -45,9 +45,7 @@ const Messenger = () => {
   useEffect(() => {
     const getConversations = async () => {
       try {
-        const res = await axios.get(
-          `http://127.0.0.1:8000/api/live-chat/conversation/${user.id}`
-        );
+        const res = await axios.get(`/api/live-chat/conversation/${user.id}`);
         setConversations(res.data.conversation);
         // console.log(res.conversation);
       } catch (err) {
@@ -60,7 +58,7 @@ const Messenger = () => {
     const getMessages = async () => {
       try {
         const res = await axios.get(
-          `http://127.0.0.1:8000/api/live-chat/message/${currentChat?._id}`
+          `/api/live-chat/message/${currentChat?._id}`
         );
         setMessages(res.data);
       } catch (err) {
@@ -85,10 +83,7 @@ const Messenger = () => {
     });
 
     try {
-      const res = await axios.post(
-        `http://127.0.0.1:8000/api/live-chat/message`,
-        message
-      );
+      const res = await axios.post(`/api/live-chat/message`, message);
       setMessages([...messages, res.data.savedMessage]);
       setNewMessage("");
     } catch (err) {
@@ -102,10 +97,10 @@ const Messenger = () => {
 
   return (
     <>
-      <div className="messenger">
-        <div className="chatMenu">
-          <div className="chatMenuWrapper">
-            <p className="text-gray-600 fwt-bold font-serif chatMenuInput">
+      <div className='messenger'>
+        <div className='chatMenu'>
+          <div className='chatMenuWrapper'>
+            <p className='text-gray-600 fwt-bold font-serif chatMenuInput'>
               Select a conversation
             </p>
             {/* <input placeholder="Search for friends" className="chatMenuInput" /> */}
@@ -119,38 +114,38 @@ const Messenger = () => {
             ))}
           </div>
         </div>
-        <div className="chatBox">
-          <div className="chatBoxWrapper">
+        <div className='chatBox'>
+          <div className='chatBoxWrapper'>
             {currentChat ? (
               <>
-                <div className="chatBoxTop">
+                <div className='chatBoxTop'>
                   {messages.map((msg) => (
                     <div ref={scrollRef}>
                       <Message message={msg} own={msg.sender === user.id} />
                     </div>
                   ))}
                 </div>
-                <div className="chatBoxBottom">
+                <div className='chatBoxBottom'>
                   <textarea
-                    className="chatMessageInput"
-                    placeholder="write something..."
+                    className='chatMessageInput'
+                    placeholder='write something...'
                     onChange={(e) => setNewMessage(e.target.value)}
                     value={newMessage}
                   ></textarea>
-                  <button onClick={handleSubmit} className="chatSubmitButton">
+                  <button onClick={handleSubmit} className='chatSubmitButton'>
                     Send
                   </button>
                 </div>
               </>
             ) : (
-              <span className="noConversationText">
+              <span className='noConversationText'>
                 Open a conversation to start a chat.
               </span>
             )}
           </div>
         </div>
-        <div className="chatOnline">
-          <div className="chatOnlineWrapper">
+        <div className='chatOnline'>
+          <div className='chatOnlineWrapper'>
             <ChatOnline
             //   onlineUsers={onlineUsers}
             //   currentId={user._id}

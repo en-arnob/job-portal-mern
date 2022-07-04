@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { UsersContext } from "../../hooks/UsersContext";
 import { Link } from "react-router-dom";
-import { CgMenu } from "react-icons/cg";
+import { CgMenu, CgClose } from "react-icons/cg";
 import { UserContext } from "../../App";
 
 const Nav = () => {
@@ -14,27 +14,30 @@ const Nav = () => {
     if (!state && !token) {
       return (
         <>
-          <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
-            <li className="nav-item">
+          <ul className='flex flex-col lg:flex-row list-none lg:ml-auto'>
+            <li className='nav-item'>
               <Link
-                className="px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-white hover:opacity-75 no-underline"
-                to="/"
+                onClick={() => setNavbarOpen(!navbarOpen)}
+                className='px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-white hover:opacity-75 no-underline'
+                to='/'
               >
                 Home
               </Link>
             </li>
-            <li className="nav-item">
+            <li className='nav-item'>
               <Link
-                className="px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-white hover:opacity-75 no-underline"
-                to="/login"
+                onClick={() => setNavbarOpen(!navbarOpen)}
+                className='px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-white hover:opacity-75 no-underline'
+                to='/login'
               >
                 Login
               </Link>
             </li>
-            <li className="nav-item">
+            <li className='nav-item'>
               <Link
-                className="px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-white hover:opacity-75 no-underline"
-                to="/reg"
+                onClick={() => setNavbarOpen(!navbarOpen)}
+                className='px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-white hover:opacity-75 no-underline'
+                to='/reg'
               >
                 Register
               </Link>
@@ -46,35 +49,39 @@ const Nav = () => {
       if (user.usertype === "recruiter") {
         return (
           <>
-            <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
-              <li className="nav-item">
+            <ul className='flex flex-col lg:flex-row list-none lg:ml-auto'>
+              <li className='nav-item'>
                 <Link
-                  className="px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-white hover:opacity-75 no-underline"
-                  to="/profile"
+                  onClick={() => setNavbarOpen(!navbarOpen)}
+                  className='px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-white hover:opacity-75 no-underline'
+                  to='/profile'
                 >
                   Profile
                 </Link>
               </li>
-              <li className="nav-item">
+              <li className='nav-item'>
                 <Link
-                  className="px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-white hover:opacity-75 no-underline"
-                  to="/mypost"
+                  onClick={() => setNavbarOpen(!navbarOpen)}
+                  className='px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-white hover:opacity-75 no-underline'
+                  to='/mypost'
                 >
                   My Jobs
                 </Link>
               </li>
-              <li className="nav-item">
+              <li className='nav-item'>
                 <Link
-                  className="px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-white hover:opacity-75 no-underline"
-                  to="/messenger"
+                  onClick={() => setNavbarOpen(!navbarOpen)}
+                  className='px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-white hover:opacity-75 no-underline'
+                  to='/messenger'
                 >
                   Messenger
                 </Link>
               </li>
-              <li className="nav-item">
+              <li className='nav-item'>
                 <Link
-                  className="px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-white hover:opacity-75 no-underline"
-                  to="/logout"
+                  onClick={() => setNavbarOpen(!navbarOpen)}
+                  className='px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-white hover:opacity-75 no-underline'
+                  to='/logout'
                 >
                   Logout
                 </Link>
@@ -85,27 +92,31 @@ const Nav = () => {
       } else {
         return (
           <>
-            <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
-              <li className="nav-item">
+            <ul className='flex flex-col lg:flex-row list-none lg:ml-auto'>
+              <li className='nav-item'>
                 <Link
-                  className="px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-white hover:opacity-75 no-underline"
-                  to="/profile"
+                  onClick={() => setNavbarOpen(!navbarOpen)}
+                  className='px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-white hover:opacity-75 no-underline'
+                  to='/profile'
                 >
                   Profile
                 </Link>
               </li>
-              <li className="nav-item">
+
+              <li className='nav-item'>
                 <Link
-                  className="px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-white hover:opacity-75 no-underline"
-                  to="/messenger"
+                  onClick={() => setNavbarOpen(!navbarOpen)}
+                  className='px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-white hover:opacity-75 no-underline'
+                  to='/messenger'
                 >
                   Messenger
                 </Link>
               </li>
-              <li className="nav-item">
+              <li className='nav-item'>
                 <Link
-                  className="px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-white hover:opacity-75 no-underline"
-                  to="/logout"
+                  onClick={() => setNavbarOpen(!navbarOpen)}
+                  className='px-3 py-2 flex items-center text-sm uppercase font-bold leading-snug text-white hover:opacity-75 no-underline'
+                  to='/logout'
                 >
                   Logout
                 </Link>
@@ -118,22 +129,22 @@ const Nav = () => {
   };
   return (
     <>
-      <nav className=" flex flex-wrap items-center justify-between px-2 py-3 bg-gradient-to-r from-gray-700 via-gray-900 to-black mb-3">
-        <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
-          <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
+      <nav className=' flex flex-wrap items-center justify-between px-2 py-3 bg-gradient-to-r from-gray-700 via-gray-900 to-black mb-3'>
+        <div className='container px-4 mx-auto flex flex-wrap items-center justify-between'>
+          <div className='w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start'>
             <Link
-              className="px-3 text-2xl py-2 flex items-center   font-bold leading-snug text-white hover:opacity-75 no-underline"
-              to="/"
+              className='px-3 text-2xl py-2 flex items-center   font-bold leading-snug text-white hover:opacity-75 no-underline'
+              to='/'
             >
               ICT.jobs
             </Link>
 
             <button
-              className="text-white cursor-pointer text-xl leading-none px-3 py-1 rounded bg-transparent block lg:hidden outline-none focus:outline-none"
-              type="button"
+              className='text-white cursor-pointer text-xl leading-none px-3 py-1 rounded bg-transparent block lg:hidden outline-none focus:outline-none'
+              type='button'
               onClick={() => setNavbarOpen(!navbarOpen)}
             >
-              <CgMenu />
+              {!navbarOpen ? <CgMenu /> : <CgClose />}
             </button>
           </div>
           <div
@@ -141,7 +152,7 @@ const Nav = () => {
               "lg:flex flex-grow items-center" +
               (navbarOpen ? " flex" : " hidden")
             }
-            id="example-navbar-danger"
+            id='example-navbar-danger'
           >
             {/* dynamic nav */}
             <RenderNav />

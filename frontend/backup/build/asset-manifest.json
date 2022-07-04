@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/static/css/main.d1bd4454.css",
+    "main.js": "/static/js/main.3adb0258.js",
+    "static/media/two_factor_authentication.svg": "/static/media/two_factor_authentication.7dd15eeb40cb93e6ae576d133f0c50e4.svg",
+    "static/media/RegCandidates.svg": "/static/media/RegCandidates.628d729523cc0c3c5f6433f8ff66c038.svg",
+    "static/media/loginClients.svg": "/static/media/loginClients.c0ca4e867585dd2449b0f9c7071c4c72.svg",
+    "static/media/RegClient.svg": "/static/media/RegClient.8a2212913a705cd25718a59892261ce6.svg",
+    "static/media/authentication_re.svg": "/static/media/authentication_re.58e7554a6161227e52a270bdc25ad373.svg",
+    "static/media/loginCandidates.svg": "/static/media/loginCandidates.34dff2f20cfe76b9623020d41c64d80d.svg",
+    "static/media/blank-profile-picture.webp": "/static/media/blank-profile-picture.9999920b9e6c6830ebc4.webp",
+    "static/media/wrn.svg": "/static/media/wrn.1a31fd5d6eb09e99b187b2053edde239.svg",
+    "index.html": "/index.html",
+    "main.d1bd4454.css.map": "/static/css/main.d1bd4454.css.map",
+    "main.3adb0258.js.map": "/static/js/main.3adb0258.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d1bd4454.css",
+    "static/js/main.3adb0258.js"
+  ]
+}

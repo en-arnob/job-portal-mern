@@ -31,14 +31,14 @@ const ChatOnline = () => {
   //   };
 
   return (
-    <div className="chatOnline">
+    <div className='chatOnline'>
       {/* {onlineFriends.map((o) => ( */}
-      <div className="chatOnlineFriend">
-        <div className="chatOnlineImgContainer">
-          <img className="chatOnlineImg" src={dummy} alt="" />
-          <div className="chatOnlineBadge"></div>
+      <div className='chatOnlineFriend'>
+        <div className='chatOnlineImgContainer'>
+          <img className='chatOnlineImg' src={dummy} alt='' />
+          <div className='chatOnlineBadge'></div>
         </div>
-        <span className="chatOnlineName">User</span>
+        <span className='chatOnlineName'>User</span>
       </div>
     </div>
   );

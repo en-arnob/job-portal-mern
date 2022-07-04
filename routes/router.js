@@ -30,23 +30,15 @@ const {
   updateJob,
   rejectApplicant,
   ApplicantsDetails,
+  getJobsByCat,
+  getJobsCount,
 } = require("../controllers/jobsController");
 
-const {
-  fetchCandidates,
-  updateImageController,
-} = require("../controllers/userController");
+const { fetchCandidates, updateImageController } = require("../controllers/userController");
 
 //upload multer
-const uploadMulter = require("../middlewares/upload");
-const uploadValidation = require("../middlewares/uploadValidation");
-// const { fetchCandidates } = require("../controllers/userController");
-const {
-  newConversation,
-  getConversation,
-  postMessage,
-  getMessage,
-} = require("../controllers/chatController");
+const uploadMulter = require('../middlewares/upload')
+const uploadValidation = require('../middlewares/uploadValidation')
 
 //auth routes
 router.get("/login", loginGetController);
@@ -104,20 +96,10 @@ router.get("/api/:userId/fetchCandidates", fetchCandidates);
 router.get("/api/job/:jobID", ApplicantsDetails);
 
 //image upload
-router.post(
-  "/:userType/:userId/image/upload",
-  uploadMulter,
-  uploadValidation,
-  updateImageController
-);
+router.post('/:userType/:userId/image/upload', uploadMulter, uploadValidation, updateImageController)
 
-// chat controllers
-// new conversation
-router.post("/api/live-chat/conversation", newConversation);
-// get conversation buID
-router.get("/api/live-chat/conversation/:userId", getConversation);
-// post message
-router.post("/api/live-chat/message", postMessage);
-// get message
-router.get("/api/live-chat/message/:conversationId", getMessage);
+//category-job
+router.get("/api/jobs/:category", getJobsByCat);
+router.get("/api/jobs/cat/counter", getJobsCount);
+
 module.exports = router;

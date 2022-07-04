@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import JobCardSponsored from "./JobCardSponsored";
 import JobCard from "./JobCard";
 import ReactPaginate from "react-paginate";
-import ReactLoading from "react-loading";
+// import ReactLoading from "react-loading";
 import { useLocation } from "react-router-dom";
 
 const JobsSection = (props) => {
@@ -19,17 +19,20 @@ const JobsSection = (props) => {
   const [pageNumber, setPageNumber] = useState(0);
   const postsPerPage = 10;
   const pagesVisited = pageNumber * postsPerPage;
+
   useEffect(() => {
     if (location.state) {
       setPageNumber(location.state.pageNum);
     }
-  }, []);
+  }, [location.state]);
 
   const displayPosts = jobs
     .filter((post) => {
       if (searchTerm === "") {
         return post;
       } else if (post.title.toLowerCase().includes(searchTerm.toLowerCase())) {
+        return post;
+      } else if (post.tags.toLowerCase().includes(searchTerm.toLowerCase())) {
         return post;
       }
       return 0;
@@ -53,13 +56,7 @@ const JobsSection = (props) => {
   if (status === "loading") {
     return (
       <div className=' w-full h-auto md:h-auto flex flex-col mt-10 text-center items-center justify-center'>
-        <ReactLoading
-          className='text-center justify-center items-center'
-          type='cylon'
-          color='#06283D'
-          height={150}
-          width={150}
-        />
+        <div className='w-16 h-16 border-4 border-dashed  rounded-full animate-spin dark:border-violet-400'></div>
       </div>
     );
   }

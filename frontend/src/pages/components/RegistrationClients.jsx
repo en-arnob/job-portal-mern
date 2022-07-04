@@ -68,7 +68,7 @@ const RegistrationClients = () => {
       if (age >= 16) {
         setAgeError("");
         try {
-          const url = "http://127.0.0.1:8000/client-register";
+          const url = "/client-register";
           const { data: res } = await axios.post(url, data);
 
           setModalMsg(res.msg);
@@ -96,40 +96,40 @@ const RegistrationClients = () => {
       <Container>
         <Row>
           <Col lg={6} md={6} sm={12}>
-            <div className="mt-5">
-              <Card.Body className="text-center">
-                <p className="font-mono text-3xl font-extrabold text-blue-700">
+            <div className='mt-5'>
+              <Card.Body className='text-center'>
+                <p className='font-mono text-3xl font-extrabold text-blue-700'>
                   Sign UP as Recruiter
                 </p>
                 <form
-                  class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+                  className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'
                   onSubmit={handleSubmit}
                 >
-                  <div class="mb-4">
+                  <div className='mb-4'>
                     <label
-                      class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                      for="grid-first-name"
+                      className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+                      for='grid-first-name'
                     >
                       Full Name
                     </label>
                     <input
-                      class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                      id="grid-full-name"
-                      type="text"
+                      className='appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+                      id='grid-full-name'
+                      type='text'
                       onChange={handleChange}
                       value={data.fullname}
-                      placeholder="Enter Name"
-                      name="fullname"
+                      placeholder='Enter Name'
+                      name='fullname'
                     />
 
                     {/* <label
-                      class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                      className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                       for="grid-user-name"
                     >
                       Username
                     </label>
                     <input
-                      class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                      className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                       id="grid-full-name"
                       type="text"
                       onChange={handleChange}
@@ -139,155 +139,155 @@ const RegistrationClients = () => {
                     /> */}
 
                     <label
-                      class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                      for="grid-email"
+                      className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+                      for='grid-email'
                     >
                       Email
                     </label>
                     <input
-                      class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                      id="grid-full-name"
-                      type="email"
+                      className='appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+                      id='grid-full-name'
+                      type='email'
                       onChange={handleChange}
                       value={data.email}
-                      placeholder="Enter email address"
-                      name="email"
+                      placeholder='Enter email address'
+                      name='email'
                     />
 
                     <label
-                      class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                      for="grid-phone"
+                      className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+                      for='grid-phone'
                     >
                       Phone
                     </label>
                     <input
-                      class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                      id="grid-full-name"
-                      type="text"
+                      className='appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+                      id='grid-full-name'
+                      type='text'
                       onChange={handleChange}
                       value={data.phone}
-                      placeholder="Enter phone number"
-                      name="phone"
+                      placeholder='Enter phone number'
+                      name='phone'
                     />
 
                     <label
-                      class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                      for="grid-nid"
+                      className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+                      for='grid-nid'
                     >
                       Nid
                     </label>
                     <input
-                      class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                      id="grid-full-name"
-                      type="text"
+                      className='appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+                      id='grid-full-name'
+                      type='text'
                       onChange={handleChange}
                       value={data.nid}
-                      placeholder="Enter nid number"
-                      name="nid"
+                      placeholder='Enter nid number'
+                      name='nid'
                     />
 
                     <label
-                      class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                      for="grid-organization"
+                      className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+                      for='grid-organization'
                     >
                       Organization
                     </label>
                     <input
-                      class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                      id="grid-organization"
-                      type="text"
+                      className='appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+                      id='grid-organization'
+                      type='text'
                       onChange={handleChange}
                       value={data.organization}
-                      placeholder="Enter Organization name"
-                      name="organization"
+                      placeholder='Enter Organization name'
+                      name='organization'
                     />
 
                     <label
-                      class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                      for="grid-birthday"
+                      className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+                      for='grid-birthday'
                     >
                       Birthday
                     </label>
                     <input
-                      class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                      id="grid-full-name"
-                      type="date"
+                      className='appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+                      id='grid-full-name'
+                      type='date'
                       onChange={handleChange}
                       value={data.birthday}
-                      name="birthday"
+                      name='birthday'
                     />
                     {ageError && (
-                      <p class="text-red-500 text-xs italic">{ageError}</p>
+                      <p className='text-red-500 text-xs italic'>{ageError}</p>
                     )}
 
                     <label
-                      class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                      for="grid-image"
+                      className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+                      for='grid-image'
                     >
                       Upload an image
                     </label>
                     <input
-                      class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                      id="grid-file"
-                      type="file"
+                      className='appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+                      id='grid-file'
+                      type='file'
                       onChange={handleChange}
-                      name="image"
+                      name='image'
                       // value={data.image}
                     />
 
                     <label
-                      class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                      for="grid-gender"
+                      className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+                      for='grid-gender'
                     >
                       Select Gender
                     </label>
-                    <div class="flex">
+                    <div className='flex'>
                       <div>
-                        <div class="form-check">
+                        <div className='form-check'>
                           <input
-                            class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-sky-500 checked:bg-blue-800 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-                            type="radio"
-                            name="gender"
-                            id="flexRadioDefault1"
+                            className='form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-sky-500 checked:bg-blue-800 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer'
+                            type='radio'
+                            name='gender'
+                            id='flexRadioDefault1'
                             onChange={handleChange}
-                            value="male"
+                            value='male'
                           />
                           <label
-                            class="form-check-label inline-block text-gray-800"
-                            for="flexRadioDefault1"
+                            className='form-check-label inline-block text-gray-800'
+                            for='flexRadioDefault1'
                           >
                             Male
                           </label>
                         </div>
-                        <div class="form-check">
+                        <div className='form-check'>
                           <input
-                            class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-sky-500 checked:bg-blue-800 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-                            type="radio"
-                            name="gender"
-                            id="flexRadioDefault2"
+                            className='form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-sky-500 checked:bg-blue-800 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer'
+                            type='radio'
+                            name='gender'
+                            id='flexRadioDefault2'
                             onChange={handleChange}
-                            value="female"
+                            value='female'
                           />
                           <label
-                            class="form-check-label inline-block text-gray-800"
-                            for="flexRadioDefault2"
+                            className='form-check-label inline-block text-gray-800'
+                            for='flexRadioDefault2'
                           >
                             Female
                           </label>
                         </div>
 
-                        <div class="form-check">
+                        <div className='form-check'>
                           <input
-                            class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-sky-500 checked:bg-blue-800 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-                            type="radio"
-                            name="gender"
-                            id="flexRadioDefault3"
+                            className='form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-sky-500 checked:bg-blue-800 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer'
+                            type='radio'
+                            name='gender'
+                            id='flexRadioDefault3'
                             onChange={handleChange}
-                            value="other"
+                            value='other'
                           />
                           <label
-                            class="form-check-label inline-block text-gray-800"
-                            for="flexRadioDefault3"
+                            className='form-check-label inline-block text-gray-800'
+                            for='flexRadioDefault3'
                           >
                             Other
                           </label>
@@ -296,50 +296,50 @@ const RegistrationClients = () => {
                     </div>
                   </div>
 
-                  <div class="mb-6">
+                  <div className='mb-6'>
                     <label
-                      class="block text-gray-700 text-sm font-bold mb-2"
-                      for="password"
+                      className='block text-gray-700 text-sm font-bold mb-2'
+                      for='password'
                     >
                       Password
                     </label>
                     <input
-                      class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                      id="grid-password"
-                      type="password"
-                      placeholder="******************"
+                      className='appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+                      id='grid-password'
+                      type='password'
+                      placeholder='******************'
                       onChange={handleChange}
                       value={data.password}
-                      name="password"
+                      name='password'
                     />
                     <PasswordStrengthBar password={data.password} />
                     <label
-                      class="block text-gray-700 text-sm font-bold mb-2"
-                      for="password"
+                      className='block text-gray-700 text-sm font-bold mb-2'
+                      for='password'
                     >
                       Confirm Password
                     </label>
                     <input
-                      class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                      id="confirmPassword"
-                      type="password"
-                      placeholder="******************"
+                      className='appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+                      id='confirmPassword'
+                      type='password'
+                      placeholder='******************'
                       // onChange={(e) => checkValidation(e.target.value)}
                       // value={confirmPassword}
-                      name="confirmPassword"
+                      name='confirmPassword'
                     />
 
                     {passError && (
-                      <p class="text-red-500 text-xs italic">{passError}</p>
+                      <p className='text-red-500 text-xs italic'>{passError}</p>
                     )}
                     {error && (
-                      <p class="text-red-500 text-xs italic">{error.msg}</p>
+                      <p className='text-red-500 text-xs italic'>{error.msg}</p>
                     )}
                   </div>
-                  <div class="content-center">
+                  <div className='content-center'>
                     <button
-                      class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                      type="submit"
+                      className='bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+                      type='submit'
                     >
                       Sign Up
                     </button>
@@ -349,19 +349,19 @@ const RegistrationClients = () => {
                       onAfterOpen={afterOpenModal}
                       onRequestClose={closeModal}
                       style={customStyles}
-                      contentLabel="Apply Status Modal"
+                      contentLabel='Apply Status Modal'
                     >
                       <h2
-                        className="text-2xl"
+                        className='text-2xl'
                         ref={(_subtitle) => (subtitle = _subtitle)}
                       >
                         Verify your Email
                       </h2>
 
-                      <div className="text-xl py-4">{modalMsg}</div>
+                      <div className='text-xl py-4'>{modalMsg}</div>
                       <button
                         onClick={closeModal}
-                        className="bg-red-600 px-4 py-2 mt-2 text-white rounded-lg"
+                        className='bg-red-600 px-4 py-2 mt-2 text-white rounded-lg'
                       >
                         close
                       </button>
@@ -373,8 +373,8 @@ const RegistrationClients = () => {
           </Col>
 
           <Col lg={6} md={6} sm={12}>
-            <div className="text-center mt-44">
-              <img src={RegImg} className="img-fluid" alt="clientImage" />
+            <div className='text-center mt-44'>
+              <img src={RegImg} className='img-fluid' alt='clientImage' />
             </div>
           </Col>
         </Row>

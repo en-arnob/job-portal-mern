@@ -48,7 +48,7 @@ function App() {
     };
     axios
       .post(
-        `http://localhost:8000/${userData.usertype}/${userData._id}/image/upload`,
+        `/${userData.usertype}/${userData._id}/image/upload`,
         formData,
         options
       )
@@ -96,7 +96,11 @@ function App() {
         </div>
       )}
 
-      <form onSubmit={handleSubmit} style={{ width: "359px" }}>
+      <form
+        enctype='multipart/form-data'
+        onSubmit={handleSubmit}
+        style={{ width: "359px" }}
+      >
         <div className='progress mb-3 w-100'>
           <div
             className='progress-bar'

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import jwt_decode from "jwt-decode";
 import { useLocation } from "react-router-dom";
-import { FiBriefcase, FiType } from "react-icons/fi";
+import { FiMapPin } from "react-icons/fi";
 import { HiOutlineOfficeBuilding, HiOutlineClock } from "react-icons/hi";
 import { RiUserVoiceLine } from "react-icons/ri";
 import { MdOutlineLockClock } from "react-icons/md";
@@ -29,14 +29,6 @@ const customStyles = {
 Modal.setAppElement("*");
 
 const JobView = () => {
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-    getUserDetails();
-  }, []);
-
   const navigate = useNavigate();
   const token = localStorage.getItem("myToken");
   let usr = "";
@@ -48,7 +40,7 @@ const JobView = () => {
   const getUserDetails = () => {
     setStatus("loading");
     axios
-      .get(`http://localhost:8000/userDetails/${usr.id}/${usr.usertype}`)
+      .get(`/userDetails/${usr.id}/${usr.usertype}`)
       .then((response) => {
         const catchData = response.data.data.user;
         setUserData(catchData);
@@ -61,7 +53,23 @@ const JobView = () => {
   };
   const location = useLocation();
   const job = location.state.job;
+  const fallback = location.state.fallback;
+  // const fallbackk = location.state.fallbackk;
+  // console.log(fallbackk);
+
+  //moment
+  const deadlineD = Moment.utc(job.deadline);
+  const todayD = Moment.utc();
+
   const pageNum = location.state.pageNumber;
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+    getUserDetails();
+  }, []);
 
   let subtitle;
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -85,7 +93,7 @@ const JobView = () => {
   const [modalMsg, setModalMsg] = useState(" ");
   const applyJob = () => {
     axios
-      .get(`http://localhost:8000/apply/${job._id}/${usr.id}`)
+      .get(`/apply/${job._id}/${usr.id}`)
       .then((response) => {
         setModalMsg(response.data.msg);
         openModal();
@@ -94,67 +102,79 @@ const JobView = () => {
         console.log(error);
       });
   };
-  console.log(userData);
+  // const displayBreadcumb = (fallback, fallbackk) => {
+  //   if (fallback) {
+  //     return <Breadcumb pageName='Job View' back={fallback} pageNum={0} />;
+  //   } else if (fallbackk) {
+  //     return (
+  //       <Breadcumb pageName='Job View' back={fallbackk} pageNum={pageNum} />
+  //     );
+  //   } else {
+  //     return <Breadcumb pageName='Job View' back={"/"} pageNum={pageNum} />;
+  //   }
+  // };
 
   return (
     <div>
-      <Breadcumb pageName='Job View' back={"/"} pageNum={pageNum} />
+      {fallback ? (
+        <Breadcumb pageName='Job View' back={fallback} pageNum={0} />
+      ) : (
+        <Breadcumb pageName='Job View' back={"/"} pageNum={pageNum} />
+      )}
+      {/* {displayBreadcumb(fallback, fallbackk)} */}
+
       <div className='grid grid-cols-1 md:grid-cols-4 md:divide-x divide-green-500  gap-2 min-h-screen'>
         <div className=' w-full h-auto col-span-3'>
           <div className='p-4'>
-            <div className='flex ml-2 gap-4 text-3xl font-normal text-stone-800'>
-              {" "}
-              <FiBriefcase className='text-green-500 mt-1' /> {job.title}
-            </div>
-            <div className='mt-4 text-gray-700  mx-2 flex md:flex-row flex-col '>
-              <div className='   flex gap-2 mr-4'>
-                <h1 className='text-lg bg-sky-200  rounded px-2 flex gap-2 font-normal'>
-                  <HiOutlineOfficeBuilding className=' mt-1' />
-                  Company Name:
-                </h1>
-                <h1 className='text-lg bg-sky-200 px-2 rounded font-normal'>
-                  {job.authorId.organization}
-                </h1>
-              </div>
-              <div className='flex gap-2 '>
-                <h1 className='text-lg bg-blue-200 rounded px-2 flex gap-2 font-normal'>
-                  <RiUserVoiceLine className=' mt-1' />
-                  Posted By:
-                </h1>
-                <h1 className='text-lg bg-blue-200 rounded px-2 font-normal'>
-                  {job.authorId.fullname}
-                </h1>
-              </div>
-            </div>
-            <div className='flex gap-2 text-gray-700 px-2 rounded-lg'>
-              <h1 className='text-lg flex bg-teal-200 rounded px-2 gap-2 font-normal'>
-                <HiOutlineClock className='mt-1' />
-                {Moment.utc(job.dateOfPosting).format("MMM Do, YYYY")}
-              </h1>
-              <h1 className='text-lg text-gray-700 bg-rose-200 rounded px-2 flex gap-2 font-normal '>
-                <MdOutlineLockClock className='mt-1  ' />
-                <span className=''>Deadline:</span>{" "}
-                {Moment.utc(job.deadline).format("MMM Do, YYYY")}
-              </h1>
-            </div>
+            <div className='px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20 dark:bg-gray-800 dark:text-gray-100'>
+              <h2 className='mb-8 text-4xl font-bold leading-none text-center'>
+                {job.title}
+              </h2>
 
-            <div className='text-gray-700  mx-2 flex md:flex-row flex-col '>
-              <div className='flex gap-2 mr-2'>
-                <h1 className='text-lg bg-yellow-200 px-2 rounded flex gap-2 font-normal'>
-                  <SiPolywork className='mt-1' />
-                  Highlighited Skills: <span className=''>{job.tags}</span>
-                </h1>
-              </div>
-              <div className='flex gap-2 '>
-                <h1 className='text-lg bg-gray-200 px-2 rounded flex gap-2 font-normal'>
-                  <FiType className='mt-1' />
-                  Job Type: <span className=''>{job.jobType}</span>
-                </h1>
-              </div>
+              <ul className='grid gap-3 md:grid-cols-2 lg:grid-cols-3'>
+                <li className='flex items-center space-x-2'>
+                  <HiOutlineOfficeBuilding />
+                  <span>{job.authorId.organization}</span>
+                </li>
+                <li className='flex items-center space-x-2'>
+                  <RiUserVoiceLine />
+                  <span>{job.authorId.fullname} </span>
+                </li>
+                <li className='flex items-center space-x-2'>
+                  <FiMapPin />
+                  <span>
+                    {job.jobType === "Onsite"
+                      ? `${job.address} ${job.cityName} ${job.zip}`
+                      : job.jobType}
+                  </span>
+                </li>
+                <li className='flex items-center space-x-2'>
+                  <SiPolywork />
+                  <span>{job.tags}</span>
+                </li>
+                <li className='flex items-center space-x-2'>
+                  <HiOutlineClock />
+                  <span>
+                    {Moment.utc(job.dateOfPosting).format("MMM Do, YYYY")}
+                  </span>
+                </li>
+                <li className='flex items-center space-x-2'>
+                  <MdOutlineLockClock />
+                  <span>
+                    Deadline: {Moment.utc(job.deadline).format("MMM Do, YYYY")}
+                  </span>
+                </li>
+              </ul>
             </div>
-
-            <div className='mt-6 p-6 bg-stone-100 rounded-lg'>
-              <p className='text-lg font-normal'>{parse(job.body)}</p>
+            {todayD > deadlineD ? (
+              <p className='mb-8 p-2 inline text-base justify-center items-center text-center text-red-700 border-l-4 border-red-700 bg-red-50'>
+                Opportunity Over
+              </p>
+            ) : (
+              ""
+            )}
+            <div className='mt-4 p-4 bg-stone-100 rounded-lg'>
+              <p className='text-base font-normal'>{parse(job.body)}</p>
             </div>
             {usr && usr.usertype === "candidate" ? (
               <div>
@@ -184,9 +204,9 @@ const JobView = () => {
                               stroke='currentColor'
                             >
                               <path
-                                stroke-linecap='round'
-                                stroke-linejoin='round'
-                                stroke-width='2'
+                                strokeLinecap='round'
+                                strokeLinejoin='round'
+                                strokeWidth='2'
                                 d='M17 8l4 4m0 0l-4 4m4-4H3'
                               />
                             </svg>
