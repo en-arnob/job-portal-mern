@@ -25,6 +25,7 @@ import Footer from "./pages/components/Footer";
 import UpdateImage from "./pages/UpdateImage";
 import Messenger from "./pages/Messenger";
 import CategoryJobs from "./pages/components/CategoryJobs";
+import OtsHome from "./pages/OtsHome";
 
 
 
@@ -81,6 +82,7 @@ function App() {
             <Route path="/createPost" exact element={<CreatePost />} />
             <Route path="/messenger" exact element={<Messenger />} />
             <Route path="/categoryPage" exact element={<CategoryJobs />} />
+            <Route path="/one-time-service" exact element={<OtsHome />} />
           </Routes>
           <Footer />
         </UserProvider>
