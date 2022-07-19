@@ -36,6 +36,8 @@ const {
 
 const { fetchCandidates, updateImageController } = require("../controllers/userController");
 
+const {getOTSCandidates} = require("../controllers/otsController")
+
 //upload multer
 const uploadMulter = require('../middlewares/upload')
 const uploadValidation = require('../middlewares/uploadValidation')
@@ -101,5 +103,9 @@ router.post('/:userType/:userId/image/upload', uploadMulter, uploadValidation, u
 //category-job
 router.get("/api/jobs/:category", getJobsByCat);
 router.get("/api/jobs/cat/counter", getJobsCount);
+
+// ots
+
+router.get('/api/ots/get-candidates/:workType/:locationString', getOTSCandidates)
 
 module.exports = router;

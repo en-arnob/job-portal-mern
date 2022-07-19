@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import cta from "../assets/images/cta.svg";
 import pca from "../assets/images/pcsvg.svg";
 import con from "../assets/images/consvg.svg";
+import { useNavigate } from "react-router-dom";
+
+import { FaMapMarkerAlt } from "react-icons/fa";
 
 const OtsHome = () => {
-  const handleChange = () => {};
+  const navigate = useNavigate();
+  const [inp, setInp] = useState({
+    serviceType: "",
+    location: "",
+  });
+  const handleChange = ({ currentTarget: input }) => {
+    setInp({ ...inp, [input.name]: input.value });
+  };
+  // console.log(inp);
+
   return (
     <div className='h-full'>
       <h1 className='text-center text-4xl border-b-2 p-2'>One Time Service</h1>
@@ -39,29 +51,31 @@ const OtsHome = () => {
               <select
                 className='w-full p-3 text-sm border-gray-200 '
                 onChange={handleChange}
-                name='jobType'
-                id='jobType'
+                name='serviceType'
+                id='serviceType'
               >
                 <option value='Remote'>What do you need?</option>
-                <option value='Onsite'>Onsite</option>
+                <option value='System Fix'>System Fix</option>
               </select>
             </div>
 
-            <div>
+            <div className='flex'>
               <input
-                className='w-full p-3 text-sm border-gray-200 '
-                placeholder='Location'
-                type='number'
-                id='vaccancy'
+                type='text'
+                name='location'
+                id='location'
                 onChange={handleChange}
-                value='fegf'
-                name='vaccancy'
-                required
+                placeholder='Enter your location'
+                value={inp.location}
+                className='flex flex-1 text-right border sm:text-sm  focus:ring-inset dark:border-gray-700 dark:text-gray-100 dark:bg-gray-800 focus:ring-violet-400'
               />
+              <span className='flex items-center px-3 pointer-events-none sm:text-sm rounded-r-md dark:bg-gray-700'>
+                <FaMapMarkerAlt />
+              </span>
             </div>
             <div>
               <button
-                // onClick={() => navigate("/one-time-service")}
+                onClick={() => navigate("/service-search", { state: { inp } })}
                 // href='/one-time-service'
                 class='inline-flex items-center justify-center w-full px-5 py-3 text-base font-medium text-white transition-colors duration-150 transform sm:w-auto bg-gradient-to-r from-blue-700 to-blue-900 hover:from-blue-600 hover:to-blue-600 no-underline'
               >
