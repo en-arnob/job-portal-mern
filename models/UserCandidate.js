@@ -6,6 +6,14 @@ const CandidateSchema = new Schema({
     type: String,
     // required: true,
   },
+  otsProvider: {
+    type: String,
+  },
+  otsField: {
+    type: String,
+    
+  },
+
   // username: {
   //   type: String,
   //   trim: true,

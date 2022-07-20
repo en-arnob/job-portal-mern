@@ -29,6 +29,8 @@ const RegistrationCandidates = () => {
     password: "",
     gender: "",
     birthday: "",
+    otsProvider: "",
+    otsField: "",
   });
   const [error, setError] = useState(" ");
   const [passError, setPassError] = useState("");
@@ -76,6 +78,7 @@ const RegistrationCandidates = () => {
   //   }
   // };
   const handleSubmit = async (e) => {
+    // console.log(data);
     e.preventDefault();
     const confirmPassword = document.getElementById("confirmPassword").value;
     if (data.password === confirmPassword) {
@@ -263,6 +266,54 @@ const RegistrationCandidates = () => {
                       </div>
                     </div>
                   </div>
+                  <div>
+                    <label className='' for='image-url'>
+                      Do you wish to provide One Time Service?
+                    </label>
+
+                    <select
+                      className='w-full p-3 text-sm border-gray-200 rounded-lg'
+                      onChange={handleChange}
+                      name='otsProvider'
+                      id='otsProvider'
+                    >
+                      <option value='No'>No</option>
+                      <option value='Yes'>Yes</option>
+                    </select>
+                  </div>
+
+                  {data.otsProvider && data.otsProvider === "Yes" ? (
+                    <div>
+                      <label className='' for='imarl'>
+                        Service Catagory
+                      </label>
+
+                      <select
+                        className='w-full p-3 text-sm border-gray-200 rounded-lg'
+                        onChange={handleChange}
+                        name='otsField'
+                        id='otsField'
+                      >
+                        <option value='NULL'>Select a catagory</option>
+                        <option value='IT Support'>IT Support</option>
+                        <option value='Networking'>Networking</option>
+                        <option value='Servers'>Servers</option>
+                        <option value='IT Home Service'>IT Home Service</option>
+                        <option value='Cyber Security'>Cyber Security</option>
+                        <option value='Digital Device Installation'>
+                          Digital Device Installation
+                        </option>
+                        <option value='Electrical Services'>
+                          Electrical Services
+                        </option>
+                        <option value='Data Recovery'>Data Recovery</option>
+                        <option value='Video Filming'>Video Filming</option>
+                        <option value='TV'>TV</option>
+                      </select>
+                    </div>
+                  ) : (
+                    ""
+                  )}
 
                   <div className='mb-6'>
                     <label

@@ -84,6 +84,7 @@ exports.clientRegPostController = async (req, res) => {
     password,
     phone,
     gender,
+    
   } = req.body;
 
   const vErrors = validationResult(req);
@@ -112,6 +113,7 @@ exports.clientRegPostController = async (req, res) => {
         password: hashed,
         phone,
         gender,
+        
       });
       let transporter = nodemailer.createTransport({
         name: 'laptop-repair-putney.co.uk',
@@ -160,7 +162,7 @@ exports.clientRegPostController = async (req, res) => {
 };
 
 exports.candidateRegPostController = async (req, res) => {
-  const { usertype, fullname, email, address, password, phone, gender } =
+  const { usertype, fullname, email, address, password, phone, gender, otsProvider, otsField } =
     req.body;
 
   const xErrors = validationResult(req);
@@ -187,6 +189,8 @@ exports.candidateRegPostController = async (req, res) => {
         password: hashed,
         phone,
         gender,
+        otsProvider,
+        otsField,
       });
       let transporter = nodemailer.createTransport({
         name: 'laptop-repair-putney.co.uk',
