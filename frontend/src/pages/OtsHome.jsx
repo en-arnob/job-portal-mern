@@ -54,8 +54,19 @@ const OtsHome = () => {
                 name='serviceType'
                 id='serviceType'
               >
-                <option value='Remote'>What do you need?</option>
-                <option value='System Fix'>System Fix</option>
+                <option value='NULL'>What do you need?</option>
+                <option value='IT Support'>IT Support</option>
+                <option value='Networking'>Networking</option>
+                <option value='Servers'>Server</option>
+                <option value='IT Home Service'>IT Home Service</option>
+                <option value='Cyber Security'>Cyber Security</option>
+                <option value='Digital Device Installation'>
+                  Digital Device Installation
+                </option>
+                <option value='Electrical Services'>Electrical Services</option>
+                <option value='Data Recovery'>Data Recovery</option>
+                <option value='Video Filming'>Video Filming</option>
+                <option value='TV'>TV</option>
               </select>
             </div>
 

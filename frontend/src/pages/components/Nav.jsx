@@ -129,11 +129,11 @@ const Nav = () => {
   };
   return (
     <>
-      <nav className=' flex flex-wrap items-center justify-between px-2 py-3 bg-gradient-to-r from-gray-700 via-gray-900 to-black mb-3'>
+      <nav className=' flex flex-wrap items-center justify-between px-2 py-3 bg-gradient-to-r from-blue-100 via-blue-300 to-blue-500  mb-3'>
         <div className='container px-4 mx-auto flex flex-wrap items-center justify-between'>
           <div className='w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start'>
             <Link
-              className='px-3 text-2xl py-2 flex items-center   font-bold leading-snug text-white hover:opacity-75 no-underline'
+              className='px-3 text-2xl py-2 flex items-center   font-bold leading-snug text-blue-800 hover:opacity-75 no-underline'
               to='/'
             >
               ICT.jobs
