@@ -22,45 +22,58 @@ exports.fetchCandidates = async (req, res) => {
 exports.updateImageController = async (req, res) => {
   const { userType, userId } = req.params;
   let name = req.body.name
-  let image = req.file.path
-
+  let image = req.file
+  
+ 
   if(userType === 'candidate'){
 
     try {
+        let ur = `/uploads/${req.file.filename}`
+        
       let user = await UserCandidate.findById(userId)
       if (!user) {
-        fs.unlinkSync(image)
+        fs.unlinkSync(req.file)
         res.status(400).json({ errors: "No User"});
 
-        
-      } else{
-        fs.unlinkSync(user.profileImage)
-        let updatedUser = await UserCandidate.findByIdAndUpdate(userId, {profileImage: image})
+      }else if(user.profileImage){
+          
+        fs.unlinkSync(path.join(__dirname, '..', user.profileImage))
+        let updatedUser = await UserCandidate.findByIdAndUpdate(userId, {profileImage: ur})
         res.status(200).json({ msg: "Success", updatedUser});
         
+      } else{
+          let updatedUser = await UserCandidate.findByIdAndUpdate(userId, {profileImage: ur})
+        res.status(200).json({ msg: "Success", updatedUser});
       }
     } catch (error) {
-      fs.unlinkSync(image)
+      fs.unlinkSync(req.file)
       res.status(400).json({ errors: error.message});
       
     }
 
   } else if (userType === 'recruiter') {
     try {
-      let user = await UserClient.findByIdAndUpdate(userId, {profileImage: image})
+        let ur = `/uploads/${req.file.filename}`
+      let user = await UserClient.findById(userId)
       if (!user) {
-        fs.unlinkSync(image)
-        res.status(400).json({ errors: "No User"});
+          fs.unlinkSync(req.file)
+          res.status(400).json({ errors: "No User"});
         
-      } else{
-        fs.unlinkSync(user.profileImage)
-        let updatedUser = await UserClient.findById(userId)
+      }else if(user.profileImage){
+          
+        fs.unlinkSync(path.join(__dirname, '..', user.profileImage))
+        let updatedUser = await UserClient.findByIdAndUpdate(userId, {profileImage: ur})
         res.status(200).json({ msg: "Success", updatedUser});
         
+      } else{
+          let updatedUser = await UserClient.findByIdAndUpdate(userId, {profileImage: ur})
+        res.status(200).json({ msg: "Success", updatedUser});
       }
     } catch (error) {
-      fs.unlinkSync(image)
+    //   fs.unlinkSync(path.join(__dirname, '..', 'uploads', req.file.filename))
+    fs.unlinkSync(req.file)
       res.status(400).json({ errors: error.message});
+      
       
     } 
 
