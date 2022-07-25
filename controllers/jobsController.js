@@ -397,3 +397,19 @@ exports.getJobsCount = async (req, res) => {
   }
   
 }
+
+exports.getSimilarJobs = async (req, res) => {
+
+  let category = req.params.category
+  try {
+    let jobs = await JobPost.find({ category: category })
+      .populate("authorId")
+      .sort([["dateOfPosting", -1]]).limit(3);
+    return res.status(200).json({ msg: "Success", jobs });
+    
+  } catch (error) {
+    res.json(error);
+  }
+
+
+}

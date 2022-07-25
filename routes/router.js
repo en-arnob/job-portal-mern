@@ -32,6 +32,7 @@ const {
   ApplicantsDetails,
   getJobsByCat,
   getJobsCount,
+  getSimilarJobs,
 } = require("../controllers/jobsController");
 
 const { fetchCandidates, updateImageController } = require("../controllers/userController");
@@ -107,5 +108,8 @@ router.get("/api/jobs/cat/counter", getJobsCount);
 // ots
 
 router.get('/api/ots/get-candidates/:workType/:locationString', getOTSCandidates)
+
+//similar jobs
+router.get('/api/jobs/similar/:category', getSimilarJobs)
 
 module.exports = router;
