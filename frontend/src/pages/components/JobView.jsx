@@ -88,7 +88,7 @@ const JobView = () => {
     getSimilarJobs();
   }, []);
 
-  console.log(similarJobs);
+  // console.log(similarJobs);
 
   let subtitle;
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -310,24 +310,21 @@ const JobView = () => {
               <AiOutlineCoffee className='text-green-500' /> Similar Jobs
             </div>
             <div className='mt-4'>
-              {similarJobs.map((job) => {
+            {similarJobs.map((job) => {
                 return (
                   <p
                   onClick={() => {
                     toJobViewComponent(job, fallback);
                   }}
-                   className='flex gap-2 mb-4 cursor-pointer'>
+                   className='flex gap-2 mb-4 cursor-pointer hover:text-blue-00'>
                     <IoCopyOutline /> {job.title} - {job.authorId.organization}
                   </p>
                 );
               })}
+              
             </div>
 
-            <p className='mt-4'>
-              {" "}
-              <span className='text-red-500'>*</span> Currently no data for this
-              section
-            </p>
+            
           </div>
         </div>
       </div>
