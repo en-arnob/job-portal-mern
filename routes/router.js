@@ -110,6 +110,6 @@ router.get("/api/jobs/cat/counter", getJobsCount);
 router.get('/api/ots/get-candidates/:workType/:locationString', getOTSCandidates)
 
 //similar jobs
-router.get('/api/jobs/similar/:category', getSimilarJobs)
+router.get('/api/jobs/similar/:category/:currentPostId', getSimilarJobs)
 
 module.exports = router;

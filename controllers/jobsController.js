@@ -401,8 +401,9 @@ exports.getJobsCount = async (req, res) => {
 exports.getSimilarJobs = async (req, res) => {
 
   let category = req.params.category
+  let currentPostId = req.params.currentPostId
   try {
-    let jobs = await JobPost.find({ category: category })
+    let jobs = await JobPost.find({ category: category, _id: {$ne: currentPostId} })
       .populate("authorId")
       .sort([["dateOfPosting", -1]]).limit(3);
     return res.status(200).json({ msg: "Success", jobs });

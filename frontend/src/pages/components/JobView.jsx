@@ -7,6 +7,7 @@ import { RiUserVoiceLine } from "react-icons/ri";
 import { MdOutlineLockClock } from "react-icons/md";
 import { SiPolywork } from "react-icons/si";
 import { AiOutlineCoffee } from "react-icons/ai";
+import { IoCopyOutline } from "react-icons/io5";
 
 import Modal from "react-modal";
 import axios from "axios";
@@ -63,13 +64,31 @@ const JobView = () => {
 
   const pageNum = location.state.pageNumber;
 
+  const [similarJobs, setSimilarJobs] = useState([]);
+  const [errors, setErrors] = useState([]);
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
     getUserDetails();
+    const getSimilarJobs = () => {
+      axios
+        .get(`/api/jobs/similar/${job.category}/${job._id}`)
+        .then((response) => {
+          const allJobs = response.data.jobs;
+
+          setSimilarJobs(allJobs);
+        })
+        .catch((error) => {
+          setErrors(error);
+        });
+    };
+    getSimilarJobs();
   }, []);
+
+  console.log(similarJobs);
 
   let subtitle;
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -113,7 +132,9 @@ const JobView = () => {
   //     return <Breadcumb pageName='Job View' back={"/"} pageNum={pageNum} />;
   //   }
   // };
-
+  const toJobViewComponent = (job, fallback) => {
+    navigate("/jobView", { state: { job, fallback } });
+  };
   return (
     <div>
       {fallback ? (
@@ -286,8 +307,22 @@ const JobView = () => {
           <div className='p-4'>
             <div className='flex ml-2 gap-4 text-3xl font-normal text-stone-800'>
               {" "}
-              <AiOutlineCoffee className='text-green-500' /> Sponsored Jobs
+              <AiOutlineCoffee className='text-green-500' /> Similar Jobs
             </div>
+            <div className='mt-4'>
+              {similarJobs.map((job) => {
+                return (
+                  <p
+                  onClick={() => {
+                    toJobViewComponent(job, fallback);
+                  }}
+                   className='flex gap-2 mb-4 cursor-pointer'>
+                    <IoCopyOutline /> {job.title} - {job.authorId.organization}
+                  </p>
+                );
+              })}
+            </div>
+
             <p className='mt-4'>
               {" "}
               <span className='text-red-500'>*</span> Currently no data for this
