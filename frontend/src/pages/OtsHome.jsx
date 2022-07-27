@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import cta from "../assets/images/cta.svg";
 import pca from "../assets/images/pcsvg.svg";
 import con from "../assets/images/consvg.svg";
@@ -6,8 +6,26 @@ import { useNavigate } from "react-router-dom";
 
 import { FaMapMarkerAlt } from "react-icons/fa";
 
+import { useAnimation, motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+
+const fadeBottom = {
+  hidden: { opacity: 0, y: 100 },
+  visible: { opacity: 1, y: 0 },
+};
+
+const fadeRight = {
+  hidden: { opacity: 0, x: 100 },
+  visible: { opacity: 1, x: 0 },
+};
+const fadeLeft = {
+  hidden: { opacity: 0, x: -100 },
+  visible: { opacity: 1, x: 0 },
+};
+
 const OtsHome = () => {
   const navigate = useNavigate();
+
   const [inp, setInp] = useState({
     serviceType: "",
     location: "",
@@ -17,32 +35,58 @@ const OtsHome = () => {
   };
   // console.log(inp);
 
+  const controls = useAnimation();
+  const [ref, inView] = useInView();
+  useEffect(() => {
+    if (inView) {
+      controls.start("visible");
+    }
+  }, [controls, inView]);
+
   return (
     <div className='h-full'>
       <h1 className='text-center text-4xl border-b-2 p-2'>One Time Service</h1>
       <div className='mt-4 md:rounded container bg-gray-100'>
         <div class='flex flex-col items-center px-4 py-4 mx-auto xl:flex-row'>
-          <div class='flex justify-center xl:w-1/2'>
+          <motion.div
+            ref={ref}
+            animate={controls}
+            initial='hidden'
+            variants={fadeLeft}
+            class='flex justify-center xl:w-1/2'
+          >
             <img
               class='h-72 w-72 sm:w-[28rem] sm:h-[28rem] flex-shrink-0 object-cover '
               src={cta}
               alt=''
             />
-          </div>
-          <div class='flex justify-center xl:w-1/2'>
+          </motion.div>
+          <motion.div
+            ref={ref}
+            animate={controls}
+            initial='hidden'
+            variants={fadeBottom}
+            class='flex justify-center xl:w-1/2'
+          >
             <img
               class='h-72 w-72 sm:w-[28rem] sm:h-[28rem] flex-shrink-0 object-cover '
               src={pca}
               alt=''
             />
-          </div>
-          <div class='flex justify-center xl:w-1/2'>
+          </motion.div>
+          <motion.div
+            ref={ref}
+            animate={controls}
+            initial='hidden'
+            variants={fadeRight}
+            class='flex justify-center xl:w-1/2'
+          >
             <img
               class='h-72 w-72 sm:w-[28rem] sm:h-[28rem] flex-shrink-0 object-cover '
               src={con}
               alt=''
             />
-          </div>
+          </motion.div>
         </div>
         <div className='pb-10'>
           <h1 className='text-2xl text-center'>I'm a Recruiter</h1>
