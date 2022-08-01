@@ -89,7 +89,9 @@ const OtsHome = () => {
           </motion.div>
         </div>
         <div className='pb-10'>
-          <h1 className='text-2xl text-center'>I'm a Recruiter</h1>
+          <h1 className='text-2xl text-center font-normal'>
+            I'm looking for:{" "}
+          </h1>
           <div className='md:grid grid-cols-3 gap-4 justify-around md:px-4'>
             <div>
               <select
@@ -116,6 +118,7 @@ const OtsHome = () => {
 
             <div className='flex'>
               <input
+                required
                 type='text'
                 name='location'
                 id='location'

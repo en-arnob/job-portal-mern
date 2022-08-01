@@ -6,7 +6,7 @@ export const UsersContext = createContext()
 
  
 
-//TODO: Later on user state should not contain password. so have to make change in api so that it does not return user object containing password ::arnob::
+//TODO: Later on user state should not contain password. so have to make change in api so that it does not return user object containing password ::arnob:: DONE <//
 
 export const UserProvider = props => {
   const token = localStorage.getItem('myToken')

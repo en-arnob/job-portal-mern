@@ -8,6 +8,8 @@ import { useLocation } from "react-router-dom";
 import dummy from "../assets/images/blank-profile-picture.webp";
 import { useNavigate } from "react-router-dom";
 import Breadcumb from "./components/Breadcumb";
+import jwt_decode from "jwt-decode";
+import johnsnow from "../assets/images/johnsnow.svg";
 
 const ProfileView = () => {
   const navigate = useNavigate();
@@ -48,6 +50,32 @@ const ProfileView = () => {
     const res = axios.post("/api/live-chat/conversation", conversationDetails);
     if (res) navigate("/messenger");
   };
+
+  const token = localStorage.getItem("myToken");
+  let usr = "";
+  if (token) {
+    const decoded = jwt_decode(token);
+    usr = decoded.user;
+  } else {
+    usr = "";
+  }
+
+  if (usr === "") {
+    return (
+      <div className='min-h-screen p-4'>
+        <img
+          class='h-72 w-72 sm:w-[28rem] sm:h-[28rem] flex-shrink-0 object-cover '
+          src={johnsnow}
+          alt=''
+        />
+        <h4 className='mt-4'>
+          My watch <span className='text-red-800'>has not</span> ended.
+        </h4>
+        <h4>I'm watching, you need to login..</h4>
+      </div>
+    );
+  }
+
   return (
     <div className=''>
       {fallback ? (
