@@ -3,6 +3,7 @@ const jwt_decode = require("jwt-decode");
 const JobPost = require("../models/JobPost");
 const { count } = require("../models/UserCandidate");
 const UserCandidate = require("../models/UserCandidate");
+const RejectionList = require('../models/RejectionList')
 const dfs = require('date-from-string');
 
 
@@ -43,6 +44,9 @@ exports.postJobsController = async (req, res) => {
         address: data.address,
         category: data.category,
       });
+      const jobRejectionDoc = await RejectionList.create({
+        postId: job._id,
+      })
       return res.status(200).json({ msg: "Job Posted Successfully" });
     } catch (error) {
       return res.status(500).json({ errors: error });
@@ -223,12 +227,23 @@ exports.ApplicantsDetails = async (req, res) => {
 exports.rejectApplicant = async (req, res) => {
   try {
     const post = await JobPost.findById(req.params.jobID);
+    const rejectionDoc = await RejectionList.find({postId: req.params.jobID})
     if (post.applicants.includes(req.params.applicantId)) {
-      console.log("success");
+      // console.log("success");
       await JobPost.findOneAndUpdate(
         { _id: req.params.jobID },
         { $pull: { applicants: req.params.applicantId } }
       );
+      if(!rejectionDoc){
+        const newRejectDoc = await RejectionList.create({
+          postId: req.params.jobID
+        })
+        
+        await RejectionList.findOneAndUpdate(
+          { postId: req.params.jobID },
+          { $push: { rejectedApplicants: req.params.applicantId}}
+        )
+      }
       res.status(201).json({
         status: "successfully rejected or removed",
       });
