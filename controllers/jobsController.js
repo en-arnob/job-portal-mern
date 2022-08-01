@@ -227,23 +227,18 @@ exports.ApplicantsDetails = async (req, res) => {
 exports.rejectApplicant = async (req, res) => {
   try {
     const post = await JobPost.findById(req.params.jobID);
-    const rejectionDoc = await RejectionList.find({postId: req.params.jobID})
+    
     if (post.applicants.includes(req.params.applicantId)) {
       // console.log("success");
+      await RejectionList.findOneAndUpdate(
+        { postId: req.params.jobID },
+        { $push: { rejectedApplicants: req.params.applicantId}}
+      )
       await JobPost.findOneAndUpdate(
         { _id: req.params.jobID },
         { $pull: { applicants: req.params.applicantId } }
       );
-      if(!rejectionDoc){
-        const newRejectDoc = await RejectionList.create({
-          postId: req.params.jobID
-        })
-        
-        await RejectionList.findOneAndUpdate(
-          { postId: req.params.jobID },
-          { $push: { rejectedApplicants: req.params.applicantId}}
-        )
-      }
+      
       res.status(201).json({
         status: "successfully rejected or removed",
       });
