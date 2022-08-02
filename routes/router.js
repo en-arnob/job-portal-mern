@@ -33,6 +33,8 @@ const {
   getJobsByCat,
   getJobsCount,
   getSimilarJobs,
+  getRejectedApplicants,
+  retakeApplicant,
 } = require("../controllers/jobsController");
 
 const { fetchCandidates, updateImageController } = require("../controllers/userController");
@@ -112,4 +114,8 @@ router.get('/api/ots/get-candidates/:workType/:locationString', getOTSCandidates
 //similar jobs
 router.get('/api/jobs/similar/:category/:currentPostId', getSimilarJobs)
 
-module.exports = router;
+//rejected candidates
+router.get('/api/jobs/:jobId/applicants/rejected', getRejectedApplicants)
+router.patch('/api/jobs/:jobId/:applicantId/retake', retakeApplicant);
+
+module.exports = router; 

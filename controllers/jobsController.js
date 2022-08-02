@@ -424,3 +424,21 @@ exports.getSimilarJobs = async (req, res) => {
 
 
 }
+
+exports.getRejectedApplicants = async (req, res) => {
+  let jobId = req.params.jobId
+  try {
+    let rejectedDocument = await RejectionList.find({postId: jobId}).populate('rejectedApplicants')
+    
+    res.status(200).json({msg: "Success", rejectedDocument})
+  } catch (error) {
+    res.json(error);
+  }
+}
+
+exports.retakeApplicant = async (req, res) => {
+  let jobId = req.params.jobId
+  let applicantId = req.params.applicantId
+
+  res.json({msg: 'Coming Soon!'})
+}

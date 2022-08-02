@@ -6,10 +6,10 @@ import { useNavigate, useLocation } from "react-router-dom";
 import dummy from "../assets/images/blank-profile-picture.webp";
 import Breadcumb from "./components/Breadcumb";
 
-const TotalApplicantsPage = () => {
+const RejectedPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const jobDetails = location.state.jobDetails;
+  const job = location.state.job;
   const [userData, setUserData] = useState([]);
   // console.log(jobDetails);
   const fallback = "/applicants";
@@ -17,9 +17,10 @@ const TotalApplicantsPage = () => {
   useEffect(() => {
     const getUserDetails = () => {
       axios
-        .get(`/api/job/${jobDetails._id}`)
+        .get(`/api/jobs/${job._id}/applicants/rejected`)
         .then((response) => {
-          const catchData = response.data.data.job.applicants;
+          const catchData =
+            response.data.rejectedDocument[0].rejectedApplicants;
           setUserData(catchData);
         })
         .catch((error) => {
@@ -31,70 +32,48 @@ const TotalApplicantsPage = () => {
       top: 0,
       behavior: "smooth",
     });
-  }, [jobDetails]);
+  }, [job]);
+  //   console.log(job);
   const toApplicatsProfile = (arrElId) => {
     navigate("/profileView", {
       state: {
         userId: arrElId,
         userType: "candidate",
-        recruiterId: jobDetails.authorId,
+        recruiterId: job.authorId,
         fallback,
       },
     });
   };
-  const toRejectedPage = () => {
-    navigate("/rejected-applicants", {
-      state: {
-        job: jobDetails,
-      },
-    });
-  };
 
-  const rejectApplicant = (applicantId, e) => {
-    // e.preventDefault();
-    try {
-      axios.patch(`/api/job/rejectApplicant/${jobDetails._id}/${applicantId}`);
-      setUserData(userData.filter((item) => item._id !== applicantId));
-      navigate("/mypost");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //   const rejectApplicant = (applicantId, e) => {
+  //     // e.preventDefault();
+  //     try {
+  //       axios.patch(`/api/job/rejectApplicant/${jobDetails._id}/${applicantId}`);
+  //       setUserData(userData.filter((item) => item._id !== applicantId));
+  //       navigate("/mypost");
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
   return (
     <div className='min-h-screen'>
       <Breadcumb pageName='Applicants' back={"/mypost"} pageNum={0} />
       <Container>
         <div className='text-center'>
           <p className=' text-2xl  text-rose-700 sm:text-3xl font-semibold'>
-            <span className=' text-2xl  text-slate-700 sm:text-3xl'>
-              Job Title:
-            </span>{" "}
-            {jobDetails.title}
+            {job.title}
           </p>
           <p className=' text-xs  text-rose-700 sm:text-sm  font-semibold'>
-            <span className=' text-sm  text-slate-700 sm:text-sm'>
-              Total Applicant:
+            <span className=' text-lg  text-slate-700 sm:text-sm'>
+              Rejection List
             </span>{" "}
-            {jobDetails.applicants.length} /{" "}
-            <span className=' text-sm  text-slate-700 sm:text-sm'>
-              Total Vacancy:
-            </span>{" "}
-            {jobDetails.vaccancy}
-          </p>
-          <p
-            onClick={() => {
-              toRejectedPage();
-            }}
-            className='text-blue-800 cursor-pointer inline  hover:text-red-700 p-2'
-          >
-            Show Rejected
           </p>
         </div>
         <Row>
           {userData &&
             userData.map((arrEl) => {
               return (
-                <Col lg={4} md={6} sm={12}>
+                <Col key={arrEl._id} lg={4} md={6} sm={12}>
                   <div className='max-w-sm bg-slate-300 rounded-lg border border-slate-300 shadow-md dark:bg-gray-800 dark:border-gray-700 mt-3'>
                     <div className='flex flex-col items-center py-5'>
                       {arrEl.profileImage === undefined ? (
@@ -117,21 +96,16 @@ const TotalApplicantsPage = () => {
                         {arrEl.designation || "No Designation"}
                       </span>
                       <div className='flex mt-4 space-x-3 lg:mt-6'>
+                        <button className='inline-flex items-center py-2 px-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 no-underline'>
+                          Retake
+                        </button>
                         <button
                           onClick={() => {
                             toApplicatsProfile(arrEl._id);
                           }}
-                          className='inline-flex items-center py-2 px-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 no-underline'
-                        >
-                          View Profile
-                        </button>
-                        <button
-                          onClick={() => {
-                            rejectApplicant(arrEl._id);
-                          }}
                           className='inline-flex items-center py-2 px-4 text-sm font-medium text-center text-gray-900 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700 no-underline'
                         >
-                          Reject
+                          View Profile
                         </button>
                       </div>
                     </div>
@@ -176,4 +150,4 @@ const TotalApplicantsPage = () => {
   );
 };
 
-export default TotalApplicantsPage;
+export default RejectedPage;

@@ -27,6 +27,7 @@ import Messenger from "./pages/Messenger";
 import CategoryJobs from "./pages/components/CategoryJobs";
 import OtsHome from "./pages/OtsHome";
 import ServiceSearchPage from "./pages/ServiceSearchPage";
+import RejectedPage from "./pages/RejectedPage";
 
 
 
@@ -85,6 +86,7 @@ function App() {
             <Route path="/categoryPage" exact element={<CategoryJobs />} />
             <Route path="/one-time-service" exact element={<OtsHome />} />
             <Route path="/service-search" exact element={<ServiceSearchPage />} />
+            <Route path="/rejected-applicants" exact element={<RejectedPage/>} />
           </Routes>
           <Footer />
         </UserProvider>
