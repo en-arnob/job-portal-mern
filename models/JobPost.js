@@ -66,6 +66,7 @@ const jobPostSchema = new Schema({
     {
       type: Schema.Types.ObjectId,
       ref: UserCandidate,
+      unique: true,
     },
   ],
 });

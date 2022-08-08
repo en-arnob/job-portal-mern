@@ -440,5 +440,47 @@ exports.retakeApplicant = async (req, res) => {
   let jobId = req.params.jobId
   let applicantId = req.params.applicantId
 
-  res.json({msg: 'Coming Soon!'})
+  try {
+    
+    // const postMod = JobPost.findOneAndUpdate(
+    //   { _id: jobId },
+    //   { $push: { applicants: req.params.applicantId } }
+    // );
+    // const rejMod = await RejectionList.findOneAndUpdate(
+    //   { postId: jobId },
+    //   { 
+    //     $pull: {
+    //       rejectedApplicants: { _id: applicantId }
+    //   }
+    //   }, { new: true }
+    // )
+    await RejectionList.findOneAndUpdate(
+      { postId: jobId },
+      { $pull: { rejectedApplicants: req.params.applicantId}}
+    )
+    await JobPost.findOneAndUpdate(
+      { _id: jobId },
+      { $push: { applicants: req.params.applicantId } }
+    );
+
+    // if(rejMod){
+    //   res.status(201).json({
+    //     status: "Retake Successfull",
+    //   })
+    // }
+    
+
+    // await Promise.all([postMod, rejMod]);
+    res.status(201).json({
+      status: "Retake Successfull",
+    })
+    
+
+  } catch (error) {
+    res.status(404).json({
+      status: "fail",
+      message: "Retake Failed",
+      error: error,
+    });
+  }
 }
