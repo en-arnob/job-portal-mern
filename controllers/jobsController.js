@@ -484,3 +484,12 @@ exports.retakeApplicant = async (req, res) => {
     });
   }
 }
+
+exports.promotePost = async (req, res) => {
+  let postId = req.params.postId
+
+  res.status(201).json({
+    status: "promote route working",
+  })
+
+}
