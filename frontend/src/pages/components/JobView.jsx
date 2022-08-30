@@ -95,7 +95,7 @@ const JobView = () => {
         .get(`/api/jobs/featured/get`)
         .then((response) => {
           const allFJobs = response.data.fJobs;
-          console.log(allFJobs);
+          // console.log(allFJobs);
 
           setFeaturedJobs(allFJobs);
         })
@@ -183,7 +183,7 @@ const JobView = () => {
                   <FiMapPin />
                   <span>
                     {job.jobType === "Onsite"
-                      ? `${job.address} ${job.cityName} ${job.zip}`
+                      ? `${job.address}, ${job.cityName}, ${job.zip}`
                       : job.jobType}
                   </span>
                 </li>
