@@ -36,6 +36,7 @@ const {
   getRejectedApplicants,
   retakeApplicant,
   promotePost,
+  getFeatured,
 } = require("../controllers/jobsController");
 
 const { fetchCandidates, updateImageController } = require("../controllers/userController");
@@ -122,5 +123,6 @@ router.patch('/api/jobs/:jobId/:applicantId/retake', retakeApplicant);
 
 //featured post
 router.patch('/api/jobs/post/promote/:postId', promotePost)
+router.get('/api/jobs/featured/get', getFeatured)
 
 module.exports = router; 

@@ -6,8 +6,11 @@ import { HiOutlineOfficeBuilding, HiOutlineClock } from "react-icons/hi";
 import { RiUserVoiceLine } from "react-icons/ri";
 import { MdOutlineLockClock } from "react-icons/md";
 import { SiPolywork } from "react-icons/si";
-import { AiOutlineCoffee } from "react-icons/ai";
-import { IoCopyOutline } from "react-icons/io5";
+import {
+  AiOutlineCoffee,
+  AiOutlineCalendar,
+  AiOutlineCaretRight,
+} from "react-icons/ai";
 
 import Modal from "react-modal";
 import axios from "axios";
@@ -66,6 +69,7 @@ const JobView = () => {
 
   const [similarJobs, setSimilarJobs] = useState([]);
   const [errors, setErrors] = useState([]);
+  const [featuredJobs, setFeaturedJobs] = useState([]);
 
   useEffect(() => {
     window.scrollTo({
@@ -86,6 +90,20 @@ const JobView = () => {
         });
     };
     getSimilarJobs();
+    const getFeaturedJobs = () => {
+      axios
+        .get(`/api/jobs/featured/get`)
+        .then((response) => {
+          const allFJobs = response.data.fJobs;
+          console.log(allFJobs);
+
+          setFeaturedJobs(allFJobs);
+        })
+        .catch((error) => {
+          setErrors(error);
+        });
+    };
+    getFeaturedJobs();
   }, []);
 
   // console.log(similarJobs);
@@ -305,26 +323,50 @@ const JobView = () => {
         </div>
         <div className=' w-full h-auto'>
           <div className='p-4'>
-            <div className='flex ml-2 gap-4 text-3xl font-normal text-stone-800'>
-              {" "}
-              <AiOutlineCoffee className='text-green-500' /> Similar Jobs
+            <div className='flex flex-col'>
+              <div>
+                <div className='flex ml-2 gap-4 text-3xl font-normal text-stone-800'>
+                  {" "}
+                  <AiOutlineCalendar className='text-green-500' /> Featured Jobs
+                </div>
+                <div className='mt-4'>
+                  {featuredJobs.map((fjob) => {
+                    return (
+                      <p
+                        onClick={() => {
+                          toJobViewComponent(fjob, fallback);
+                        }}
+                        className='flex gap-2 mb-4 cursor-pointer hover:text-blue-00'
+                      >
+                        <AiOutlineCaretRight /> {fjob.title} -{" "}
+                        {fjob.authorId.organization}
+                      </p>
+                    );
+                  })}
+                </div>
+              </div>
+              <div>
+                <div className='flex ml-2 gap-4 text-3xl font-normal text-stone-800'>
+                  {" "}
+                  <AiOutlineCoffee className='text-green-500' /> Similar Jobs
+                </div>
+                <div className='mt-4'>
+                  {similarJobs.map((job) => {
+                    return (
+                      <p
+                        onClick={() => {
+                          toJobViewComponent(job, fallback);
+                        }}
+                        className='flex gap-2 mb-4 cursor-pointer hover:text-blue-00'
+                      >
+                        <AiOutlineCaretRight /> {job.title} -{" "}
+                        {job.authorId.organization}
+                      </p>
+                    );
+                  })}
+                </div>
+              </div>
             </div>
-            <div className='mt-4'>
-            {similarJobs.map((job) => {
-                return (
-                  <p
-                  onClick={() => {
-                    toJobViewComponent(job, fallback);
-                  }}
-                   className='flex gap-2 mb-4 cursor-pointer hover:text-blue-00'>
-                    <IoCopyOutline /> {job.title} - {job.authorId.organization}
-                  </p>
-                );
-              })}
-              
-            </div>
-
-            
           </div>
         </div>
       </div>

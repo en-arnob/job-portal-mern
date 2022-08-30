@@ -488,8 +488,48 @@ exports.retakeApplicant = async (req, res) => {
 exports.promotePost = async (req, res) => {
   let postId = req.params.postId
 
-  res.status(201).json({
-    status: "promote route working",
-  })
+  try {
+    await JobPost.findOneAndUpdate({ _id: postId}, {featured: true})
+    res.status(201).json({
+      status: "Promote Successfull",
+    })
+  } catch (error) {
+    res.status(404).json({
+      status: "fail",
+      message: "Promote Failed",
+      error: error,
+    });
+  }
 
+  // res.status(201).json({
+  //   status: "promote route working",
+  // })
+
+}
+
+exports.getSimilardJobs = async (req, res) => {
+
+  let category = req.params.category
+  let currentPostId = req.params.currentPostId
+  try {
+    let jobs = await JobPost.find({ category: category, _id: {$ne: currentPostId} })
+      .populate("authorId")
+      .sort([["dateOfPosting", -1]]).limit(3);
+    return res.status(200).json({ msg: "Success", jobs });
+    
+  } catch (error) {
+    res.json(error);
+  }
+
+
+}
+
+exports.getFeatured = async (req, res) => {
+  try {
+    let fJobs = await JobPost.find({featured: true}).populate("authorId").sort([["dateOfPosting", -1]]).limit(3)
+    return res.status(200).json({ msg: "Success", fJobs });
+
+  } catch (error) {
+    res.json(error);
+  }
 }
